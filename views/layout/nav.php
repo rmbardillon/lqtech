@@ -22,8 +22,20 @@
                 <li><a class="dropdown-item" href="../master-page/category.php">Category</a></li>
             </ul>
         </li>
-      <li class="nav-item">
+      <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Transaction
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="../master-page/add-item.php">In</a></li>
+                <li><a class="dropdown-item" href="../master-page/category.php">Out</a></li>
+            </ul>
+        </li>
+    <li class="nav-item">
         <a class="nav-link" href="#">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Reports</a>
       </li>
     </ul>
     <ul class="navbar-nav">
@@ -34,7 +46,7 @@
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="../master-page/add-item.php">Action Logs</a></li>
                 <li><a class="dropdown-item" href="../master-page/category.php">Change Password</a></li>
-                <li><a class="dropdown-item" href="../master-page/category.php">Log Out</a></li>
+                <li><a class="dropdown-item" href="" onclick="logout()">Log Out</a></li>
             </ul>
         </li>
       <li class="nav-item">
