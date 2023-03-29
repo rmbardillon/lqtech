@@ -120,6 +120,7 @@ const Admin = (() => {
     const thisAdmin = {};
 
     let toUpdate = false;
+    let user_id = '';
 
     thisAdmin.loadTableData = () => {
         $.ajax({
@@ -202,8 +203,8 @@ const Admin = (() => {
         } 
     }
 
-    thisAdmin.clickUpdate = () => {
-        var user_id = $(".update").data('id');
+    thisAdmin.clickUpdate = (id) => {
+        user_id = id;
 
         $.ajax({
             type: "POST",
@@ -255,6 +256,7 @@ const Admin = (() => {
             {
                 thisAdmin.resetFields();
                 thisAdmin.loadTableData();
+                toUpdate = false;
             },
             error: function () {
 
@@ -262,8 +264,8 @@ const Admin = (() => {
         }); 
     }
 
-    thisAdmin.clickDelete = () => {
-        var user_id = $(".delete").data('id');
+    thisAdmin.clickDelete = (id) => {
+        user_id = id;
 
         Swal.fire({
             title: 'Are you sure?',
@@ -307,9 +309,8 @@ const Admin = (() => {
         }); 
     }
 
-    thisAdmin.clickResetPassword = () => {
-        var user_id = $(".reset").data('id');
-
+    thisAdmin.clickResetPassword = (id) => {
+        user_id = id
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",

@@ -59,10 +59,10 @@
             $table_data .= '<td>'  . $last_login . '</td>';
             $table_data .= '<td class="col-actions">';
             $table_data .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
-            $table_data .= '<button type="button" id="update" onclick="Admin.clickUpdate()" data-id="'. $user['USER_ID'] .'" class="btn btn-warning btn-sm update"><i class="bi bi-list-check"></i> Update </button>';
-            $table_data .= '<button type="button" id="reset" onclick="Admin.clickResetPassword()" data-id="'. $user['USER_ID'] .'" class="btn btn-info btn-sm reset"><i class="bi bi-key"></i> Reset Password </button>';
+            $table_data .= '<button type="button" id="update" onclick="Admin.clickUpdate(`'.$user['USER_ID'] .'`)" data-id="'. $user['USER_ID'] .'" class="btn btn-warning btn-sm update"><i class="bi bi-list-check"></i> Update </button>';
+            $table_data .= '<button type="button" id="reset" onclick="Admin.clickResetPassword(`'. $user['USER_ID'] .'`)" data-id="'. $user['USER_ID'] .'" class="btn btn-info btn-sm reset"><i class="bi bi-key"></i> Reset Password </button>';
             if($_SESSION['user']['role'] == 1) {
-                $table_data .= '<button type="button" id="delete" onclick="Admin.clickDelete()" data-id="'. $user['USER_ID'] .'" class="btn btn-danger btn-sm delete"> <i class="bi bi-trash"></i> Delete</button>';
+                $table_data .= '<button type="button" id="delete" onclick="Admin.clickDelete(`'. $user['USER_ID'] .'`)" data-id="'. $user['USER_ID'] .'" class="btn btn-danger btn-sm delete"> <i class="bi bi-trash"></i> Delete</button>';
             }
             $table_data .= '</div>';
             $table_data .= '</td>';
@@ -115,6 +115,22 @@
         $user_id = $_POST['user_id'];
 
         $result = $user->delete($user_id);
+
+        echo json_encode($result);
+    }
+    else if($action == 'resetPassword') 
+    {
+        $password = DEFAULT_PASSWORD;
+        $user_id = $_POST['user_id'];
+
+        $request = [
+            'user_id' => $user_id,
+            'password' => $password
+        ];
+
+        $user->update_status($user_id, 0);
+        $user->update_login_attempt($user_id, 0);
+        $result = $user->update_password($request);
 
         echo json_encode($result);
     }

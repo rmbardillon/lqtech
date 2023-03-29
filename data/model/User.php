@@ -121,6 +121,31 @@
 
             return $result;
         }
+
+        public function update_password($request)
+        {
+            $password = $request['password'];
+            $user_id = $request['user_id'];
+
+            $password = password_hash($password, PASSWORD_BCRYPT);
+
+            $sql = "UPDATE users SET PASSWORD=? WHERE USER_ID=?";
+
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param("ss", $password, $user_id);
+
+            $result = '';
+            if ($stmt->execute() === TRUE) {
+                $result = "Updated Successfully";
+            } else {
+                $result = "Error updating record: " . $this->connection->error;
+            }
+
+            $this->connection->close();
+
+            return $result;
+        }
+
         public function login($request)
         {
             $username = $request['username'];
