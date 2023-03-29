@@ -12,11 +12,11 @@
 </head>
 <body>
     <div class="container-fluid text-center d-flex justify-content-center align-items-center" id="login-wrapper">
-        <form class="login-box w-50" action="">
+        <form class="login-box w-25" action="">
             <img src="../../libs/images/lqtechicon.png" alt="LQTech Logo">
             <input type="text" class="form-control" id="username" placeholder="Username" required>
             <input type="password" class="form-control" id="password" placeholder="Password" required>
-            <button class="btn btn-primary w-75 mb-4" id="login">Login</button><br>
+            <button class="btn btn-primary w-100 mb-2" id="login">Login</button>
             <a class="" href="#">Forgot Password?</a>
         </form>
     </div>

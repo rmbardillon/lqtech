@@ -11,7 +11,7 @@
     }
 
 
-    CONST DEFAULT_PASSWORD = 'default123';
+    CONST DEFAULT_PASSWORD = 'Default@123';
 
     session_start();
 ?>
