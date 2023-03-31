@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="../../libs/plugins/datatables/dataTables.bootstrap5.min.css" />
     <link rel="styesheet" href="../../libs/plugins/chart.js/Chart.min.css"/>
     <link rel="styesheet" href="../../libs/plugins/select2/css/select2.css"/>
+    <!-- New Links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu&amp;display=swap">
     <!-- Style -->
     <link rel="stylesheet" href="../../libs/css/style.css">
     <!-- <link rel="stylesheet" href="../../libs/css/index.css" /> -->
