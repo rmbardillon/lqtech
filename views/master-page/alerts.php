@@ -1,5 +1,6 @@
 <?php include_once("../layout/header.php") ?>
 <?php 
+    $page = "Alerts";
     if(!$_SESSION['user']) {
         header("Location: login.php"); 
     }

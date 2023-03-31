@@ -3,17 +3,17 @@
     include_once('../model/User.php');
 
     $action = $_GET['action'];
+    $User = new User($conn);
     
     if($action == "login")
     {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $user = new User($connection);
         $request = [
             'username' => $username,
             'password' => $password
         ];
-        $result = $user->login($request);
+        $result = $User->login($request);
 
         echo json_encode($result);
     }

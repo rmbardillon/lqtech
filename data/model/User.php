@@ -1,11 +1,12 @@
 <?php 
-
+    include_once('ActionLog.php');
     class User {
         private $connection;
 
         public function __construct($connection)
         {
             $this->connection = $connection;
+            $this->ActionLog = new ActionLog($connection);
         }
 
         public function getAll()
@@ -41,6 +42,7 @@
             $result = '';
             if ($stmt->execute() === TRUE) {
                 $result = "Updated Successfully";
+                $this->ActionLog->saveLogs('user', 'updated');
             } else {
                 $result = "Error updating record: " . $this->connection->error;
             }
@@ -57,6 +59,7 @@
             $result = '';
             if ($this->connection->query($sql) === TRUE) {
                 $result = "Deleted Successfully";
+                $this->ActionLog->saveLogs('user', 'deleted');
             } else {
                 $result = "Error deleting record: " . $this->connection->error;
             }
@@ -137,6 +140,7 @@
             $result = '';
             if ($stmt->execute() === TRUE) {
                 $result = "Updated Successfully";
+                $this->ActionLog->saveLogs('user', 'change password');
             } else {
                 $result = "Error updating record: " . $this->connection->error;
             }
@@ -185,6 +189,7 @@
                 $this->update_login_attempt($user_id, 0);
                 $this->udpate_login_details($user_id);
 
+                $this->ActionLog->saveLogs('login');
                 return "Validated";
             } else {
                 $stmt->free_result();
@@ -220,7 +225,7 @@
             $result = '';
             if ($stmt->execute() === TRUE) {
                 $result = "Successfully Save";
-                // $this->ActionLog->saveLogs('user', 'saved');
+                $this->ActionLog->saveLogs('user', 'saved');
             } else {
                 $result = "Error: <br>" . $this->connection->error;
             }

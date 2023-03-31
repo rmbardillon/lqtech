@@ -7,14 +7,14 @@
   </button>
   <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="../master-page/home.php">Home</a>
+      <li class="nav-item">
+        <a class="nav-link <?php echo ($page == "Home") ? 'active' : '' ?>" href="../master-page/home.php">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../master-page/admin.php">Admin</a>
+        <a class="nav-link <?php echo ($page == "Admin") ? 'active' : '' ?>" href="../master-page/admin.php">Admin</a>
       </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle  <?php echo ($page == "Register") ? 'active' : '' ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Register
             </a>
             <ul class="dropdown-menu">
@@ -23,7 +23,7 @@
             </ul>
         </li>
       <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle  <?php echo ($page == "Transaction") ? 'active' : '' ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Transaction
             </a>
             <ul class="dropdown-menu">
@@ -32,15 +32,15 @@
             </ul>
         </li>
     <li class="nav-item">
-        <a class="nav-link" href="../master-page/products.php">Products</a>
+        <a class="nav-link  <?php echo ($page == "Products") ? 'active' : '' ?>" href="../master-page/products.php">Products</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../master-page/reports.php">Reports</a>
+        <a class="nav-link  <?php echo ($page == "Reports") ? 'active' : '' ?>" href="../master-page/reports.php">Reports</a>
       </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle <?php echo ($page == "Profile") ? 'active' : '' ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Profile
             </a>
             <ul class="dropdown-menu">
@@ -50,7 +50,7 @@
             </ul>
         </li>
       <li class="nav-item">
-        <a class="nav-link" href="../master-page/alerts.php">Alerts</a>
+        <a class="nav-link  <?php echo ($page == "Alerts") ? 'active' : '' ?>" href="../master-page/alerts.php">Alerts</a>
       </li>
     </ul>
   </div>

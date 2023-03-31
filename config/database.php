@@ -4,10 +4,10 @@
     $password = '';
     $db_name = 'lqtech';
 
-    $connection = new mysqli($host, $username, $password, $db_name);
+    $conn = new mysqli($host, $username, $password, $db_name);
 
-    if ($connection->connect_error) {
-        die("Connection failed: " . connection->connect_error);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
 

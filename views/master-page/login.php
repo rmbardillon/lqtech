@@ -20,8 +20,8 @@
     <div class="container-fluid text-center d-flex justify-content-center align-items-center" id="login-wrapper">
         <form class="login-box w-25" action="">
             <img src="../../libs/images/lqtechicon.png" alt="LQTech Logo">
-            <input type="text" class="form-control" id="username" placeholder="Username" required>
-            <input type="password" class="form-control" id="password" placeholder="Password" required>
+            <input type="text" class="form-control mb-2" id="username" placeholder="Username" required>
+            <input type="password" class="form-control mb-2" id="password" placeholder="Password" required>
             <button class="btn btn-primary w-100 mb-2" id="login">Login</button>
             <a class="" href="#">Forgot Password?</a>
         </form>

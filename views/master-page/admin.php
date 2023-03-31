@@ -1,5 +1,6 @@
 <?php include_once("../layout/header.php") ?>
 <?php 
+    $page = "Admin";
     if(!$_SESSION['user']) {
         header("Location: login.php"); 
     } else if($_SESSION['user']['role'] === 3) {

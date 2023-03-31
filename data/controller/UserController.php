@@ -3,7 +3,7 @@
     include_once('../model/User.php');
 
     $action = $_GET['action'];
-    $user = new User($connection);
+    $User = new User($conn);
     if($action == "registerUser")
     {
         $first_name = $_POST['first_name'];
@@ -25,7 +25,7 @@
     }
     else if ($action == 'getTableData') 
     {
-        $result = $user->getAll();
+        $result = $User->getAll();
 
         $table_data = '';
         $counter = 1;
@@ -77,7 +77,7 @@
     {
         $user_id = $_POST['user_id'];
 
-        echo json_encode($user->getById($user_id));
+        echo json_encode($User->getById($user_id));
     }
     else if($action == "login")
     {
@@ -88,7 +88,7 @@
             'username' => $username,
             'password' => $password
         ];
-        $result = $user->login($request);
+        $result = $User->login($request);
 
         echo json_encode($result);
     }
@@ -106,7 +106,7 @@
             'role' => $role,
         ];
 
-        $result = $user->update($request);
+        $result = $User->update($request);
 
         echo json_encode($result);
     }
@@ -114,7 +114,7 @@
     {
         $user_id = $_POST['user_id'];
 
-        $result = $user->delete($user_id);
+        $result = $User->delete($user_id);
 
         echo json_encode($result);
     }
@@ -128,9 +128,9 @@
             'password' => $password
         ];
 
-        $user->update_status($user_id, 0);
-        $user->update_login_attempt($user_id, 0);
-        $result = $user->update_password($request);
+        $User->update_status($user_id, 0);
+        $User->update_login_attempt($user_id, 0);
+        $result = $User->update_password($request);
 
         echo json_encode($result);
     }
