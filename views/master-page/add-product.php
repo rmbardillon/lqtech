@@ -8,7 +8,6 @@
 <body>
     <?php include_once("../layout/nav.php") ?>
     <div class="container mt-5">
-        <h1>Add Products</h1>
         <div class="row">
         <div class="col-lg-5 offset-lg-3" style="margin-left: 35px;">
             <div style="padding-right: 0px;padding-bottom: 0px;margin-left: 25px;margin-right: 0px;">
@@ -17,9 +16,11 @@
                     <div class="col">
                         <p style="font-family: Ubuntu, sans-serif;">Category</p><select class="form-select" style="height: 38.2px;font-family: ubuntu;text-align: left;border-radius: 5px;">
                             <option value="" disabled selected>- Select Category -</option>
-                            <option>Analog</option>
-                            <option>IP</option>
-                            <option>Accessories</option>
+                            <option value="Camera">Camera</option>
+                            <option value="Recorder">Recorder</option>
+                            <option value="Hard drive">Hard drive</option>
+                            <option value="Power Supply">Power Supply</option>
+                            <option value="Monitor">Monitor</option>
                         </select>
                     </div>
                     <div class="col">
@@ -43,18 +44,24 @@
                 </div>
                 <div class="row" style="margin-top: 30px;">
                     <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">Model Number</p><input type="number" style="border-radius: 5px;">
+                        <p style="font-family: Ubuntu, sans-serif;">Model Number</p><input class="form-control" type="number" style="border-radius: 5px;">
                     </div>
                     <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">Serial Number</p><input type="number" style="border-radius: 5px;">
+                        <p style="font-family: Ubuntu, sans-serif;">Serial Number</p><input class="form-control" type="number" style="border-radius: 5px;">
                     </div>
                 </div>
                 <div class="row" style="margin-top: 30px;">
                     <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">Buying Price</p><input type="number" style="border-radius: 5px;">
+                        <p style="font-family: Ubuntu, sans-serif;">Buying Price</p><input class="form-control" type="number" style="border-radius: 5px;">
                     </div>
                     <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">SellingPrice</p><input type="number" style="border-radius: 5px;">
+                        <p style="font-family: Ubuntu, sans-serif;">SellingPrice</p><input class="form-control" type="number" style="border-radius: 5px;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p style="font-family: Ubuntu, sans-serif;">Serial Numbers</p>
+                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="row" style="margin-top: 10px;">
@@ -64,7 +71,6 @@
             </div>
         </div>
         <div class="col" style="margin-right: 35px;">
-            <div></div>
             <div class="row">
                 <div class="col">
                     <p style="font-family: Ubuntu, sans-serif;"><strong><em>Product List</em></strong></p>
