@@ -14,7 +14,8 @@
                 <p style="font-family: Ubuntu, sans-serif;font-weight: bold;font-style: italic;">Product Registration</p>
                 <div class="row">
                     <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">Category</p><select class="form-select" style="height: 38.2px;font-family: ubuntu;text-align: left;border-radius: 5px;">
+                        <label class="form-label" for="category">Category</label>
+                        <select class="form-select" id="category">
                             <option value="" disabled selected>- Select Category -</option>
                             <option value="Camera">Camera</option>
                             <option value="Recorder">Recorder</option>
@@ -23,50 +24,50 @@
                             <option value="Monitor">Monitor</option>
                         </select>
                     </div>
+                </div>
+                <div class="row" style="margin-top: 30px;">
                     <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">Product Type</p><select class="form-select" style="height: 38.2px;font-family: ubuntu;text-align: left;border-radius: 5px;">
-                            <option value="" disabled selected>- Select Product Type -</option>
-                            <option>Video Surveillance</option>
-                            <option>Power and Accessories</option>
-                            <option>Mounting and Installation</option>
-                            <option>Security and Access Control</option>
-                            <option>Other</option>
-                        </select>
+                        <label class="form-label" for="brand">Brand</label>
+                        <input type="text" class="form-control" id="brand">
+                    </div>
+                    <div class="col">
+                        <label class="form-label" for="model">Model</label>
+                        <input type="text" class="form-control" id="model">
                     </div>
                 </div>
                 <div class="row" style="margin-top: 30px;">
                     <div class="col">
-                        <p>Brand</p><select class="form-select" style="height: 38.2px;font-family: ubuntu;text-align: left;border-radius: 5px;">
-                            <option value="" disabled selected>- Select Brand -</option>
-                            <option>HikVision</option>
-                        </select>
+                        <label class="form-label" for="camera_type">Camera Type</label>
+                        <input type="text" class="form-control" id="camera_type">
+                    </div>
+                    <div class="col">
+                        <label class="form-label" for="camera_shape">Camera Shape</label>
+                        <input type="text" class="form-control" id="camera_shape">
                     </div>
                 </div>
                 <div class="row" style="margin-top: 30px;">
                     <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">Model Number</p><input class="form-control" type="number" style="border-radius: 5px;">
+                        <label class="form-label" for="buying_price">Buying Price</label>
+                        <input class="form-control" type="number" id="buying_price">
                     </div>
                     <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">Serial Number</p><input class="form-control" type="number" style="border-radius: 5px;">
+                        <label class="form-label" for="selling_price">Selling Price</label>
+                        <input class="form-control" type="number" id="selling_price">
                     </div>
                 </div>
                 <div class="row" style="margin-top: 30px;">
                     <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">Buying Price</p><input class="form-control" type="number" style="border-radius: 5px;">
-                    </div>
-                    <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">SellingPrice</p><input class="form-control" type="number" style="border-radius: 5px;">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <p style="font-family: Ubuntu, sans-serif;">Serial Numbers</p>
-                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                        <label class="form-label" for="serial_number">Serial Numbers</label>
+                        <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="row" style="margin-top: 10px;">
-                    <div class="col"><button class="btn btn-primary" type="button" style="background: rgb(46, 49, 146);"><i class="far fa-check-circle"></i>&nbsp;Register</button></div>
-                    <div class="col"><button class="btn btn-primary" type="button" style="background: #AA1515;"><i class="far fa-times-circle"></i>&nbsp;Cancel</button></div>
+                    <div class="col">
+                        <button class="btn btn-primary w-100" type="button"><i class="far fa-check-circle"></i>Register</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-danger w-100" type="button"><i class="far fa-times-circle"></i>Cancel</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -22,7 +22,7 @@
             confirmButtonText: 'Yes!',
             cancelButtonText: 'No'
         }).then(function(result) {
-            // if (result.value) {
+            if (result.value) {
                 $.ajax({
                     type: "POST",
                     url: "../../data/controller/LoginController.php?action=logout",
@@ -34,7 +34,7 @@
                     error: function () {
                     }
                 }); 
-            // }
+            }
         })
     }
 </script>

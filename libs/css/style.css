@@ -58,6 +58,8 @@ footer p {
 }
 
 .active {
-    color: red !important;
-    text-decoration: underline;
+    color: white !important;
+    background-color: #2d3090;
+    /* text-decoration: underline; */
+    border-radius: 40px;
 }
