@@ -25,7 +25,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="row" style="margin-top: 30px;">
+                <div id="inputs"></div>
+                <!-- <div class="row" style="margin-top: 30px;">
                     <div class="col">
                         <label class="form-label" for="brand">Brand</label>
                         <input type="text" class="form-control" id="brand">
@@ -38,11 +39,19 @@
                 <div class="row" style="margin-top: 30px;">
                     <div class="col">
                         <label class="form-label" for="camera_type">Camera Type</label>
-                        <input type="text" class="form-control" id="camera_type">
+                        <select class="form-select" id="camera_type">
+                            <option value="" disabled selected>- Select Camera Type -</option>
+                            <option value="IP">IP</option>
+                            <option value="Analog">Analog</option>
+                        </select>
                     </div>
                     <div class="col">
                         <label class="form-label" for="camera_shape">Camera Shape</label>
-                        <input type="text" class="form-control" id="camera_shape">
+                        <select class="form-select" id="camera_shape">
+                            <option value="" disabled selected>- Select Camera Shape -</option>
+                            <option value="Dome">Dome</option>
+                            <option value="Bullet">Bullet</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row" style="margin-top: 30px;">
@@ -60,7 +69,7 @@
                         <label class="form-label" for="serial_number">Serial Numbers</label>
                         <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
                     </div>
-                </div>
+                </div> -->
                 <div class="row" style="margin-top: 10px;">
                     <div class="col">
                         <button class="btn btn-primary w-100" type="button"><i class="far fa-check-circle"></i>Register</button>
@@ -114,5 +123,6 @@
     </div>
     </div>
 <?php include_once("../layout/scripts.php") ?>
+<script src="../../libs/scripts/master-page/add-item.js"></script>
 </body>
 </html>

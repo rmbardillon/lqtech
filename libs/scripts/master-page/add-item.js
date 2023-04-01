@@ -9,7 +9,245 @@ $(document).ready(function () {
     })
 });
 
-
+$("#category").change(function() {
+    if($(this).val() == "Camera") {
+        var input = `
+        <div class="row" style="margin-top: 30px;">
+            <div class="col">
+                <label class="form-label" for="brand">Brand</label>
+                <input type="text" class="form-control" id="brand">
+            </div>
+            <div class="col">
+                <label class="form-label" for="model">Model</label>
+                <input type="text" class="form-control" id="model">
+            </div>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+            <div class="col">
+                <label class="form-label" for="camera_type">Camera Type</label>
+                <select class="form-select" id="camera_type">
+                    <option value="" disabled selected>- Select Camera Type -</option>
+                    <option value="IP">IP</option>
+                    <option value="Analog">Analog</option>
+                </select>
+            </div>
+            <div class="col">
+                <label class="form-label" for="camera_shape">Camera Shape</label>
+                <select class="form-select" id="camera_shape">
+                    <option value="" disabled selected>- Select Camera Shape -</option>
+                    <option value="Dome">Dome</option>
+                    <option value="Bullet">Bullet</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+            <div class="col">
+                <label class="form-label" for="buying_price">Buying Price</label>
+                <input class="form-control" type="number" id="buying_price">
+            </div>
+            <div class="col">
+                <label class="form-label" for="selling_price">Selling Price</label>
+                <input class="form-control" type="number" id="selling_price">
+            </div>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+            <div class="col">
+                <label class="form-label" for="serial_number">Serial Numbers</label>
+                <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+    `;
+    } else if($(this).val() == "Recorder") {
+        var input = `
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="brand">Brand</label>
+                    <input type="text" class="form-control" id="brand">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="model">Model</label>
+                    <input type="text" class="form-control" id="model">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="camera_type">Camera Type</label>
+                    <select class="form-select" id="camera_type">
+                        <option value="" disabled selected>- Select Camera Type -</option>
+                        <option value="IP">IP</option>
+                        <option value="Analog">Analog</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="camera_shape">Camera Shape</label>
+                    <select class="form-select" id="camera_shape">
+                        <option value="" disabled selected>- Select Camera Shape -</option>
+                        <option value="Dome">Dome</option>
+                        <option value="Bullet">Bullet</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="buying_price">Buying Price</label>
+                    <input class="form-control" type="number" id="buying_price">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="selling_price">Selling Price</label>
+                    <input class="form-control" type="number" id="selling_price">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="serial_number">Serial Numbers</label>
+                    <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        `;
+    } else if($(this).val() == "Hard drive") {
+        var input = `
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="brand">Brand</label>
+                    <input type="text" class="form-control" id="brand">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="model">Model</label>
+                    <input type="text" class="form-control" id="model">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="camera_type">Camera Type</label>
+                    <select class="form-select" id="camera_type">
+                        <option value="" disabled selected>- Select Camera Type -</option>
+                        <option value="IP">IP</option>
+                        <option value="Analog">Analog</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="camera_shape">Camera Shape</label>
+                    <select class="form-select" id="camera_shape">
+                        <option value="" disabled selected>- Select Camera Shape -</option>
+                        <option value="Dome">Dome</option>
+                        <option value="Bullet">Bullet</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="buying_price">Buying Price</label>
+                    <input class="form-control" type="number" id="buying_price">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="selling_price">Selling Price</label>
+                    <input class="form-control" type="number" id="selling_price">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="serial_number">Serial Numbers</label>
+                    <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        `;
+    } else if($(this).val() == "Power Supply") {
+        var input = `
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="brand">Brand</label>
+                    <input type="text" class="form-control" id="brand">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="model">Model</label>
+                    <input type="text" class="form-control" id="model">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="camera_type">Camera Type</label>
+                    <select class="form-select" id="camera_type">
+                        <option value="" disabled selected>- Select Camera Type -</option>
+                        <option value="IP">IP</option>
+                        <option value="Analog">Analog</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="camera_shape">Camera Shape</label>
+                    <select class="form-select" id="camera_shape">
+                        <option value="" disabled selected>- Select Camera Shape -</option>
+                        <option value="Dome">Dome</option>
+                        <option value="Bullet">Bullet</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="buying_price">Buying Price</label>
+                    <input class="form-control" type="number" id="buying_price">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="selling_price">Selling Price</label>
+                    <input class="form-control" type="number" id="selling_price">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="serial_number">Serial Numbers</label>
+                    <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        `;
+    } else if($(this).val() == "Monitor") {
+        var input = `
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="brand">Brand</label>
+                    <input type="text" class="form-control" id="brand">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="model">Model</label>
+                    <input type="text" class="form-control" id="model">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="camera_type">Camera Type</label>
+                    <select class="form-select" id="camera_type">
+                        <option value="" disabled selected>- Select Camera Type -</option>
+                        <option value="IP">IP</option>
+                        <option value="Analog">Analog</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="camera_shape">Camera Shape</label>
+                    <select class="form-select" id="camera_shape">
+                        <option value="" disabled selected>- Select Camera Shape -</option>
+                        <option value="Dome">Dome</option>
+                        <option value="Bullet">Bullet</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="buying_price">Buying Price</label>
+                    <input class="form-control" type="number" id="buying_price">
+                </div>
+                <div class="col">
+                    <label class="form-label" for="selling_price">Selling Price</label>
+                    <input class="form-control" type="number" id="selling_price">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col">
+                    <label class="form-label" for="serial_number">Serial Numbers</label>
+                    <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        `;
+    }
+    $('#inputs').html(input);
+});
 const Category = (() => {
     const thisCategory = {};
 
