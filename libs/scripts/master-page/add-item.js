@@ -1,6 +1,7 @@
 $(document).ready(function () {
     Category.loadTableData();
     Category.loadSelectData();
+    Product.loadTableData();
 
     // Product.loadTableData();
 
@@ -71,19 +72,11 @@ $("#category").change(function() {
             </div>
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="camera_type">Camera Type</label>
-                    <select class="form-select" id="camera_type">
-                        <option value="" disabled selected>- Select Camera Type -</option>
-                        <option value="IP">IP</option>
-                        <option value="Analog">Analog</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label class="form-label" for="camera_shape">Camera Shape</label>
-                    <select class="form-select" id="camera_shape">
-                        <option value="" disabled selected>- Select Camera Shape -</option>
-                        <option value="Dome">Dome</option>
-                        <option value="Bullet">Bullet</option>
+                    <label class="form-label" for="recorder_type">Recorder Type</label>
+                    <select class="form-select" id="recorder_type">
+                        <option value="" disabled selected>- Select Recorder Type -</option>
+                        <option value="DVR">DVR</option>
+                        <option value="NVR">NVR</option>
                     </select>
                 </div>
             </div>
@@ -118,19 +111,13 @@ $("#category").change(function() {
             </div>
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="camera_type">Camera Type</label>
-                    <select class="form-select" id="camera_type">
-                        <option value="" disabled selected>- Select Camera Type -</option>
-                        <option value="IP">IP</option>
-                        <option value="Analog">Analog</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label class="form-label" for="camera_shape">Camera Shape</label>
-                    <select class="form-select" id="camera_shape">
-                        <option value="" disabled selected>- Select Camera Shape -</option>
-                        <option value="Dome">Dome</option>
-                        <option value="Bullet">Bullet</option>
+                    <label class="form-label" for="capacity">Capacity</label>
+                    <select class="form-select" id="capacity">
+                        <option value="" disabled selected>- Select Capacity -</option>
+                        <option value="1TB">1TB</option>
+                        <option value="2TB">2TB</option>
+                        <option value="4TB">4TB</option>
+                        <option value="6TB">6TB</option>
                     </select>
                 </div>
             </div>
@@ -165,20 +152,16 @@ $("#category").change(function() {
             </div>
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="camera_type">Camera Type</label>
-                    <select class="form-select" id="camera_type">
-                        <option value="" disabled selected>- Select Camera Type -</option>
-                        <option value="IP">IP</option>
-                        <option value="Analog">Analog</option>
+                    <label class="form-label" for="psu_type">PSU Type</label>
+                    <select class="form-select" id="psu_type">
+                        <option value="" disabled selected>- Select PSU Type -</option>
+                        <option value="Metal Type">Metal Type</option>
+                        <option value="Fuse Type">Fuse Type</option>
                     </select>
                 </div>
                 <div class="col">
-                    <label class="form-label" for="camera_shape">Camera Shape</label>
-                    <select class="form-select" id="camera_shape">
-                        <option value="" disabled selected>- Select Camera Shape -</option>
-                        <option value="Dome">Dome</option>
-                        <option value="Bullet">Bullet</option>
-                    </select>
+                    <label class="form-label" for="watts">Watts</label>
+                    <input class="form-control" id="watts">
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
@@ -212,19 +195,12 @@ $("#category").change(function() {
             </div>
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="camera_type">Camera Type</label>
-                    <select class="form-select" id="camera_type">
-                        <option value="" disabled selected>- Select Camera Type -</option>
-                        <option value="IP">IP</option>
-                        <option value="Analog">Analog</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label class="form-label" for="camera_shape">Camera Shape</label>
-                    <select class="form-select" id="camera_shape">
-                        <option value="" disabled selected>- Select Camera Shape -</option>
-                        <option value="Dome">Dome</option>
-                        <option value="Bullet">Bullet</option>
+                    <label class="form-label" for="monitor_size">Monitor Size</label>
+                    <select class="form-select" id="monitor_size">
+                        <option value="" disabled selected>- Select Monitor Size -</option>
+                        <option value="19 Inches">19 Inches</option>
+                        <option value="20 Inches">20 Inches</option>
+                        <option value="32 Inches">32 Inches</option>
                     </select>
                 </div>
             </div>
@@ -245,9 +221,12 @@ $("#category").change(function() {
                 </div>
             </div>
         `;
+    } else {
+        var input = '';
     }
     $('#inputs').html(input);
 });
+
 const Category = (() => {
     const thisCategory = {};
 
@@ -448,330 +427,265 @@ const Category = (() => {
     return thisCategory;
 })();
 
-//     const today = new Date();
-//     today.setDate(today.getDate() + 1);
-//     const year = today.getFullYear();
-//     const month = today.getMonth();
-//     const dates = today.getDate();
-    
-//     // Set max date to today's date
-//     const maxDate = new Date(year, month, dates).toISOString().split('T')[0];
-//     document.getElementById("txt_manufature_date").setAttribute("max", maxDate);
-    
-//     let dateInput = document.getElementById('txt_expiraton_date'); 
-    
-//     const cur_date = new Date(); 
-//     const cur_month = cur_date.getMonth() > 9 ? cur_date.getMonth() + 1 : '0' + (cur_date.getMonth() + 1); 
-//     const cur_day = cur_date.getDate() > 9 ? cur_date.getDate() : '0' + cur_date.getDate();
-//     const dateStr = cur_date.getFullYear() + '-' + cur_month + '-' + cur_day; 
-//     dateInput.setAttribute('min', dateStr); 
+const Product = (() => {
+    const thisProduct = {};
+    let toUpdate = false;
+    let product_id = '';
 
-// const Product = (() => {
-//     // const sixMonthsFromNow = new Date();
-//     // sixMonthsFromNow.setMonth(sixMonthsFromNow.getMonth() - 6 );
+    thisProduct.loadTableData = () => {
+        $.ajax({
+            type: "GET",
+            url: PRODUCT_CONTROLLER + '?action=getTableDataRegister',
+            dataType: "json",
+            success: function (response) {
+                $('.table').DataTable().destroy();
+                $('#tbody_product').html(response);
 
+                $('.table').DataTable();
+            },
+            error: function () {
 
-//     let thisProduct = {};
+            }
+        });
+    }
 
-//     let product_id;
-//     let product_details_id;
-//     let toUpdate = false;
+    thisProduct.clickSaveButton = () => {
+        if(!toUpdate) {
+            thisProduct.save()
+        }
+        else {
+            thisProduct.update()
+        }
+    }
 
+    thisProduct.save = () => {
+        var category = $("#category").val();
+        var brand = $("#brand").val();
+        var model = $("#model").val();
+        var buying_price = $("#buying_price").val();
+        var selling_price = $("#selling_price").val();
+        var serial_number = $("#serial_number").val();
+        var data = {
+            category: category,
+            brand: brand,
+            model: model,
+            buying_price: buying_price,
+            selling_price: selling_price,
+            serial_number: serial_number,
+        };
 
-//     thisProduct.loadTableData = () => {
-//         $.ajax({
-//             type: "GET",
-//             url: PRODUCT_CONTROLLER + '?action=getTableDataRegister',
-//             dataType: "json",
-//             success: function (response) {
-//                 $('.table').DataTable().destroy();
-//                 $('#tbody_product').html(response);
+        if(category == "Camera") {
+            var camera_type = $("#camera_type").val();
+            var camera_shape = $("#camera_shape").val();
+            data.camera_type = camera_type;
+            data.camera_shape = camera_shape;
+        } else if(category == "Recorder") {
+            var recorder_type = $("#recorder_type").val();
+            data.recorder_type = recorder_type;
+        } else if(category == "Hard drive") {
+            var capacity = $("#capacity").val();
+            data.capacity = capacity;
+        } else if(category == "Power Supply") {
+            var psu_type = $("#psu_type").val();
+            var watts = $("#watts").val();
+            data.psu_type = psu_type;
+            data.watts = watts;
+        } else if(category == "Monitor") {
+            var monitor_size = $("#monitor_size").val();
+            data.monitor_size = monitor_size;
+        }
 
-//                 $('.table').DataTable();
-//             },
-//             error: function () {
+        $.ajax({
+            type: "POST",
+            url: PRODUCT_CONTROLLER + '?action=save',
+            dataType: "json",
+            data:{
+                data: data
+            },
+            success: function (response) 
+            {
+                thisProduct.loadTableData();
+                thisProduct.resetFields();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Product added successfully',
+                    showConfirmButton: true,
+                })
+            },
+            error: function () {
 
-//             }
-//         });
-//     }
-
-//     thisProduct.clickSaveButton= () => {
-//         console.log('test');
-//         if(!toUpdate) {
-//             console.log('test2');
-//             thisProduct.save()
-//         }
-//         else {
-//             thisProduct.update()
-//         }
-//     }
-
-//     thisProduct.save = () => {
-//         const product_barcode = $('#txt_product_barcode').val();
-//         const product_name = $('#txt_product_name').val();
-//         const product_category = $('#slc_product_category').val();
-//         const buying_price = $('#txt_buying_price').val();
-//         const selling_price = $('#txt_selling_price').val();
-//         const manufature_date = $('#txt_manufature_date').val();
-//         const expiraton_date = $('#txt_expiraton_date').val();
-//         const status = $('#slc_status').val();
-//         const quantity = $('#txt_quantity').val();
-//         const type = $('#slc_type').val();
-//         const date = new Date();
-//         date.setDate(date.getDate() + 180);
-//         var expiration = new Date(expiraton_date);
-//         // var todayDate = Date(expiraton_date);
-//         const datetoday = new Date();
-//         datetoday.setDate(datetoday.getDate());
-//         var manufacture = new Date(manufature_date);
-//         // a = todayDate.toString();
-
-//         if(product_barcode == "" 
-//         || product_name == ""
-//         || product_category == ""
-//         || buying_price == ""
-//         || selling_price == ""
-//         || manufature_date == ""
-//         || expiraton_date == ""
-//         || quantity == ""
-//         || type == null
-//         || status == null) {
-//             Swal.fire({
-//                 position: 'center',
-//                 icon: 'warning',
-//                 title: 'Please fillout all fields',
-//                 showConfirmButton: true,
-//             })
+            }
             
-//         }
-//         else if (manufacture >= datetoday){
-//             Swal.fire({
-//                 position: 'center',
-//                 icon: 'warning',
-//                 title: 'Cannot add products that is not manufactured yet',
-//                 showConfirmButton: true,
-//             })
-//         }          
-//         else if (date >= expiration){
-//             Swal.fire({
-//                 position: 'center',
-//                 icon: 'warning',
-//                 title: 'Expiration date is due in less than six months',
-//                 showConfirmButton: true,
-//             })
-//         }    
-//         else if (expiration <= date){
-//             Swal.fire({
-//                 position: 'center',
-//                 icon: 'warning',
-//                 title: 'Invalid expiration date',
-//                 showConfirmButton: true,
-//             })
-//         }
-//         else if (buying_price >= selling_price){
-//             Swal.fire({
-//                 position: 'center',
-//                 icon: 'warning',
-//                 title: 'Buying price should be lower than Selling price',
-//                 showConfirmButton: true,
-//             })
+            
+        });
+    }
 
-//         }
-//         else {
-//             $.ajax({
-//                 type: "POST",
-//                 url: PRODUCT_CONTROLLER + '?action=save',
-//                 dataType: "json",
-//                 data:{
-//                     product_barcode: product_barcode,
-//                     product_name: product_name,
-//                     product_category: product_category,
-//                     buying_price: buying_price,
-//                     selling_price: selling_price,
-//                     manufature_date: manufature_date,
-//                     expiraton_date: expiraton_date,
-//                     status: status,
-//                     quantity: quantity,
-//                     type: type,
-//                 },
-//                 success: function (response) 
-//                 {
-//                     thisProduct.loadTableData();
-//                     thisProduct.resetFields();
-//                     Swal.fire({
-//                         position: 'center',
-//                         icon: 'success',
-//                         title: 'Product added successfully',
-//                         showConfirmButton: true,
-//                     })
-//                 },
-//                 error: function () {                }
+    thisProduct.resetFields = () => {
+        toUpdate = false;
+
+        $('#category').val("");
+        $('#inputs').html('');
+    }
+
+    thisProduct.clickDelete = (id) => {
+        product_id = id
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                thisProduct.delete();
+            }
+        })
+    }
+
+    thisProduct.delete = () => {
+        $.ajax({
+            type: "POST",
+            url: PRODUCT_CONTROLLER + '?action=delete',
+            dataType: "json",
+            data:{
+                product_id: product_id
+            },
+            success: function (response) 
+            {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Product Deleted Successfully ',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                thisProduct.loadTableData();
+                // thisProduct.loadSelectData();
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    thisProduct.clickUpdate = (id) => {
+        product_id = id;
+
+        $.ajax({
+            type: "POST",
+            url: PRODUCT_CONTROLLER + '?action=getById',
+            dataType: "json",
+            data:{
+                product_id: product_id
+            },
+            success: function (response) 
+            {   
+                if(response.CATEGORY == "Camera") {
+                    $('#category').val("Camera");
+                    $('#category').trigger("change");
+                    $("#camera_type").val(response.CAMERA_TYPE);
+                    $("#camera_shape").val(response.CAMERA_SHAPE);
+                    $("#camera_type").prop("disabled", true);
+                    $("#camera_shape").prop("disabled", true);
+                } else if(response.CATEGORY == "Recorder") {
+                    $('#category').val("Recorder");
+                    $('#category').trigger("change");
+                    $("#recorder_type").val(response.RECORDER_TYPE);
+                    $("#recorder_type").prop("disabled", true);
+                } else if(response.CATEGORY == "Hard drive") {
+                    $('#category').val("Hard drive");
+                    $('#category').trigger("change");
+                    $("#capacity").val(response.CAPACITY);
+                    $("#capacity").prop("disabled", true);
+                } else if(response.CATEGORY == "Power Supply") {
+                    $('#category').val("Power Supply");
+                    $('#category').trigger("change");
+                    $("#psu_type").val(response.PSU_TYPE);
+                    $("#watts").val(response.WATTS);
+                    $("#psu_type").prop("disabled", true);
+                    $("#watts").prop("disabled", true);
+                } else if(response.CATEGORY == "Monitor") {
+                    $('#category').val("Monitor");
+                    $('#category').trigger("change");
+                    $("#monitor_size").val(response.MONITOR_SIZE);
+                    $("#monitor_size").prop("disabled", true);
+                }
+                $("#category").val(response.CATEGORY);
+                $("#brand").val(response.BRAND);
+                $("#model").val(response.MODEL);
+                $("#buying_price").val(response.BUYING_PRICE);
+                $("#selling_price").val(response.SELLING_PRICE);
+                $("#serial_number").val(response.SERIAL_NUMBER);
+
+                $("#brand").prop("disabled", true);
+                $("#model").prop("disabled", true);
+                $("#serial_number").prop("disabled", true);
                 
-                
-//             });
-//         }
-//     }
+                toUpdate = true;
 
-//     thisProduct.clickUpdate = (id, product_table_id) => {
-//         product_details_id = id;
-//         product_id = product_table_id;
+                $('#btn_save_product').html('Update Product');
+            },
+            error: function () {
 
-//         $.ajax({
-//             type: "POST",
-//             url: PRODUCT_CONTROLLER + '?action=getById',
-//             dataType: "json",
-//             data:{
-//                 product_details_id: product_details_id
-//             },
-//             success: function (response) 
-//             {
-//                 $('#txt_product_barcode').val(response.barcode);
-//                 $('#txt_product_barcode').prop( "disabled", true );
-//                 $('#txt_product_name').val(response.product_name);
-//                 $('#txt_product_name').prop( "disabled", true );
-//                 $('#slc_product_category').val(response.category_id);
-//                 $('#slc_product_category').prop( "disabled", true );
-//                 $('#txt_buying_price').val(response.buy_price);
-//                 $('#txt_selling_price').val(response.sale_price);
-//                 // $('#txt_selling_price').prop( "disabled", true );
-//                 $('#txt_manufature_date').val(response.manufacture_date);
-//                 $('#txt_manufature_date').prop( "disabled", true );
-//                 $('#txt_expiraton_date').val(response.expiration_date);
-//                 $('#txt_expiraton_date').prop( "disabled", true );
-//                 $('#slc_status').val(response.status);
-//                 $('#slc_status').prop( "disabled", true );
-//                 $('#txt_quantity').val(response.quantity);
-//                 $('#slc_type').val(response.type);
-//                 $('#slc_type').prop( "disabled", true );
-                
-//                 toUpdate = true;
+            }
+        });
+    }
 
-//                 $('#btn_save_product').html('Update Product');
-//             },
-//             error: function () {
-
-//             }
-//         });
-//     }
-
-//     thisProduct.update = () => {
-//         const buying_price = $('#txt_buying_price').val();
-//         const selling_price = $('#txt_selling_price').val();
-//         const quantity = $('#txt_quantity').val();
-//         const manufature_date = $('#txt_manufature_date').val();
-//         const expiraton_date = $('#txt_expiraton_date').val();
-
-//         if(buying_price == ""
-//         || selling_price == ""
-//         || quantity == "") {
-//             Swal.fire({
-//                 position: 'center',
-//                 icon: 'warning',
-//                 title: 'Please fillout all fields',
-//                 showConfirmButton: true,
-//             })
-//         }
-
-//         else if (buying_price >= selling_price){
-//             Swal.fire({
-//                 position: 'center',
-//                 icon: 'warning',
-//                 title: 'Buying price should be lower than Selling price',
-//                 showConfirmButton: true,
-//             })
-//         }
-//         else {
-//             $.ajax({
-//                 type: "POST",
-//                 url: PRODUCT_CONTROLLER + '?action=updateProductDetails',
-//                 dataType: "json",
-//                 data:{
-//                     product_id: product_id,
-//                     product_details_id: product_details_id,
-//                     buying_price: buying_price,
-//                     selling_price: selling_price,
-//                     quantity: quantity,
-//                     manufature_date: manufature_date,
-//                     expiraton_date: expiraton_date,
-                    
-//                 },
-//                 success: function () 
-//                 {
-//                     Swal.fire({
-//                         position: 'center',
-//                         icon: 'success',
-//                         title: 'Product updated successfully',
-//                         showConfirmButton: true,
-//                     })
-//                     thisProduct.loadTableData();
-//                     thisProduct.resetFields()
-//                 },
-//                 error: function () {
-    
-//                 }
-//             });
-//         }
+    thisProduct.update = () => {
+        const buying_price = $('#buying_price').val();
+        const selling_price = $('#selling_price').val();
         
-//     }
+        if(buying_price == ""
+        || selling_price == "") {
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'Please fillout all fields',
+                showConfirmButton: true,
+            })
+        }
 
-//     thisProduct.resetFields = () => {
-//         toUpdate = false;
+        else if (buying_price > selling_price){
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'Buying price should be lower than Selling price',
+                showConfirmButton: true,
+            })
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: PRODUCT_CONTROLLER + '?action=updateProductDetails',
+                dataType: "json",
+                data:{
+                    product_id: product_id,
+                    buying_price: buying_price,
+                    selling_price: selling_price,
+                },
+                success: function () 
+                {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Product updated successfully',
+                        showConfirmButton: true,
+                    })
+                    thisProduct.loadTableData();
+                    thisProduct.resetFields()
+                },
+                error: function () {
+    
+                }
+            });
+        }
+        
+    }
 
-//         $('#txt_product_barcode').val("");
-//         $('#txt_product_name').val("");
-//         $('#slc_product_category').val("");
-//         $('#txt_buying_price').val("");
-//         $('#txt_selling_price').val("");
-//         $('#txt_manufature_date').val("");
-//         $('#txt_expiraton_date').val("");
-//         $('#slc_status').val("");
-//         $('#txt_quantity').val("");
-//         $('#slc_type').val("");
-
-//         $('.form-control').prop("disabled", false);
-
-//         $('#btn_save_product').html('Register Product');
-//     }
-
-//     thisProduct.onChangeBarcode = () => {
-//         const product_barcode = $('#txt_product_barcode').val();
-//         $.ajax({
-//             type:'GET',
-//             url: PRODUCT_CONTROLLER + `?action=getAvailableProductByBarcode&barcode=${product_barcode}`,
-//             dataType: 'json',
-//             cache:false,
-//             success: (response) => {               
-//                 if(response.length > 0){
-                    
-//                     $('#txt_product_name').val(response[0].product_name);
-//                     $('#txt_product_name').prop( "disabled", true );
-//                     $('#slc_product_category').val(response[0].category_id);
-//                     $('#slc_product_category').prop( "disabled", true );
-//                     $('#txt_buying_price').val(response[0].buy_price);
-//                     $('#txt_selling_price').val(response[0].sale_price);
-//                     $('#slc_status').val(response[0].status);
-//                     $('#slc_status').prop( "disabled", true );
-//                     $('#slc_type').val(response[0].type);
-//                     $('#slc_type').prop( "disabled", true );
-//                 }
-//                 else{
-//                     $('#txt_product_name').val("");
-//                     $('#slc_product_category').val("");
-//                     $('#txt_buying_price').val("");
-//                     $('#txt_selling_price').val("");
-//                     $('#txt_manufature_date').val("");
-//                     $('#txt_expiraton_date').val("");
-//                     $('#slc_status').val("");
-//                     $('#txt_quantity').val("");
-//                     $('#slc_type').val("");
-
-//                     $('.form-control').prop("disabled", false);
-//                 }
-//             }
-//         })
-//     }
-
-
-
-//     return thisProduct;
-// })();
+    return thisProduct;
+})();

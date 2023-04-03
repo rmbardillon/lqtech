@@ -28,7 +28,7 @@ class ProductDetails
 
     public function getAll()
     {
-        $sql = $this->getAllquery . ' WHERE expired_status = 0 and quantity != 0' . $this->orderBy;
+        $sql = "SELECT * FROM products";
 
         $result = $this->conn->query($sql);
         
@@ -49,9 +49,9 @@ class ProductDetails
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getById($product_details_id)
+    public function getById($product_id)
     {
-        $sql = $this->getAllquery . " WHERE pd.id = $product_details_id";
+        $sql = "SELECT * FROM products WHERE PRODUCT_ID = '$product_id'";
         $result = $this->conn->query($sql);
 
         $this->conn->close();
@@ -84,12 +84,27 @@ class ProductDetails
 
     public function save($request)
     {
-        $product_id = $request['product_id'];
-        $quantity = $request['quantity'];
+        $category = $request['category'];
+        $brand = $request['brand'];
+        $model = $request['model'];
         $buying_price = $request['buying_price'];
-        $manufature_date = $request['manufature_date'];
-        $expiraton_date = $request['expiraton_date'];
+        $selling_price = $request['selling_price'];
+        $serial_number = $request['serial_number'];
         $date_added = date("Y-m-d H:i:s");
+
+        if($category == "Camera") {
+            $camera_type = $request['camera_type'];
+            $camera_shape = $request['camera_shape'];
+        } else if($category == "Recorder") {
+            $recorder_type = $request['recorder_type'];
+        } else if($category == "Hard drive") {
+            $capacity = $request['capacity'];
+        } else if($category == "Power Supply") {
+            $psu_type = $request['psu_type'];
+            $watts = $request['watts'];
+        } else if($category == "Monitor") {
+            $monitor_size = $request['monitor_size'];
+        }
 
         $sql = "INSERT INTO product_details (product_id, quantity, buy_price, date_added, manufacture_date, expiration_date) VALUES (?,?,?,?,?,?)";
         

@@ -236,7 +236,6 @@ const Admin = (() => {
     }
 
     thisAdmin.update = () => {
-        var user_id = $(".update").data('id');
         const first_name = $('#txt_first_name').val();
         const last_name = $('#txt_last_name').val();
         const role = $('#role').val();
@@ -257,6 +256,12 @@ const Admin = (() => {
                 thisAdmin.resetFields();
                 thisAdmin.loadTableData();
                 toUpdate = false;
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'User updated successfully',
+                    showConfirmButton: true,
+                })
             },
             error: function () {
 
@@ -339,7 +344,7 @@ const Admin = (() => {
             success: function (response) 
             {
                 Swal.fire({
-                    position: 'top-end',
+                    position: 'center',
                     icon: 'success',
                     title: 'Password Reset Successfully ',
                     showConfirmButton: false,

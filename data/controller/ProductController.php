@@ -23,13 +23,15 @@ if ($action == 'getTableDataRegister')
     foreach ($result as $product) {
         $table_data .= '<tr>';
         $table_data .= '<td>' . $counter . '</td>';
-        $table_data .= '<td>' . $product['product_name'] . '</td>';
-        $table_data .= '<td>' . $product['barcode'] . '</td>';
-        $table_data .= '<td>' . $product['batch'] . '</td>';
+        $table_data .= '<td>' . $product['CATEGORY'] . '</td>';
+        $table_data .= '<td>' . $product['BRAND'] . '</td>';
+        $table_data .= '<td>' . $product['MODEL']. '</td>';
+        $table_data .= '<td>' . $product['SERIAL_NUMBER'] . '</td>';
+        $table_data .= '<td>' . $product['SELLING_PRICE'] . '</td>';
         $table_data .= '<td class="col-actions">';
         $table_data .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
-        $table_data .= '<button type="button" onclick="Product.clickUpdate('. $product['product_details_id'] .','. $product['product_id'] .')" class="btn btn-warning btn-sm"><i class="bi bi-list-check"></i> Update </button>';
-        // $table_data .= '<button type="button" onclick="Product.clickDelete('. $product['product_details_id'] .')" class="btn btn-danger btn-sm"> <i class="bi bi-trash"></i> Delete</button>';
+        $table_data .= '<button type="button" onclick="Product.clickUpdate(`'. $product['PRODUCT_ID'] .'`)" class="btn btn-warning btn-sm"><i class="bi bi-list-check"></i> Update </button>';
+        $table_data .= '<button type="button" onclick="Product.clickDelete(`'. $product['PRODUCT_ID'] .'`)" class="btn btn-danger btn-sm"> <i class="bi bi-trash"></i> Delete</button>';
         $table_data .= '</div>';
         $table_data .= '</td>';
         $table_data .= '</tr>';
@@ -139,80 +141,67 @@ else if ($action == 'getSelectData')
 
 else if ($action == 'getById')
 {
-    $product_details_id = $_POST['product_details_id'];
+    $product_id = $_POST['product_id'];
 
-    echo json_encode($ProductDetails->getById($product_details_id));
+    echo json_encode($ProductDetails->getById($product_id));
 }
 
 else if ($action == 'save')
 {
-    $product_barcode = $_POST['product_barcode'];
-    $product_name = $_POST['product_name'];
-    $product_category = $_POST['product_category'];
-    $buying_price = $_POST['buying_price'];
-    $selling_price = $_POST['selling_price'];
-    $manufature_date = $_POST['manufature_date'];
-    $expiraton_date = $_POST['expiraton_date'];
-    $status = $_POST['status'];
-    $quantity = $_POST['quantity'];
-    $type = $_POST['type'];
+    $serial_numbers = $_POST['data']['serial_number'];
+    $values_array = explode("\n", $serial_numbers);
+    foreach($values_array as $serial_number) {
+        if($serial_number == "") {
+            continue;
+        }
+        $category = $_POST['data']['category'];
+        $brand = $_POST['data']['brand'];
+        $model = $_POST['data']['model'];
+        $buying_price = $_POST['data']['buying_price'];
+        $selling_price = $_POST['data']['selling_price'];
 
+        $request = [
+            'category' => $category,
+            'brand' => $brand,
+            'model' => $model,
+            'buying_price' => $buying_price,
+            'selling_price' => $selling_price,
+            'serial_number' => $serial_number,
+        ];
 
-    $request = [
-        'product_barcode' => $product_barcode,
-        'product_name' => $product_name,
-        'product_category' => $product_category,
-        'buying_price' => $buying_price,
-        'selling_price' => $selling_price,
-        'manufature_date' => $manufature_date,
-        'expiraton_date' => $expiraton_date,
-        'status' => $status,
-        'quantity' => $quantity,
-        'type' => $type,
-    ];
+        if($category == "Camera") {
+            $request['camera_type'] = $_POST['data']['camera_type'];
+            $request['camera_shape'] = $_POST['data']['camera_shape'];
+        } else if($category == "Recorder") {
+            $request['recorder_type'] = $_POST['data']['recorder_type'];
+        } else if($category == "Hard drive") {
+            $request['capacity'] = $_POST['data']['capacity'];
+        } else if($category == "Power Supply") {
+            $request['psu_type'] = $_POST['data']['psu_type'];
+            $request['watts'] = $_POST['data']['watts'];
+        } else if($category == "Monitor") {
+            $request['monitor_size'] = $_POST['data']['monitor_size'];
+        }
 
-    
-    $product = $Product->getByBarcode($product_barcode);
-    
-    $lastInsertID = '';
-    if(empty($product)) 
-    {
-        $lastInsertID = $Product->save($request);
-        $request['product_id'] = $lastInsertID;
+        $result = $Product->save($request);
+
     }
-    else 
-    {
-        $request['product_id'] = $product['id'];
-        $Product->updateSellPrice($request);
-    }
-    
-    $result = $ProductDetails->save($request);
-
     echo json_encode($result);
 }
 
 else if ($action == 'updateProductDetails')
 {
     $product_id = $_POST['product_id'];
-    $product_details_id = $_POST['product_details_id'];
     $buying_price = $_POST['buying_price'];
     $selling_price = $_POST['selling_price'];
-    $manufature_date = $_POST['manufature_date'];
-    $expiraton_date = $_POST['expiraton_date'];
-    $quantity = $_POST['quantity'];
-    $Product->updateSellPrice($request);
     
     $request = [
         'product_id' => $product_id,
-        'product_details_id' => $product_details_id,
         'buying_price' => $buying_price,
         'selling_price' => $selling_price,
-        'manufature_date' => $manufature_date,
-        'expiraton_date' => $expiraton_date,
-        'quantity' => $quantity,
     ];
-    $Product->updateSellPrice($request);
-    $result = $ProductDetails->update($request);
+    $result = $Product->updateSellPrice($request);
+    // $result = $ProductDetails->update($request);
     
     echo json_encode($result);
 }
@@ -226,6 +215,14 @@ else if ($action == 'getProductForUpdate')
     echo json_encode($result);
 }
 
+else if($action == 'delete')
+{
+    $product_id = $_POST['product_id'];
+
+    $result = $Product->delete($product_id);
+
+    echo json_encode($result);
+}
 
 else if ($action == 'updateProduct')
 {

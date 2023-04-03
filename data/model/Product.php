@@ -71,17 +71,47 @@ class Product
 
     public function save($request)
     {
-        $product_barcode = $request['product_barcode'];
-        $product_name = $request['product_name'];
-        $product_category = $request['product_category'];
+        $category = $request['category'];
+        $brand = $request['brand'];
+        $model = $request['model'];
+        $buying_price = $request['buying_price'];
         $selling_price = $request['selling_price'];
-        $status = $request['status'];
-        $type = ($request['type'] != "" ? $request['type'] : null);
+        $serial_number = $request['serial_number'];
+        $date_added = date("Y-m-d H:i:s");
 
-        $sql = "INSERT INTO products (category_id,barcode,name,sale_price,status,type) VALUES (?, ?, ?, ?, ?, ?)";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("issdis",$product_category, $product_barcode, $product_name, $selling_price, $status, $type);
+        if($category == "Camera") {
+            $camera_type = $request['camera_type'];
+            $camera_shape = $request['camera_shape'];
+            $sql = "INSERT INTO products (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, SERIAL_NUMBER, CAMERA_TYPE, CAMERA_SHAPE) 
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssiisss", $category, $brand, $model, $buying_price, $selling_price, $serial_number, $camera_type, $camera_shape);
+        } else if($category == "Recorder") {
+            $recorder_type = $request['recorder_type'];
+            $sql = "INSERT INTO products (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, SERIAL_NUMBER, RECORDER_TYPE) 
+            VALUES(?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssiiss", $category, $brand, $model, $buying_price, $selling_price, $serial_number, $recorder_type);
+        } else if($category == "Hard drive") {
+            $capacity = $request['capacity'];
+            $sql = "INSERT INTO products (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, SERIAL_NUMBER, CAPACITY) 
+            VALUES(?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssiiss", $category, $brand, $model, $buying_price, $selling_price, $serial_number, $capacity);
+        } else if($category == "Power Supply") {
+            $psu_type = $request['psu_type'];
+            $watts = $request['watts'];
+            $sql = "INSERT INTO products (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, SERIAL_NUMBER,PSU_TYPE, WATTS) 
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssiisss", $category, $brand, $model, $buying_price, $selling_price, $serial_number, $psu_type, $watts);
+        } else if($category == "Monitor") {
+            $monitor_size = $request['monitor_size'];
+            $sql = "INSERT INTO products (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, SERIAL_NUMBER, MONITOR_SIZE) 
+            VALUES(?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssiiss", $category, $brand, $model, $buying_price, $selling_price, $serial_number, $monitor_size);
+        }
         
         $result = '';
         if ($stmt->execute() === TRUE) {
@@ -127,11 +157,11 @@ class Product
     public function updateSellPrice($request)
     {
         $id = $request['product_id'];
-        $sale_price = $request['selling_price'];
-
-        $sql = "UPDATE products SET sale_price=? WHERE id=?";
+        $selling_price = $request['selling_price'];
+        $buying_price = $request['buying_price'];
+        $sql = "UPDATE products SET SELLING_PRICE=?, BUYING_PRICE=? WHERE PRODUCT_ID=?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("di",$sale_price, $id);
+        $stmt->bind_param("dds",$selling_price, $buying_price, $id);
 
         $result = '';
         if ($stmt->execute() === TRUE) {
@@ -144,9 +174,9 @@ class Product
         return $result;
     }
 
-    public function delete($category_id)
+    public function delete($product_id)
     {
-        $sql = "DELETE FROM categories WHERE id=$category_id";
+        $sql = "DELETE FROM products WHERE PRODUCT_ID='$product_id'";
 
         $result = '';
         if ($this->conn->query($sql) === TRUE) {

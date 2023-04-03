@@ -19,7 +19,7 @@
             'role' => $role,
             'username' => $username
         ];
-        $result = $user->save($request);
+        $result = $User->save($request);
 
         echo json_encode($result);
     }
@@ -59,10 +59,10 @@
             $table_data .= '<td>'  . $last_login . '</td>';
             $table_data .= '<td class="col-actions">';
             $table_data .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
-            $table_data .= '<button type="button" id="update" onclick="Admin.clickUpdate(`'.$user['USER_ID'] .'`)" data-id="'. $user['USER_ID'] .'" class="btn btn-warning btn-sm update"><i class="bi bi-list-check"></i> Update </button>';
-            $table_data .= '<button type="button" id="reset" onclick="Admin.clickResetPassword(`'. $user['USER_ID'] .'`)" data-id="'. $user['USER_ID'] .'" class="btn btn-info btn-sm reset"><i class="bi bi-key"></i> Reset Password </button>';
+            $table_data .= '<button type="button" id="update" onclick="Admin.clickUpdate(`'.$user['USER_ID'] .'`)" class="btn btn-warning btn-sm update"><i class="bi bi-list-check"></i> Update </button>';
+            $table_data .= '<button type="button" id="reset" onclick="Admin.clickResetPassword(`'. $user['USER_ID'] .'`)" class="btn btn-info btn-sm reset"><i class="bi bi-key"></i> Reset Password </button>';
             if($_SESSION['user']['role'] == 1) {
-                $table_data .= '<button type="button" id="delete" onclick="Admin.clickDelete(`'. $user['USER_ID'] .'`)" data-id="'. $user['USER_ID'] .'" class="btn btn-danger btn-sm delete"> <i class="bi bi-trash"></i> Delete</button>';
+                $table_data .= '<button type="button" id="delete" onclick="Admin.clickDelete(`'. $user['USER_ID'] .'`)" class="btn btn-danger btn-sm delete"> <i class="bi bi-trash"></i> Delete</button>';
             }
             $table_data .= '</div>';
             $table_data .= '</td>';
