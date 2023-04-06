@@ -1,0 +1,44 @@
+{
+  "brands": [
+    {
+      "name": "Hikvision",
+      "sales": 2000000
+    },
+    {
+      "name": "Dahua",
+      "sales": 1500000
+    },
+    {
+      "name": "Axis Communications",
+      "sales": 800000
+    },
+    {
+      "name": "Bosch Security Systems",
+      "sales": 700000
+    },
+    {
+      "name": "Samsung Techwin",
+      "sales": 600000
+    },
+    {
+      "name": "Honeywell Security",
+      "sales": 500000
+    },
+    {
+      "name": "Sony",
+      "sales": 400000
+    },
+    {
+      "name": "Panasonic",
+      "sales": 300000
+    },
+    {
+      "name": "Vivotek",
+      "sales": 200000
+    },
+    {
+      "name": "Arecont Vision",
+      "sales": 100000
+    }
+  ]
+}

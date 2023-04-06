@@ -60,6 +60,9 @@ footer p {
 .active {
     color: white !important;
     background-color: #2d3090;
-    /* text-decoration: underline; */
     border-radius: 40px;
+}
+
+#homeChart {
+    height: 700px !important;
 }
