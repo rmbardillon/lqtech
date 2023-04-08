@@ -17,40 +17,70 @@ class Category
 
     public function getAll()
     {
-        $sql = "SELECT CATEGORY_ID, CATEGORY from categories";
+        $sql = "SELECT MODEL_ID, MODEL from models";
         $result = $this->conn->query($sql);
 
         $this->conn->close();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getById($category_id)
+    public function getById($model_id)
     {
-        $sql = "SELECT CATEGORY_ID, CATEGORY FROM categories WHERE CATEGORY_ID = '$category_id'";
+        $sql = "SELECT MODEL_ID, MODEL FROM models WHERE MODEL_ID = '$model_id'";
         $result = $this->conn->query($sql);
 
         $this->conn->close();
         return $result->fetch_assoc();
     }
 
+    // public function save($request)
+    // {
+    //     $model_name = $request['name'];
+    //     // $values_array = explode("\n", $model_name);
+    //     // foreach($values_array as $model) {
+    //         $sql = "INSERT INTO models(MODEL) VALUES (?)";
+
+    //         $stmt = $this->conn->prepare($sql);
+    //         $stmt->bind_param("s",$model_name);
+
+    //         $result = '';
+    //         if ($stmt->execute() === TRUE) {
+    //             $result = "Successfully Save";
+
+    //             $this->ActionLog->saveLogs('category', 'saved');
+    //         } else {
+    //             $result = "Error: <br>" . $this->conn->error;
+    //         }
+
+    //     // }
+    //     $this->conn->close();
+
+    //     return $result;
+    // }
+
     public function save($request)
     {
-        $category_name = $request['name'];
+        $model_name = $request['name'];
+        $values_array = explode("\n", $model_name);
+        foreach($values_array as $model) {
+            if(trim($model) === "") {
+                continue;
+            }
+            $sql = "INSERT INTO models(MODEL) VALUES (?)";
 
-        $sql = "INSERT INTO categories(CATEGORY) VALUES (?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s",$model);
 
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("s",$category_name);
+            $result = '';
+            if ($stmt->execute() === TRUE) {
+                $result = "Successfully Save";
 
-        $result = '';
-        if ($stmt->execute() === TRUE) {
-            $result = "Successfully Save";
+                $this->ActionLog->saveLogs('category', 'saved');
+            } else {
+                $result = "Error: <br>" . $this->conn->error;
+            }
 
-            $this->ActionLog->saveLogs('category', 'saved');
-        } else {
-            $result = "Error: <br>" . $this->conn->error;
         }
-
         $this->conn->close();
 
         return $result;
@@ -58,13 +88,13 @@ class Category
 
     public function update($request)
     {
-        $category_id = $request['id'];
-        $category_name = $request['name'];
+        $model_id = $request['id'];
+        $model_name = $request['name'];
 
-        $sql = "UPDATE categories SET CATEGORY=? WHERE CATEGORY_ID=?";
+        $sql = "UPDATE models SET MODEL=? WHERE MODEL_ID=?";
 
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ss",$category_name, $category_id);
+        $stmt->bind_param("ss",$model_name, $model_id);
 
         $result = '';
         if ($stmt->execute() === TRUE) {
@@ -80,9 +110,9 @@ class Category
         return $result;
     }
 
-    public function delete($category_id)
+    public function delete($model_id)
     {
-        $sql = "DELETE FROM categories WHERE CATEGORY_ID='$category_id'";
+        $sql = "DELETE FROM models WHERE MODEL_ID='$model_id'";
 
         $result = '';
         if ($this->conn->query($sql) === TRUE) {
@@ -98,26 +128,5 @@ class Category
         return $result;
 
 
-    }
-
-    public function getReportLastSixMonths()
-    {
-        $month = date("Y-m", strtotime("-5 months"));
-        $date = $month . '-' . '01';
-    
-        $sql = "SELECT c.name AS category_name,  SUBSTRING(s.date_purchased,1,7) as month, sum(s.qty) as total
-        FROM categories c 
-        INNER JOIN products p 
-        ON c.id = p.category_id 
-        INNER JOIN sales s 
-        ON p.id = s.product_id
-        WHERE s.date_purchased >= $date and s.void is null
-        GROUP BY c.name,  SUBSTRING(s.date_purchased,1,7)
-        ORDER BY SUBSTRING(s.date_purchased,1,7), c.name, sum(s.qty)";
-
-        $result = $this->conn->query($sql);
-
-        $this->conn->close();
-        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }

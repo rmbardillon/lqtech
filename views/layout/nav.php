@@ -18,8 +18,9 @@
                 Register
             </a>
             <ul class="dropdown-menu">
+                <!-- <li><a class="dropdown-item" href="../master-page/add-category.php">Brand</a></li> -->
+                <li><a class="dropdown-item" href="../master-page/add-model.php">Model</a></li>
                 <li><a class="dropdown-item" href="../master-page/add-product.php">Product</a></li>
-                <li><a class="dropdown-item" href="../master-page/add-category.php">Category</a></li>
             </ul>
         </li>
       <li class="nav-item dropdown">

@@ -55,7 +55,6 @@
                                     <th style="font-family: Ubuntu, sans-serif;">Category</th>
                                     <th style="font-family: Ubuntu, sans-serif;">Brand</th>
                                     <th style="font-family: Ubuntu, sans-serif;">Model</th>
-                                    <th style="font-family: Ubuntu, sans-serif;">Serial Number</th>
                                     <th style="font-family: Ubuntu, sans-serif;">Price</th>
                                     <th style="font-family: Ubuntu, sans-serif;">Action</th>
                                 </tr>

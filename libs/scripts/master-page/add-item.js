@@ -1,9 +1,6 @@
 $(document).ready(function () {
     Category.loadTableData();
-    Category.loadSelectData();
     Product.loadTableData();
-
-    // Product.loadTableData();
 
     $('.btn').click(function (event){
         event.preventDefault()
@@ -20,7 +17,8 @@ $("#category").change(function() {
             </div>
             <div class="col">
                 <label class="form-label" for="model">Model</label>
-                <input type="text" class="form-control" id="model">
+                <select class="form-select model" name="" id="model">
+                </select>
             </div>
         </div>
         <div class="row" style="margin-top: 30px;">
@@ -51,12 +49,6 @@ $("#category").change(function() {
                 <input class="form-control" type="number" id="selling_price">
             </div>
         </div>
-        <div class="row" style="margin-top: 30px;">
-            <div class="col">
-                <label class="form-label" for="serial_number">Serial Numbers</label>
-                <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
-            </div>
-        </div>
     `;
     } else if($(this).val() == "Recorder") {
         var input = `
@@ -67,7 +59,8 @@ $("#category").change(function() {
                 </div>
                 <div class="col">
                     <label class="form-label" for="model">Model</label>
-                    <input type="text" class="form-control" id="model">
+                    <select class="form-select model" name="" id="model">
+                    </select>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
@@ -88,12 +81,6 @@ $("#category").change(function() {
                 <div class="col">
                     <label class="form-label" for="selling_price">Selling Price</label>
                     <input class="form-control" type="number" id="selling_price">
-                </div>
-            </div>
-            <div class="row" style="margin-top: 30px;">
-                <div class="col">
-                    <label class="form-label" for="serial_number">Serial Numbers</label>
-                    <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
                 </div>
             </div>
         `;
@@ -129,12 +116,6 @@ $("#category").change(function() {
                 <div class="col">
                     <label class="form-label" for="selling_price">Selling Price</label>
                     <input class="form-control" type="number" id="selling_price">
-                </div>
-            </div>
-            <div class="row" style="margin-top: 30px;">
-                <div class="col">
-                    <label class="form-label" for="serial_number">Serial Numbers</label>
-                    <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
                 </div>
             </div>
         `;
@@ -174,12 +155,6 @@ $("#category").change(function() {
                     <input class="form-control" type="number" id="selling_price">
                 </div>
             </div>
-            <div class="row" style="margin-top: 30px;">
-                <div class="col">
-                    <label class="form-label" for="serial_number">Serial Numbers</label>
-                    <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
-                </div>
-            </div>
         `;
     } else if($(this).val() == "Monitor") {
         var input = `
@@ -214,23 +189,22 @@ $("#category").change(function() {
                     <input class="form-control" type="number" id="selling_price">
                 </div>
             </div>
-            <div class="row" style="margin-top: 30px;">
-                <div class="col">
-                    <label class="form-label" for="serial_number">Serial Numbers</label>
-                    <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
-                </div>
-            </div>
         `;
     } else {
         var input = '';
     }
     $('#inputs').html(input);
+    Category.loadSelectData();
+    $('.model').select2({
+        placeholder: 'Search for an option...',
+        allowClear: true,
+    });
 });
 
 const Category = (() => {
     const thisCategory = {};
 
-    let category_id = '';
+    let model_id = '';
 
     let toUpdate = false;
 
@@ -257,8 +231,7 @@ const Category = (() => {
             url: CATEGORY_CONTROLLER + '?action=getSelectData',
             dataType: "json",
             success: function (response) {
-
-                $('#slc_product_category').html(response);
+                $('#model').html(response);
             },
             error: function () {
 
@@ -276,13 +249,12 @@ const Category = (() => {
     }
 
     thisCategory.save = () => {
-        const category_name = $('#txt_category_name').val();
-
-        if(category_name == "") {
+        const model_name = $('#txt_category_name').val();
+        if(model_name == "") {
             Swal.fire({
                 position: 'center',
                 icon: 'warning',
-                title: 'Category Field should have value',
+                title: 'Model Field should have value',
                 showConfirmButton: true,
             })
         }
@@ -292,7 +264,7 @@ const Category = (() => {
                 url: CATEGORY_CONTROLLER + '?action=save',
                 dataType: "json",
                 data:{
-                    category_name: category_name
+                    model_name: model_name
                 },
                 success: function (response) 
                 {
@@ -302,7 +274,7 @@ const Category = (() => {
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Category added successfully',
+                        title: 'Model added successfully',
                         showConfirmButton: true,
                     })
                 },
@@ -314,21 +286,21 @@ const Category = (() => {
     }
 
     thisCategory.clickUpdate = (id) => {
-        category_id = id;
+        model_id = id;
 
         $.ajax({
             type: "POST",
             url: CATEGORY_CONTROLLER + '?action=getById',
             dataType: "json",
             data:{
-                category_id: category_id
+                model_id: model_id
             },
             success: function (response) 
             {
-                $('#txt_category_name').val(response.CATEGORY);
+                $('#txt_category_name').val(response.MODEL);
                 toUpdate = true;
 
-                $('#btn_save_category').html('Update Category');
+                $('#btn_save_category').html('Update MODEL');
             },
             error: function () {
 
@@ -337,27 +309,27 @@ const Category = (() => {
     }
 
     thisCategory.update = () => {
-        const category_name = $('#txt_category_name').val();
+        const model_name = $('#txt_category_name').val();
 
         $.ajax({
             type: "POST",
             url: CATEGORY_CONTROLLER + '?action=update',
             dataType: "json",
             data:{
-                category_id: category_id,
-                category_name: category_name
+                model_id: model_id,
+                model_name: model_name
             },
             success: function (response) 
             {
                 $('#txt_category_name').val("")
                 thisCategory.loadTableData();
                 thisCategory.loadSelectData();
-                $('#btn_save_category').html('Register Category');
+                $('#btn_save_category').html('Register Model');
                 toUpdate = false;
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Category updated successfully',
+                    title: 'Model updated successfully',
                     showConfirmButton: true,
                 })
             },
@@ -370,17 +342,17 @@ const Category = (() => {
     thisCategory.clickCancel = () => {
         $('#txt_category_name').val("")
         toUpdate = false;
-        $('#btn_save_category').html('Register Category');
+        $('#btn_save_category').html('Register Model');
     }
 
     thisCategory.clickCancel = () => {
         $('#txt_category_name').val("")
         toUpdate = false;
-        $('#btn_save_category').html('Register Category');
+        $('#btn_save_category').html('Register Model');
     }
 
     thisCategory.clickDelete = (id) => {
-        category_id = id
+        model_id = id
 
         Swal.fire({
             title: 'Are you sure?',
@@ -404,14 +376,14 @@ const Category = (() => {
             url: CATEGORY_CONTROLLER + '?action=delete',
             dataType: "json",
             data:{
-                category_id: category_id
+                model_id: model_id
             },
             success: function (response) 
             {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Category Deleted Successfully ',
+                    title: 'Model Deleted Successfully ',
                     showConfirmButton: false,
                     timer: 1500
                 })
@@ -464,14 +436,12 @@ const Product = (() => {
         var model = $("#model").val();
         var buying_price = $("#buying_price").val();
         var selling_price = $("#selling_price").val();
-        var serial_number = $("#serial_number").val();
         var data = {
             category: category,
             brand: brand,
             model: model,
             buying_price: buying_price,
             selling_price: selling_price,
-            serial_number: serial_number,
         };
 
         if(category == "Camera") {

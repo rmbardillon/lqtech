@@ -22,9 +22,10 @@
                                         <label for="productBarcode" class="form-label">Category Name</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon3"><i class="bi bi-tag"></i></span>
+                                                <!-- <span class="input-group-text" id="basic-addon3"><i class="bi bi-tag"></i></span> -->
                                             </div>
-                                            <input type="text" class="form-control" id="txt_category_name">
+                                            <!-- <input type="text" class="form-control" id="txt_category_name"> -->
+                                            <textarea class="form-control" id="txt_category_name" cols="30" rows="10"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-12">

@@ -15,12 +15,12 @@ if ($action == 'getTableData')
     foreach ($result as $category) {
         $table_data .= '<tr>';
         $table_data .= '<td>' . $counter . '</td>';
-        $table_data .= '<td><span class="category">'  . $category['CATEGORY'] . '</span></td>';
+        $table_data .= '<td><span class="category">'  . $category['MODEL'] . '</span></td>';
         $table_data .= '<td class="col-actions">';
         $table_data .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
-        $table_data .= '<button type="button" onclick="Category.clickUpdate(`'. $category['CATEGORY_ID'] .'`)" data-id="'. $category['CATEGORY_ID'] .'" class="btn btn-warning btn-sm"><i class="bi bi-list-check"></i> Update </button>';
+        $table_data .= '<button type="button" onclick="Category.clickUpdate(`'. $category['MODEL_ID'] .'`)" data-id="'. $category['MODEL_ID'] .'" class="btn btn-warning btn-sm"><i class="bi bi-list-check"></i> Update </button>';
         if($_SESSION['user']['role'] == 1) {
-            $table_data .= '<button type="button" onclick="Category.clickDelete(`'. $category['CATEGORY_ID'] .'`)" data-id="'. $category['CATEGORY_ID'] .'" class="btn btn-danger btn-sm"> <i class="bi bi-trash"></i> Delete</button>';
+            $table_data .= '<button type="button" onclick="Category.clickDelete(`'. $category['MODEL_ID'] .'`)" data-id="'. $category['MODEL_ID'] .'" class="btn btn-danger btn-sm"> <i class="bi bi-trash"></i> Delete</button>';
         }
         $table_data .= '</div>';
         $table_data .= '</td>';
@@ -36,11 +36,11 @@ else if ($action == 'getSelectData')
 {
     $result = $Category->getAll();
 
-    $options = '<option value="" selected="true" disabled>Select Category</option>';
+    $options = '<option value="" selected="true" disabled>Select Model</option>';
 
     foreach ($result as $category) 
     {
-        $options .= '<option value='. $category['CATEGORY_ID'] .'>' . $category['CATEGORY'] . '</option>';
+        $options .= '<option value='. $category['MODEL'] .'>' . $category['MODEL'] . '</option>';
     }
 
     echo json_encode($options);
@@ -48,17 +48,17 @@ else if ($action == 'getSelectData')
 
 else if ($action == 'getById')
 {
-    $category_id = $_POST['category_id'];
+    $model_id = $_POST['model_id'];
 
-    echo json_encode($Category->getById($category_id));
+    echo json_encode($Category->getById($model_id));
 }
 
 else if ($action == 'save')
 {
-    $category_name = $_POST['category_name'];
+    $model_name = $_POST['model_name'];
 
     $request = [
-        'name' => $category_name
+        'name' => $model_name
     ];
 
     $result = $Category->save($request);
@@ -68,12 +68,12 @@ else if ($action == 'save')
 
 else if ($action == 'update')
 {
-    $category_id = $_POST['category_id'];
-    $category_name = $_POST['category_name'];
+    $model_id = $_POST['model_id'];
+    $model_name = $_POST['model_name'];
 
     $request = [
-        'id' => $category_id,
-        'name' => $category_name,
+        'id' => $model_id,
+        'name' => $model_name,
     ];
 
     $result = $Category->update($request);
@@ -83,78 +83,9 @@ else if ($action == 'update')
 
 else if ($action == 'delete')
 {
-    $category_id = $_POST['category_id'];
+    $model_id = $_POST['model_id'];
 
-    $result = $Category->delete($category_id);
+    $result = $Category->delete($model_id);
 
     echo json_encode($result);
-}
-
-else if($action == 'getCategoryPerMonthReport')
-{
-    $colors = ['#4682B4', '#FFE4C4','#A9A9A9', '#CD5C5C', '#FFA07A', '#FFE4B5', '#E6E6FA', '#90EE90', '#E0FFFF', '#2E8B57', '#9370DB', '#FFDAB9'];
-
-    $data = $Category->getReportLastSixMonths();
-
-    $dates = [];
-    $chart_label = [];
-    for($x=5; $x>=0 ;$x--) {
-        $month_num = date("Y-m", strtotime("-$x months"));
-        $month_name = date("F", strtotime("-$x months"));
-
-        $dates[] = [
-            'month' => $month_num,
-            'label' => $month_name
-        ];
-
-        $chart_label[] = $month_name;
-    }
-
-    $categories = [];
-    foreach($data as $report_data)
-    {
-        $category = $report_data['category_name'];
-        if(!in_array($category, $categories)){
-            $categories[] = $category;
-        }
-    }
-
-    $chart_dataset = [];
-    $x=0;
-    foreach($categories as $category)
-    {
-        $chart_data = [];
-        foreach ($dates as $date) 
-        {
-            $value = 0;
-            foreach($data as $report_data) 
-            {
-                if($category == $report_data['category_name'] && $date['month'] == $report_data['month'])
-                {
-                    $value = $report_data['total'];
-                }
-            }
-            $chart_data[] = $value;
-        }
-
-        $chart_dataset[] = [
-            'label' => $category,
-            'backgroundColor' => $colors[$x],
-            'borderColor' => $colors[$x],
-            'pointRadius' => false,
-            'pointColor' => $colors[$x],
-            'pointStrokeColor' => $colors[$x],
-            'pointHighlightFill' => '#fff',
-            'pointHighlightStroke' => $colors[$x],
-            'data' => $chart_data,
-        ];
-        $x++;
-    }
-
-    $chartData = [
-        'labels' => $chart_label,
-        'datasets' => $chart_dataset
-    ];
-    
-    echo json_encode($chartData);
 }

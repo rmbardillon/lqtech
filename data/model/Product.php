@@ -14,7 +14,7 @@ class Product
     private $commonSql = "SELECT p.id AS product_id, p.name AS product_name, barcode, sale_price, status, max_stock, min_stock, type, expired_products,
     c.id AS category_id, c.name AS category_name,
     SUM(pd.quantity) AS total_quantity
-    FROM products p 
+    FROM product_details p 
     INNER JOIN categories c 
     ON p.category_id = c.id 
     INNER JOIN product_details pd 
@@ -31,7 +31,10 @@ class Product
 
     public function getAll()
     {
-        $sql = $this->commonSql . ' WHERE expired_status = 0 ' . $this->groupBySql ;
+        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE
+                FROM products p
+                JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                GROUP BY pd.PRODUCT_DETAILS_ID;";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -55,7 +58,7 @@ class Product
 
     public function getByBarcode($barcode)
     {
-        $sql = "SELECT id, name from products where barcode = '$barcode'";
+        $sql = "SELECT id, name from product_details where barcode = '$barcode'";
         $result = $this->conn->query($sql);
 
         return $result->fetch_assoc();
@@ -63,7 +66,7 @@ class Product
 
     public function getById($product_id)
     {
-        $sql = "SELECT id, category_id, barcode, name, sale_price, status, max_stock, min_stock, type from products where id = '$product_id'";
+        $sql = "SELECT id, category_id, barcode, name, sale_price, status, max_stock, min_stock, type from product_details where id = '$product_id'";
         $result = $this->conn->query($sql);
 
         return $result->fetch_assoc();
@@ -76,41 +79,40 @@ class Product
         $model = $request['model'];
         $buying_price = $request['buying_price'];
         $selling_price = $request['selling_price'];
-        $serial_number = $request['serial_number'];
         $date_added = date("Y-m-d H:i:s");
 
         if($category == "Camera") {
             $camera_type = $request['camera_type'];
             $camera_shape = $request['camera_shape'];
-            $sql = "INSERT INTO products (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, SERIAL_NUMBER, CAMERA_TYPE, CAMERA_SHAPE) 
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO product_details (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, CAMERA_TYPE, CAMERA_SHAPE) 
+            VALUES(?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssiisss", $category, $brand, $model, $buying_price, $selling_price, $serial_number, $camera_type, $camera_shape);
+            $stmt->bind_param("sssiiss", $category, $brand, $model, $buying_price, $selling_price, $camera_type, $camera_shape);
         } else if($category == "Recorder") {
             $recorder_type = $request['recorder_type'];
-            $sql = "INSERT INTO products (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, SERIAL_NUMBER, RECORDER_TYPE) 
-            VALUES(?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO product_details (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, RECORDER_TYPE) 
+            VALUES(?, ?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssiiss", $category, $brand, $model, $buying_price, $selling_price, $serial_number, $recorder_type);
+            $stmt->bind_param("sssiis", $category, $brand, $model, $buying_price, $selling_price, $recorder_type);
         } else if($category == "Hard drive") {
             $capacity = $request['capacity'];
-            $sql = "INSERT INTO products (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, SERIAL_NUMBER, CAPACITY) 
-            VALUES(?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO product_details (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, CAPACITY) 
+            VALUES(?, ?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssiiss", $category, $brand, $model, $buying_price, $selling_price, $serial_number, $capacity);
+            $stmt->bind_param("sssiis", $category, $brand, $model, $buying_price, $selling_price, $capacity);
         } else if($category == "Power Supply") {
             $psu_type = $request['psu_type'];
             $watts = $request['watts'];
-            $sql = "INSERT INTO products (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, SERIAL_NUMBER,PSU_TYPE, WATTS) 
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssiisss", $category, $brand, $model, $buying_price, $selling_price, $serial_number, $psu_type, $watts);
-        } else if($category == "Monitor") {
-            $monitor_size = $request['monitor_size'];
-            $sql = "INSERT INTO products (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, SERIAL_NUMBER, MONITOR_SIZE) 
+            $sql = "INSERT INTO product_details (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE,PSU_TYPE, WATTS) 
             VALUES(?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssiiss", $category, $brand, $model, $buying_price, $selling_price, $serial_number, $monitor_size);
+            $stmt->bind_param("sssiiss", $category, $brand, $model, $buying_price, $selling_price, $psu_type, $watts);
+        } else if($category == "Monitor") {
+            $monitor_size = $request['monitor_size'];
+            $sql = "INSERT INTO product_details (CATEGORY, BRAND, MODEL, BUYING_PRICE, SELLING_PRICE, MONITOR_SIZE) 
+            VALUES(?, ?, ?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("sssiis", $category, $brand, $model, $buying_price, $selling_price, $monitor_size);
         }
         
         $result = '';
@@ -121,6 +123,36 @@ class Product
         } else {
             return "Error: " . $sql . "<br>" . $this->conn->error;
         }
+
+    }
+
+    public function insert($request)
+    {
+        $model = $request['model'];
+        $serial_numbers = $request['serial_numbers'];
+        $values_array = explode("\n", $serial_numbers);
+        foreach($values_array as $serial_number) {
+            if(trim($serial_numbers) === "") {
+                continue;
+            }
+            $sql = "INSERT INTO products(PRODUCT_DETAILS_ID, SERIAL_NUMBER) VALUES (?, ?)";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ss",$model, $serial_number);
+
+            $result = '';
+            if ($stmt->execute() === TRUE) {
+                $result = "Successfully Save";
+
+                $this->ActionLog->saveLogs('product', 'saved');
+            } else {
+                $result = "Error: <br>" . $this->conn->error;
+            }
+
+        }
+        $this->conn->close();
+
+        return $result;
 
     }
 
@@ -137,7 +169,7 @@ class Product
         $type = ($request['type'] != "" ? $request['type'] : null);
         // $expired_products = $request['expired_products'];
         
-        $sql = "UPDATE products 
+        $sql = "UPDATE product_details 
         SET category_id= ?, barcode= ?, name= ?, sale_price= ?, status= ?, max_stock=?, min_stock=?, type=?, expired_products=?
         WHERE id= ?";
         $stmt = $this->conn->prepare($sql);
@@ -159,7 +191,7 @@ class Product
         $id = $request['product_id'];
         $selling_price = $request['selling_price'];
         $buying_price = $request['buying_price'];
-        $sql = "UPDATE products SET SELLING_PRICE=?, BUYING_PRICE=? WHERE PRODUCT_ID=?";
+        $sql = "UPDATE product_details SET SELLING_PRICE=?, BUYING_PRICE=? WHERE PRODUCT_ID=?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("dds",$selling_price, $buying_price, $id);
 
@@ -176,7 +208,7 @@ class Product
 
     public function delete($product_id)
     {
-        $sql = "DELETE FROM products WHERE PRODUCT_ID='$product_id'";
+        $sql = "DELETE FROM product_details WHERE PRODUCT_ID='$product_id'";
 
         $result = '';
         if ($this->conn->query($sql) === TRUE) {
@@ -198,7 +230,7 @@ class Product
         p.id, p.barcode, p.name AS product_name, p.sale_price, p.type, p.status, p.category_id,
         pd.id, pd.product_id, pd.expired_status, pd.quantity, pd.batch, pd.manufacture_date, pd.expiration_date,
         c.id, c.name AS category_name
-        FROM products p 
+        FROM product_details p 
         INNER JOIN product_details pd ON pd.product_id = p.id
         INNER JOIN categories c ON c.id = p.category_id
         WHERE expired_status = 0
@@ -213,7 +245,7 @@ class Product
 
     public function getTotalProduct()
     {
-        $sql = "SELECT count(*) as total_product from products where status = 1";
+        $sql = "SELECT count(*) as total_product from product_details where status = 1";
 
         $result = $this->conn->query($sql);
 
