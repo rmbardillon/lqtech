@@ -30,7 +30,6 @@ const Product = (() => {
             allowClear: true,
         });
     });
-
     thisProduct.loadSelectData = () => {
         $.ajax({
             type: "GET",

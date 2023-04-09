@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow px-3">
   <a class="navbar-brand" href="../master-page/home.php">
-    <img src="../../libs/images/hikvisionicon.png" alt="hikvision icon" style="height: 45px; width: 100px;">
+    <img src="../../libs/images/lqtechlogo.png" alt="hikvision icon" style="height: 45px; width: 100px;">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -34,6 +34,9 @@
         </li>
     <li class="nav-item">
         <a class="nav-link  <?php echo ($page == "Products") ? 'active' : '' ?>" href="../master-page/products.php">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link  <?php echo ($page == "Stocks") ? 'active' : '' ?>" href="../master-page/stocks.php">Stocks</a>
       </li>
       <li class="nav-item">
         <a class="nav-link  <?php echo ($page == "Reports") ? 'active' : '' ?>" href="../master-page/reports.php">Reports</a>
