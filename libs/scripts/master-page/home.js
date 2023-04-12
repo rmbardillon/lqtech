@@ -15,7 +15,7 @@ $.ajax({
     console.log(modelNames);
     console.log(salesFigures);
     let barChart = new Chart(homeChart, {
-      type: "doughnut",
+      type: "bar",
       data: {
         labels: modelNames,
         datasets: [{

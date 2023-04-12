@@ -18,7 +18,6 @@
                 Register
             </a>
             <ul class="dropdown-menu">
-                <!-- <li><a class="dropdown-item" href="../master-page/add-category.php">Brand</a></li> -->
                 <li><a class="dropdown-item" href="../master-page/add-model.php">Model</a></li>
                 <li><a class="dropdown-item" href="../master-page/add-product.php">Product</a></li>
             </ul>
@@ -38,8 +37,8 @@
       <li class="nav-item">
         <a class="nav-link  <?php echo ($page == "Stocks") ? 'active' : '' ?>" href="../master-page/stocks.php">Stocks</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link  <?php echo ($page == "Reports") ? 'active' : '' ?>" href="../master-page/reports.php">Reports</a>
+      <li class="nav-item ms-3">
+        <a class="nav-link report <?php echo ($page == "Reports") ? 'report-active' : '' ?>" href="../master-page/reports.php"><i class="fas fa-download me-2"></i>Reports</a>
       </li>
     </ul>
     <ul class="navbar-nav">

@@ -31,7 +31,7 @@ class Product
 
     public function getAll()
     {
-        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE
+        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU
                 FROM products p
                 JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
                 GROUP BY pd.PRODUCT_DETAILS_ID;";
@@ -56,9 +56,13 @@ class Product
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getByBarcode($barcode)
+    public function getBySku($sku)
     {
-        $sql = "SELECT id, name from product_details where barcode = '$barcode'";
+        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU, PRODUCT_ID
+                FROM products p
+                JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                WHERE SKU = '$sku'
+                GROUP BY pd.PRODUCT_DETAILS_ID;";
         $result = $this->conn->query($sql);
 
         return $result->fetch_assoc();
@@ -129,16 +133,17 @@ class Product
     public function insert($request)
     {
         $model = $request['model'];
+        $sku = $request['sku'];
         $serial_numbers = $request['serial_numbers'];
         $values_array = explode("\n", $serial_numbers);
         foreach($values_array as $serial_number) {
-            if(trim($serial_numbers) === "") {
+            if(trim($serial_number) === "") {
                 continue;
             }
-            $sql = "INSERT INTO products(PRODUCT_DETAILS_ID, SERIAL_NUMBER) VALUES (?, ?)";
+            $sql = "INSERT INTO products(PRODUCT_DETAILS_ID, SKU, SERIAL_NUMBER) VALUES (?, ?, ?)";
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ss",$model, $serial_number);
+            $stmt->bind_param("sss",$model, $sku, $serial_number);
 
             $result = '';
             if ($stmt->execute() === TRUE) {
@@ -208,7 +213,7 @@ class Product
 
     public function delete($product_id)
     {
-        $sql = "DELETE FROM product_details WHERE PRODUCT_ID='$product_id'";
+        $sql = "DELETE FROM products WHERE PRODUCT_DETAILS_ID='$product_id'";
 
         $result = '';
         if ($this->conn->query($sql) === TRUE) {
@@ -251,5 +256,47 @@ class Product
 
         $this->conn->close();
         return $result->fetch_assoc();
+    }
+
+    public function checkout($productCart)
+    {
+        foreach($productCart as $product) {
+            $sku = $product['sku'];
+            $productID = $product['productID'];
+            $model = $product['model'];
+            $serial_numbers = $product['serial_numbers'];
+            $serial_number_array = explode("\n", $serial_numbers);
+            
+            foreach($serial_number_array as $serial_number) {
+                if(trim($serial_number) === "") {
+                    continue;
+                }
+                $sql = "INSERT INTO sales(SERIAL_NUMBER, SKU) VALUES (?, ?)";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("ss",$serial_number, $sku);
+                $result = '';
+                if ($stmt->execute() === TRUE) {
+                    $result = "Successfully Save";
+                    $this->ActionLog->saveLogs('product', 'saved');
+                } else {
+                    $result = "Error: <br>" . $this->conn->error;
+                }
+            }
+
+        }
+        $this->conn->close();
+        return $result;
+    }
+
+    public function checkSerialNumbers($serial_number)
+    {
+            $sql = "SELECT * FROM products WHERE SERIAL_NUMBER = '$serial_number'";
+            $result = $this->conn->query($sql);
+            if($result->num_rows > 0) {
+                return $result->fetch_assoc();
+            } else {
+                return false;
+            }
+        return $result;
     }
 }

@@ -51,7 +51,7 @@ class ProductDetails
 
     public function getById($product_id)
     {
-        $sql = "SELECT * FROM product_details WHERE PRODUCT_ID = '$product_id'";
+        $sql = "SELECT * FROM product_details WHERE PRODUCT_DETAILS_ID = '$product_id'";
         $result = $this->conn->query($sql);
 
         $this->conn->close();

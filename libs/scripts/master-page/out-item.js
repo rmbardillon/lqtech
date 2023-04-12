@@ -1,15 +1,162 @@
 $(document).ready(function () {
+    var productCart = [];
+    var totalItems = 0;
+    cartProducts = '';
+    var productID = '';
     Product.loadTableData();
 
     $('.btn').click(function (event){
         event.preventDefault()
     })
-    
+
     $('#sku').on('keydown', function(event) {
         if (event.key === 'Enter') {
             event.preventDefault();
-            $('#serial_number').focus(); // move focus to the textarea
+            $.ajax({
+                type: "POST",
+                url: PRODUCT_CONTROLLER + '?action=getBySku',
+                dataType: "json",
+                data:{
+                    sku: $('#sku').val()
+                },
+                success: function (response){
+                    if(response == null) {
+                        swal.fire({
+                            title: "Error",
+                            text: "Product not found",
+                            icon: "error",
+                            confirmButtonText: "Ok"
+                        })
+                    } else {
+                        $("#model").val(response.MODEL);
+                        productID = response.PRODUCT_ID;
+                        $('#serial_numbers').focus(); // move focus to the textarea
+                    }
+                },
+                error: function () {
+                }
+            });
         }
+    });
+
+    $("#serial_numbers").on('keydown', function(event) {
+        if (event.key === 'Enter') {
+            var serialNumbers = $('#serial_numbers').val().trim().split('\n');
+            var serial_number = serialNumbers.pop().trim();
+            $.ajax({
+                type: "POST",
+                url: PRODUCT_CONTROLLER + '?action=checkSerialNumbers',
+                dataType: "json",
+                data:{
+                    serial_number: serial_number
+                },
+                success: function (response){
+                    if(response == false) {
+                        swal.fire({
+                            title: "Error",
+                            text: "Invalid Serial Number",
+                            icon: "error",
+                            confirmButtonText: "Ok"
+                        }).then(function() {
+                            // Remove the last invalid serial_number and add a new line
+                            var serialNumbers = $('#serial_numbers').val().trim().split('\n');
+                            if (serialNumbers.length > 0) {
+                                var lastSerialNumber = serialNumbers.pop().trim();
+                                $('#serial_numbers').val(serialNumbers.join('\n'));
+                                if (lastSerialNumber !== '') {
+                                    $('#serial_numbers').val($('#serial_numbers').val() + '\n');
+                                }
+                            }
+                        });
+                    }
+                }
+            })         
+        }
+    });
+
+    $("#addToCart").click(function() {
+        var sku = $("#sku").val();
+        var model = $("#model").val();
+        var serial_numbers = $("#serial_numbers").val();
+        var lines = serial_numbers.split(/\r|\r\n|\n/); // split by line breaks
+        var nonEmptyLines = lines.filter(function(line) {
+            return line.trim() !== ''; // exclude empty lines
+        });
+        var quantity = nonEmptyLines.length;
+        totalItems += quantity;
+
+        alert("Total Items: " + totalItems);
+        var productRow = `
+            <tr>
+                <td>${quantity}</td>
+                <td>${sku}</td>
+                <td>${model}</td>
+                <td><button class="btn btn-danger">Remove</button></td>
+            </tr>
+        `;
+        cartProducts += `<tr>
+                <td>${quantity}</td>
+                <td>${sku}</td>
+                <td>${model}</td>
+            </tr>`;
+        productCart.push({
+            sku: sku,
+            model: model,
+            serial_numbers: serial_numbers,
+            productID: productID
+        });
+        $('.table').DataTable().destroy();
+        $("#cart").append(productRow);
+        $('.table').DataTable();
+        $("#sku").val("");
+        $("#model").val("");
+        $("#serial_numbers").val("");
+        $("#sku").focus();
+    });
+
+    $("#checkout").click(function() {
+        console.log(cartProducts);
+        $("#checkout_table").html(cartProducts);
+        $("#total").html(totalItems);
+        $('#myModal').modal('show');
+    });
+
+    $("#checkout_confirm").click(function() {
+        $.ajax({
+            type: "POST",
+            url: PRODUCT_CONTROLLER + '?action=checkout',
+            dataType: "json",
+            data:{
+                productCart: productCart
+            },
+            success: function (response){
+                if(response == "Successfully Save") {
+                    swal.fire({
+                        title: "Success",
+                        text: "Products successfully checked out",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    }).then(function() {
+                        productCart = [];
+                        // Reload the page
+                        location.reload();
+                    })
+                } else {
+                    swal.fire({
+                        title: "Error",
+                        text: "Something went wrong",
+                        icon: "error",
+                        confirmButtonText: "Ok"
+                    })
+                }     
+            },
+            error: function () {
+            }
+        });
+    });
+
+    $(".pos_close").click(function() {
+        $(`#myModal`).modal('hide');
     });
 });
 
@@ -80,7 +227,6 @@ const Product = (() => {
 
     thisProduct.save = () => {
         var model = $("#models").val();
-        var sku = $("#sku").val();
         var serial_numbers = $("#serial_number").val();
 
         $.ajax({
@@ -89,8 +235,7 @@ const Product = (() => {
             dataType: "json",
             data:{
                 model : model,
-                serial_numbers : serial_numbers,
-                sku: sku
+                serial_numbers : serial_numbers
             },
             success: function (response) 
             {
@@ -123,7 +268,6 @@ const Product = (() => {
         // $('#models').val("").select2("val", "");
         $("#modelDiv").html(model);
         $('#serial_number').val("");
-        $('#sku').val("");
     }
 
     thisProduct.clickDelete = (id) => {

@@ -63,6 +63,12 @@ footer p {
     border-radius: 40px;
 }
 
+.report {
+    color: white !important;
+    background-color: red;
+    border-radius: 40px;
+}
+
 #homeChart {
     height: 700px !important;
 }

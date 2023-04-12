@@ -27,7 +27,7 @@
                 </div>
                 <form id="input_product_form">
                     <div id="inputs"></div>
-                    <div class="row" style="margin-top: 10px;">
+                    <div class="row" style="margin-top: 30px;">
                         <div class="col">
                             <button class="btn btn-primary w-100" type="button" onclick="Product.clickSaveButton()"><i class="far fa-check-circle"></i>Register</button>
                         </div>

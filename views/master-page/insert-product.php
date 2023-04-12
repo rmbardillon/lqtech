@@ -32,6 +32,10 @@
                                 </select>
                             </div>
                             <div class="mb-3">
+                                <label class="form-label" for="sku">SKU</label>
+                                <input class="form-control" type="text" id="sku">
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label" for="serial_number">Serial Numbers</label>
                                 <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
                             </div>
@@ -46,11 +50,12 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th style="font-family: Ubuntu, sans-serif;">No.</th>
+                            <!-- <th style="font-family: Ubuntu, sans-serif;">No.</th> -->
+                            <th style="font-family: Ubuntu, sans-serif;">Quantity</th>
                             <th style="font-family: Ubuntu, sans-serif;">Category</th>
                             <th style="font-family: Ubuntu, sans-serif;">Brand</th>
                             <th style="font-family: Ubuntu, sans-serif;">Model</th>
-                            <th style="font-family: Ubuntu, sans-serif;">Quantity</th>
+                            <th style="font-family: Ubuntu, sans-serif;">SKU</th>
                             <th style="font-family: Ubuntu, sans-serif;">Action</th>
                         </tr>
                     </thead>

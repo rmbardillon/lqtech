@@ -29,8 +29,8 @@ if ($action == 'getTableDataRegister')
         $table_data .= '<td>' . $product['SELLING_PRICE'] . '</td>';
         $table_data .= '<td class="col-actions">';
         $table_data .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
-        $table_data .= '<button type="button" onclick="Product.clickUpdate(`'. $product['PRODUCT_DETAILS_ID'] .'`)" class="btn btn-warning btn-sm"><i class="bi bi-list-check"></i> Update </button>';
-        $table_data .= '<button type="button" onclick="Product.clickDelete(`'. $product['PRODUCT_DETAILS_ID'] .'`)" class="btn btn-danger btn-sm"> <i class="bi bi-trash"></i> Delete</button>';
+        $table_data .= '<button type="button" onclick="Product.clickUpdate(`'. $product['PRODUCT_DETAILS_ID'] .'`)" class="btn btn-warning btn-sm w-100"><i class="bi bi-list-check"></i> Update </button>';
+        // $table_data .= '<button type="button" onclick="Product.clickDelete(`'. $product['PRODUCT_DETAILS_ID'] .'`)" class="btn btn-danger btn-sm"> <i class="bi bi-trash"></i> Delete</button>';
         $table_data .= '</div>';
         $table_data .= '</td>';
         $table_data .= '</tr>';
@@ -64,11 +64,12 @@ else if ($action == 'getProductsTable')
     $counter = 1;
     foreach ($result as $product) {
         $table_data .= '<tr>';
-        $table_data .= '<td>' . $counter . '</td>';
+        // $table_data .= '<td>' . $counter . '</td>';
+        $table_data .= '<td>' . $product['QUANTITY'] . '</td>';
         $table_data .= '<td>' . $product['CATEGORY'] . '</td>';
         $table_data .= '<td>' . $product['BRAND'] . '</td>';
         $table_data .= '<td>' . $product['MODEL']. '</td>';
-        $table_data .= '<td>' . $product['QUANTITY'] . '</td>';
+        $table_data .= '<td>' . $product['SKU']. '</td>';
         $table_data .= '<td class="col-actions">';
         $table_data .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
         $table_data .= '<button type="button" onclick="Product.clickUpdate(`'. $product['PRODUCT_DETAILS_ID'] .'`)" class="btn btn-warning btn-sm"><i class="bi bi-list-check"></i> Update </button>';
@@ -104,6 +105,7 @@ else if ($action == 'displayProductsTable')
         $table_data .= '<td>' . $product['MODEL']. '</td>';
         $table_data .= '<td>' . $product['QUANTITY'] . '</td>';
         $table_data .= '<td>' . $product['SELLING_PRICE'] . '</td>';
+        $table_data .= '<td><button class="btn btn-warning"><i class="bi bi-list-check"></i>Edit</button></td>';
         $table_data .= '</td>';
         $table_data .= '</tr>';
 
@@ -118,7 +120,7 @@ else if ($action == 'getSelectData')
     $result = $Category->getAll();
 
     $options = '<option value="" selected="true" disabled>Select Category</option>';
-
+    
     foreach ($result as $category) 
     {
         $options .= '<option value='. $category['id'] .'>' . $category['name'] . '</option>';
@@ -127,11 +129,11 @@ else if ($action == 'getSelectData')
     echo json_encode($options);
 }
 
-else if ($action == 'getById')
+else if ($action == 'getBySku')
 {
-    $product_id = $_POST['product_id'];
+    $sku = $_POST['sku'];
 
-    echo json_encode($ProductDetails->getById($product_id));
+    echo json_encode($Product->getBySku($sku));
 }
 
 else if ($action == 'save')
@@ -171,11 +173,13 @@ else if ($action == 'save')
 else if ($action == 'insert')
 {
     $model = $_POST['model'];
+    $sku = $_POST['sku'];
     $serial_numbers = $_POST['serial_numbers'];
 
     $request = [
         'model' => $model,
         'serial_numbers' => $serial_numbers,
+        'sku' => $sku,
     ];
 
     $result = $Product->insert($request);
@@ -260,4 +264,18 @@ else if($action === 'getTotalProduct')
     echo json_encode($result);
 }
 
+else if($action === 'checkout')
+{
+    $productCart = $_POST['productCart'];
+    $result = $Product->checkout($productCart);
 
+    echo json_encode($result);
+}
+
+else if($action === 'checkSerialNumbers')
+{
+    $serial_number = $_POST['serial_number'];
+    $result = $Product->checkSerialNumbers($serial_number);
+
+    echo json_encode($result);
+}

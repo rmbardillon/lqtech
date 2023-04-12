@@ -42,11 +42,11 @@ $("#category").change(function() {
         <div class="row" style="margin-top: 30px;">
             <div class="col">
                 <label class="form-label" for="buying_price">Buying Price</label>
-                <input class="form-control" type="number" id="buying_price">
+                <input class="form-control" type="number" id="buying_price" value="0">
             </div>
             <div class="col">
                 <label class="form-label" for="selling_price">Selling Price</label>
-                <input class="form-control" type="number" id="selling_price">
+                <input class="form-control" type="number" id="selling_price" value="0">
             </div>
         </div>
     `;
@@ -76,11 +76,11 @@ $("#category").change(function() {
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
                     <label class="form-label" for="buying_price">Buying Price</label>
-                    <input class="form-control" type="number" id="buying_price">
+                    <input class="form-control" type="number" id="buying_price" value="0">
                 </div>
                 <div class="col">
                     <label class="form-label" for="selling_price">Selling Price</label>
-                    <input class="form-control" type="number" id="selling_price">
+                    <input class="form-control" type="number" id="selling_price" value="0">
                 </div>
             </div>
         `;
@@ -111,11 +111,11 @@ $("#category").change(function() {
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
                     <label class="form-label" for="buying_price">Buying Price</label>
-                    <input class="form-control" type="number" id="buying_price">
+                    <input class="form-control" type="number" id="buying_price" value="0">
                 </div>
                 <div class="col">
                     <label class="form-label" for="selling_price">Selling Price</label>
-                    <input class="form-control" type="number" id="selling_price">
+                    <input class="form-control" type="number" id="selling_price" value="0">
                 </div>
             </div>
         `;
@@ -124,11 +124,11 @@ $("#category").change(function() {
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
                     <label class="form-label" for="brand">Brand</label>
-                    <input type="text" class="form-control" id="brand">
+                    <input type="text" class="form-control" id="brand" value="OEM" readonly>
                 </div>
                 <div class="col">
                     <label class="form-label" for="model">Model</label>
-                    <input type="text" class="form-control" id="model">
+                    <input type="text" class="form-control" id="model" value="Generic" readonly>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
@@ -148,11 +148,11 @@ $("#category").change(function() {
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
                     <label class="form-label" for="buying_price">Buying Price</label>
-                    <input class="form-control" type="number" id="buying_price">
+                    <input class="form-control" type="number" id="buying_price" value="0">
                 </div>
                 <div class="col">
                     <label class="form-label" for="selling_price">Selling Price</label>
-                    <input class="form-control" type="number" id="selling_price">
+                    <input class="form-control" type="number" id="selling_price" value="0">
                 </div>
             </div>
         `;
@@ -165,7 +165,7 @@ $("#category").change(function() {
                 </div>
                 <div class="col">
                     <label class="form-label" for="model">Model</label>
-                    <input type="text" class="form-control" id="model">
+                    <input type="text" class="form-control" id="model" value="Generic">
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
@@ -175,18 +175,21 @@ $("#category").change(function() {
                         <option value="" disabled selected>- Select Monitor Size -</option>
                         <option value="19 Inches">19 Inches</option>
                         <option value="20 Inches">20 Inches</option>
+                        <option value="22 Inches">22 Inches</option>
                         <option value="32 Inches">32 Inches</option>
+                        <option value="43 Inches">43 Inches</option>
+                        <option value="55 Inches">55 Inches</option>
                     </select>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
                     <label class="form-label" for="buying_price">Buying Price</label>
-                    <input class="form-control" type="number" id="buying_price">
+                    <input class="form-control" type="number" id="buying_price" value="0">
                 </div>
                 <div class="col">
                     <label class="form-label" for="selling_price">Selling Price</label>
-                    <input class="form-control" type="number" id="selling_price">
+                    <input class="form-control" type="number" id="selling_price" value="0">
                 </div>
             </div>
         `;
