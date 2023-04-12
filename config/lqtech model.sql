@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2023 at 05:40 AM
+-- Generation Time: Apr 12, 2023 at 10:22 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -34,6 +34,26 @@ CREATE TABLE `action_logs` (
   `ROLE` int(16) NOT NULL,
   `ACTION` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `action_logs`
+--
+
+INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACTION`) VALUES
+('016942edd90b11ed', '2023-04-12 10:21:20', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('0169c34fd90b11ed', '2023-04-12 10:21:20', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('485631edd8f611ed', '2023-04-12 07:53:00', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('6978c1d2d8fa11ed', '2023-04-12 08:22:34', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('b1131d89d90011ed', '2023-04-12 09:07:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('c1d6124dd8ff11ed', '2023-04-12 09:00:49', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('d4b7c0bed8f611ed', '2023-04-12 07:56:56', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('dfaa75f3d8f911ed', '2023-04-12 08:18:42', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('f5560a0ad90a11ed', '2023-04-12 10:21:00', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('f556e6cbd90a11ed', '2023-04-12 10:21:00', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('f557727bd90a11ed', '2023-04-12 10:21:00', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('f557f950d90a11ed', '2023-04-12 10:21:00', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('ff512ae7d90111ed', '2023-04-12 09:16:51', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('ff520202d90111ed', '2023-04-12 09:16:52', '58727a89cdf911ed', 1, 'Successfully saved the Product');
 
 -- --------------------------------------------------------
 
@@ -210,7 +230,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`PRODUCT_ID`, `PRODUCT_DETAILS_ID`, `SKU`, `SERIAL_NUMBER`) VALUES
+('697716f9d8fa11ed', '721e1638d83511ed', '6954273692438', '321'),
+('c1d5b273d8ff11ed', '721e1638d83511ed', '6954273692438', '111'),
 ('d993a3aed83511ed', '721e1638d83511ed', '6954273692438', 'K24148414'),
+('dfa8c2e1d8f911ed', '721e1638d83511ed', '6954273692438', '123'),
 ('e146bbe9d83511ed', '7d6b5e05d83511ed', '6954273697167', 'K07492984');
 
 -- --------------------------------------------------------
