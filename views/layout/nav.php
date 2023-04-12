@@ -53,7 +53,8 @@
             </ul>
         </li>
       <li class="nav-item">
-        <a class="nav-link  <?php echo ($page == "Alerts") ? 'active' : '' ?>" href="../master-page/alerts.php">Alerts</a>
+        <span class="badge rounded-pill bg-danger" style="float:right;margin-bottom:-5px;">5</span>
+        <a class="nav-link  <?php echo ($page == "Alerts") ? '' : '' ?>" href="../master-page/alerts.php"><i class="bi bi-bell"></i></a>
       </li>
     </ul>
   </div>
