@@ -136,6 +136,20 @@ else if ($action == 'getBySku')
     echo json_encode($Product->getBySku($sku));
 }
 
+else if($action == 'getSales')
+{
+    $result = $Product->getSales();
+
+    echo(json_encode($result));
+}
+
+else if($action == 'getIn')
+{
+    $result = $Product->getIn();
+
+    echo(json_encode($result));
+}
+
 else if ($action == 'save')
 {
     $category = $_POST['data']['category'];

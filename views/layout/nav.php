@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow px-3">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow px-3 sticky-top">
   <a class="navbar-brand" href="../master-page/home.php">
     <img src="../../libs/images/lqtechlogo.png" alt="hikvision icon" style="height: 45px; width: 100px;">
   </a>
@@ -53,7 +53,7 @@
             </ul>
         </li>
       <li class="nav-item">
-        <span class="badge rounded-pill bg-danger" style="float:right;margin-bottom:-5px;">5</span>
+        <span class="badge rounded-pill bg-danger" style="float:right;margin-bottom:-5px;"></span>
         <a class="nav-link  <?php echo ($page == "Alerts") ? '' : '' ?>" href="../master-page/alerts.php"><i class="bi bi-bell"></i></a>
       </li>
     </ul>

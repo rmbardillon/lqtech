@@ -37,3 +37,4 @@
         })
     }
 </script>
+<script src="../../libs/scripts/master-page/alerts.js" ></script>

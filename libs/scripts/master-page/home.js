@@ -1,7 +1,55 @@
-let homeChart = document.getElementById("homeChart").getContext("2d");
+let transactionInChart = document.getElementById("transactionIn").getContext("2d");
+let transactionOutChart = document.getElementById("transactionOut").getContext("2d");
+let productChart = document.getElementById("productChart").getContext("2d");
+const colors = [];
+for (let i = 0; i < 1000; i++) {
+  const r = Math.floor(Math.random() * 255);
+  const g = Math.floor(Math.random() * 255);
+  const b = Math.floor(Math.random() * 255);
+  colors.push(`rgb(${r}, ${g}, ${b})`);
+}
 
 $.ajax({
   url: PRODUCT_CONTROLLER + '?action=getProducts',
+  dataType: 'json',
+  success: function(data) {
+    let modelNames = [];
+    let salesFigures = [];
+
+    for (let i = 0; i < data.length; i++) {
+      modelNames.push(data[i].MODEL);
+      salesFigures.push(data[i].QUANTITY);
+    }
+    let barChart = new Chart(productChart, {
+      type: "bar",
+      data: {
+        labels: modelNames,
+        datasets: [{
+          label: "Quantity",
+          data: salesFigures,
+          backgroundColor: colors,
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Products Total",
+            font: {
+              size: 25,
+            }
+          },
+          legend: {
+            position: 'right',
+            display: true,
+          }
+        }
+      }
+    });
+  }
+});
+$.ajax({
+  url: PRODUCT_CONTROLLER + '?action=getIn',
   dataType: 'json',
   success: function(data) {
     console.log(data);
@@ -10,12 +58,10 @@ $.ajax({
 
     for (let i = 0; i < data.length; i++) {
       modelNames.push(data[i].MODEL);
-      salesFigures.push(data[i].QUANTITY);
+      salesFigures.push(data[i].MODEL_COUNT);
     }
-    console.log(modelNames);
-    console.log(salesFigures);
-    let barChart = new Chart(homeChart, {
-      type: "bar",
+    let barChart = new Chart(transactionInChart, {
+      type: "pie",
       data: {
         labels: modelNames,
         datasets: [{
@@ -27,7 +73,45 @@ $.ajax({
         plugins: {
           title: {
             display: true,
-            text: "Sales per day",
+            text: "In Products Today",
+            font: {
+              size: 25,
+            }
+          },
+          legend: {
+            position: 'right',
+            display: true,
+          }
+        }
+      }
+    });
+  }
+});
+$.ajax({
+  url: PRODUCT_CONTROLLER + '?action=getSales',
+  dataType: 'json',
+  success: function(data) {
+    let modelNames = [];
+    let salesFigures = [];
+    
+    for (let i = 0; i < data.length; i++) {
+      modelNames.push(data[i].MODEL);
+      salesFigures.push(data[i].MODEL_COUNT);
+    }
+    let barChart = new Chart(transactionOutChart, {
+      type: "pie",
+      data: {
+        labels: modelNames,
+        datasets: [{
+          label: "Quantity",
+          data: salesFigures,
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: "Out Products Today",
             font: {
               size: 25,
             }

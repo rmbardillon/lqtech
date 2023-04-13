@@ -3,6 +3,7 @@ $(document).ready(function () {
     var totalItems = 0;
     cartProducts = '';
     var productID = '';
+    var productDetailsID = '';
     Product.loadTableData();
 
     $('.btn').click(function (event){
@@ -30,6 +31,7 @@ $(document).ready(function () {
                     } else {
                         $("#model").val(response.MODEL);
                         productID = response.PRODUCT_ID;
+                        productDetailsID = response.PRODUCT_DETAILS_ID;
                         $('#serial_numbers').focus(); // move focus to the textarea
                     }
                 },
@@ -103,7 +105,8 @@ $(document).ready(function () {
             sku: sku,
             model: model,
             serial_numbers: serial_numbers,
-            productID: productID
+            productID: productID,
+            productDetailsID: productDetailsID
         });
         $('.table').DataTable().destroy();
         $("#cart").append(productRow);
@@ -130,7 +133,8 @@ $(document).ready(function () {
                 productCart: productCart
             },
             success: function (response){
-                if(response == "Successfully Save") {
+                if(response == "Successfully Deleted") {
+                    console.log(response);
                     swal.fire({
                         title: "Success",
                         text: "Products successfully checked out",

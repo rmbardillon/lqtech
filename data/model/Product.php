@@ -50,7 +50,24 @@ class Product
 
     public function getAllByStockStatus()
     {
-        $sql = $this->commonSql . ' WHERE expired_status = 0 ' . $this->groupBySql . ' HAVING sum(pd.quantity) NOT BETWEEN min_stock and max_stock' ;
+        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU,
+                (SELECT COUNT(*)
+                FROM (
+                    SELECT 
+                        pd.PRODUCT_DETAILS_ID
+                    FROM 
+                        products p
+                        JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                    GROUP BY 
+                        pd.PRODUCT_DETAILS_ID
+                    HAVING 
+                        COUNT(*) < 10
+                    ) AS subquery
+                ) AS row_count
+                FROM products p
+                JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                GROUP BY pd.PRODUCT_DETAILS_ID
+                HAVING COUNT(*) <= 10";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -66,6 +83,48 @@ class Product
         $result = $this->conn->query($sql);
 
         return $result->fetch_assoc();
+    }
+
+    public function getSales() 
+    {
+        $today = date('Y-m-d H:i:s', strtotime('today'));
+        $tomorrow = date('Y-m-d H:i:s', strtotime('tomorrow'));
+
+        $sql = "SELECT pd.MODEL, COUNT(*) as MODEL_COUNT
+                FROM sales
+                JOIN product_details pd ON sales.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                WHERE DATE_PURCHASED >= '$today' AND DATE_PURCHASED < '$tomorrow'
+                GROUP BY pd.MODEL;";
+
+        $result = $this->conn->query($sql);
+        $rows = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+
+    public function getIn() 
+    {
+        $today = date('Y-m-d H:i:s', strtotime('today'));
+        $tomorrow = date('Y-m-d H:i:s', strtotime('tomorrow'));
+
+        $sql = "SELECT pd.MODEL, COUNT(*) as MODEL_COUNT
+                FROM products
+                JOIN product_details pd ON products.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                WHERE DATE_INSERTED >= '$today' AND DATE_INSERTED < '$tomorrow'
+                GROUP BY pd.MODEL;";
+
+        $result = $this->conn->query($sql);
+        $rows = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
     }
 
     public function getById($product_id)
@@ -263,6 +322,7 @@ class Product
         foreach($productCart as $product) {
             $sku = $product['sku'];
             $productID = $product['productID'];
+            $productDetailsID = $product['productDetailsID'];
             $model = $product['model'];
             $serial_numbers = $product['serial_numbers'];
             $serial_number_array = explode("\n", $serial_numbers);
@@ -271,12 +331,23 @@ class Product
                 if(trim($serial_number) === "") {
                     continue;
                 }
-                $sql = "INSERT INTO sales(SERIAL_NUMBER, SKU) VALUES (?, ?)";
+                $sql = "INSERT INTO sales(PRODUCT_DETAILS_ID,SERIAL_NUMBER, SKU) VALUES (?, ?, ?)";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("sss",$productDetailsID, $serial_number, $sku);
+                $result = '';
+                if ($stmt->execute() === TRUE) {
+                    $result = "Successfully Save";
+                    $this->ActionLog->saveLogs('product', 'saved');
+                } else {
+                    $result = "Error: <br>" . $this->conn->error;
+                }
+
+                $sql = "DELETE FROM products WHERE SERIAL_NUMBER = ? AND SKU = ?";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("ss",$serial_number, $sku);
                 $result = '';
                 if ($stmt->execute() === TRUE) {
-                    $result = "Successfully Save";
+                    $result = "Successfully Deleted";
                     $this->ActionLog->saveLogs('product', 'saved');
                 } else {
                     $result = "Error: <br>" . $this->conn->error;
