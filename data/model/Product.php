@@ -61,7 +61,7 @@ class Product
                     GROUP BY 
                         pd.PRODUCT_DETAILS_ID
                     HAVING 
-                        COUNT(*) < 10
+                        COUNT(*) <= 10
                     ) AS subquery
                 ) AS row_count
                 FROM products p
