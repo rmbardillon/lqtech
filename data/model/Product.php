@@ -85,6 +85,18 @@ class Product
         return $result->fetch_assoc();
     }
 
+    public function getByID($id)
+    {
+        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU, PRODUCT_ID
+                FROM products p
+                JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                WHERE pd.PRODUCT_DETAILS_ID = '$id'
+                GROUP BY pd.PRODUCT_DETAILS_ID;";
+        $result = $this->conn->query($sql);
+
+        return $result->fetch_assoc();
+    }
+
     public function getSales() 
     {
         $today = date('Y-m-d H:i:s', strtotime('today'));
@@ -125,14 +137,6 @@ class Product
         }
 
         return $rows;
-    }
-
-    public function getById($product_id)
-    {
-        $sql = "SELECT id, category_id, barcode, name, sale_price, status, max_stock, min_stock, type from product_details where id = '$product_id'";
-        $result = $this->conn->query($sql);
-
-        return $result->fetch_assoc();
     }
 
     public function save($request)

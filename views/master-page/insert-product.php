@@ -27,7 +27,7 @@
                             </div>
                             <div class="mb-3" id="modelDiv">
                                 <label class="form-label" for="models">Models</label>
-                                <select class="form-select model" name="models" id="models">
+                                <select class="form-select model" id="models">
                                     <option value="" disabled selected>- Select Model -</option>
                                 </select>
                             </div>

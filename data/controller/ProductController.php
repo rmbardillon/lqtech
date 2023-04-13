@@ -136,6 +136,13 @@ else if ($action == 'getBySku')
     echo json_encode($Product->getBySku($sku));
 }
 
+else if ($action == 'getByID')
+{
+    $id = $_POST['id'];
+
+    echo json_encode($Product->getByID($id));
+}
+
 else if($action == 'getSales')
 {
     $result = $Product->getSales();

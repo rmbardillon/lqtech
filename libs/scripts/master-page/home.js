@@ -21,7 +21,7 @@ $.ajax({
       salesFigures.push(data[i].QUANTITY);
     }
     let barChart = new Chart(productChart, {
-      type: "bar",
+      type: "pie",
       data: {
         labels: modelNames,
         datasets: [{
@@ -61,12 +61,13 @@ $.ajax({
       salesFigures.push(data[i].MODEL_COUNT);
     }
     let barChart = new Chart(transactionInChart, {
-      type: "pie",
+      type: "bar",
       data: {
         labels: modelNames,
         datasets: [{
           label: "Quantity",
           data: salesFigures,
+          backgroundColor: colors,
         }]
       },
       options: {
@@ -81,7 +82,7 @@ $.ajax({
           legend: {
             position: 'right',
             display: true,
-          }
+          },
         }
       }
     });
@@ -99,12 +100,13 @@ $.ajax({
       salesFigures.push(data[i].MODEL_COUNT);
     }
     let barChart = new Chart(transactionOutChart, {
-      type: "pie",
+      type: "bar",
       data: {
         labels: modelNames,
         datasets: [{
           label: "Quantity",
           data: salesFigures,
+          backgroundColor: colors,
         }]
       },
       options: {

@@ -21,7 +21,7 @@ if ($action == 'getTableDataStockStatus')
         $table_data .= '<td>' . $product['MODEL'] . '</td>';
         $table_data .= '<td>' . $product['QUANTITY'] . '</td>';
         $table_data .= '<td><span class="category" style="color: red;">Low Stocks</span></td>';
-        $table_data .= '<td><button class="btn btn-info">Restock</button></td>';
+        $table_data .= '<td><button class="btn btn-info restock" onclick="Alerts.restock(`' . $product['PRODUCT_DETAILS_ID'] .'`)">Restock</button></td>';
         $table_data .= '</tr>';
 
         $counter++;

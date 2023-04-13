@@ -11,6 +11,18 @@ $(document).ready(function () {
             $('#serial_number').focus(); // move focus to the textarea
         }
     });
+
+    // Get the value of the category parameter from the query string
+    var category = new URLSearchParams(window.location.search).get('category');
+    var model = new URLSearchParams(window.location.search).get('model');
+    if(category != null) {
+        $('#category').val(category);
+        $('.model').select2({
+            placeholder: 'Search for an option...',
+            allowClear: true,
+        });
+        Product.loadSelectData(category, model);
+    }
 });
 
 const Product = (() => {
@@ -31,13 +43,13 @@ const Product = (() => {
         } else if($(this).val() == "Monitor") {
             category = "Monitor";
         }
-        thisProduct.loadSelectData();
+        thisProduct.loadSelectData(category);
         $('.model').select2({
             placeholder: 'Search for an option...',
             allowClear: true,
         });
     });
-    thisProduct.loadSelectData = () => {
+    thisProduct.loadSelectData = (category, defaultModel) => {
         $.ajax({
             type: "GET",
             url: PRODUCT_CONTROLLER + '?action=getProductTable',
@@ -47,12 +59,16 @@ const Product = (() => {
             dataType: "json",
             success: function (response) {
                 $('#models').html(response);
+                if (defaultModel) {
+                    $('#models').val(defaultModel);
+                }
             },
             error: function () {
-                
+            
             }
         });
-    }
+    };
+
     thisProduct.loadTableData = () => {
         $.ajax({
             type: "GET",
