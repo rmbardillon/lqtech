@@ -2,10 +2,10 @@
   <a class="navbar-brand" href="../master-page/home.php">
     <img src="../../libs/images/lqtechlogo.png" alt="hikvision icon" style="height: 45px; width: 100px;">
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link <?php echo ($page == "Home") ? 'active' : '' ?>" href="../master-page/home.php">Home</a>
@@ -37,8 +37,8 @@
       <li class="nav-item">
         <a class="nav-link  <?php echo ($page == "Stocks") ? 'active' : '' ?>" href="../master-page/stocks.php">Stocks</a>
       </li>
-      <li class="nav-item ms-3">
-        <a class="nav-link report <?php echo ($page == "Reports") ? 'report-active' : '' ?>" href="../master-page/reports.php"><i class="fas fa-download me-2"></i>Reports</a>
+      <li class="nav-item ">
+        <a class="nav-link report <?php echo ($page == "Reports") ? 'report-active' : '' ?>" href="../master-page/reports.php"><i class="fas fa-download "></i>Reports</a>
       </li>
     </ul>
     <ul class="navbar-nav">
