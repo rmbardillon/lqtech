@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2023 at 05:25 AM
+-- Generation Time: Apr 13, 2023 at 09:20 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -80,6 +80,16 @@ INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACT
 ('41e17448d99711ed', '2023-04-13 03:05:18', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('41e20373d99711ed', '2023-04-13 03:05:18', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('4cd4d518d99711ed', '2023-04-13 03:05:37', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7fb67ac1d9ca11ed', '2023-04-13 09:12:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7fb76f36d9ca11ed', '2023-04-13 09:12:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7fb7fb92d9ca11ed', '2023-04-13 09:12:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7fb89227d9ca11ed', '2023-04-13 09:12:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7fb91c39d9ca11ed', '2023-04-13 09:12:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7fb9adbed9ca11ed', '2023-04-13 09:12:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7fba249dd9ca11ed', '2023-04-13 09:12:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7fba9719d9ca11ed', '2023-04-13 09:12:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7fbb1630d9ca11ed', '2023-04-13 09:12:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7fbb8582d9ca11ed', '2023-04-13 09:12:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('84823989d9aa11ed', '2023-04-13 05:23:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('8b3816edd9aa11ed', '2023-04-13 05:23:22', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('8b3908d7d9aa11ed', '2023-04-13 05:23:22', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
@@ -94,6 +104,14 @@ INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACT
 ('8ff861ead9a011ed', '2023-04-13 04:11:55', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('8ff8d132d9a011ed', '2023-04-13 04:11:55', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('8ff94752d9a011ed', '2023-04-13 04:11:55', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('959848cdd9ca11ed', '2023-04-13 09:12:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('95991bcbd9ca11ed', '2023-04-13 09:12:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('9599b65bd9ca11ed', '2023-04-13 09:12:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('959a8df1d9ca11ed', '2023-04-13 09:12:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('959b0c2fd9ca11ed', '2023-04-13 09:12:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('959b73b1d9ca11ed', '2023-04-13 09:12:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('959c2273d9ca11ed', '2023-04-13 09:12:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('959c7b4dd9ca11ed', '2023-04-13 09:12:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('ad6a9273d9a011ed', '2023-04-13 04:12:44', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('ad6b3293d9a011ed', '2023-04-13 04:12:44', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('ad6bcbc6d9a011ed', '2023-04-13 04:12:44', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
@@ -319,6 +337,12 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`PRODUCT_ID`, `PRODUCT_DETAILS_ID`, `SKU`, `SERIAL_NUMBER`, `DATE_INSERTED`) VALUES
 ('4cd483e7d99711ed', '721e1638d83511ed', '321', '321', '2023-04-12 10:02:00'),
+('7fb8d9ffd9ca11ed', '84809829d9aa11ed', '123', '5', '2023-04-13 15:12:06'),
+('7fb96314d9ca11ed', '84809829d9aa11ed', '123', '6', '2023-04-13 15:12:06'),
+('7fb9eca0d9ca11ed', '84809829d9aa11ed', '123', '7', '2023-04-13 15:12:06'),
+('7fba5d4bd9ca11ed', '84809829d9aa11ed', '123', '8', '2023-04-13 15:12:06'),
+('7fbad8a4d9ca11ed', '84809829d9aa11ed', '123', '88', '2023-04-13 15:12:06'),
+('7fbb4ebcd9ca11ed', '84809829d9aa11ed', '123', '99', '2023-04-13 15:12:06'),
 ('8b36621fd9aa11ed', '84809829d9aa11ed', '111', '1', '2023-04-13 11:23:22'),
 ('8b38b446d9aa11ed', '84809829d9aa11ed', '111', '2', '2023-04-13 11:23:22'),
 ('8b394fc0d9aa11ed', '84809829d9aa11ed', '111', '3', '2023-04-13 11:23:22'),
@@ -377,6 +401,10 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`SALE_ID`, `PRODUCT_DETAILS_ID`, `SERIAL_NUMBER`, `SKU`, `DATE_PURCHASED`) VALUES
+('9596bfb4d9ca11ed', '84809829d9aa11ed', '1', '123', '2023-04-13 15:12:43'),
+('95996945d9ca11ed', '84809829d9aa11ed', '2', '123', '2023-04-13 15:12:43'),
+('959ad7bdd9ca11ed', '84809829d9aa11ed', '3', '123', '2023-04-13 15:12:43'),
+('959bf223d9ca11ed', '84809829d9aa11ed', '4', '123', '2023-04-13 15:12:43'),
 ('ad6982b4d9a011ed', '721e1638d83511ed', '1', '321', '2023-04-13 10:12:44'),
 ('ad6b8c89d9a011ed', '721e1638d83511ed', '2', '321', '2023-04-13 10:12:44'),
 ('ad6ce423d9a011ed', '721e1638d83511ed', '3', '321', '2023-04-13 10:12:44'),
