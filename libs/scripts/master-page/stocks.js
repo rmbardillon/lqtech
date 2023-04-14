@@ -4,7 +4,6 @@ $(document).ready(function () {
     $('.btn').click(function (event){
         event.preventDefault()
     })
-    console.log('stocks.js loaded')
 });
 
 const Stock = (() => {
@@ -29,13 +28,30 @@ const Stock = (() => {
     thisStock.viewProduct = (id) => {
         $.ajax({
             type: "POST",
+            url: STOCK_CONTROLLER + '?action=displayStocksPerId',
+            dataType: "json",
+            data: {
+                id: id,
+            },
+            success: function(response) {
+                $('.table').DataTable().destroy();
+                $("#stock_table").html(response);
+                $('.table').DataTable();
+            }, 
+            error: function() {
+            
+            }
+        });
+        $.ajax({
+            type: "POST",
             url: STOCK_CONTROLLER + '?action=getById',
             dataType: "json",
             data: {
                 id: id,
             },
             success: function(response) {
-
+                console.log(response[0].MODEL);
+                $("#stockModal .modal-title").html(response[0].MODEL);
             }, 
             error: function() {
             

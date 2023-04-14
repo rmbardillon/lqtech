@@ -28,11 +28,30 @@ if ($action == 'displayStocksTable')
     echo json_encode($table_data);
 }
 
-else if($action == 'viewProduct')
+else if($action == 'displayStocksPerId')
 {
     $result = $Stock->getById($_POST['id']);
 
     $table_data = '';
+    $counter = 1;
+    foreach ($result as $product) {
+        $table_data .= '<tr>';
+        $table_data .= '<td>' . $product['DATE_INSERTED'] . '</td>';
+        $table_data .= '<td>' . $product['TOTAL_IN'] . '</td>';
+        $table_data .= '<td>' . $product['TOTAL_IN'] . '</td>';
+        $table_data .= '<td>' . $product['TOTAL_IN'] . '</td>';
+        $table_data .= '</tr>';
+
+        $counter++;
+    }
+
 
     echo json_encode($table_data);
+}
+
+else if($action == 'getById')
+{
+    $result = $Stock->getById($_POST['id']);
+
+    echo json_encode($result);
 }
