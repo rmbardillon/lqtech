@@ -133,7 +133,7 @@ $(document).ready(function () {
                 productCart: productCart
             },
             success: function (response){
-                if(response == "Successfully Deleted") {
+                if(response == "Successfully Updated") {
                     console.log(response);
                     swal.fire({
                         title: "Success",

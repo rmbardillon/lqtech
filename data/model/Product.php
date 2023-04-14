@@ -31,9 +31,10 @@ class Product
 
     public function getAll()
     {
-        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU
+        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU, STATUS
                 FROM products p
                 JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                WHERE STATUS = 'IN'
                 GROUP BY pd.PRODUCT_DETAILS_ID;";
         $result = $this->conn->query($sql);
 
@@ -50,7 +51,7 @@ class Product
 
     public function getAllByStockStatus()
     {
-        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU,
+        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU, STATUS,
                 (SELECT COUNT(*)
                 FROM (
                     SELECT 
@@ -66,6 +67,7 @@ class Product
                 ) AS row_count
                 FROM products p
                 JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                WHERE STATUS = 'IN'
                 GROUP BY pd.PRODUCT_DETAILS_ID
                 HAVING COUNT(*) <= 10";
         $result = $this->conn->query($sql);
@@ -346,12 +348,12 @@ class Product
                     $result = "Error: <br>" . $this->conn->error;
                 }
 
-                $sql = "DELETE FROM products WHERE SERIAL_NUMBER = ? AND SKU = ?";
+                $sql = "UPDATE products SET STATUS = 'OUT' WHERE SERIAL_NUMBER = ? AND SKU = ?";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("ss",$serial_number, $sku);
                 $result = '';
                 if ($stmt->execute() === TRUE) {
-                    $result = "Successfully Deleted";
+                    $result = "Successfully Updated";
                     $this->ActionLog->saveLogs('product', 'saved');
                 } else {
                     $result = "Error: <br>" . $this->conn->error;
