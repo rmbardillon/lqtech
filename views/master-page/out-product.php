@@ -41,7 +41,6 @@
                     <button type="button" class="btn btn-danger pos_close">Close</button>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="container mt-5">
@@ -61,11 +60,22 @@
                     <div class="mb-3">
                         <button class="btn btn-primary w-100" type="button" id="addToCart">Add to Cart</button>
                     </div>
+                    <div class="mb-3">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>SKU</th>
+                                    <th>Model</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody id="item_list"></tbody>
+                        </table>
+                    </div>
                 </form>
             </div>
             <div class="col">
-                <form action="">
-
+                <form>
                     <table class="table table-bordered">
                         <thead>
                             <tr>

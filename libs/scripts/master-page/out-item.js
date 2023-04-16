@@ -41,8 +41,11 @@ $(document).ready(function () {
         }
     });
 
+    var i = 0;
     $("#serial_numbers").on('keydown', function(event) {
         if (event.key === 'Enter') {
+            var sku = $("#sku").val();
+            var model = $("#model").val();
             var serialNumbers = $('#serial_numbers').val().trim().split('\n');
             var serial_number = serialNumbers.pop().trim();
             $.ajax({
@@ -50,26 +53,61 @@ $(document).ready(function () {
                 url: PRODUCT_CONTROLLER + '?action=checkSerialNumbers',
                 dataType: "json",
                 data:{
-                    serial_number: serial_number
+                    serial_number: serial_number,
+                    sku: sku
                 },
-                success: function (response){
-                    if(response == false) {
+                success: function(response) {
+                    if (response == false) {
                         swal.fire({
-                            title: "Error",
-                            text: "Invalid Serial Number",
-                            icon: "error",
-                            confirmButtonText: "Ok"
+                        title: "Error",
+                        text: "Invalid Serial Number",
+                        icon: "error",
+                        confirmButtonText: "Ok"
                         }).then(function() {
                             // Remove the last invalid serial_number and add a new line
                             var serialNumbers = $('#serial_numbers').val().trim().split('\n');
                             if (serialNumbers.length > 0) {
                                 var lastSerialNumber = serialNumbers.pop().trim();
                                 $('#serial_numbers').val(serialNumbers.join('\n'));
-                                if (lastSerialNumber !== '') {
-                                    $('#serial_numbers').val($('#serial_numbers').val() + '\n');
+                                if ($('#serial_numbers').val() !== '') { // added condition to check if textarea has any content
+                                $('#serial_numbers').val($('#serial_numbers').val() + '\n');
                                 }
                             }
                         });
+                    } else {
+                        // Remove the last invalid serial_number and check for duplicates
+                        var serialNumbers = $('#serial_numbers').val().trim().split('\n');
+                        if (serialNumbers.length > 0) {
+                            var lastSerialNumber = serialNumbers.pop().trim();
+                            var duplicateSerialNumbers = false;
+                            serialNumbers.forEach(function(serialNumber) {
+                                if (serialNumber.trim() === lastSerialNumber) {
+                                    duplicateSerialNumbers = true;
+                                    return false; // stop looping since we found a duplicate
+                                }
+                            });
+                            if (duplicateSerialNumbers) {
+                                swal.fire({
+                                    title: "Error",
+                                    text: "Duplicate Serial Number",
+                                    icon: "error",
+                                    confirmButtonText: "Ok"
+                                }).then(function() {
+                                    $('#serial_numbers').val(serialNumbers.join('\n'));
+                                    if ($('#serial_numbers').val() !== '') { 
+                                        $('#serial_numbers').val($('#serial_numbers').val() + '\n');
+                                    }
+                                });
+                            } else {
+                                i += 1;
+                                cartProduct =   `<tr>
+                                                    <td>${i}</td>
+                                                    <td>${sku}</td>
+                                                    <td>${model}</td>
+                                                </tr>`;
+                                $("#item_list").html(cartProduct);
+                            }
+                        }
                     }
                 }
             })         
@@ -97,10 +135,10 @@ $(document).ready(function () {
             </tr>
         `;
         cartProducts += `<tr>
-                <td>${quantity}</td>
-                <td>${sku}</td>
-                <td>${model}</td>
-            </tr>`;
+                            <td>${quantity}</td>
+                            <td>${sku}</td>
+                            <td>${model}</td>
+                        </tr>`;
         productCart.push({
             sku: sku,
             model: model,
@@ -115,10 +153,11 @@ $(document).ready(function () {
         $("#model").val("");
         $("#serial_numbers").val("");
         $("#sku").focus();
+        $("#item_list").html("");
+        i = 0;
     });
 
     $("#checkout").click(function() {
-        console.log(cartProducts);
         $("#checkout_table").html(cartProducts);
         $("#total").html(totalItems);
         $('#myModal').modal('show');

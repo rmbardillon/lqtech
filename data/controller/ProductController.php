@@ -65,7 +65,7 @@ else if ($action == 'getProductsTable')
     foreach ($result as $product) {
         $table_data .= '<tr>';
         // $table_data .= '<td>' . $counter . '</td>';
-        $table_data .= '<td>' . $product['QUANTITY'] . '</td>';
+        $table_data .= '<td>' . $product['IN_QUANTITY'] . '</td>';
         $table_data .= '<td>' . $product['CATEGORY'] . '</td>';
         $table_data .= '<td>' . $product['BRAND'] . '</td>';
         $table_data .= '<td>' . $product['MODEL']. '</td>';
@@ -103,7 +103,7 @@ else if ($action == 'displayProductsTable')
         $table_data .= '<td>' . $product['CATEGORY'] . '</td>';
         $table_data .= '<td>' . $product['BRAND'] . '</td>';
         $table_data .= '<td>' . $product['MODEL']. '</td>';
-        $table_data .= '<td>' . $product['QUANTITY'] . '</td>';
+        $table_data .= '<td>' . $product['IN_QUANTITY'] . '</td>';
         $table_data .= '<td>' . $product['SELLING_PRICE'] . '</td>';
         $table_data .= '<td><button class="btn btn-warning"><i class="bi bi-list-check"></i>Edit</button></td>';
         $table_data .= '</td>';
@@ -296,7 +296,8 @@ else if($action === 'checkout')
 else if($action === 'checkSerialNumbers')
 {
     $serial_number = $_POST['serial_number'];
-    $result = $Product->checkSerialNumbers($serial_number);
+    $sku = $_POST['sku'];
+    $result = $Product->checkSerialNumbers($serial_number, $sku);
 
     echo json_encode($result);
 }

@@ -31,11 +31,14 @@ class Product
 
     public function getAll()
     {
-        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU, STATUS
+        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, 
+                SUM(CASE WHEN p.STATUS = 'IN' THEN 1 ELSE 0 END) as IN_QUANTITY, 
+                SUM(CASE WHEN p.STATUS = 'OUT' THEN 1 ELSE 0 END) as OUT_QUANTITY,
+                SELLING_PRICE, SKU, p.STATUS
                 FROM products p
                 JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
-                WHERE STATUS = 'IN'
-                GROUP BY pd.PRODUCT_DETAILS_ID;";
+                GROUP BY pd.PRODUCT_DETAILS_ID;
+";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -67,7 +70,6 @@ class Product
                 ) AS row_count
                 FROM products p
                 JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
-                WHERE STATUS = 'IN'
                 GROUP BY pd.PRODUCT_DETAILS_ID
                 HAVING COUNT(*) <= 10";
         $result = $this->conn->query($sql);
@@ -365,9 +367,9 @@ class Product
         return $result;
     }
 
-    public function checkSerialNumbers($serial_number)
+    public function checkSerialNumbers($serial_number, $sku)
     {
-            $sql = "SELECT * FROM products WHERE SERIAL_NUMBER = '$serial_number'";
+            $sql = "SELECT * FROM products WHERE SERIAL_NUMBER = '$serial_number' AND SKU = '$sku' AND STATUS = 'IN'";
             $result = $this->conn->query($sql);
             if($result->num_rows > 0) {
                 return $result->fetch_assoc();
