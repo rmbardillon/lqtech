@@ -16,7 +16,7 @@ if ($action == 'displayStocksTable')
         $table_data .= '<tr>';
         $table_data .= '<td>' . $counter . '</td>';
         $table_data .= '<td>' . $product['CATEGORY'] ." ". $product['BRAND'] . " " .$product['MODEL']. '</td>';
-        $table_data .= '<td>' . $product['QUANTITY'] . '</td>';
+        $table_data .= '<td>' . $product['IN_QUANTITY'] . '</td>';
         $table_data .= '<td class="col-actions">';
         $table_data .= '<button type="button" onclick="Stock.viewProduct(`'. $product['PRODUCT_DETAILS_ID'] .'`)" class="btn btn-warning btn-sm w-50"><i class="bi bi-list-check"></i>View</button>';
         $table_data .= '</td>';
@@ -38,8 +38,8 @@ else if($action == 'displayStocksPerId')
         $table_data .= '<tr>';
         $table_data .= '<td>' . $product['DATE_INSERTED'] . '</td>';
         $table_data .= '<td>' . $product['TOTAL_IN'] . '</td>';
-        $table_data .= '<td>' . $product['TOTAL_IN'] . '</td>';
-        $table_data .= '<td>' . $product['TOTAL_IN'] . '</td>';
+        $table_data .= '<td>' . $product['TOTAL_OUT'] . '</td>';
+        $table_data .= '<td>' . $product['TOTAL_IN'] - $product['TOTAL_OUT'] . '</td>';
         $table_data .= '</tr>';
 
         $counter++;

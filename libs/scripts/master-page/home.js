@@ -18,7 +18,7 @@ $.ajax({
 
     for (let i = 0; i < data.length; i++) {
       modelNames.push(data[i].MODEL);
-      salesFigures.push(data[i].QUANTITY);
+      salesFigures.push(data[i].IN_QUANTITY);
     }
     let barChart = new Chart(productChart, {
       type: "pie",

@@ -50,7 +50,6 @@ const Stock = (() => {
                 id: id,
             },
             success: function(response) {
-                console.log(response[0].MODEL);
                 $("#stockModal .modal-title").html(response[0].MODEL);
             }, 
             error: function() {

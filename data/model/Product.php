@@ -44,9 +44,18 @@ class Product
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getAllExpired()
+    public function getAllAlert()
     {
-        $sql = $this->commonSql . ' WHERE expired_status = 1 ' . $this->groupBySql ;
+        $sql = "SELECT COUNT(*) as TotalRows
+                FROM (
+                    SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, 
+                    SUM(CASE WHEN p.STATUS = 'IN' THEN 1 ELSE 0 END) as IN_QUANTITY, 
+                    SUM(CASE WHEN p.STATUS = 'OUT' THEN 1 ELSE 0 END) as OUT_QUANTITY
+                    FROM products p
+                    JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                    GROUP BY pd.PRODUCT_DETAILS_ID
+                    HAVING IN_QUANTITY <= 10
+                ) as result;";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -54,24 +63,14 @@ class Product
 
     public function getAllByStockStatus()
     {
-        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU, STATUS,
-                (SELECT COUNT(*)
-                FROM (
-                    SELECT 
-                        pd.PRODUCT_DETAILS_ID
-                    FROM 
-                        products p
-                        JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
-                    GROUP BY 
-                        pd.PRODUCT_DETAILS_ID
-                    HAVING 
-                        COUNT(*) <= 10
-                    ) AS subquery
-                ) AS row_count
+        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, 
+                SUM(CASE WHEN p.STATUS = 'IN' THEN 1 ELSE 0 END) as IN_QUANTITY, 
+                SUM(CASE WHEN p.STATUS = 'OUT' THEN 1 ELSE 0 END) as OUT_QUANTITY,
+                SELLING_PRICE, SKU, p.STATUS, COUNT(*) as QUANTITY
                 FROM products p
                 JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
                 GROUP BY pd.PRODUCT_DETAILS_ID
-                HAVING COUNT(*) <= 10";
+                HAVING IN_QUANTITY <= 10";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
