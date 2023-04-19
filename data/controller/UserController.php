@@ -139,4 +139,32 @@
         session_destroy();
         echo json_encode('Success');
     }
+
+    else if($action == 'checkOldPassword')
+    {
+        $username = $_POST['username'];
+        $oldPassword = $_POST['oldPassword'];
+
+        $request = [
+            'username' => $username,
+            'oldPassword' => $oldPassword
+        ];
+
+        $result = $User->checkOldPassword($request);
+        echo json_encode($result);
+    }
+
+    else if($action == 'changePassword') 
+    {
+        $username = $_POST['username'];
+        $newPassword = $_POST['newPassword'];
+
+        $request = [
+            'username' => $username,
+            'newPassword' => $newPassword
+        ];
+
+        $result = $User->update_password($request);
+        echo json_encode($result);
+    }
 ?>

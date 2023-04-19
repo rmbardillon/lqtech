@@ -5,6 +5,7 @@
 <script src="../../libs/plugins/chart.js/chart.js"></script>
 <script src="../../libs/plugins/select2/js/select2.full.min.js"></script>
 <script src="../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>
+<script src="../../libs/plugins/sha1/src/sha1.js"></script>
 
 <script src="../../config/system_name.js"></script>
 <script src="../../libs/scripts/vars.js"></script>

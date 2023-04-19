@@ -64,9 +64,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th>Quantity</th>
                                     <th>SKU</th>
                                     <th>Model</th>
-                                    <th>Quantity</th>
                                 </tr>
                             </thead>
                             <tbody id="item_list"></tbody>

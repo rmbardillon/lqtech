@@ -125,7 +125,7 @@ $(document).ready(function () {
         var quantity = nonEmptyLines.length;
         totalItems += quantity;
 
-        alert("Total Items: " + totalItems);
+        // alert("Total Items: " + totalItems);
         var productRow = `
             <tr>
                 <td>${quantity}</td>

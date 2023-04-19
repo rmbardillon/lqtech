@@ -34,12 +34,14 @@ else if($action == 'displayStocksPerId')
 
     $table_data = '';
     $counter = 1;
+    $totalStocks = 0;
     foreach ($result as $product) {
+        $totalStocks += $product['TOTAL_IN'] - $product['TOTAL_OUT'];
         $table_data .= '<tr>';
         $table_data .= '<td>' . $product['DATE_INSERTED'] . '</td>';
         $table_data .= '<td>' . $product['TOTAL_IN'] . '</td>';
         $table_data .= '<td>' . $product['TOTAL_OUT'] . '</td>';
-        $table_data .= '<td>' . $product['TOTAL_IN'] - $product['TOTAL_OUT'] . '</td>';
+        $table_data .= '<td>' . $totalStocks . '</td>';
         $table_data .= '</tr>';
 
         $counter++;

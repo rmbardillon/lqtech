@@ -127,15 +127,15 @@
 
         public function update_password($request)
         {
-            $password = $request['password'];
-            $user_id = $request['user_id'];
+            $newPassword = $request['newPassword'];
+            $username = $request['username'];
 
-            $password = password_hash($password, PASSWORD_BCRYPT);
+            $password = password_hash($newPassword, PASSWORD_BCRYPT);
 
-            $sql = "UPDATE users SET PASSWORD=? WHERE USER_ID=?";
+            $sql = "UPDATE users SET PASSWORD=? WHERE USERNAME=?";
 
             $stmt = $this->connection->prepare($sql);
-            $stmt->bind_param("ss", $password, $user_id);
+            $stmt->bind_param("ss", $password, $username);
 
             $result = '';
             if ($stmt->execute() === TRUE) {
@@ -233,6 +233,28 @@
             $this->connection->close();
 
             return $result;
-        } 
+        }
+
+        public function checkOldPassword($request)
+        {
+            $username = $request['username'];
+            $oldPassword = $request['oldPassword'];
+
+            $sql = "SELECT PASSWORD FROM users WHERE USERNAME = ?";
+
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+
+            $db_password = "";
+            $stmt->bind_result($db_password);
+            $stmt->fetch();
+
+            if (password_verify($oldPassword, $db_password)) {
+                return "Validated";
+            } else {
+                return "Invalid Password";
+            }
+        }
     }
 ?>
