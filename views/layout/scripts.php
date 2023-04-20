@@ -10,6 +10,31 @@
 <script src="../../config/system_name.js"></script>
 <script src="../../libs/scripts/vars.js"></script>
 <script>
+    function updateDatetime() {
+        $.ajax({
+            type: "GET",
+            url: 'https://worldtimeapi.org/api/ip',
+            dataType: "json",
+            success: function (response) {
+            const datetimeString = response.datetime;
+            const datetime = new Date(datetimeString);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            const formattedDatetime = datetime.toLocaleString('en-US', options);
+            $("#currentDate").html(formattedDatetime);
+        },
+        error: function (error) {
+            console.error(error);
+        }
+        });
+    }
+
+
+    // call the updateDatetime() function immediately to display the current datetime
+    updateDatetime();
+
+    // call the updateDatetime() function every second to update the datetime display
+    setInterval(updateDatetime, 1000);
+
     const logout = () => {
         event.preventDefault();
         Swal.fire({

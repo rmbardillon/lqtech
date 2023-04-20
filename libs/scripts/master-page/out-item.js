@@ -6,6 +6,36 @@ $(document).ready(function () {
     var productDetailsID = '';
     Product.loadTableData();
 
+    $.ajax({
+        type: "GET",
+        url: 'https://worldtimeapi.org/api/ip',
+        dataType: "json",
+        success: function (response) {
+            const datetimeString = response.datetime;
+            const datetime = new Date(datetimeString);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+            const formattedDatetime = datetime.toLocaleString('en-US', options);
+            $("#date").html(formattedDatetime);
+        },
+    });
+    $("#formModal").modal("show");
+
+    $("#closeModal").click(function () {
+        Swal.fire({
+            title: 'Are you sure you want to leave?',
+            text: "You will lose all unsaved data.",
+            showCancelButton: true,
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'home.php';
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // User clicked the cancel button, do nothing
+            }
+        });
+    });
+
     $('.btn').click(function (event){
         event.preventDefault()
     })

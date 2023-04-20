@@ -7,6 +7,74 @@
 ?>
 <body>
     <?php include_once("../layout/nav.php") ?>
+    <div id="formModal" class="modal" role="dialog" data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Installation Form</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col col-8">
+                                <label class="form-label" for="projectName">PROJECT NAME</label>
+                                <input type="text" class="form-control" id="projectName" autofocus>
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="date">DATE</label>
+                                <p class="text-capitalize" id="date"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-8">
+                                <label class="form-label" for="contactPerson">CONTACT PERSON</label>
+                                <input type="text" class="form-control" id="contactPerson">
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="contactNumber">CONTACT NUMBER</label>
+                                <input type="text" class="form-control" id="contactNumber">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label" for="projectSite">PROJECT SITE</label>
+                                <input type="text" class="form-control" id="projectSite">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label" for="salesManBranch">SALESMAN/BRANCH</label>
+                                <input type="text" class="form-control" id="salesManBranch">
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="installer">INSTALLER</label>
+                                <input type="text" class="form-control" id="installer">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label" for="salesOrderNumber">SALES ORDER NUMBER</label>
+                                <input type="text" class="form-control" id="salesOrderNumber">
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="jobOrderNumber">JOB ORDER NUMBER</label>
+                                <input type="text" class="form-control" id="jobOrderNumber">
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="service">SERVICE</label>
+                                <input type="text" class="form-control" id="service">
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="checkout_confirm">Save</button>
+                    <button type="button" class="btn btn-danger" id="closeModal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="myModal" class="modal" role="dialog">
         <div class="modal-dialog modal-xl">
             <!-- Modal content-->
