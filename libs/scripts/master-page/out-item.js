@@ -1,10 +1,28 @@
 $(document).ready(function () {
+    Product.loadTableData();
+    $("#formModal").modal("show");
+});
+
+const Product = (() => {
+    var projectName = "";
+    var date = "";
+    var contactPerson = "";
+    var contactNumber = "";
+    var projectSite = "";
+    var salesManBranch = "";
+    var installer = "";
+    var salesOrderNumber = "";
+    var jobOrderNumber = "";
+    var service = "";
+    var installationForm = [];
+
     var productCart = [];
+    var i = 0;
     var totalItems = 0;
-    cartProducts = '';
+    var productRow = '';
+    var cartProducts = '';
     var productID = '';
     var productDetailsID = '';
-    Product.loadTableData();
 
     $.ajax({
         type: "GET",
@@ -15,10 +33,9 @@ $(document).ready(function () {
             const datetime = new Date(datetimeString);
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
             const formattedDatetime = datetime.toLocaleString('en-US', options);
-            $("#date").html(formattedDatetime);
+            $("#date").val(formattedDatetime);
         },
     });
-    $("#formModal").modal("show");
 
     $("#closeModal").click(function () {
         Swal.fire({
@@ -34,6 +51,65 @@ $(document).ready(function () {
                 // User clicked the cancel button, do nothing
             }
         });
+    });
+
+    $("#confirmForm").click(function() {
+        projectName = $("#projectName").val();
+        date = $("#date").text();
+        contactPerson = $("#contactPerson").val();
+        contactNumber = $("#contactNumber").val();
+        projectSite = $("#projectSite").val();
+        salesManBranch = $("#salesManBranch").val();
+        installer = $("#installer").val();
+        salesOrderNumber = $("#salesOrderNumber").val();
+        jobOrderNumber = $("#jobOrderNumber").val();
+        service = $("#service").val();
+
+        installationForm.push({
+            projectName: projectName,
+            date: date,
+            contactPerson: contactPerson,
+            contactNumber: contactNumber,
+            projectSite: projectSite,
+            salesManBranch: salesManBranch,
+            installer: installer,
+            salesOrderNumber: salesOrderNumber,
+            jobOrderNumber: jobOrderNumber,
+            service: service,
+            status: "Pending"
+        });
+        console.log(installationForm)
+        if(projectName == "" || contactPerson == "" || contactNumber == "" || projectSite == "" || salesManBranch == "" || installer == "" || salesOrderNumber == "" || jobOrderNumber == "" || service == "") {
+            Swal.fire({
+                title: 'Error',
+                text: 'Please fill up all the fields',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        } else {
+            $("#formModal").modal("hide");
+            $("#confirmFormModal").modal("show");
+            $(".projectNameValue").text(projectName);
+            $(".dateValue").text(date);
+            $(".contactPersonValue").text(contactPerson);
+            $(".contactNumberValue").text(contactNumber);
+            $(".projectSiteValue").text(projectSite);
+            $(".salesManBranchValue").text(salesManBranch);
+            $(".installerValue").text(installer);
+            $(".salesOrderNumberValue").text(salesOrderNumber);
+            $(".jobOrderNumberValue").text(jobOrderNumber);
+            $(".serviceValue").text(service);
+        }
+    });
+
+
+    $("#back").click(function(){
+        $("#formModal").modal("show");
+        $("#confirmFormModal").modal("hide");
+    });
+    
+    $("#submitInstallationForm").click(function(){
+        $("#confirmFormModal").modal("hide");
     });
 
     $('.btn').click(function (event){
@@ -71,76 +147,78 @@ $(document).ready(function () {
         }
     });
 
-    var i = 0;
     $("#serial_numbers").on('keydown', function(event) {
         if (event.key === 'Enter') {
             var sku = $("#sku").val();
             var model = $("#model").val();
-            var serialNumbers = $('#serial_numbers').val().trim().split('\n');
-            var serial_number = serialNumbers.pop().trim();
-            $.ajax({
-                type: "POST",
-                url: PRODUCT_CONTROLLER + '?action=checkSerialNumbers',
-                dataType: "json",
-                data:{
-                    serial_number: serial_number,
-                    sku: sku
-                },
-                success: function(response) {
-                    if (response == false) {
-                        swal.fire({
-                        title: "Error",
-                        text: "Invalid Serial Number",
-                        icon: "error",
-                        confirmButtonText: "Ok"
-                        }).then(function() {
-                            // Remove the last invalid serial_number and add a new line
+            var serial = $('#serial_numbers').val().split('\n');
+            if(serial[serial.length - 1] != "") {
+                var serialNumbers = $('#serial_numbers').val().trim().split('\n');
+                var serial_number = serialNumbers.pop().trim();
+                $.ajax({
+                    type: "POST",
+                    url: PRODUCT_CONTROLLER + '?action=checkSerialNumbers',
+                    dataType: "json",
+                    data:{
+                        serial_number: serial_number,
+                        sku: sku
+                    },
+                    success: function(response) {
+                        if (response == false) {
+                            swal.fire({
+                            title: "Error",
+                            text: "Invalid Serial Number",
+                            icon: "error",
+                            confirmButtonText: "Ok"
+                            }).then(function() {
+                                // Remove the last invalid serial_number and add a new line
+                                var serialNumbers = $('#serial_numbers').val().trim().split('\n');
+                                if (serialNumbers.length > 0) {
+                                    var lastSerialNumber = serialNumbers.pop().trim();
+                                    $('#serial_numbers').val(serialNumbers.join('\n'));
+                                    if ($('#serial_numbers').val() !== '') { // added condition to check if textarea has any content
+                                    $('#serial_numbers').val($('#serial_numbers').val() + '\n');
+                                    }
+                                }
+                            });
+                        } else {
+                            // Remove the last invalid serial_number and check for duplicates
                             var serialNumbers = $('#serial_numbers').val().trim().split('\n');
                             if (serialNumbers.length > 0) {
                                 var lastSerialNumber = serialNumbers.pop().trim();
-                                $('#serial_numbers').val(serialNumbers.join('\n'));
-                                if ($('#serial_numbers').val() !== '') { // added condition to check if textarea has any content
-                                $('#serial_numbers').val($('#serial_numbers').val() + '\n');
-                                }
-                            }
-                        });
-                    } else {
-                        // Remove the last invalid serial_number and check for duplicates
-                        var serialNumbers = $('#serial_numbers').val().trim().split('\n');
-                        if (serialNumbers.length > 0) {
-                            var lastSerialNumber = serialNumbers.pop().trim();
-                            var duplicateSerialNumbers = false;
-                            serialNumbers.forEach(function(serialNumber) {
-                                if (serialNumber.trim() === lastSerialNumber) {
-                                    duplicateSerialNumbers = true;
-                                    return false; // stop looping since we found a duplicate
-                                }
-                            });
-                            if (duplicateSerialNumbers) {
-                                swal.fire({
-                                    title: "Error",
-                                    text: "Duplicate Serial Number",
-                                    icon: "error",
-                                    confirmButtonText: "Ok"
-                                }).then(function() {
-                                    $('#serial_numbers').val(serialNumbers.join('\n'));
-                                    if ($('#serial_numbers').val() !== '') { 
-                                        $('#serial_numbers').val($('#serial_numbers').val() + '\n');
+                                var duplicateSerialNumbers = false;
+                                serialNumbers.forEach(function(serialNumber) {
+                                    if (serialNumber.trim() === lastSerialNumber) {
+                                        duplicateSerialNumbers = true;
+                                        return false; // stop looping since we found a duplicate
                                     }
                                 });
-                            } else {
-                                i += 1;
-                                cartProduct =   `<tr>
-                                                    <td>${i}</td>
-                                                    <td>${sku}</td>
-                                                    <td>${model}</td>
-                                                </tr>`;
-                                $("#item_list").html(cartProduct);
+                                if (duplicateSerialNumbers) {
+                                    swal.fire({
+                                        title: "Error",
+                                        text: "Duplicate Serial Number",
+                                        icon: "error",
+                                        confirmButtonText: "Ok"
+                                    }).then(function() {
+                                        $('#serial_numbers').val(serialNumbers.join('\n'));
+                                        if ($('#serial_numbers').val() !== '') { 
+                                            $('#serial_numbers').val($('#serial_numbers').val() + '\n');
+                                        }
+                                    });
+                                } else {
+                                    i += 1;
+                                    cartProduct =   `<tr>
+                                                        <td>${i}</td>
+                                                        <td>${sku}</td>
+                                                        <td>${model}</td>
+                                                    </tr>`;
+                                    $("#item_list").html(cartProduct);
+                                }
                             }
                         }
                     }
-                }
-            })         
+                });
+            }
         }
     });
 
@@ -148,36 +226,62 @@ $(document).ready(function () {
         var sku = $("#sku").val();
         var model = $("#model").val();
         var serial_numbers = $("#serial_numbers").val();
+        var endsWithNewLine = serial_numbers.endsWith('\n');
         var lines = serial_numbers.split(/\r|\r\n|\n/); // split by line breaks
         var nonEmptyLines = lines.filter(function(line) {
             return line.trim() !== ''; // exclude empty lines
         });
         var quantity = nonEmptyLines.length;
+
+        if(!endsWithNewLine) {
+            $("#serial_numbers").val("");
+            $("#serial_numbers").focus();
+            swal.fire({
+                title: "Error",
+                text: "Please enter serial numbers",
+                icon: "error",
+                confirmButtonText: "Ok"
+            });
+            return;
+        }
+
+        if(quantity == 0) {
+            $("#serial_numbers").focus();
+            swal.fire({
+                title: "Error",
+                text: "Please enter serial numbers",
+                icon: "error",
+                confirmButtonText: "Ok"
+            });
+            return;
+        }
+
         totalItems += quantity;
 
-        // alert("Total Items: " + totalItems);
-        var productRow = `
-            <tr>
+        productRow += `
+            <tr id="${productID}">
                 <td>${quantity}</td>
                 <td>${sku}</td>
                 <td>${model}</td>
-                <td><button class="btn btn-danger">Remove</button></td>
-            </tr>
-        `;
-        cartProducts += `<tr>
+                <td><button type="button" class="btn btn-danger" onclick="Product.remove('${productID}');">Remove</button></td>
+            </tr>`;
+
+        cartProducts += `<tr id="${productID}">
                             <td>${quantity}</td>
                             <td>${sku}</td>
                             <td>${model}</td>
                         </tr>`;
         productCart.push({
+            quantity: quantity,
             sku: sku,
             model: model,
             serial_numbers: serial_numbers,
             productID: productID,
             productDetailsID: productDetailsID
         });
+        console.log(productCart);
         $('.table').DataTable().destroy();
-        $("#cart").append(productRow);
+        $("#cart").html(productRow);
         $('.table').DataTable();
         $("#sku").val("");
         $("#model").val("");
@@ -188,9 +292,19 @@ $(document).ready(function () {
     });
 
     $("#checkout").click(function() {
+        // Check if cart has items
+        if (totalItems == 0) {
+            swal.fire({
+                title: "Error",
+                text: "Please add items to cart",
+                icon: "error",
+                confirmButtonText: "Ok"
+            });
+            return;
+        }
         $("#checkout_table").html(cartProducts);
         $("#total").html(totalItems);
-        $('#myModal').modal('show');
+        $('#checkoutModal').modal('show');
     });
 
     $("#checkout_confirm").click(function() {
@@ -199,7 +313,8 @@ $(document).ready(function () {
             url: PRODUCT_CONTROLLER + '?action=checkout',
             dataType: "json",
             data:{
-                productCart: productCart
+                productCart: productCart,
+                installationForm: installationForm
             },
             success: function (response){
                 if(response == "Successfully Updated") {
@@ -211,8 +326,8 @@ $(document).ready(function () {
                         confirmButtonText: "Ok"
                     }).then(function() {
                         productCart = [];
-                        // Reload the page
-                        location.reload();
+                        // Go to Installation Form Page
+                        window.location.href = "installation-status.php";
                     })
                 } else {
                     swal.fire({
@@ -228,12 +343,6 @@ $(document).ready(function () {
         });
     });
 
-    $(".pos_close").click(function() {
-        $(`#myModal`).modal('hide');
-    });
-});
-
-const Product = (() => {
     const thisProduct = {};
     let toUpdate = false;
     let product_id = '';
@@ -257,6 +366,7 @@ const Product = (() => {
             allowClear: true,
         });
     });
+
     thisProduct.loadSelectData = () => {
         $.ajax({
             type: "GET",
@@ -273,6 +383,7 @@ const Product = (() => {
             }
         });
     }
+
     thisProduct.loadTableData = () => {
         $.ajax({
             type: "GET",
@@ -329,23 +440,8 @@ const Product = (() => {
         });
     }
 
-    thisProduct.resetFields = () => {
-        toUpdate = false;
-        var model = `
-        <label class="form-label" for="models">Models</label>
-        <select class="form-select model" name="models" id="models">
-            <option value="" disabled selected>- Select Model -</option>
-        </select>
-        `;
-        $('#category').val("");
-        // $('#models').val("").select2("val", "");
-        $("#modelDiv").html(model);
-        $('#serial_number').val("");
-    }
-
-    thisProduct.clickDelete = (id) => {
-        product_id = id
-
+    thisProduct.remove = (id) => {
+        var row = $('#' + id);
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -357,148 +453,26 @@ const Product = (() => {
             cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
-                thisProduct.delete();
+                var index = -1;
+                var quantity = 0;
+                for (var i = 0; i < productCart.length; i++) {
+                    if (productCart[i].productID == id) {
+                        quantity = productCart[i].quantity;
+                        totalItems -= quantity;
+                        index = i;
+                        break;
+                    }
+                }
+                if (index != -1) {
+                    productCart.splice(index, 1);
+                }
+                var pattern = new RegExp("<tr id=\"" + id + "\">.*?</tr>", "s");
+                cartProducts = cartProducts.replace(pattern, "");
+                productRow = productRow.replace(pattern, "");
+                row.remove();
+                $("#total").html(totalItems);
             }
         })
-    }
-
-    thisProduct.delete = () => {
-        $.ajax({
-            type: "POST",
-            url: PRODUCT_CONTROLLER + '?action=delete',
-            dataType: "json",
-            data:{
-                product_id: product_id
-            },
-            success: function (response) 
-            {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Product Deleted Successfully ',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                thisProduct.loadTableData();
-            },
-            error: function () {
-
-            }
-        });
-    }
-
-    thisProduct.clickUpdate = (id) => {
-        product_id = id;
-
-        $.ajax({
-            type: "POST",
-            url: PRODUCT_CONTROLLER + '?action=getById',
-            dataType: "json",
-            data:{
-                product_id: product_id
-            },
-            success: function (response) 
-            {   
-                if(response.CATEGORY == "Camera") {
-                    $('#category').val("Camera");
-                    $('#category').trigger("change");
-                    $("#camera_type").val(response.CAMERA_TYPE);
-                    $("#camera_shape").val(response.CAMERA_SHAPE);
-                    $("#camera_type").prop("disabled", true);
-                    $("#camera_shape").prop("disabled", true);
-                } else if(response.CATEGORY == "Recorder") {
-                    $('#category').val("Recorder");
-                    $('#category').trigger("change");
-                    $("#recorder_type").val(response.RECORDER_TYPE);
-                    $("#recorder_type").prop("disabled", true);
-                } else if(response.CATEGORY == "Hard drive") {
-                    $('#category').val("Hard drive");
-                    $('#category').trigger("change");
-                    $("#capacity").val(response.CAPACITY);
-                    $("#capacity").prop("disabled", true);
-                } else if(response.CATEGORY == "Power Supply") {
-                    $('#category').val("Power Supply");
-                    $('#category').trigger("change");
-                    $("#psu_type").val(response.PSU_TYPE);
-                    $("#watts").val(response.WATTS);
-                    $("#psu_type").prop("disabled", true);
-                    $("#watts").prop("disabled", true);
-                } else if(response.CATEGORY == "Monitor") {
-                    $('#category').val("Monitor");
-                    $('#category').trigger("change");
-                    $("#monitor_size").val(response.MONITOR_SIZE);
-                    $("#monitor_size").prop("disabled", true);
-                }
-                $("#category").val(response.CATEGORY);
-                $("#brand").val(response.BRAND);
-                $("#model").val(response.MODEL);
-                $("#buying_price").val(response.BUYING_PRICE);
-                $("#selling_price").val(response.SELLING_PRICE);
-                $("#serial_number").val(response.SERIAL_NUMBER);
-
-                $("#brand").prop("disabled", true);
-                $("#model").prop("disabled", true);
-                $("#serial_number").prop("disabled", true);
-                
-                toUpdate = true;
-
-                $('#btn_save_product').html('Update Product');
-            },
-            error: function () {
-
-            }
-        });
-    }
-
-    thisProduct.update = () => {
-        const buying_price = $('#buying_price').val();
-        const selling_price = $('#selling_price').val();
-        
-        if(buying_price == ""
-        || selling_price == "") {
-            Swal.fire({
-                position: 'center',
-                icon: 'warning',
-                title: 'Please fillout all fields',
-                showConfirmButton: true,
-            })
-        }
-
-        else if (buying_price > selling_price){
-            Swal.fire({
-                position: 'center',
-                icon: 'warning',
-                title: 'Buying price should be lower than Selling price',
-                showConfirmButton: true,
-            })
-        }
-        else {
-            $.ajax({
-                type: "POST",
-                url: PRODUCT_CONTROLLER + '?action=updateProductDetails',
-                dataType: "json",
-                data:{
-                    product_id: product_id,
-                    buying_price: buying_price,
-                    selling_price: selling_price,
-                },
-                success: function () 
-                {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Product updated successfully',
-                        showConfirmButton: true,
-                    })
-                    thisProduct.loadTableData();
-                    thisProduct.resetFields()
-                },
-                error: function () {
-    
-                }
-            });
-        }
-        
     }
 
     return thisProduct;

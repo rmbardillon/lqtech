@@ -7,83 +7,204 @@
 ?>
 <body>
     <?php include_once("../layout/nav.php") ?>
+    <!-- Installation Form Modal -->
     <div id="formModal" class="modal" role="dialog" data-bs-backdrop="static">
         <div class="modal-dialog modal-xl">
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Installation Form</h4>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col col-8">
-                                <label class="form-label" for="projectName">PROJECT NAME</label>
-                                <input type="text" class="form-control" id="projectName" autofocus>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="projectName" placeholder="PROJECT NAME" required>
+                                    <label class="form-label" for="projectName">PROJECT NAME</label>
+                                </div>
                             </div>
                             <div class="col">
-                                <label class="form-label" for="date">DATE</label>
-                                <p class="text-capitalize" id="date"></p>
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" id="date" readonly>
+                                    <label class="form-label" for="date">DATE</label> 
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col col-8">
-                                <label class="form-label" for="contactPerson">CONTACT PERSON</label>
-                                <input type="text" class="form-control" id="contactPerson">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="contactPerson" placeholder="CONTACT PERSON" required>
+                                    <label class="form-label" for="contactPerson">CONTACT PERSON</label>
+                                </div>
                             </div>
                             <div class="col">
-                                <label class="form-label" for="contactNumber">CONTACT NUMBER</label>
-                                <input type="text" class="form-control" id="contactNumber">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label class="form-label" for="projectSite">PROJECT SITE</label>
-                                <input type="text" class="form-control" id="projectSite">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="contactNumber" placeholder="CONTACT NUMBER" required>
+                                    <label class="form-label" for="contactNumber">CONTACT NUMBER</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col">
-                                <label class="form-label" for="salesManBranch">SALESMAN/BRANCH</label>
-                                <input type="text" class="form-control" id="salesManBranch">
-                            </div>
-                            <div class="col">
-                                <label class="form-label" for="installer">INSTALLER</label>
-                                <input type="text" class="form-control" id="installer">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="projectSite" placeholder="PROJECT SITE" required>
+                                    <label class="form-label" for="projectSite">PROJECT SITE</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col">
-                                <label class="form-label" for="salesOrderNumber">SALES ORDER NUMBER</label>
-                                <input type="text" class="form-control" id="salesOrderNumber">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="salesManBranch" placeholder="SALESMAN / BRANCH" required>
+                                    <label class="form-label" for="salesManBranch">SALESMAN / BRANCH</label>
+                                </div>
                             </div>
                             <div class="col">
-                                <label class="form-label" for="jobOrderNumber">JOB ORDER NUMBER</label>
-                                <input type="text" class="form-control" id="jobOrderNumber">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="installer" placeholder="INSTALLER" required>
+                                    <label class="form-label" for="installer">INSTALLER</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="salesOrderNumber" placeholder="SALES ORDER NUMBER" required>
+                                    <label class="form-label" for="salesOrderNumber">SALES ORDER NUMBER</label>
+                                </div>
                             </div>
                             <div class="col">
-                                <label class="form-label" for="service">SERVICE</label>
-                                <input type="text" class="form-control" id="service">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="jobOrderNumber" placeholder="JOB ORDER NUMBER" required>
+                                    <label class="form-label" for="jobOrderNumber">JOB ORDER NUMBER</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="service" placeholder="SERVICE" required>
+                                    <label class="form-label" for="service">SERVICE</label>
+                                </div>
                             </div>
                         </div>
                     </form>    
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" id="checkout_confirm">Save</button>
+                    <button class="btn btn-success" id="confirmForm">Next</button>
                     <button type="button" class="btn btn-danger" id="closeModal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-    <div id="myModal" class="modal" role="dialog">
+    <!-- Confirm Installation Form Modal -->
+    <div id="confirmFormModal" class="modal" role="dialog" data-bs-backdrop="static">
         <div class="modal-dialog modal-xl">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                    <h4 class="modal-title">Form Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col">
+                                <b>PROJECT NAME:</b> <span class="projectNameValue"></span>
+                            </div>
+                            <div class="col">
+                                <b>DATE:</b> <span class="dateValue"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>CONTACT PERSON:</b> <span class="contactPersonValue"></span>
+                            </div>
+                            <div class="col">
+                                <b>CONTACT NUMBER:</b> <span class="contactNumberValue"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>PROJECT SITE:</b> <span class="projectSiteValue"></span>
+                            </div>
+                            <div class="col">
+                                <b>SALESMAN / BRANCH:</b> <span class="salesManBranchValue"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>INSTALLER:</b> <span class="installerValue"></span>
+                            </div>
+                            <div class="col">
+                                <b>SERVICE:</b> <span class="serviceValue"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>SALES ORDER NUMBER:</b> <span class="salesOrderNumberValue"></span>
+                            </div>
+                            <div class="col">
+                                <b>JOB ORDER NUMBER:</b> <span class="jobOrderNumberValue"></span>
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="submitInstallationForm">Confirm</button>
+                    <button type="button" class="btn btn-danger" id="back">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal" role="dialog">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h4 class="modal-title">Confirmation</h4>
                 </div>
                 <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col">
+                                <b>PROJECT NAME:</b> <span class="projectNameValue"></span>
+                            </div>
+                            <div class="col">
+                                <b>DATE:</b> <span class="dateValue"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>CONTACT PERSON:</b> <span class="contactPersonValue"></span>
+                            </div>
+                            <div class="col">
+                                <b>CONTACT NUMBER:</b> <span class="contactNumberValue"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>PROJECT SITE:</b> <span class="projectSiteValue"></span>
+                            </div>
+                            <div class="col">
+                                <b>SALESMAN/BRANCH:</b> <span class="salesManBranchValue"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>INSTALLER:</b> <span class="installerValue"></span>
+                            </div>
+                            <div class="col">
+                                <b>SERVICE:</b> <span class="serviceValue"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>SALES ORDER NUMBER:</b> <span class="salesOrderNumberValue"></span>
+                            </div>
+                            <div class="col">
+                                <b>JOB ORDER NUMBER:</b> <span class="jobOrderNumberValue"></span>
+                            </div>
+                        </div>
+                    </form>    
+                    <hr>
                     <table class="table">
                         <thead>
                             <tr>
@@ -106,11 +227,12 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success" id="checkout_confirm">Confirm</button>
-                    <button type="button" class="btn btn-danger pos_close">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- POS -->
     <div class="container mt-5">
         <h1>Out Product</h1>
         <div class="row">
@@ -128,6 +250,7 @@
                     <div class="mb-3">
                         <button class="btn btn-primary w-100" type="button" id="addToCart">Add to Cart</button>
                     </div>
+                    <!-- Current Cart Table -->
                     <div class="mb-3">
                         <table class="table">
                             <thead>
@@ -142,6 +265,7 @@
                     </div>
                 </form>
             </div>
+            <!-- Products cart Table -->
             <div class="col">
                 <form>
                     <table class="table table-bordered">

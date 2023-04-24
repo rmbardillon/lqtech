@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>POS System</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="script.js"></script>
+	<style>
+		table {
+			border-collapse: collapse;
+		}
+		table, th, td {
+			border: 1px solid black;
+		}
+		th, td {
+			padding: 5px;
+			text-align: left;
+		}
+		th {
+			background-color: #ddd;
+		}
+	</style>
+</head>
+<body>
+	<h1>POS System</h1>
+	<div>
+		<label>Scan Barcode:</label>
+		<input type="text" id="barcode" />
+		<button id="add">Add to Cart</button>
+	</div>
+	<h2>Cart</h2>
+	<table id="cart">
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>Price</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<button id="checkout">Check Out</button>
+	<h2>Receipt</h2>
+	<ul id="receipt"></ul>
+    <script>
+        $(document).ready(function() {
+	// Initialize cart array
+	var cart = [];
+
+	// Add item to cart when "Add to Cart" button is clicked
+	$("#add").click(function() {
+		var barcode = $("#barcode").val();
+		// Replace this with your own logic to get the item's name and price from the barcode
+		var item = "Item " + barcode;
+		var price = "$10.00";
+
+		// Add item to cart array
+		cart.push({item: item, price: price});
+
+		// Update cart table
+		updateCart();
+
+		// Clear barcode input
+		$("#barcode").val("");
+	});
+
+	// Remove item from cart when "Remove" button is clicked
+	$("#cart").on("click", ".remove", function() {
+		var index = $(this).data("index");
+		cart.splice(index, 1);
+		updateCart();
+	});
+
+	// Display receipt when "Check Out" button is clicked
+	$("#checkout").click(function() {
+		$("#receipt").empty();
+		$.each(cart, function(index, item) {
+			$("#receipt").append("<li>" + item.item + " - " + item.price + "</li>");
+		});
+	});
+
+	// Update cart table
+	function updateCart() {
+		$("#cart tbody").empty();
+		$.each(cart, function(index, item) {
+			$("#cart tbody").append("<tr><td>" + item.item + "</td><td>" + item.price + "</td><td><button class='remove' data-index='" + index + "'>Remove</button></td></tr>");
+		});
+	}
+});
+
+    </script>
+</body>
+</html>

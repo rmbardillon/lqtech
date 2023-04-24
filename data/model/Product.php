@@ -324,8 +324,20 @@ class Product
         return $result->fetch_assoc();
     }
 
-    public function checkout($productCart)
+    public function checkout($productCart, $installationForm)
     {
+        foreach($installationForm as $form) {
+            $sql = "INSERT INTO installation_form(PROJECT_NAME, CONTACT_PERSON, CONTACT_NUMBER, PROJECT_SITE, SALESMAN_BRANCH, INSTALLER, SALES_ORDER_NUMBER, JOB_ORDER_NUMBER, SERVICE, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ssssssssss",$form['projectName'], $form['contactPerson'], $form['contactNumber'], $form['projectSite'], $form['salesManBranch'], $form['installer'], $form['salesOrderNumber'], $form['jobOrderNumber'], $form['service'], $form['status']);
+            $result = '';
+            if ($stmt->execute() === TRUE) {
+                $result = "Successfully Save";
+                $this->ActionLog->saveLogs('product', 'saved');
+            } else {
+                $result = "Error: <br>" . $this->conn->error;
+            }
+        }
         foreach($productCart as $product) {
             $sku = $product['sku'];
             $productID = $product['productID'];

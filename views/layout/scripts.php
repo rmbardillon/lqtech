@@ -10,6 +10,17 @@
 <script src="../../config/system_name.js"></script>
 <script src="../../libs/scripts/vars.js"></script>
 <script>
+    // Forms Validation
+    const forms = document.querySelectorAll("form");
+    forms.forEach(function(form) {
+        form.addEventListener('submit', e => {
+            if (!form.checkValidity()) {
+                e.preventDefault();
+            }
+            form.classList.add('was-validated');
+        });
+    });
+    
     function updateDatetime() {
         $.ajax({
             type: "GET",

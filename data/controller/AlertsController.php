@@ -25,8 +25,8 @@ if ($action == 'getTableDataStockStatus')
         $table_data .= '</tr>';
 
         $counter++;
+        $_SESSION['alert_stock_status'] = $product['QUANTITY'];
     }
-    $_SESSION['alert_stock_status'] = $product['QUANTITY'];
     echo json_encode($table_data);
 }
 
