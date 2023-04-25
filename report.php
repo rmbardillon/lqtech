@@ -59,7 +59,7 @@ $pdf->Cell(19,10,'QTY OUT',1,0,'C');
 $pdf->Cell(19,10,'QTY RETURN',1,0,'C');
 $pdf->Cell(39,10,'SERIAL NUMBER (RETURNS)',1,1,'C');
 
-for($i = 1; $i <= 30; $i++)
+for($i = 1; $i <= 80; $i++)
 {
     $pdf->Cell(13,7,$i,1,0,'C');
     $pdf->Cell(30,7,'$itemCode',1,0,'C');
@@ -71,7 +71,11 @@ for($i = 1; $i <= 30; $i++)
 
 // Line break
 $pdf->Ln(5);
-
+// echo($pdf->GetY());
+if($pdf->GetY() > 258.00125)
+{
+    $pdf->AddPage();
+}
 // First column
 $pdf->SetXY(10, $pdf->GetY());
 $pdf->Cell(70, 5, 'PREPARED BY:', 0, 1);
