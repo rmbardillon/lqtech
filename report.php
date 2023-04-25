@@ -26,25 +26,26 @@ $pdf->SetFont('Arial','B',10);
 // Row 1
 $pdf->Cell(0,6,'INSTALLATION FORM / TRANSMITTAL',0,1,'C');
 
+$projectName = 'PROJECT NAME PLACEHOLDER';
 // Row 2
-$pdf->Cell(110,6,'PROJECT NAME:',1,0);
-$pdf->Cell(80,6,'DATE:',1,1);
+$pdf->Cell(110,6,'PROJECT NAME: '.$projectName,1,0);
+$pdf->Cell(80,6,'DATE: ',1,1);
 
 // Row 3
-$pdf->Cell(110,6,'CONTACT PERSON:',1,0);
-$pdf->Cell(80,6,'CONTACT NUMBER:',1,1);
+$pdf->Cell(110,6,'CONTACT PERSON: ',1,0);
+$pdf->Cell(80,6,'CONTACT NUMBER: ',1,1);
 
 // Row 4
-$pdf->Cell(190,6,'PROJECT SITE:',1,1);
+$pdf->Cell(190,6,'PROJECT SITE: ',1,1);
 
 // Row 5
-$pdf->Cell(95,6,'SALESMAN / BRANCH:',1,0);
-$pdf->Cell(95,6,'INSTALLER:',1,1);
+$pdf->Cell(95,6,'SALESMAN / BRANCH: ',1,0);
+$pdf->Cell(95,6,'INSTALLER: ',1,1);
 
 // Row 6
-$pdf->Cell(65,6,'SALES ORDER NUMBER:',1,0);
-$pdf->Cell(65,6,'JOB ORDER NUMBER:',1,0);
-$pdf->Cell(60,6,'SERVICE:',1,1);
+$pdf->Cell(65,6,'SALES ORDER NUMBER: ',1,0);
+$pdf->Cell(65,6,'JOB ORDER NUMBER: ',1,0);
+$pdf->Cell(60,6,'SERVICE: ',1,1);
 
 // Line break
 $pdf->Ln(1);
