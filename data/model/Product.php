@@ -415,4 +415,18 @@ class Product
             }
         return $result;
     }
+
+    public function confirmTransaction($id)
+    {
+        $sql = "UPDATE installation_form SET STATUS = 'Success' WHERE INSTALLATION_FORM_ID = '$id'";
+        $result = '';
+        if ($this->conn->query($sql) === TRUE) {
+            $result = "Successfully Updated";
+            $this->ActionLog->saveLogs('product', 'saved');
+        } else {
+            $result = "Error: <br>" . $this->conn->error;
+        }
+        $this->conn->close();
+        return $result;
+    }
 }

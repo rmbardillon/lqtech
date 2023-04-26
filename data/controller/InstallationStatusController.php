@@ -18,7 +18,7 @@ if ($action == 'getInstallationStatusTable')
         $table_data .= '<tr>';
         $table_data .= '<td>' . $counter . '</td>';
         $table_data .= '<td>' . $form['PROJECT_NAME'] . '</td>';
-        $table_data .= '<td>' . $form['DATE_TIME'] . '</td>';
+        $table_data .= '<td>' . $form['FORMATTED_DATE'] . '</td>';
         $table_data .= '<td>' . $form['CONTACT_PERSON']. '</td>';
         $table_data .= '<td>' . $form['CONTACT_NUMBER'] . '</td>';
         $table_data .= '<td>' . $form['PROJECT_SITE'] . '</td>';
@@ -45,6 +45,14 @@ else if ($action == 'getInstallationStatus')
 {
     $id = $_POST['id'];
     $result = $Product->getInstallationStatus($id);
+
+    echo json_encode($result);
+}
+
+else if($action == 'confirmTransaction')
+{
+    $id = $_POST['installationFormID'];
+    $result = $Product->confirmTransaction($id);
 
     echo json_encode($result);
 }

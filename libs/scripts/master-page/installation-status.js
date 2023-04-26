@@ -4,6 +4,12 @@ $(document).ready(function () {
 
 const installationStatus = (() => {
     const thisInstallationStatus = {};
+    var installationFormID = '';
+
+    $("#viewForm").click(function () {
+        // Opon new page
+        window.open("../report/report.php?installationFormID=" + installationFormID, "_blank");
+    });
 
     thisInstallationStatus.loadTableData = () => {
         $.ajax({
@@ -30,6 +36,10 @@ const installationStatus = (() => {
                 id: id
             },
             success: function (response) {
+                if(response[0].STATUS == "Success") {
+                    $("#viewForm").removeClass("disabled");
+                }
+                installationFormID = response[0]['INSTALLATION_FORM_ID'];
                 $("#installationFormID").text("Installation Form ID: " + response[0]['INSTALLATION_FORM_ID']);
                 $(".projectNameValue").text(response[0]['PROJECT_NAME']);
                 $(".dateValue").text(response[0]['FORMATTED_DATE']);
@@ -69,6 +79,69 @@ const installationStatus = (() => {
                 
             }
         });
+        $('#modal_installation_status').modal('show');
+    }
+
+    thisInstallationStatus.confirmTransaction = () => {
+        console.log(installationFormID);
+        swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, confirm it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: INSTALLATION_STATUS_CONTROLLER + '?action=confirmTransaction',
+                    dataType: "json",
+                    data: {
+                        installationFormID: installationFormID
+                    },
+                    success: function (response) {
+                        if (response == "Successfully Updated") {
+                            swal.fire(
+                                'Confirmed!',
+                                'Transaction has been confirmed.',
+                                'success'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    installationStatus.loadTableData();
+                                    $('#modal_installation_status').modal('hide');
+                                }
+                            });
+                        } else {
+                            swal.fire(
+                                'Failed!',
+                                'Transaction failed to confirm.',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function () {
+                        
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swal.fire(
+                    'Cancelled',
+                    'Transaction cancelled',
+                    'error'
+                )
+            }
+        })
+    }
+    
+    thisInstallationStatus.processReturns = () => {
+        console.log(installationFormID);
+        $('#modal_installation_status').modal('show');
+    }
+    
+    thisInstallationStatus.cancelTransaction = () => {
+        console.log(installationFormID);
         $('#modal_installation_status').modal('show');
     }
 

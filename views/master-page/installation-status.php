@@ -13,6 +13,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="installationFormID">Installation Form ID: </h4>
+                        <button type="button" class="btn btn-primary disabled" id="viewForm">View Installation Form</button>
                     </div>
                     <div class="modal-body">
                         <form>
@@ -72,7 +73,16 @@
                         </table>                
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-success" id="checkout_confirm">Confirm</button>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonAction" data-bs-toggle="dropdown" aria-expanded="false">
+                                Action
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAction">
+                                <li><a class="dropdown-item" id="confirmTransaction" onclick="installationStatus.confirmTransaction();">Confirm Transaction</a></li>
+                                <li><a class="dropdown-item" id="processReturns" onclick="installationStatus.processReturns();">Process Returns</a></li>
+                                <li><a class="dropdown-item" id="cancelTransaction" onclick="installationStatus.cancelTransaction();">Cancel Transaction</a></li>
+                            </ul>
+                        </div>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
