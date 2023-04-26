@@ -142,6 +142,25 @@ class Product
         return $rows;
     }
 
+    public function getInstallationStatusTable()
+    {
+        $sql = "SELECT *, DATE_FORMAT(DATE_TIME, '%W, %M %e, %Y at %h:%i:%s %p') AS FORMATTED_DATE FROM installation_form;";
+        $result = $this->conn->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getInstallationStatus($id)
+    {
+        $sql = "SELECT *, DATE_FORMAT(DATE_TIME, '%W, %M %e, %Y at %h:%i:%s %p') AS FORMATTED_DATE FROM sales
+                JOIN product_details ON sales.PRODUCT_DETAILS_ID = product_details.PRODUCT_DETAILS_ID
+                JOIN installation_form ON sales.INSTALLATION_FORM_ID = installation_form.INSTALLATION_FORM_ID
+                WHERE sales.INSTALLATION_FORM_ID = '$id';";
+        $result = $this->conn->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function save($request)
     {
         $category = $request['category'];
@@ -323,13 +342,20 @@ class Product
         $this->conn->close();
         return $result->fetch_assoc();
     }
+    public function generateUUID() {
+        $uuid = uniqid('', true);
+        $uuid = str_replace('.', '', $uuid);
+        return substr($uuid, 0, 16);
+    }
+
 
     public function checkout($productCart, $installationForm)
     {
+        $uuid = $this->generateUUID();
         foreach($installationForm as $form) {
-            $sql = "INSERT INTO installation_form(PROJECT_NAME, CONTACT_PERSON, CONTACT_NUMBER, PROJECT_SITE, SALESMAN_BRANCH, INSTALLER, SALES_ORDER_NUMBER, JOB_ORDER_NUMBER, SERVICE, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO installation_form(INSTALLATION_FORM_ID, PROJECT_NAME, CONTACT_PERSON, CONTACT_NUMBER, PROJECT_SITE, SALESMAN_BRANCH, INSTALLER, SALES_ORDER_NUMBER, JOB_ORDER_NUMBER, SERVICE, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ssssssssss",$form['projectName'], $form['contactPerson'], $form['contactNumber'], $form['projectSite'], $form['salesManBranch'], $form['installer'], $form['salesOrderNumber'], $form['jobOrderNumber'], $form['service'], $form['status']);
+            $stmt->bind_param("sssssssssss",$uuid, $form['projectName'], $form['contactPerson'], $form['contactNumber'], $form['projectSite'], $form['salesManBranch'], $form['installer'], $form['salesOrderNumber'], $form['jobOrderNumber'], $form['service'], $form['status']);
             $result = '';
             if ($stmt->execute() === TRUE) {
                 $result = "Successfully Save";
@@ -350,9 +376,9 @@ class Product
                 if(trim($serial_number) === "") {
                     continue;
                 }
-                $sql = "INSERT INTO sales(PRODUCT_DETAILS_ID,SERIAL_NUMBER, SKU) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO sales(INSTALLATION_FORM_ID,PRODUCT_DETAILS_ID,SERIAL_NUMBER, SKU) VALUES (?, ?, ?, ?)";
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("sss",$productDetailsID, $serial_number, $sku);
+                $stmt->bind_param("ssss",$uuid, $productDetailsID, $serial_number, $sku);
                 $result = '';
                 if ($stmt->execute() === TRUE) {
                     $result = "Successfully Save";

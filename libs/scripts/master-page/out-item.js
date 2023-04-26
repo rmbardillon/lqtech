@@ -55,7 +55,7 @@ const Product = (() => {
 
     $("#confirmForm").click(function() {
         projectName = $("#projectName").val();
-        date = $("#date").text();
+        date = $("#date").val();
         contactPerson = $("#contactPerson").val();
         contactNumber = $("#contactNumber").val();
         projectSite = $("#projectSite").val();
@@ -65,6 +65,7 @@ const Product = (() => {
         jobOrderNumber = $("#jobOrderNumber").val();
         service = $("#service").val();
 
+        console.log(date)
         installationForm.push({
             projectName: projectName,
             date: date,
