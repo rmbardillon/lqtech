@@ -19,6 +19,18 @@ class PDF extends FPDF
     }
 }
 
+$projectName = '';
+        $date = '';
+        $contactPerson ='';
+        $contactNumber = '';
+        $projectSite = '';
+        $salesmanBranch = '';
+        $installer = '';
+        $salesOrderNumber = '';
+        $jobOrderNumber = '';
+        $service = '';
+        $status = '';
+
 if(isset($_GET['installationFormID'])){
 
     $installationFormID = $_GET['installationFormID'];
@@ -54,15 +66,6 @@ if(isset($_GET['installationFormID'])){
     }
 
     $data = '';
-    // foreach ($serialNumbersByModel as $key => $value) {
-    //     $data .= '<tr>';
-    //     $data .= '<td>' . $key . '</td>';
-    //     $data .= '<td>' . implode(',', $value) . '</td>';
-    //     $data .= '<td>' . count($value) . '</td>';
-    //     $data .= '</tr>';
-    // }
-
-    // echo($data);
 }
 
 // Instanciation of inherited class
@@ -110,26 +113,28 @@ $pdf->Cell(19,10,'QTY OUT',1,0,'C');
 $pdf->Cell(19,10,'QTY RETURN',1,0,'C');
 $pdf->Cell(39,10,'SERIAL NUMBER (RETURNS)',1,1,'C');
 
-$i = 1;
-foreach($serialNumbersByModel as $key => $value)
+if(isset($_GET['installationFormID'])){
+    $i = 1;
+    foreach($serialNumbersByModel as $key => $value)
+    {
+        $pdf->Cell(13,7,$i,1,0,'C');
+        $pdf->Cell(30,7,$key,1,0,'C');
+        $pdf->Cell(70,7,implode(',', $value),1,0,'C');
+        $pdf->Cell(19,7,count($value),1,0,'C');
+        $pdf->Cell(19,7,'$itemQTYReturn',1,0,'C');
+        $pdf->Cell(39,7,'$serialNumberReturn',1,1,'C');
+        $i++;
+    }
+}
+for($i = 1; $i <= 28; $i++)
 {
     $pdf->Cell(13,7,$i,1,0,'C');
-    $pdf->Cell(30,7,$key,1,0,'C');
-    $pdf->Cell(70,7,implode(',', $value),1,0,'C');
-    $pdf->Cell(19,7,count($value),1,0,'C');
+    $pdf->Cell(30,7,'$itemCode',1,0,'C');
+    $pdf->Cell(70,7,'$itemDesc',1,0,'C');
+    $pdf->Cell(19,7,'$itemQTYOut',1,0,'C');
     $pdf->Cell(19,7,'$itemQTYReturn',1,0,'C');
     $pdf->Cell(39,7,'$serialNumberReturn',1,1,'C');
-    $i++;
 }
-// for($i = 1; $i <= 80; $i++)
-// {
-//     $pdf->Cell(13,7,$i,1,0,'C');
-//     $pdf->Cell(30,7,'$itemCode',1,0,'C');
-//     $pdf->Cell(70,7,'$itemDesc',1,0,'C');
-//     $pdf->Cell(19,7,'$itemQTYOut',1,0,'C');
-//     $pdf->Cell(19,7,'$itemQTYReturn',1,0,'C');
-//     $pdf->Cell(39,7,'$serialNumberReturn',1,1,'C');
-// }
 
 // Line break
 $pdf->Ln(5);
