@@ -152,7 +152,7 @@ class Product
 
     public function getInstallationStatus($id)
     {
-        $sql = "SELECT *, DATE_FORMAT(DATE_TIME, '%W, %M %e, %Y at %h:%i:%s %p') AS FORMATTED_DATE FROM sales
+        $sql = "SELECT *, DATE_FORMAT(DATE_TIME, '%W, %M %e, %Y %h:%i:%s %p') AS FORMATTED_DATE FROM sales
                 JOIN product_details ON sales.PRODUCT_DETAILS_ID = product_details.PRODUCT_DETAILS_ID
                 JOIN installation_form ON sales.INSTALLATION_FORM_ID = installation_form.INSTALLATION_FORM_ID
                 WHERE sales.INSTALLATION_FORM_ID = '$id';";

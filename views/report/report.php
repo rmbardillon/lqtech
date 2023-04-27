@@ -1,5 +1,9 @@
 <?php
 require('../../libs/plugins/fpdf/fpdf.php');
+include_once('../../config/database.php');
+include_once('../../data/model/Product.php');
+
+$Product = new Product($conn);
 
 class PDF extends FPDF
 {
@@ -15,7 +19,52 @@ class PDF extends FPDF
     }
 }
 
-$installationFormID = $_GET['installationFormID'];
+if(isset($_GET['installationFormID'])){
+
+    $installationFormID = $_GET['installationFormID'];
+    $result = $Product->getInstallationStatus($installationFormID);
+
+    // print_r($result);
+    
+    foreach ($result as $row) {
+        $projectName = $row['PROJECT_NAME'];
+        $date = $row['FORMATTED_DATE'];
+        $contactPerson = $row['CONTACT_PERSON'];
+        $contactNumber = $row['CONTACT_NUMBER'];
+        $projectSite = $row['PROJECT_SITE'];
+        $salesmanBranch = $row['SALESMAN_BRANCH'];
+        $installer = $row['INSTALLER'];
+        $salesOrderNumber = $row['SALES_ORDER_NUMBER'];
+        $jobOrderNumber = $row['JOB_ORDER_NUMBER'];
+        $service = $row['SERVICE'];
+        $status = $row['STATUS'];
+    }
+
+    $serialNumbersByModel = [];
+    foreach ($result as $element) {
+        $model = $element['MODEL'];
+        $serialNumbers = array_filter($result, function($obj) use ($model) {
+            return $obj['MODEL'] === $model;
+        });
+        $serialNumbers = array_map(function($obj) {
+            return $obj['SERIAL_NUMBER'];
+        }, $serialNumbers);
+
+        $serialNumbersByModel[$model] = $serialNumbers;
+    }
+
+    $data = '';
+    // foreach ($serialNumbersByModel as $key => $value) {
+    //     $data .= '<tr>';
+    //     $data .= '<td>' . $key . '</td>';
+    //     $data .= '<td>' . implode(',', $value) . '</td>';
+    //     $data .= '<td>' . count($value) . '</td>';
+    //     $data .= '</tr>';
+    // }
+
+    // echo($data);
+}
+
 // Instanciation of inherited class
 $pdf = new PDF('P', 'mm', "Legal");
 $pdf->AliasNbPages();
@@ -30,23 +79,23 @@ $pdf->Cell(0,6,'INSTALLATION FORM / TRANSMITTAL',0,1,'C');
 $projectName = 'PROJECT NAME PLACEHOLDER';
 // Row 2
 $pdf->Cell(110,6,'PROJECT NAME: '.$projectName,1,0);
-$pdf->Cell(80,6,'DATE: ',1,1);
+$pdf->Cell(80,6,'DATE: '.$date,1,1);
 
 // Row 3
-$pdf->Cell(110,6,'CONTACT PERSON: ',1,0);
-$pdf->Cell(80,6,'CONTACT NUMBER: ',1,1);
+$pdf->Cell(110,6,'CONTACT PERSON: '.$contactPerson,1,0);
+$pdf->Cell(80,6,'CONTACT NUMBER: '.$contactNumber,1,1);
 
 // Row 4
-$pdf->Cell(190,6,'PROJECT SITE: ',1,1);
+$pdf->Cell(190,6,'PROJECT SITE: '.$projectSite,1,1);
 
 // Row 5
-$pdf->Cell(95,6,'SALESMAN / BRANCH: ',1,0);
-$pdf->Cell(95,6,'INSTALLER: ',1,1);
+$pdf->Cell(95,6,'SALESMAN / BRANCH: '.$salesmanBranch,1,0);
+$pdf->Cell(95,6,'INSTALLER: '.$installer,1,1);
 
 // Row 6
-$pdf->Cell(65,6,'SALES ORDER NUMBER: ',1,0);
-$pdf->Cell(65,6,'JOB ORDER NUMBER: ',1,0);
-$pdf->Cell(60,6,'SERVICE: ',1,1);
+$pdf->Cell(65,6,'SALES ORDER NUMBER: '.$salesOrderNumber,1,0);
+$pdf->Cell(65,6,'JOB ORDER NUMBER: '.$jobOrderNumber,1,0);
+$pdf->Cell(60,6,'SERVICE: '.$service,1,1);
 
 // Line break
 $pdf->Ln(1);
@@ -61,15 +110,26 @@ $pdf->Cell(19,10,'QTY OUT',1,0,'C');
 $pdf->Cell(19,10,'QTY RETURN',1,0,'C');
 $pdf->Cell(39,10,'SERIAL NUMBER (RETURNS)',1,1,'C');
 
-for($i = 1; $i <= 80; $i++)
+$i = 1;
+foreach($serialNumbersByModel as $key => $value)
 {
     $pdf->Cell(13,7,$i,1,0,'C');
-    $pdf->Cell(30,7,'$itemCode',1,0,'C');
-    $pdf->Cell(70,7,'$itemDesc',1,0,'C');
-    $pdf->Cell(19,7,'$itemQTYOut',1,0,'C');
+    $pdf->Cell(30,7,$key,1,0,'C');
+    $pdf->Cell(70,7,implode(',', $value),1,0,'C');
+    $pdf->Cell(19,7,count($value),1,0,'C');
     $pdf->Cell(19,7,'$itemQTYReturn',1,0,'C');
     $pdf->Cell(39,7,'$serialNumberReturn',1,1,'C');
+    $i++;
 }
+// for($i = 1; $i <= 80; $i++)
+// {
+//     $pdf->Cell(13,7,$i,1,0,'C');
+//     $pdf->Cell(30,7,'$itemCode',1,0,'C');
+//     $pdf->Cell(70,7,'$itemDesc',1,0,'C');
+//     $pdf->Cell(19,7,'$itemQTYOut',1,0,'C');
+//     $pdf->Cell(19,7,'$itemQTYReturn',1,0,'C');
+//     $pdf->Cell(39,7,'$serialNumberReturn',1,1,'C');
+// }
 
 // Line break
 $pdf->Ln(5);
@@ -81,20 +141,20 @@ if($pdf->GetY() > 258.00125)
 // First column
 $pdf->SetXY(10, $pdf->GetY());
 $pdf->Cell(70, 5, 'PREPARED BY:', 0, 1);
-$pdf->Cell(50, 5, 'NAME WITH UNDERLINE', 0, 1, 'C');
+$pdf->Cell(50, 5, strtoupper($_SESSION['user']['fullname']), 0, 1, 'C');
 $pdf->Line($pdf->GetX(), $pdf->GetY(), $pdf->GetX() + 50, $pdf->GetY());
 $pdf->Cell(70, 5, 'Signature over Printed Name', 0, 1);
 $pdf->Cell(8, 5, 'DATE:', 0, 0);
 // Set Font
 $pdf->SetFont('Arial','U',7);
-$pdf->Cell(62, 5, 'DATE PLACEHOLDER', 0, 1);
+$pdf->Cell(62, 5, date("Y/m/d"), 0, 1);
 $pdf->Ln(5);
 
 // Set font
 $pdf->SetFont('Arial','B',7);
 
 $pdf->Cell(70, 5, 'TRANSMITTED BY:', 0, 1);
-$pdf->Cell(50, 5, 'NAME WITH UNDERLINE', 0, 1, 'C');
+$pdf->Cell(50, 5, strtoupper('NAME PLACEHOLDER'), 0, 1, 'C');
 $pdf->Line($pdf->GetX(), $pdf->GetY(), $pdf->GetX() + 50, $pdf->GetY());
 $pdf->Cell(70, 5, 'Signature over Printed Name', 0, 1);
 $pdf->Cell(8, 5, 'DATE:', 0, 0);
@@ -107,7 +167,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',7);
 
 $pdf->Cell(70, 5, 'RECEIVED BY:', 0, 1);
-$pdf->Cell(50, 5, 'NAME WITH UNDERLINE', 0, 1, 'C');
+$pdf->Cell(50, 5, strtoupper('NAME PLACEHOLDER'), 0, 1, 'C');
 $pdf->Line($pdf->GetX(), $pdf->GetY(), $pdf->GetX() + 50, $pdf->GetY());
 $pdf->Cell(70, 5, 'Signature over Printed Name', 0, 1);
 $pdf->Cell(8, 5, 'DATE:', 0, 0);
