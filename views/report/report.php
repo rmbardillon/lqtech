@@ -19,7 +19,8 @@ class PDF extends FPDF
     }
 }
 
-$projectName = '';
+        $projectName = '';
+        $dateFormatted = '';
         $date = '';
         $contactPerson ='';
         $contactNumber = '';
@@ -30,6 +31,10 @@ $projectName = '';
         $jobOrderNumber = '';
         $service = '';
         $status = '';
+        $note = '';
+        $preparedBy = '';
+        $receivedBy = '';
+        $transmittedBy = '';
 
 if(isset($_GET['installationFormID'])){
 
@@ -127,15 +132,17 @@ if(isset($_GET['installationFormID'])){
         $pdf->Cell(39,7,'$serialNumberReturn',1,1,'C');
         $i++;
     }
-}
-for($i = 1; $i <= 28; $i++)
-{
-    $pdf->Cell(13,7,$i,1,0,'C');
-    $pdf->Cell(30,7,'$itemCode',1,0,'C');
-    $pdf->Cell(70,7,'$itemDesc',1,0,'C');
-    $pdf->Cell(19,7,'$itemQTYOut',1,0,'C');
-    $pdf->Cell(19,7,'$itemQTYReturn',1,0,'C');
-    $pdf->Cell(39,7,'$serialNumberReturn',1,1,'C');
+} else {
+    
+    for($i = 1; $i <= 28; $i++)
+    {
+        $pdf->Cell(13,7,$i,1,0,'C');
+        $pdf->Cell(30,7,'$itemCode',1,0,'C');
+        $pdf->Cell(70,7,'$itemDesc',1,0,'C');
+        $pdf->Cell(19,7,'$itemQTYOut',1,0,'C');
+        $pdf->Cell(19,7,'$itemQTYReturn',1,0,'C');
+        $pdf->Cell(39,7,'$serialNumberReturn',1,1,'C');
+    }
 }
 
 // Line break

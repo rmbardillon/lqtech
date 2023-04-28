@@ -97,8 +97,7 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="installationFormID">Installation Form ID: </h4>
-                        <button type="button" class="btn btn-primary disabled" id="viewForm">View Installation Form</button>
+                        <h4 class="modal-title" class="installationFormID">Process Return</h4>
                     </div>
                     <div class="modal-body">
                         <form>
@@ -220,7 +219,7 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="installationFormID">Installation Form ID: </h4>
+                        <h4 class="modal-title" class="installationFormID">Confirm Transaction</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row mb-3">

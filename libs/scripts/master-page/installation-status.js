@@ -6,6 +6,8 @@ const installationStatus = (() => {
     const thisInstallationStatus = {};
     var installationFormID = '';
 
+    $(".installationFormID").text("Installation Form ID: " + installationFormID);
+
     $("#viewForm").click(function () {
         // Open new page
         window.open("../report/report.php?installationFormID=" + installationFormID, "_blank");
@@ -84,6 +86,7 @@ const installationStatus = (() => {
                 } else {
                     $("#actionButtons").show();
                 }
+
                 var data = '';
                 const serialNumbersByModel = {};
 
@@ -184,6 +187,7 @@ const installationStatus = (() => {
     thisInstallationStatus.processReturns = () => {
         $("#processReturnModal").modal('show');
         $("#modal_installation_status").modal('hide');
+        $("#sku").focus();
     }
     
     thisInstallationStatus.cancelTransaction = () => {
