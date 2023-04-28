@@ -7,8 +7,32 @@ const installationStatus = (() => {
     var installationFormID = '';
 
     $("#viewForm").click(function () {
-        // Opon new page
+        // Open new page
         window.open("../report/report.php?installationFormID=" + installationFormID, "_blank");
+    });
+
+    $("#confirmTransaction").click(function () {
+        console.log(installationFormID);
+        // Input Job Order Number
+        $("#modal_installation_status").modal('hide');
+        $("#confirmTransactionModal").modal('show');
+        $.ajax({
+            type: "POST",
+            url: INSTALLATION_STATUS_CONTROLLER + '?action=getSalesOrderNumber',
+            dataType: "json",
+            data: {
+                id: installationFormID
+            },
+            success: function (response) {
+                $("#salesOrderNumber").val(response['SALES_ORDER_NUMBER']);
+                $("#transmittedBy").val(response['INSTALLER']);
+                if(response['SALES_ORDER_NUMBER'] == '') {
+                    $("#salesOrderNumber").prop('readonly', false);
+                } else {
+                    $("#salesOrderNumber").prop('readonly', true);
+                }
+            }
+        });
     });
 
     thisInstallationStatus.loadTableData = () => {
@@ -38,6 +62,8 @@ const installationStatus = (() => {
             success: function (response) {
                 if(response[0].STATUS == "Success") {
                     $("#viewForm").removeClass("disabled");
+                } else {
+                    $("#viewForm").addClass("disabled");
                 }
                 installationFormID = response[0]['INSTALLATION_FORM_ID'];
                 $("#installationFormID").text("Installation Form ID: " + response[0]['INSTALLATION_FORM_ID']);
@@ -51,7 +77,13 @@ const installationStatus = (() => {
                 $(".salesOrderNumberValue").text(response[0]['SALES_ORDER_NUMBER']);
                 $(".jobOrderNumberValue").text(response[0]['JOB_ORDER_NUMBER']);
                 $(".serviceValue").text(response[0]['SERVICE']);
+                $(".noteValue").text(response[0]['NOTE']);
 
+                if(response[0]['STATUS'] == "Success") {
+                    $("#actionButtons").hide();
+                } else {
+                    $("#actionButtons").show();
+                }
                 var data = '';
                 const serialNumbersByModel = {};
 
@@ -83,7 +115,17 @@ const installationStatus = (() => {
     }
 
     thisInstallationStatus.confirmTransaction = () => {
-        console.log(installationFormID);
+        var salesOrderNumber = $("#salesOrderNumber").val();
+        var jobOrderNumber = $("#jobOrderNumber").val();
+        var transmittedBy = $("#transmittedBy").val();
+        if(salesOrderNumber == '' || jobOrderNumber == '') {
+            swal.fire(
+                'Failed!',
+                'Please input Sales Order Number and Job Order Number.',
+                'error'
+            );
+            return;
+        }
         swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -99,7 +141,10 @@ const installationStatus = (() => {
                     url: INSTALLATION_STATUS_CONTROLLER + '?action=confirmTransaction',
                     dataType: "json",
                     data: {
-                        installationFormID: installationFormID
+                        installationFormID: installationFormID,
+                        salesOrderNumber: salesOrderNumber,
+                        jobOrderNumber: jobOrderNumber,
+                        transmittedBy: transmittedBy
                     },
                     success: function (response) {
                         if (response == "Successfully Updated") {
@@ -111,6 +156,7 @@ const installationStatus = (() => {
                                 if (result.isConfirmed) {
                                     installationStatus.loadTableData();
                                     $('#modal_installation_status').modal('hide');
+                                    $('#confirmTransactionModal').modal('hide');
                                 }
                             });
                         } else {
@@ -136,13 +182,50 @@ const installationStatus = (() => {
     }
     
     thisInstallationStatus.processReturns = () => {
-        console.log(installationFormID);
-        $('#modal_installation_status').modal('show');
+        $("#processReturnModal").modal('show');
+        $("#modal_installation_status").modal('hide');
     }
     
     thisInstallationStatus.cancelTransaction = () => {
-        console.log(installationFormID);
-        $('#modal_installation_status').modal('show');
+        swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, cancel it!',
+            cancelButtonText: 'No, don\'t cancel!',
+        }).then((result) => {
+            if(result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: INSTALLATION_STATUS_CONTROLLER + '?action=cancelTransaction',
+                    dataType: "json",
+                    data: {
+                        installationFormID: installationFormID
+                    },
+                    success: function (response) {
+                        if (response == "Successfully Canceled") {
+                            swal.fire(
+                                'Cancelled!',
+                                'Transaction has been cancelled.',
+                                'success'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    installationStatus.loadTableData();
+                                    $('#modal_installation_status').modal('hide');
+                                }
+                            });
+                        } else {
+                            swal.fire(
+                                'Failed!',
+                                'Transaction failed to cancel.',
+                                'error'
+                            );
+                        }
+                    }
+                })
+            }
+        });
     }
 
     return thisInstallationStatus;

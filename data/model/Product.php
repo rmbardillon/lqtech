@@ -161,6 +161,13 @@ class Product
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getSalesOrderNumber($id)
+    {
+        $sql = "SELECT * FROM installation_form WHERE INSTALLATION_FORM_ID = '$id';";
+        $result = $this->conn->query($sql);
+
+        return $result->fetch_assoc();
+    }
     public function save($request)
     {
         $category = $request['category'];
@@ -353,9 +360,9 @@ class Product
     {
         $uuid = $this->generateUUID();
         foreach($installationForm as $form) {
-            $sql = "INSERT INTO installation_form(INSTALLATION_FORM_ID, PROJECT_NAME, CONTACT_PERSON, CONTACT_NUMBER, PROJECT_SITE, SALESMAN_BRANCH, INSTALLER, SALES_ORDER_NUMBER, JOB_ORDER_NUMBER, SERVICE, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO installation_form(INSTALLATION_FORM_ID, PROJECT_NAME, CONTACT_PERSON, CONTACT_NUMBER, PROJECT_SITE, SALESMAN_BRANCH, INSTALLER, SALES_ORDER_NUMBER, SERVICE, PREPARED_BY, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssssssssss",$uuid, $form['projectName'], $form['contactPerson'], $form['contactNumber'], $form['projectSite'], $form['salesManBranch'], $form['installer'], $form['salesOrderNumber'], $form['jobOrderNumber'], $form['service'], $form['status']);
+            $stmt->bind_param("sssssssssss",$uuid, $form['projectName'], $form['contactPerson'], $form['contactNumber'], $form['projectSite'], $form['salesManBranch'], $form['installer'], $form['salesOrderNumber'], $form['service'], $_SESSION['user']['fullname'], $form['status']);
             $result = '';
             if ($stmt->execute() === TRUE) {
                 $result = "Successfully Save";
@@ -416,11 +423,14 @@ class Product
         return $result;
     }
 
-    public function confirmTransaction($id)
+    public function confirmTransaction($id, $salesOrderNumber, $jobOrderNumber, $transmittedBy)
     {
-        $sql = "UPDATE installation_form SET STATUS = 'Success' WHERE INSTALLATION_FORM_ID = '$id'";
+        $receiver = $_SESSION['user']['fullname'];
+        $sql = "UPDATE installation_form SET STATUS = 'Success', SALES_ORDER_NUMBER = '$salesOrderNumber', JOB_ORDER_NUMBER = '$jobOrderNumber', RECEIVED_BY = ?, TRANSMITTED_BY = ? WHERE INSTALLATION_FORM_ID = '$id'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ss",$receiver, $transmittedBy);
         $result = '';
-        if ($this->conn->query($sql) === TRUE) {
+        if ($stmt->execute() === TRUE) {
             $result = "Successfully Updated";
             $this->ActionLog->saveLogs('product', 'saved');
         } else {
@@ -428,5 +438,23 @@ class Product
         }
         $this->conn->close();
         return $result;
+
+    }
+
+    public function cancelTransaction($id)
+    {
+        $receiver = $_SESSION['user']['fullname'];
+        $sql = "UPDATE installation_form SET STATUS = 'Canceled' WHERE INSTALLATION_FORM_ID = '$id'";
+        $stmt = $this->conn->prepare($sql);
+        $result = '';
+        if ($stmt->execute() === TRUE) {
+            $result = "Successfully Canceled";
+            $this->ActionLog->saveLogs('product', 'saved');
+        } else {
+            $result = "Error: <br>" . $this->conn->error;
+        }
+        $this->conn->close();
+        return $result;
+
     }
 }

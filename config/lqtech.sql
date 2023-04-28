@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2023 at 07:44 AM
+-- Generation Time: Apr 28, 2023 at 08:58 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -40,6 +40,12 @@ CREATE TABLE `action_logs` (
 --
 
 INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACTION`) VALUES
+('0153350fe58a11ed', '2023-04-28 08:00:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('18a908ece58a11ed', '2023-04-28 08:01:22', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('1f08dbede55a11ed', '2023-04-28 08:17:54', '58727a89cdf911ed', 1, 'User has logged in'),
+('20430479e57211ed', '2023-04-28 05:09:47', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('2c7799bfe58f11ed', '2023-04-28 08:37:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('4e657dd5e57211ed', '2023-04-28 05:11:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('541499ece3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('54156053e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('54163885e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
@@ -55,6 +61,11 @@ INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACT
 ('541aded7e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('541b4f34e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('541bceb0e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('5a380baae58311ed', '2023-04-28 07:13:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('6421d8bee40311ed', '2023-04-26 09:24:33', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('76a51309e40311ed', '2023-04-26 09:25:04', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('78a144fae40111ed', '2023-04-26 15:10:48', '58727a89cdf911ed', 1, 'User has logged in'),
+('793bc4ece49311ed', '2023-04-27 08:35:56', '58727a89cdf911ed', 1, 'User has logged in'),
 ('7b09a229e3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('7b0a9c02e3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('7b0b451ce3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
@@ -64,6 +75,11 @@ INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACT
 ('7b0d99b5e3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('7b0e1b3ae3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('7b0eb286e3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('8995fd80e49311ed', '2023-04-27 02:36:23', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('94c4e8ede56311ed', '2023-04-28 03:25:40', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('99b5ed68e55b11ed', '2023-04-28 02:28:32', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('9d44c8abe4cf11ed', '2023-04-27 15:46:26', '58727a89cdf911ed', 1, 'User has logged in'),
+('a3218438e40311ed', '2023-04-26 09:26:19', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('b43d5f94e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('b43e3060e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('b43ed5c9e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
@@ -93,6 +109,7 @@ INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACT
 ('b44a9288e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('b44b10b5e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('b44b839de3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('cbe13fc7e58a11ed', '2023-04-28 08:06:23', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('e27426dee3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('e274b3eae3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('e2754195e3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
@@ -104,7 +121,13 @@ INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACT
 ('e278b7ace3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('e2795c51e3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('e279d127e3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('f2171000e3cd11ed', '2023-04-26 09:01:58', '58727a89cdf911ed', 1, 'User has logged in');
+('f2171000e3cd11ed', '2023-04-26 09:01:58', '58727a89cdf911ed', 1, 'User has logged in'),
+('f93b75ade40311ed', '2023-04-26 09:28:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('f9f70b62e58611ed', '2023-04-28 07:39:02', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('f9f7b4ace58611ed', '2023-04-28 07:39:02', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('f9f86647e58611ed', '2023-04-28 07:39:02', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('fb698fb7e49d11ed', '2023-04-27 09:51:09', '58727a89cdf911ed', 1, 'User has logged in'),
+('fb8dba0ee40311ed', '2023-04-26 09:28:47', '58727a89cdf911ed', 1, 'Successfully saved the Product');
 
 -- --------------------------------------------------------
 
@@ -124,6 +147,10 @@ CREATE TABLE `installation_form` (
   `SALES_ORDER_NUMBER` varchar(16) NOT NULL,
   `JOB_ORDER_NUMBER` varchar(16) NOT NULL,
   `SERVICE` varchar(32) NOT NULL,
+  `NOTE` varchar(1024) NOT NULL,
+  `PREPARED_BY` varchar(64) NOT NULL,
+  `TRANSMITTED_BY` varchar(64) NOT NULL,
+  `RECEIVED_BY` varchar(64) NOT NULL,
   `STATUS` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -131,9 +158,10 @@ CREATE TABLE `installation_form` (
 -- Dumping data for table `installation_form`
 --
 
-INSERT INTO `installation_form` (`INSTALLATION_FORM_ID`, `PROJECT_NAME`, `DATE_TIME`, `CONTACT_PERSON`, `CONTACT_NUMBER`, `PROJECT_SITE`, `SALESMAN_BRANCH`, `INSTALLER`, `SALES_ORDER_NUMBER`, `JOB_ORDER_NUMBER`, `SERVICE`, `STATUS`) VALUES
-('64487ea27e773851', 'CCTV LQTEch', '2023-04-26 09:30:10', 'Romeo Jr Bardillon', '09760657071', 'Binan', 'Binan', 'Jose Miguel Sevilla', '203', '102', 'Laguna', 'Pending'),
-('6448b75fd517d008', 'IMall Famy CCTV Installation', '2023-04-26 13:32:15', 'Marvin Vicencio', '09123456789', 'Famy, Laguna', 'Santa Rosa Main Branch', 'LQTech Interns', '809', '173', 'Install', 'Pending');
+INSERT INTO `installation_form` (`INSTALLATION_FORM_ID`, `PROJECT_NAME`, `DATE_TIME`, `CONTACT_PERSON`, `CONTACT_NUMBER`, `PROJECT_SITE`, `SALESMAN_BRANCH`, `INSTALLER`, `SALES_ORDER_NUMBER`, `JOB_ORDER_NUMBER`, `SERVICE`, `NOTE`, `PREPARED_BY`, `TRANSMITTED_BY`, `RECEIVED_BY`, `STATUS`) VALUES
+('64487ea27e773851', 'CCTV LQTEch', '2023-04-26 09:30:10', 'Romeo Jr Bardillon', '09760657071', 'Binan', 'Binan', 'Jose Miguel Sevilla', '', '', 'Laguna', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '', '', '', 'Pending'),
+('6448b75fd517d008', 'IMall Famy CCTV Installation', '2023-04-26 13:32:15', 'Marvin Vicencio', '09123456789', 'Famy, Laguna', 'Santa Rosa Main Branch', 'LQTech Interns', '', '', 'Install', '', '', '', '', 'Canceled'),
+('644b5bf6bcde3932', 'CCTV LQTEch', '2023-04-28 13:39:02', 'Romeo Jr Bardillon', '09123456789', 'Binan', 'Binan', 'Jose Miguel Sevilla', '203', '321', 'Avanza', '', 'JOHN DOE', 'Wendell', 'JOHN DOE', 'Success');
 
 -- --------------------------------------------------------
 
@@ -305,7 +333,7 @@ INSERT INTO `products` (`PRODUCT_ID`, `PRODUCT_DETAILS_ID`, `SKU`, `SERIAL_NUMBE
 ('541a2a75e3cf11ed', 'b5651390dcbe11ed', '123', '12', '2023-04-26 09:11:52', 'OUT'),
 ('541aa297e3cf11ed', 'b5651390dcbe11ed', '123', '13', '2023-04-26 09:11:52', 'OUT'),
 ('541b159de3cf11ed', 'b5651390dcbe11ed', '123', '14', '2023-04-26 09:11:52', 'OUT'),
-('541b8e50e3cf11ed', 'b5651390dcbe11ed', '123', '15', '2023-04-26 09:11:52', 'IN'),
+('541b8e50e3cf11ed', 'b5651390dcbe11ed', '123', '15', '2023-04-26 09:11:52', 'OUT'),
 ('7b0819a4e3f311ed', '9373d003ddbc11ed', '321', '11', '2023-04-26 13:30:39', 'OUT'),
 ('7b0a48b0e3f311ed', '9373d003ddbc11ed', '321', '22', '2023-04-26 13:30:39', 'OUT'),
 ('7b0af2e2e3f311ed', '9373d003ddbc11ed', '321', '33', '2023-04-26 13:30:39', 'OUT'),
@@ -385,7 +413,8 @@ INSERT INTO `sales` (`SALE_ID`, `INSTALLATION_FORM_ID`, `PRODUCT_DETAILS_ID`, `S
 ('e27581c0e3d111ed', '64487ea27e773851', 'b5651390dcbe11ed', '2', '123', '2023-04-26 09:30:10'),
 ('e2772736e3d111ed', '64487ea27e773851', 'b5651390dcbe11ed', '3', '123', '2023-04-26 09:30:10'),
 ('e2781fd6e3d111ed', '64487ea27e773851', 'b5651390dcbe11ed', '4', '123', '2023-04-26 09:30:10'),
-('e278fd2ee3d111ed', '64487ea27e773851', 'b5651390dcbe11ed', '5', '123', '2023-04-26 09:30:10');
+('e278fd2ee3d111ed', '64487ea27e773851', 'b5651390dcbe11ed', '5', '123', '2023-04-26 09:30:10'),
+('f9f7599be58611ed', '644b5bf6bcde3932', 'b5651390dcbe11ed', '15', '123', '2023-04-28 13:39:02');
 
 -- --------------------------------------------------------
 
@@ -410,7 +439,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`USER_ID`, `FIRST_NAME`, `LAST_NAME`, `USERNAME`, `PASSWORD`, `ROLE`, `LOGIN_ATTEMPTS`, `IS_LOCKED`, `LAST_LOGIN`) VALUES
-('58727a89cdf911ed', 'JOHN', 'DOE', 'owner', '$2y$10$NNjsc/qfqw0VhWXnVXwI4e7epUme3YfQlyWpaXcMdpHqjRvp721ze', 1, 0, 0, '2023-04-26 09:01:58');
+('58727a89cdf911ed', 'JOHN', 'DOE', 'owner', '$2y$10$NNjsc/qfqw0VhWXnVXwI4e7epUme3YfQlyWpaXcMdpHqjRvp721ze', 1, 0, 0, '2023-04-28 08:17:54');
 
 --
 -- Indexes for dumped tables

@@ -62,7 +62,7 @@ const Product = (() => {
         salesManBranch = $("#salesManBranch").val();
         installer = $("#installer").val();
         salesOrderNumber = $("#salesOrderNumber").val();
-        jobOrderNumber = $("#jobOrderNumber").val();
+        note = $("#note").val();
         service = $("#service").val();
 
         console.log(date)
@@ -75,12 +75,12 @@ const Product = (() => {
             salesManBranch: salesManBranch,
             installer: installer,
             salesOrderNumber: salesOrderNumber,
-            jobOrderNumber: jobOrderNumber,
             service: service,
+            note: note,
             status: "Pending"
         });
         console.log(installationForm)
-        if(projectName == "" || contactPerson == "" || contactNumber == "" || projectSite == "" || salesManBranch == "" || installer == "" || salesOrderNumber == "" || jobOrderNumber == "" || service == "") {
+        if(projectName == "" || contactPerson == "" || contactNumber == "" || projectSite == "" || salesManBranch == "" || installer == "" || service == "") {
             Swal.fire({
                 title: 'Error',
                 text: 'Please fill up all the fields',
@@ -98,7 +98,7 @@ const Product = (() => {
             $(".salesManBranchValue").text(salesManBranch);
             $(".installerValue").text(installer);
             $(".salesOrderNumberValue").text(salesOrderNumber);
-            $(".jobOrderNumberValue").text(jobOrderNumber);
+            $(".noteValue").text(note);
             $(".serviceValue").text(service);
         }
     });

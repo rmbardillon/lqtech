@@ -28,7 +28,8 @@ if(isset($_GET['installationFormID'])){
     
     foreach ($result as $row) {
         $projectName = $row['PROJECT_NAME'];
-        $date = $row['FORMATTED_DATE'];
+        $dateFormatted = $row['FORMATTED_DATE'];
+        $date = $row['DATE_TIME'];
         $contactPerson = $row['CONTACT_PERSON'];
         $contactNumber = $row['CONTACT_NUMBER'];
         $projectSite = $row['PROJECT_SITE'];
@@ -38,6 +39,10 @@ if(isset($_GET['installationFormID'])){
         $jobOrderNumber = $row['JOB_ORDER_NUMBER'];
         $service = $row['SERVICE'];
         $status = $row['STATUS'];
+        $note = $row['NOTE'];
+        $preparedBy = $row['PREPARED_BY'];
+        $receivedBy = $row['RECEIVED_BY'];
+        $transmittedBy = $row['TRANSMITTED_BY'];
     }
 
     $serialNumbersByModel = [];
@@ -52,17 +57,6 @@ if(isset($_GET['installationFormID'])){
 
         $serialNumbersByModel[$model] = $serialNumbers;
     }
-
-    $data = '';
-    // foreach ($serialNumbersByModel as $key => $value) {
-    //     $data .= '<tr>';
-    //     $data .= '<td>' . $key . '</td>';
-    //     $data .= '<td>' . implode(',', $value) . '</td>';
-    //     $data .= '<td>' . count($value) . '</td>';
-    //     $data .= '</tr>';
-    // }
-
-    // echo($data);
 }
 
 // Instanciation of inherited class
@@ -76,10 +70,9 @@ $pdf->SetFont('Arial','B',10);
 // Row 1
 $pdf->Cell(0,6,'INSTALLATION FORM / TRANSMITTAL',0,1,'C');
 
-$projectName = 'PROJECT NAME PLACEHOLDER';
 // Row 2
 $pdf->Cell(110,6,'PROJECT NAME: '.$projectName,1,0);
-$pdf->Cell(80,6,'DATE: '.$date,1,1);
+$pdf->Cell(80,6,'DATE: '.$dateFormatted,1,1);
 
 // Row 3
 $pdf->Cell(110,6,'CONTACT PERSON: '.$contactPerson,1,0);
@@ -141,7 +134,20 @@ if($pdf->GetY() > 258.00125)
 // First column
 $pdf->SetXY(10, $pdf->GetY());
 $pdf->Cell(70, 5, 'PREPARED BY:', 0, 1);
-$pdf->Cell(50, 5, strtoupper($_SESSION['user']['fullname']), 0, 1, 'C');
+$pdf->Cell(50, 5, strtoupper($preparedBy), 0, 1, 'C');
+$pdf->Line($pdf->GetX(), $pdf->GetY(), $pdf->GetX() + 50, $pdf->GetY());
+$pdf->Cell(70, 5, 'Signature over Printed Name', 0, 1);
+$pdf->Cell(8, 5, 'DATE:', 0, 0);
+// Set Font
+$pdf->SetFont('Arial','U',7);
+$pdf->Cell(62, 5, $date, 0, 1);
+$pdf->Ln(5);
+
+// Set font
+$pdf->SetFont('Arial','B',7);
+
+$pdf->Cell(70, 5, 'TRANSMITTED BY:', 0, 1);
+$pdf->Cell(50, 5, strtoupper($transmittedBy), 0, 1, 'C');
 $pdf->Line($pdf->GetX(), $pdf->GetY(), $pdf->GetX() + 50, $pdf->GetY());
 $pdf->Cell(70, 5, 'Signature over Printed Name', 0, 1);
 $pdf->Cell(8, 5, 'DATE:', 0, 0);
@@ -153,27 +159,14 @@ $pdf->Ln(5);
 // Set font
 $pdf->SetFont('Arial','B',7);
 
-$pdf->Cell(70, 5, 'TRANSMITTED BY:', 0, 1);
-$pdf->Cell(50, 5, strtoupper('NAME PLACEHOLDER'), 0, 1, 'C');
-$pdf->Line($pdf->GetX(), $pdf->GetY(), $pdf->GetX() + 50, $pdf->GetY());
-$pdf->Cell(70, 5, 'Signature over Printed Name', 0, 1);
-$pdf->Cell(8, 5, 'DATE:', 0, 0);
-// Set Font
-$pdf->SetFont('Arial','U',7);
-$pdf->Cell(62, 5, 'DATE PLACEHOLDER', 0, 1);
-$pdf->Ln(5);
-
-// Set font
-$pdf->SetFont('Arial','B',7);
-
 $pdf->Cell(70, 5, 'RECEIVED BY:', 0, 1);
-$pdf->Cell(50, 5, strtoupper('NAME PLACEHOLDER'), 0, 1, 'C');
+$pdf->Cell(50, 5, strtoupper($receivedBy), 0, 1, 'C');
 $pdf->Line($pdf->GetX(), $pdf->GetY(), $pdf->GetX() + 50, $pdf->GetY());
 $pdf->Cell(70, 5, 'Signature over Printed Name', 0, 1);
 $pdf->Cell(8, 5, 'DATE:', 0, 0);
 // Set Font
 $pdf->SetFont('Arial','U',7);
-$pdf->Cell(62, 5, 'DATE PLACEHOLDER', 0, 1);
+$pdf->Cell(62, 5, date("Y/m/d"), 0, 1);
 $pdf->Ln(5);
 
 // Set font
@@ -186,7 +179,7 @@ $pdf->SetFont('Arial','U',10);
 $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod risus at elit fringilla, nec posuere est suscipit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam id luctus mi, id molestie odio. Duis vel turpis ac nibh tincidunt ultricies vel sit amet erat. Sed sed est quis lorem gravida malesuada nec quis neque. Proin et dui non ex ullamcorper malesuada. Vestibulum sodales dolor vitae aliquam bibendum. Duis eget ex eu purus iaculis posuere. Sed sit amet ultricies ipsum. Donec finibus ultricies leo, eget eleifend ante malesuada sit amet.
 
 Sed luctus justo non tellus congue, nec hendrerit sapien pellentesque. Vestibulum viverra, odio et vulputate euismod, magna sapien ultrices libero, vel lobortis ex mauris quis elit. Donec tincidunt lectus libero, vel rutrum neque tincidunt eget. Praesent a efficitur velit. Ut volutpat urna in consequat consequat. Sed euismod vestibulum magna. Sed tincidunt dolor at quam maximus scelerisque.';
-$pdf->MultiCell(120, 5, $text, 0, 'L');
+$pdf->MultiCell(120, 5, $note, 0, 'L');
 
 
 

@@ -20,7 +20,7 @@
                             <div class="col col-8">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="projectName" placeholder="PROJECT NAME" required>
-                                    <label class="form-label" for="projectName">PROJECT NAME</label>
+                                    <label class="form-label required" for="projectName">PROJECT NAME</label>
                                 </div>
                             </div>
                             <div class="col">
@@ -34,13 +34,13 @@
                             <div class="col col-8">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="contactPerson" placeholder="CONTACT PERSON" required>
-                                    <label class="form-label" for="contactPerson">CONTACT PERSON</label>
+                                    <label class="form-label required" for="contactPerson">CONTACT PERSON</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="contactNumber" placeholder="CONTACT NUMBER" required>
-                                    <label class="form-label" for="contactNumber">CONTACT NUMBER</label>
+                                    <label class="form-label required" for="contactNumber">CONTACT NUMBER</label>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                             <div class="col">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="projectSite" placeholder="PROJECT SITE" required>
-                                    <label class="form-label" for="projectSite">PROJECT SITE</label>
+                                    <label class="form-label required" for="projectSite">PROJECT SITE</label>
                                 </div>
                             </div>
                         </div>
@@ -56,33 +56,42 @@
                             <div class="col">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="salesManBranch" placeholder="SALESMAN / BRANCH" required>
-                                    <label class="form-label" for="salesManBranch">SALESMAN / BRANCH</label>
+                                    <label class="form-label required" for="salesManBranch">SALESMAN / BRANCH</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="installer" placeholder="INSTALLER" required>
-                                    <label class="form-label" for="installer">INSTALLER</label>
+                                    <label class="form-label required" for="installer">INSTALLER</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="salesOrderNumber" placeholder="SALES ORDER NUMBER" required>
+                                    <input type="text" class="form-control" id="salesOrderNumber" placeholder="SALES ORDER NUMBER">
                                     <label class="form-label" for="salesOrderNumber">SALES ORDER NUMBER</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="jobOrderNumber" placeholder="JOB ORDER NUMBER" required>
-                                    <label class="form-label" for="jobOrderNumber">JOB ORDER NUMBER</label>
+                                    <select class="form-select" name="service" id="service" required>
+                                        <option value="" selected disabled>Please select service</option>
+                                        <option value="Multicab">Multicab</option>
+                                        <option value="Avanza">Avanza</option>
+                                        <option value="Mirage">Mirage</option>
+                                        <option value="L300 (New)">L300 (New)</option>
+                                        <option value="L300 (Old)">L300 (Old)</option>
+                                    </select>
+                                    <label class="form-label required" for="service">Service</label>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="service" placeholder="SERVICE" required>
-                                    <label class="form-label" for="service">SERVICE</label>
+                                    <textarea class="form-control" name="note" id="note" cols="30" rows="10"></textarea>
+                                    <label class="form-label" for="note">Note</label>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +151,7 @@
                                 <b>SALES ORDER NUMBER:</b> <span class="salesOrderNumberValue"></span>
                             </div>
                             <div class="col">
-                                <b>JOB ORDER NUMBER:</b> <span class="jobOrderNumberValue"></span>
+                                <b>NOTE:</b> <p class="noteValue"></p>
                             </div>
                         </div>
                     </form>    
@@ -198,9 +207,6 @@
                         <div class="row">
                             <div class="col">
                                 <b>SALES ORDER NUMBER:</b> <span class="salesOrderNumberValue"></span>
-                            </div>
-                            <div class="col">
-                                <b>JOB ORDER NUMBER:</b> <span class="jobOrderNumberValue"></span>
                             </div>
                         </div>
                     </form>    

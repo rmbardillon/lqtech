@@ -72,3 +72,8 @@ footer p {
 #homeChart {
     height: 700px !important;
 }
+
+.required::after {
+    color: red;
+    content: "*";
+}

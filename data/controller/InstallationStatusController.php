@@ -15,6 +15,13 @@ if ($action == 'getInstallationStatusTable')
     $table_data = '';
     $counter = 1;
     foreach ($result as $form) {
+        if($form['STATUS'] == 'Canceled') {
+            $class = 'text-danger';
+        } else if($form['STATUS'] == 'Pending') {
+            $class = 'text-warning';
+        } else if($form['STATUS'] == 'Success') {
+            $class = 'text-success';
+        }
         $table_data .= '<tr>';
         $table_data .= '<td>' . $counter . '</td>';
         $table_data .= '<td>' . $form['PROJECT_NAME'] . '</td>';
@@ -27,7 +34,7 @@ if ($action == 'getInstallationStatusTable')
         $table_data .= '<td>' . $form['SALES_ORDER_NUMBER'] . '</td>';
         $table_data .= '<td>' . $form['JOB_ORDER_NUMBER'] . '</td>';
         $table_data .= '<td>' . $form['SERVICE'] . '</td>';
-        $table_data .= '<td>' . $form['STATUS'] . '</td>';
+        $table_data .= '<td class="'.$class.'">' . $form['STATUS'] . '</td>';
         $table_data .= '<td class="col-actions">';
         $table_data .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
         $table_data .= '<button type="button" onclick="installationStatus.view(`'. $form['INSTALLATION_FORM_ID'] .'`)" class="btn btn-warning btn-sm w-100"><i class="bi bi-list-check"></i> View </button>';
@@ -49,10 +56,29 @@ else if ($action == 'getInstallationStatus')
     echo json_encode($result);
 }
 
+else if ($action == 'getSalesOrderNumber')
+{
+    $id = $_POST['id'];
+    $result = $Product->getSalesOrderNumber($id);
+
+    echo json_encode($result);
+}
+
 else if($action == 'confirmTransaction')
 {
     $id = $_POST['installationFormID'];
-    $result = $Product->confirmTransaction($id);
+    $salesOrderNumber = $_POST['salesOrderNumber'];
+    $jobOrderNumber = $_POST['jobOrderNumber'];
+    $transmittedBy = $_POST['transmittedBy'];
+    $result = $Product->confirmTransaction($id, $salesOrderNumber, $jobOrderNumber, $transmittedBy);
+
+    echo json_encode($result);
+}
+
+else if($action == 'cancelTransaction')
+{
+    $id = $_POST['installationFormID'];
+    $result = $Product->cancelTransaction($id);
 
     echo json_encode($result);
 }
