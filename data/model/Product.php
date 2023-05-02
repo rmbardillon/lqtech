@@ -394,7 +394,7 @@ class Product
                     $result = "Error: <br>" . $this->conn->error;
                 }
 
-                $sql = "UPDATE products SET STATUS = 'OUT' WHERE SERIAL_NUMBER = ? AND SKU = ?";
+                $sql = "UPDATE products SET STATUS = 'OUT', DATE_OUT = NOW() WHERE SERIAL_NUMBER = ? AND SKU = ?";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("ss",$serial_number, $sku);
                 $result = '';
