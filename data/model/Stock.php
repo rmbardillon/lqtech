@@ -66,9 +66,9 @@ class Stock
             FROM sales
             WHERE PRODUCT_DETAILS_ID = '$id'
             GROUP BY DATE(DATE_PURCHASED)
-        ) s ON DATE(p.DATE_INSERTED) = s.SALE_DATE
+        ) s ON DATE(p.DATE_OUT) = s.SALE_DATE
         WHERE pd.PRODUCT_DETAILS_ID = '$id'
-        GROUP BY pd.PRODUCT_DETAILS_ID, DATE(p.DATE_INSERTED);";
+        GROUP BY pd.PRODUCT_DETAILS_ID, DATE(p.DATE_INSERTED), DATE(p.DATE_OUT);";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);

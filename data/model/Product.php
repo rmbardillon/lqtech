@@ -228,14 +228,16 @@ class Product
         $sku = $request['sku'];
         $serial_numbers = $request['serial_numbers'];
         $values_array = explode("\n", $serial_numbers);
+        $uuid = $this->generateUUID();
+
         foreach($values_array as $serial_number) {
             if(trim($serial_number) === "") {
                 continue;
             }
-            $sql = "INSERT INTO products(PRODUCT_DETAILS_ID, SKU, SERIAL_NUMBER) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO products(PRODUCT_ID, PRODUCT_DETAILS_ID, SKU, SERIAL_NUMBER) VALUES (?, ?, ?, ?)";
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sss",$model, $sku, $serial_number);
+            $stmt->bind_param("ssss", $uuid, $model, $sku, $serial_number);
 
             $result = '';
             if ($stmt->execute() === TRUE) {
@@ -245,7 +247,32 @@ class Product
             } else {
                 $result = "Error: <br>" . $this->conn->error;
             }
-
+            $stocks = $this->checkStocks($uuid);
+            if (!$stocks) {
+                $sql = "INSERT INTO stocks (PRODUCT_ID, DATE, IN) VALUES (?, CURDATE(), ?)";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("si", $uuid, $counter);
+                $result = '';
+                if ($stmt->execute() === TRUE) {
+                    $result = "Successfully saved";
+                    $this->ActionLog->saveLogs('product', 'saved');
+                } else {
+                    $result = "Error: <br>" . $this->conn->error;
+                }
+            } else {
+                $totalStocks = $stocks[0]['OUT'] + $counter;
+                $product_id = $stocks[0]['PRODUCT_ID'];
+                $sql = "UPDATE stocks SET IN = ? WHERE PRODUCT_ID = ? AND DATE = CURDATE()";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("is", $totalStocks, $uuid);
+                $result = '';
+                if ($stmt->execute() === TRUE) {
+                    $result = "Successfully updated";
+                    $this->ActionLog->saveLogs('product', 'updated');
+                } else {
+                    $result = "Error: <br>" . $this->conn->error;
+                }
+            }
         }
         $this->conn->close();
 
@@ -372,6 +399,7 @@ class Product
             }
         }
         foreach($productCart as $product) {
+            $counter = 0;
             $sku = $product['sku'];
             $productID = $product['productID'];
             $productDetailsID = $product['productDetailsID'];
@@ -380,6 +408,7 @@ class Product
             $serial_number_array = explode("\n", $serial_numbers);
             
             foreach($serial_number_array as $serial_number) {
+                $counter += 1;
                 if(trim($serial_number) === "") {
                     continue;
                 }
@@ -394,7 +423,7 @@ class Product
                     $result = "Error: <br>" . $this->conn->error;
                 }
 
-                $sql = "UPDATE products SET STATUS = 'OUT', DATE_OUT = NOW() WHERE SERIAL_NUMBER = ? AND SKU = ?";
+                $sql = "UPDATE products SET STATUS = 'OUT', DATE_OUT = CURDATE() WHERE SERIAL_NUMBER = ? AND SKU = ?";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("ss",$serial_number, $sku);
                 $result = '';
@@ -405,9 +434,50 @@ class Product
                     $result = "Error: <br>" . $this->conn->error;
                 }
             }
-
+            $stocks = $this->checkStocks($uuid);
+            if (!$stocks) {
+                $sql = "INSERT INTO stocks (PRODUCT_ID, DATE, IN) VALUES (?, CURDATE(), ?)";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("si", $uuid, $counter);
+                $result = '';
+                if ($stmt->execute() === TRUE) {
+                    $result = "Successfully saved";
+                    $this->ActionLog->saveLogs('product', 'saved');
+                } else {
+                    $result = "Error: <br>" . $this->conn->error;
+                }
+            } else {
+                $totalStocks = $stocks[0]['OUT'] + $counter;
+                $product_id = $stocks[0]['PRODUCT_ID'];
+                $sql = "UPDATE stocks SET IN = ? WHERE PRODUCT_ID = ? AND DATE = CURDATE()";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("is", $totalStocks, $uuid);
+                $result = '';
+                if ($stmt->execute() === TRUE) {
+                    $result = "Successfully updated";
+                    $this->ActionLog->saveLogs('product', 'updated');
+                } else {
+                    $result = "Error: <br>" . $this->conn->error;
+                }
+            }
         }
         $this->conn->close();
+        return $result;
+    }
+
+    public function checkStocks($uuid)
+    {
+        if($uuid != "") {
+            $sql = "SELECT * FROM stocks WHERE DATE = CURDATE() AND PRODUCT_ID = '$uuid'";
+        } else {
+            $sql = "SELECT * FROM stocks WHERE DATE = CURDATE()";
+        }
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return false;
+        }
         return $result;
     }
 
