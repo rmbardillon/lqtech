@@ -52,7 +52,6 @@ $.ajax({
   url: PRODUCT_CONTROLLER + '?action=getIn',
   dataType: 'json',
   success: function(data) {
-    console.log(data);
     let modelNames = [];
     let salesFigures = [];
 
