@@ -95,6 +95,7 @@ const Product = (() => {
     }
 
     thisProduct.save = () => {
+        console.log("save")
         var model = $("#models").val();
         var sku = $("#sku").val();
         var serial_numbers = $("#serial_number").val();
@@ -110,6 +111,7 @@ const Product = (() => {
             },
             success: function (response) 
             {
+                console.log("success")
                 thisProduct.loadTableData();
                 thisProduct.resetFields();
                 Swal.fire({
@@ -119,8 +121,10 @@ const Product = (() => {
                     showConfirmButton: true,
                 })
             },
-            error: function () {
-
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
             }
             
             

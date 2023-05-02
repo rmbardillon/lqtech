@@ -229,15 +229,45 @@ class Product
         $serial_numbers = $request['serial_numbers'];
         $values_array = explode("\n", $serial_numbers);
         $uuid = $this->generateUUID();
+        $counter = count($values_array);
+        $stocks = $this->checkStocks("");
+
+        if (!$stocks) {
+            $sql = "INSERT INTO stocks (PRODUCT_ID, DATE_TODAY, IN) VALUES (?, CURDATE(), ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ss", $model, $counter);
+            $result = "";
+            if ($stmt->execute() === TRUE) {
+                $result = "Successfully Save";
+
+                $this->ActionLog->saveLogs('product', 'saved');
+            } else {
+                $result = "Error: <br>" . $this->conn->error;
+            }
+        } else {
+            $totalStocks = $stocks[0]['IN'] + $counter;
+            $product_id = $stocks[0]['PRODUCT_ID'];
+            $sql = "UPDATE stocks SET IN = ? WHERE PRODUCT_ID = ? AND DATE = CURDATE()";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ss", $totalStocks, $uuid);
+            $result = "";
+            if ($stmt->execute() === TRUE) {
+                $result = "Successfully Save";
+
+                $this->ActionLog->saveLogs('product', 'saved');
+            } else {
+                $result = "Error: <br>" . $this->conn->error;
+            }
+        }
 
         foreach($values_array as $serial_number) {
             if(trim($serial_number) === "") {
                 continue;
             }
-            $sql = "INSERT INTO products(PRODUCT_ID, PRODUCT_DETAILS_ID, SKU, SERIAL_NUMBER) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO products(PRODUCT_DETAILS_ID, SKU, SERIAL_NUMBER) VALUES (?, ?, ?)";
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ssss", $uuid, $model, $sku, $serial_number);
+            $stmt->bind_param("sss",$model, $sku, $serial_number);
 
             $result = '';
             if ($stmt->execute() === TRUE) {
@@ -246,32 +276,6 @@ class Product
                 $this->ActionLog->saveLogs('product', 'saved');
             } else {
                 $result = "Error: <br>" . $this->conn->error;
-            }
-            $stocks = $this->checkStocks($uuid);
-            if (!$stocks) {
-                $sql = "INSERT INTO stocks (PRODUCT_ID, DATE, IN) VALUES (?, CURDATE(), ?)";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("si", $uuid, $counter);
-                $result = '';
-                if ($stmt->execute() === TRUE) {
-                    $result = "Successfully saved";
-                    $this->ActionLog->saveLogs('product', 'saved');
-                } else {
-                    $result = "Error: <br>" . $this->conn->error;
-                }
-            } else {
-                $totalStocks = $stocks[0]['OUT'] + $counter;
-                $product_id = $stocks[0]['PRODUCT_ID'];
-                $sql = "UPDATE stocks SET IN = ? WHERE PRODUCT_ID = ? AND DATE = CURDATE()";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("is", $totalStocks, $uuid);
-                $result = '';
-                if ($stmt->execute() === TRUE) {
-                    $result = "Successfully updated";
-                    $this->ActionLog->saveLogs('product', 'updated');
-                } else {
-                    $result = "Error: <br>" . $this->conn->error;
-                }
             }
         }
         $this->conn->close();

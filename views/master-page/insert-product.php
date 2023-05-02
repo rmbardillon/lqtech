@@ -50,7 +50,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <!-- <th style="font-family: Ubuntu, sans-serif;">No.</th> -->
                             <th style="font-family: Ubuntu, sans-serif;">Quantity</th>
                             <th style="font-family: Ubuntu, sans-serif;">Category</th>
                             <th style="font-family: Ubuntu, sans-serif;">Brand</th>
