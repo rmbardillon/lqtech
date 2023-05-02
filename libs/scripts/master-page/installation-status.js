@@ -62,10 +62,12 @@ const installationStatus = (() => {
                 id: id
             },
             success: function (response) {
-                if(response[0].STATUS == "Success") {
+                if(response[0].STATUS == "Success" || response[0].STATUS == "Canceled") {
                     $("#viewForm").removeClass("disabled");
+                    $("#actionButtons").hide();
                 } else {
                     $("#viewForm").addClass("disabled");
+                    $("#actionButtons").show();
                 }
                 installationFormID = response[0]['INSTALLATION_FORM_ID'];
                 $("#installationFormID").text("Installation Form ID: " + response[0]['INSTALLATION_FORM_ID']);
@@ -80,12 +82,6 @@ const installationStatus = (() => {
                 $(".jobOrderNumberValue").text(response[0]['JOB_ORDER_NUMBER']);
                 $(".serviceValue").text(response[0]['SERVICE']);
                 $(".noteValue").text(response[0]['NOTE']);
-
-                if(response[0]['STATUS'] == "Success") {
-                    $("#actionButtons").hide();
-                } else {
-                    $("#actionButtons").show();
-                }
 
                 var data = '';
                 const serialNumbersByModel = {};
