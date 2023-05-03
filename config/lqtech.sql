@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2023 at 03:19 AM
+-- Generation Time: May 03, 2023 at 04:32 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -40,144 +40,85 @@ CREATE TABLE `action_logs` (
 --
 
 INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACTION`) VALUES
-('0153350fe58a11ed', '2023-04-28 08:00:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('18a908ece58a11ed', '2023-04-28 08:01:22', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('1f08dbede55a11ed', '2023-04-28 08:17:54', '58727a89cdf911ed', 1, 'User has logged in'),
-('20430479e57211ed', '2023-04-28 05:09:47', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('24aa6eb6e88411ed', '2023-05-03 02:56:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('24ab4607e88411ed', '2023-05-03 02:56:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('24ac16e8e88411ed', '2023-05-03 02:56:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('24aca218e88411ed', '2023-05-03 02:56:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('24ad828fe88411ed', '2023-05-03 02:56:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('24ae094be88411ed', '2023-05-03 02:56:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('24ae993de88411ed', '2023-05-03 02:56:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('24af331ae88411ed', '2023-05-03 02:56:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('24afa5e5e88411ed', '2023-05-03 02:56:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('2c7799bfe58f11ed', '2023-04-28 08:37:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('3e4c9cbde87f11ed', '2023-05-02 08:21:12', '58727a89cdf911ed', 1, 'User has logged in'),
-('4e657dd5e57211ed', '2023-04-28 05:11:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('541499ece3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('54156053e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('54163885e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('5416accee3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('54171dace3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('54179254e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('54180c77e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('541884d8e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('5418fdcae3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('541976f8e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('5419efb6e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('541a63bae3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('541aded7e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('541b4f34e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('541bceb0e3cf11ed', '2023-04-26 03:11:52', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('545626fde88011ed', '2023-05-02 02:28:58', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('5456ca39e88011ed', '2023-05-02 02:28:58', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('54576e00e88011ed', '2023-05-02 02:28:58', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('54580654e88011ed', '2023-05-02 02:28:58', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('5458a23be88011ed', '2023-05-02 02:28:58', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('54595003e88011ed', '2023-05-02 02:28:58', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('5459d4d1e88011ed', '2023-05-02 02:28:58', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('545a6ae7e88011ed', '2023-05-02 02:28:58', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('545b8c68e88011ed', '2023-05-02 02:28:58', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('5a380baae58311ed', '2023-04-28 07:13:06', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('6421d8bee40311ed', '2023-04-26 09:24:33', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('76a51309e40311ed', '2023-04-26 09:25:04', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('78a144fae40111ed', '2023-04-26 15:10:48', '58727a89cdf911ed', 1, 'User has logged in'),
-('793bc4ece49311ed', '2023-04-27 08:35:56', '58727a89cdf911ed', 1, 'User has logged in'),
-('7b09a229e3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('7b0a9c02e3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('7b0b451ce3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('7b0c005be3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('7b0c8bf7e3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('7b0d1fe9e3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('7b0d99b5e3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('7b0e1b3ae3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('7b0eb286e3f311ed', '2023-04-26 07:30:39', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8995fd80e49311ed', '2023-04-27 02:36:23', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f0bccf7e88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f0c8229e88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f0d2f07e88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f0dd6a2e88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f0ecfc4e88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f0f6f82e88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f1005eee88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f109b3de88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f1128f4e88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f11adece88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('8f1224fee88311ed', '2023-05-02 02:52:05', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('94c4e8ede56311ed', '2023-04-28 03:25:40', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('99b5ed68e55b11ed', '2023-04-28 02:28:32', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('9d44c8abe4cf11ed', '2023-04-27 15:46:26', '58727a89cdf911ed', 1, 'User has logged in'),
-('a3218438e40311ed', '2023-04-26 09:26:19', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b0f468d1e87e11ed', '2023-05-02 08:17:15', '58727a89cdf911ed', 1, 'User has logged in'),
-('b43d5f94e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b43e3060e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b43ed5c9e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b43f5f80e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b44049e8e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b440d1c7e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b441a5dee3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b4423be5e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b442a4eee3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b4431df3e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b4438fc0e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b443ef52e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b4446187e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b444d146e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b445494fe3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b445d1abe3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b44633dae3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b44692a9e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b44714c4e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b4477ad3e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b447db7ee3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b44865dae3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b448d071e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b4492c00e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b449b8a9e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b44a23efe3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b44a9288e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b44b10b5e3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b44b839de3f311ed', '2023-04-26 07:32:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('cbe13fc7e58a11ed', '2023-04-28 08:06:23', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e27426dee3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e274b3eae3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e2754195e3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e276041ce3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e276eb85e3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e2776063e3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e277e588e3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e2784f64e3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e278b7ace3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e2795c51e3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e279d127e3d111ed', '2023-04-26 03:30:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e5814834e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e5826ce8e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e5831435e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e583aa70e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e584b04fe88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e58555d2e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e585da0be88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e5864329e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e586b090e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e5872331e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e58795c3e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e587ff02e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e5887ee3e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e588f62ce88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e589801ee88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e589f89ae88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e58a6219e88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e58ace3ae88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('e58b3dfae88111ed', '2023-05-02 02:40:11', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('f2171000e3cd11ed', '2023-04-26 09:01:58', '58727a89cdf911ed', 1, 'User has logged in'),
-('f93b75ade40311ed', '2023-04-26 09:28:43', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('f9f70b62e58611ed', '2023-04-28 07:39:02', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('f9f7b4ace58611ed', '2023-04-28 07:39:02', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('f9f86647e58611ed', '2023-04-28 07:39:02', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('fb698fb7e49d11ed', '2023-04-27 09:51:09', '58727a89cdf911ed', 1, 'User has logged in'),
-('fb8dba0ee40311ed', '2023-04-26 09:28:47', '58727a89cdf911ed', 1, 'Successfully saved the Product');
+('101c9acce94e11ed', '2023-05-03 03:01:40', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('101daf80e94e11ed', '2023-05-03 03:01:40', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('101e88dae94e11ed', '2023-05-03 03:01:40', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('101f4d13e94e11ed', '2023-05-03 03:01:40', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('101fd570e94e11ed', '2023-05-03 03:01:40', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('10204c19e94e11ed', '2023-05-03 03:01:40', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('1b534a4ae94e11ed', '2023-05-03 03:01:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('1b54b7d3e94e11ed', '2023-05-03 03:01:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('1b559c90e94e11ed', '2023-05-03 03:01:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('1b5642e3e94e11ed', '2023-05-03 03:01:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('1b56ea49e94e11ed', '2023-05-03 03:01:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('1b576dfce94e11ed', '2023-05-03 03:01:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3ba84922e95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3ba8f63ae95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3ba982e4e95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3baa3abbe95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3baacec5e95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3babc472e95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3bac8567e95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3bad17b0e95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3bad9d45e95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3bae21b4e95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3baea5dae95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('3baf18d1e95911ed', '2023-05-03 04:21:38', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('550aadd3e95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('550b5383e95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('550bf771e95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('550c8532e95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('550de20ee95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('550f4ddde95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('5510cae4e95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('551163f5e95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('5512f1e4e95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('5514dce0e95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('5516d554e95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('5517f6b7e95a11ed', '2023-05-03 04:29:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7f8990d3e95111ed', '2023-05-03 03:26:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7f8a44bee95111ed', '2023-05-03 03:26:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7f8ace91e95111ed', '2023-05-03 03:26:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7f8ba909e95111ed', '2023-05-03 03:26:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7f8c6bc0e95111ed', '2023-05-03 03:26:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('7f8cf3bce95111ed', '2023-05-03 03:26:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('94494e24e95811ed', '2023-05-03 04:16:57', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('97da699ce95111ed', '2023-05-03 03:26:56', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('97db75b2e95111ed', '2023-05-03 03:26:56', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('97dc6d98e95111ed', '2023-05-03 03:26:56', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('97dcecebe95111ed', '2023-05-03 03:26:56', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('97ddb760e95111ed', '2023-05-03 03:26:56', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('97de2925e95111ed', '2023-05-03 03:26:56', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('c4b7dde5e95911ed', '2023-05-04 04:25:23', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('c4b8c7f4e95911ed', '2023-05-04 04:25:23', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('c4b9babce95911ed', '2023-05-04 04:25:23', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('c4ba3b51e95911ed', '2023-05-04 04:25:24', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('c4bad74ee95911ed', '2023-05-04 04:25:24', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('c4bb63aae95911ed', '2023-05-04 04:25:24', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e0231377e95911ed', '2023-05-04 04:26:09', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e02448fbe95911ed', '2023-05-04 04:26:09', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e0252d54e95911ed', '2023-05-04 04:26:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e025c57ce95911ed', '2023-05-04 04:26:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e0264029e95911ed', '2023-05-04 04:26:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e0272529e95911ed', '2023-05-04 04:26:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e0279065e95911ed', '2023-05-04 04:26:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e0281da0e95911ed', '2023-05-04 04:26:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e028a31ee95911ed', '2023-05-04 04:26:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e0291e21e95911ed', '2023-05-04 04:26:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e029aae3e95911ed', '2023-05-04 04:26:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e02a2418e95911ed', '2023-05-04 04:26:10', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e52d8d49e95811ed', '2023-05-03 04:19:12', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e52f7cd2e95811ed', '2023-05-03 04:19:12', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e5308294e95811ed', '2023-05-03 04:19:12', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e53149b5e95811ed', '2023-05-03 04:19:12', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e531c06ae95811ed', '2023-05-03 04:19:12', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e532f4c5e95811ed', '2023-05-03 04:19:12', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e534166be95811ed', '2023-05-03 04:19:13', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e5359acde95811ed', '2023-05-03 04:19:13', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e53697f5e95811ed', '2023-05-03 04:19:13', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e537bd07e95811ed', '2023-05-03 04:19:13', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e53b0a78e95811ed', '2023-05-03 04:19:13', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e53e4be0e95811ed', '2023-05-03 04:19:13', '58727a89cdf911ed', 1, 'Successfully saved the Product');
 
 -- --------------------------------------------------------
 
@@ -209,8 +150,9 @@ CREATE TABLE `installation_form` (
 --
 
 INSERT INTO `installation_form` (`INSTALLATION_FORM_ID`, `PROJECT_NAME`, `DATE_TIME`, `CONTACT_PERSON`, `CONTACT_NUMBER`, `PROJECT_SITE`, `SALESMAN_BRANCH`, `INSTALLER`, `SALES_ORDER_NUMBER`, `JOB_ORDER_NUMBER`, `SERVICE`, `NOTE`, `PREPARED_BY`, `TRANSMITTED_BY`, `RECEIVED_BY`, `STATUS`) VALUES
-('64505eb59f01e177', 'CCTV LQTEch', '2023-05-02 08:52:05', 'Romeo Jr Bardillon', '09760657071', 'Binan', 'Binan', 'Jose Miguel Sevilla', '203', '', 'Multicab', '', 'JOHN DOE', '', '', 'Pending'),
-('6451b12bbc67e423', 'IMall Famy CCTV Installation', '2023-05-03 08:56:11', 'Marvin Vicencio', '09760657071', 'Famy, Laguna', 'Santa Rosa Main Branch', 'Romeo Bardillon', '', '', 'Avanza', '', 'JOHN DOE', '', '', 'Pending');
+('6451c5320be23112', 'CCTV LQTEch', '2023-05-03 10:21:38', 'Romeo Jr Bardillon', '09760657071', 'Binan', 'Binan', 'Jose Sevilla', '203', '', 'Mirage', '', 'JOHN DOE', '', '', 'Pending'),
+('6451c70bbdbf0689', 'PUP CCTV Installation', '2023-05-03 10:29:31', 'Arwin Nucum', '09123454321', 'Barangay Tagapo, Santa Rosa, Laguna', 'Boss Leo', 'Jose Sevilla', '809', '', 'Multicab', '', 'JOHN DOE', '', '', 'Pending'),
+('645317c1efa46435', 'IMall Famy CCTV Installation', '2023-05-04 10:26:09', 'Romeo Jr Bardillon', '09123456789', 'Famy, Laguna', 'Santa Rosa Main Branch', 'Jose Sevilla', '809', '', 'Avanza', '', 'JOHN DOE', '', '', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -369,30 +311,31 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`PRODUCT_ID`, `PRODUCT_DETAILS_ID`, `SKU`, `SERIAL_NUMBER`, `DATE_INSERTED`, `DATE_OUT`, `STATUS`) VALUES
-('54145465e3cf11ed', 'b5651390dcbe11ed', '123', '1', '2023-05-02 08:51:23', '2023-05-02 08:52:05', 'OUT'),
-('5414de41e3cf11ed', 'b5651390dcbe11ed', '123', '2', '2023-05-02 08:51:23', '2023-05-02 08:52:05', 'OUT'),
-('5415e610e3cf11ed', 'b5651390dcbe11ed', '123', '3', '2023-05-02 08:51:23', '2023-05-02 08:52:05', 'OUT'),
-('54167297e3cf11ed', 'b5651390dcbe11ed', '123', '4', '2023-05-02 08:51:23', '2023-05-02 08:52:05', 'OUT'),
-('5416e09be3cf11ed', 'b5651390dcbe11ed', '123', '5', '2023-05-02 08:51:23', '2023-05-02 08:52:05', 'OUT'),
-('5417576be3cf11ed', 'b5651390dcbe11ed', '123', '6', '2023-05-02 08:51:23', '2023-05-03 08:56:11', 'OUT'),
-('5417c8c6e3cf11ed', 'b5651390dcbe11ed', '123', '7', '2023-05-02 08:51:23', '2023-05-03 08:56:11', 'OUT'),
-('541849fce3cf11ed', 'b5651390dcbe11ed', '123', '8', '2023-05-02 08:51:23', '2023-05-03 08:56:11', 'OUT'),
-('5418c490e3cf11ed', 'b5651390dcbe11ed', '123', '9', '2023-05-02 08:51:23', '2023-05-03 08:56:11', 'OUT'),
-('54193999e3cf11ed', 'b5651390dcbe11ed', '123', '10', '2023-05-02 08:51:23', NULL, 'IN'),
-('5419b7a4e3cf11ed', 'b5651390dcbe11ed', '123', '11', '2023-05-02 08:51:23', NULL, 'IN'),
-('541a2a75e3cf11ed', 'b5651390dcbe11ed', '123', '12', '2023-05-02 08:51:23', NULL, 'IN'),
-('541aa297e3cf11ed', 'b5651390dcbe11ed', '123', '13', '2023-05-02 08:51:23', NULL, 'IN'),
-('541b159de3cf11ed', 'b5651390dcbe11ed', '123', '14', '2023-05-02 08:51:23', NULL, 'IN'),
-('541b8e50e3cf11ed', 'b5651390dcbe11ed', '123', '15', '2023-05-02 08:51:23', NULL, 'IN'),
-('7b0819a4e3f311ed', '9373d003ddbc11ed', '321', '11', '2023-05-02 08:51:23', NULL, 'IN'),
-('7b0a48b0e3f311ed', '9373d003ddbc11ed', '321', '22', '2023-05-02 08:51:23', NULL, 'IN'),
-('7b0af2e2e3f311ed', '9373d003ddbc11ed', '321', '33', '2023-05-02 08:51:23', NULL, 'IN'),
-('7b0b9165e3f311ed', '9373d003ddbc11ed', '321', '44', '2023-05-02 08:51:23', NULL, 'IN'),
-('7b0c4ac3e3f311ed', '9373d003ddbc11ed', '321', '55', '2023-05-02 08:51:23', NULL, 'IN'),
-('7b0cd106e3f311ed', '9373d003ddbc11ed', '321', '66', '2023-05-02 08:51:23', NULL, 'IN'),
-('7b0d5c2be3f311ed', '9373d003ddbc11ed', '321', '77', '2023-05-02 08:51:23', NULL, 'IN'),
-('7b0ddc3ce3f311ed', '9373d003ddbc11ed', '321', '88', '2023-05-02 08:51:23', NULL, 'IN'),
-('7b0e6852e3f311ed', '9373d003ddbc11ed', '321', '99', '2023-05-02 08:51:23', NULL, 'IN');
+('101d6f7ce94e11ed', 'b8b6987fe94b11ed', '123', '1', '2023-05-03 09:01:40', '2023-05-03 00:00:00', 'OUT'),
+('101de6a1e94e11ed', 'b8b6987fe94b11ed', '123', '2', '2023-05-03 09:01:40', '2023-05-03 00:00:00', 'OUT'),
+('101f18abe94e11ed', 'b8b6987fe94b11ed', '123', '3', '2023-05-03 09:01:40', '2023-05-03 00:00:00', 'OUT'),
+('101f9233e94e11ed', 'b8b6987fe94b11ed', '123', '4', '2023-05-03 09:01:40', '2023-05-03 00:00:00', 'OUT'),
+('1020143fe94e11ed', 'b8b6987fe94b11ed', '123', '5', '2023-05-03 09:01:40', '2023-05-03 00:00:00', 'OUT'),
+('1b5469afe94e11ed', 'c462ce3de94b11ed', '321', '11', '2023-05-03 09:01:59', '2023-05-03 00:00:00', 'OUT'),
+('1b54f9aee94e11ed', 'c462ce3de94b11ed', '321', '22', '2023-05-03 09:01:59', '2023-05-03 00:00:00', 'OUT'),
+('1b55f219e94e11ed', 'c462ce3de94b11ed', '321', '33', '2023-05-03 09:01:59', '2023-05-03 00:00:00', 'OUT'),
+('1b5696b0e94e11ed', 'c462ce3de94b11ed', '321', '44', '2023-05-03 09:01:59', '2023-05-03 00:00:00', 'OUT'),
+('1b573139e94e11ed', 'c462ce3de94b11ed', '321', '55', '2023-05-03 09:01:59', '2023-05-03 00:00:00', 'OUT'),
+('7f89f3cee95111ed', 'b8b6987fe94b11ed', '123', '6', '2023-05-03 09:26:15', NULL, 'IN'),
+('7f8a8be2e95111ed', 'b8b6987fe94b11ed', '123', '7', '2023-05-03 09:26:15', NULL, 'IN'),
+('7f8b16cee95111ed', 'b8b6987fe94b11ed', '123', '8', '2023-05-03 09:26:15', NULL, 'IN'),
+('7f8c2b51e95111ed', 'b8b6987fe94b11ed', '123', '9', '2023-05-03 09:26:15', NULL, 'IN'),
+('7f8cb1e5e95111ed', 'b8b6987fe94b11ed', '123', '10', '2023-05-03 09:26:15', NULL, 'IN'),
+('97dae624e95111ed', 'c462ce3de94b11ed', '321', '111', '2023-05-03 09:26:56', NULL, 'IN'),
+('97dbfcd1e95111ed', 'c462ce3de94b11ed', '321', '222', '2023-05-03 09:26:56', NULL, 'IN'),
+('97dcb25fe95111ed', 'c462ce3de94b11ed', '321', '333', '2023-05-03 09:26:56', NULL, 'IN'),
+('97dd241ee95111ed', 'c462ce3de94b11ed', '321', '444', '2023-05-03 09:26:56', NULL, 'IN'),
+('97ddf060e95111ed', 'c462ce3de94b11ed', '321', '555', '2023-05-03 09:26:56', NULL, 'IN'),
+('c4b87dd7e95911ed', 'b8b6987fe94b11ed', '123', '21', '2023-05-04 10:25:23', '2023-05-04 00:00:00', 'OUT'),
+('c4b9669ce95911ed', 'b8b6987fe94b11ed', '123', '22', '2023-05-04 10:25:23', '2023-05-04 00:00:00', 'OUT'),
+('c4b9fd97e95911ed', 'b8b6987fe94b11ed', '123', '23', '2023-05-04 10:25:24', '2023-05-04 00:00:00', 'OUT'),
+('c4ba7de6e95911ed', 'b8b6987fe94b11ed', '123', '24', '2023-05-04 10:25:24', '2023-05-04 00:00:00', 'OUT'),
+('c4bb1396e95911ed', 'b8b6987fe94b11ed', '123', '25', '2023-05-04 10:25:24', '2023-05-04 00:00:00', 'OUT');
 
 -- --------------------------------------------------------
 
@@ -422,8 +365,8 @@ CREATE TABLE `product_details` (
 --
 
 INSERT INTO `product_details` (`PRODUCT_DETAILS_ID`, `CATEGORY`, `BRAND`, `MODEL`, `BUYING_PRICE`, `SELLING_PRICE`, `DATE_ADDED`, `CAMERA_TYPE`, `CAMERA_SHAPE`, `RECORDER_TYPE`, `CAPACITY`, `PSU_TYPE`, `WATTS`, `MONITOR_SIZE`) VALUES
-('9373d003ddbc11ed', 'Recorder', 'Hikvision', 'DS-7608NI-Q1', '5000.00', '5500.00', '2023-04-18 15:42:31', NULL, NULL, 'NVR', NULL, NULL, NULL, NULL),
-('b5651390dcbe11ed', 'Camera', 'Hikvision', 'DS-2CE76D0T-ITPFS', '0.00', '0.00', '2023-04-17 09:25:18', 'Analog', 'Dome', NULL, NULL, NULL, NULL, NULL);
+('b8b6987fe94b11ed', 'Camera', 'Hikvision', 'DS-2CE70DF3T-PF', '0.00', '0.00', '2023-05-03 08:44:54', 'IP', 'Dome', NULL, NULL, NULL, NULL, NULL),
+('c462ce3de94b11ed', 'Recorder', 'Hikvision', 'ERA-A363H', '0.00', '0.00', '2023-05-03 08:45:14', NULL, NULL, 'NVR', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -445,15 +388,44 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`SALE_ID`, `INSTALLATION_FORM_ID`, `PRODUCT_DETAILS_ID`, `SERIAL_NUMBER`, `SKU`, `DATE_PURCHASED`) VALUES
-('24aaf9d1e88411ed', '6451b12bbc67e423', 'b5651390dcbe11ed', '6', '123', '2023-05-03 08:56:11'),
-('24ac60d9e88411ed', '6451b12bbc67e423', 'b5651390dcbe11ed', '7', '123', '2023-05-03 08:56:11'),
-('24adc6a2e88411ed', '6451b12bbc67e423', 'b5651390dcbe11ed', '8', '123', '2023-05-03 08:56:11'),
-('24aeeab9e88411ed', '6451b12bbc67e423', 'b5651390dcbe11ed', '9', '123', '2023-05-03 08:56:11'),
-('8f0c3249e88311ed', '64505eb59f01e177', 'b5651390dcbe11ed', '1', '123', '2023-05-02 08:52:05'),
-('8f0d855de88311ed', '64505eb59f01e177', 'b5651390dcbe11ed', '2', '123', '2023-05-02 08:52:05'),
-('8f0f25c2e88311ed', '64505eb59f01e177', 'b5651390dcbe11ed', '3', '123', '2023-05-02 08:52:05'),
-('8f10591ae88311ed', '64505eb59f01e177', 'b5651390dcbe11ed', '4', '123', '2023-05-02 08:52:05'),
-('8f116c91e88311ed', '64505eb59f01e177', 'b5651390dcbe11ed', '5', '123', '2023-05-02 08:52:05');
+('3ba93d3ae95911ed', '6451c5320be23112', 'b8b6987fe94b11ed', '1', '123', '2023-05-03 10:21:38'),
+('3baa86cbe95911ed', '6451c5320be23112', 'b8b6987fe94b11ed', '2', '123', '2023-05-03 10:21:38'),
+('3bac06a1e95911ed', '6451c5320be23112', 'b8b6987fe94b11ed', '3', '123', '2023-05-03 10:21:38'),
+('3bad629be95911ed', '6451c5320be23112', 'b8b6987fe94b11ed', '4', '123', '2023-05-03 10:21:38'),
+('3bae6a4de95911ed', '6451c5320be23112', 'b8b6987fe94b11ed', '5', '123', '2023-05-03 10:21:38'),
+('550bb52ce95a11ed', '6451c70bbdbf0689', 'c462ce3de94b11ed', '11', '321', '2023-05-03 10:29:31'),
+('550cd116e95a11ed', '6451c70bbdbf0689', 'c462ce3de94b11ed', '22', '321', '2023-05-03 10:29:31'),
+('550fe8f5e95a11ed', '6451c70bbdbf0689', 'c462ce3de94b11ed', '33', '321', '2023-05-03 10:29:31'),
+('55125d6be95a11ed', '6451c70bbdbf0689', 'c462ce3de94b11ed', '44', '321', '2023-05-03 10:29:31'),
+('55163ce5e95a11ed', '6451c70bbdbf0689', 'c462ce3de94b11ed', '55', '321', '2023-05-03 10:29:31'),
+('e0249ca5e95911ed', '645317c1efa46435', 'b8b6987fe94b11ed', '21', '123', '2023-05-04 10:26:09'),
+('e0260958e95911ed', '645317c1efa46435', 'b8b6987fe94b11ed', '22', '123', '2023-05-04 10:26:10'),
+('e027593ce95911ed', '645317c1efa46435', 'b8b6987fe94b11ed', '23', '123', '2023-05-04 10:26:10'),
+('e0286540e95911ed', '645317c1efa46435', 'b8b6987fe94b11ed', '24', '123', '2023-05-04 10:26:10'),
+('e029683de95911ed', '645317c1efa46435', 'b8b6987fe94b11ed', '25', '123', '2023-05-04 10:26:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stocks`
+--
+
+CREATE TABLE `stocks` (
+  `STOCKS_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `PRODUCT_ID` varchar(16) NOT NULL,
+  `DATE_TODAY` date NOT NULL,
+  `IN` int(11) NOT NULL,
+  `OUT` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `stocks`
+--
+
+INSERT INTO `stocks` (`STOCKS_ID`, `PRODUCT_ID`, `DATE_TODAY`, `IN`, `OUT`) VALUES
+('101b16c2e94e11ed', 'b8b6987fe94b11ed', '2023-05-03', 10, 5),
+('1b51c716e94e11ed', 'c462ce3de94b11ed', '2023-05-03', 10, 5),
+('c4b75c1ce95911ed', 'b8b6987fe94b11ed', '2023-05-04', 5, 5);
 
 -- --------------------------------------------------------
 
@@ -478,7 +450,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`USER_ID`, `FIRST_NAME`, `LAST_NAME`, `USERNAME`, `PASSWORD`, `ROLE`, `LOGIN_ATTEMPTS`, `IS_LOCKED`, `LAST_LOGIN`) VALUES
-('58727a89cdf911ed', 'JOHN', 'DOE', 'owner', '$2y$10$NNjsc/qfqw0VhWXnVXwI4e7epUme3YfQlyWpaXcMdpHqjRvp721ze', 1, 0, 0, '2023-05-02 08:21:12');
+('58727a89cdf911ed', 'JOHN', 'DOE', 'owner', '$2y$10$NNjsc/qfqw0VhWXnVXwI4e7epUme3YfQlyWpaXcMdpHqjRvp721ze', 1, 0, 0, '2023-05-03 08:19:40');
 
 --
 -- Indexes for dumped tables
@@ -525,6 +497,13 @@ ALTER TABLE `sales`
   ADD KEY `FK_PRODUCT_INSTALLATION_FORM_ID` (`INSTALLATION_FORM_ID`);
 
 --
+-- Indexes for table `stocks`
+--
+ALTER TABLE `stocks`
+  ADD PRIMARY KEY (`STOCKS_ID`),
+  ADD KEY `FK_PRODUCT_STOCKS` (`PRODUCT_ID`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -552,6 +531,12 @@ ALTER TABLE `products`
 ALTER TABLE `sales`
   ADD CONSTRAINT `FK_PRODUCT_INSTALLATION_FORM_ID` FOREIGN KEY (`INSTALLATION_FORM_ID`) REFERENCES `installation_form` (`INSTALLATION_FORM_ID`),
   ADD CONSTRAINT `SALES_PRODUCT_DETAILS_ID` FOREIGN KEY (`PRODUCT_DETAILS_ID`) REFERENCES `product_details` (`PRODUCT_DETAILS_ID`);
+
+--
+-- Constraints for table `stocks`
+--
+ALTER TABLE `stocks`
+  ADD CONSTRAINT `FK_PRODUCT_STOCKS` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product_details` (`PRODUCT_DETAILS_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
