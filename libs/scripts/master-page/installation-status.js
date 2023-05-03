@@ -5,6 +5,7 @@ $(document).ready(function () {
 const installationStatus = (() => {
     const thisInstallationStatus = {};
     var installationFormID = '';
+    var productCartReturn = [];
 
     $(".installationFormID").text("Installation Form ID: " + installationFormID);
 
@@ -183,7 +184,7 @@ const installationStatus = (() => {
     thisInstallationStatus.processReturns = () => {
         $("#processReturnModal").modal('show');
         $("#modal_installation_status").modal('hide');
-        $("#sku").focus();
+        $("#serial_number").focus();
     }
     
     thisInstallationStatus.cancelTransaction = () => {
@@ -227,6 +228,129 @@ const installationStatus = (() => {
             }
         });
     }
+
+    $("#serial_number").on('keydown', function(event) {
+        if (event.key === 'Enter') {
+            var serialNumber = $("#serial_number").val();
+            $.ajax({
+                type: "POST",
+                url: INSTALLATION_STATUS_CONTROLLER + '?action=checkSerialNumber',
+                dataType: "json",
+                data: {
+                    serialNumber: serialNumber,
+                    installationFormID: installationFormID
+                },
+                success: function (response) {
+                    if(!response) {
+                        swal.fire({
+                            title: 'Serial Number not found',
+                            text: "Input another serial number",
+                            icon: 'error',
+                            confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $("#serial_number").val('');
+                                $("#serial_number").focus();
+                            }
+                        });
+                    } else {
+                        $("#model").val(response['MODEL']);
+                        productCartReturn.push(response);
+                        $("#serial_number").val('');
+                        $("#serial_number").focus();
+
+                        // Check if there are any items with the same model in the productCartReturn array
+                        const sameModelItems = productCartReturn.filter(item => item.MODEL === response.MODEL);
+                        if (sameModelItems.length === 1) {
+                            // If there are no other items with the same model, add a new row to the table with a quantity of 1
+                            $("#productCartReturn").append(`
+                                <tr>
+                                    <td>1</td>
+                                    <td>${response['SKU']}</td>
+                                    <td>${response['MODEL']}</td>
+                                    <td><button type="button" class="btn btn-danger btn-sm" onclick="thisInstallationStatus.removeProductCartReturn('${response['SERIAL_NUMBER']}')">Remove</button></td>
+                                </tr>
+                            `);
+                        } else {
+                            // If there are other items with the same model, update the quantity of the existing row
+                            const quantity = sameModelItems.length;
+                            $("#productCartReturn tr").each(function() {
+                                const $row = $(this);
+                                if ($row.find("td").eq(1).html() === response['SKU'] && $row.find("td").eq(2).html() === response['MODEL']) {
+                                    $row.find("td").eq(0).html(quantity);
+                                }
+                            });
+                        }
+                    }
+                }, error: function(e) {
+                    console.log(e);
+                }
+            });
+        }
+    });
+
+    $("#return").on('click', function() {
+        if(productCartReturn.length == 0) {
+            swal.fire({
+                title: 'No items to return',
+                text: "Please input serial numbers",
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+            return;
+        }
+        swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, confirm it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: INSTALLATION_STATUS_CONTROLLER + '?action=confirmReturn',
+                    dataType: "json",
+                    data: {
+                        installationFormID: installationFormID,
+                        productCartReturn: productCartReturn
+                    },
+                    success: function (response) {
+                        if (response == "Successfully Updated") {
+                            swal.fire(
+                                'Confirmed!',
+                                'Transaction has been confirmed.',
+                                'success'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    installationStatus.loadTableData();
+                                    $('#modal_installation_status').modal('hide');
+                                    $('#processReturnModal').modal('hide');
+                                }
+                            });
+                        } else {
+                            swal.fire(
+                                'Failed!',
+                                'Transaction failed to confirm.',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function () {
+                        
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swal.fire(
+                    'Cancelled',
+                    'Transaction cancelled',
+                    'error'
+                )
+            }
+        })
+    });
 
     return thisInstallationStatus;
 })();

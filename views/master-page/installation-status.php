@@ -152,19 +152,13 @@
                             <div class="col">
                                 <form class="">
                                     <div class="mb-3">
-                                        <input class="form-control" type="text" id="sku" placeholder="SKU" autofocus>
+                                        <input class="form-control" type="text" id="serial_number" placeholder="Serial Number" autofocus>
                                     </div>
                                     <div class="mb-3">
                                         <input class="form-control" type="text" id="model" placeholder="Model" readonly>
                                     </div>
-                                    <div class="mb-3">    
-                                        <textarea class="form-control" name="" id="serial_numbers" cols="30" rows="10" placeholder="Serial Numbers"></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <button class="btn btn-primary w-100" type="button" id="addToCart">Add to Cart</button>
-                                    </div>
                                     <!-- Current Cart Table -->
-                                    <div class="mb-3">
+                                    <!-- <div class="mb-3">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -175,7 +169,7 @@
                                             </thead>
                                             <tbody id="item_list"></tbody>
                                         </table>
-                                    </div>
+                                    </div> -->
                                 </form>
                             </div>
                             <!-- Products cart Table -->
@@ -190,10 +184,10 @@
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="cart"></tbody>
+                                        <tbody id="productCartReturn"></tbody>
                                     </table>
                                     <div class="mt-4">
-                                        <button class="btn btn-success w-100" id="checkout" type="button">Check Out</button>
+                                        <button class="btn btn-success w-100" id="return" type="button">Return</button>
                                     </div>
                                 </form>
                             </div>

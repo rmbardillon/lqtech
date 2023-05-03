@@ -83,4 +83,13 @@ else if($action == 'cancelTransaction')
     echo json_encode($result);
 }
 
+else if($action == 'checkSerialNumber')
+{
+    $serialNumber = $_POST['serialNumber'];
+    $installationFormID = $_POST['installationFormID'];
+    $result = $Product->checkSerialNumber($serialNumber, $installationFormID);
+
+    echo json_encode($result);
+}
+
 ?>

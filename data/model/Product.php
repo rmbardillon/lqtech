@@ -485,13 +485,27 @@ class Product
 
     public function checkSerialNumbers($serial_number, $sku)
     {
-            $sql = "SELECT * FROM products WHERE SERIAL_NUMBER = '$serial_number' AND SKU = '$sku' AND STATUS = 'IN'";
-            $result = $this->conn->query($sql);
-            if($result->num_rows > 0) {
-                return $result->fetch_assoc();
-            } else {
-                return false;
-            }
+        $sql = "SELECT * FROM products WHERE SERIAL_NUMBER = '$serial_number' AND SKU = '$sku' AND STATUS = 'IN'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return false;
+        }
+        return $result;
+    }
+
+    public function checkSerialNumber($serialNumber, $installationFormID)
+    {
+        $sql = "SELECT * FROM sales 
+        LEFT JOIN product_details ON sales.PRODUCT_DETAILS_ID = product_details.PRODUCT_DETAILS_ID
+        WHERE SERIAL_NUMBER = '$serialNumber' && INSTALLATION_FORM_ID = '$installationFormID'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return false;
+        }
         return $result;
     }
 
