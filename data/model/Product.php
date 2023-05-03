@@ -284,36 +284,6 @@ class Product
 
     }
 
-    public function update($request)
-    {
-        $product_id = $request['product_id'];
-        $product_name = $request['product_name'];
-        $product_barcode = $request['product_barcode'];
-        $product_category = $request['product_category'];
-        $selling_price = $request['selling_price'];
-        $status = $request['status'];
-        $max_stock = $request['max_stock'];
-        $min_stock = $request['min_stock'];
-        $type = ($request['type'] != "" ? $request['type'] : null);
-        // $expired_products = $request['expired_products'];
-        
-        $sql = "UPDATE product_details 
-        SET category_id= ?, barcode= ?, name= ?, sale_price= ?, status= ?, max_stock=?, min_stock=?, type=?, expired_products=?
-        WHERE id= ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("issdiiisii",$product_category, $product_barcode, $product_name, $selling_price, $status, $max_stock, $min_stock, $type, $expired_products, $product_id);
-        $result = '';
-        if ($stmt->execute() === TRUE) {
-            $result = "Successfully Update";
-            $this->ActionLog->saveLogs('product', 'updated');
-            return $this->conn->insert_id;
-        } else {
-            return "Error: " . $sql . "<br>" . $this->conn->error;
-        }
-
-    }
-
-
     public function updateSellPrice($request)
     {
         $id = $request['product_id'];
@@ -542,5 +512,67 @@ class Product
         $this->conn->close();
         return $result;
 
+    }
+
+    public function confirmReturn($installationFormID, $productCartReturn)
+    {
+        foreach($productCartReturn as $productReturn){
+            $productDetailsID = $productReturn['PRODUCT_DETAILS_ID'];
+            $serialNumber = $productReturn['SERIAL_NUMBER'];
+            $sku = $productReturn['SKU'];
+            $counter = 1;
+            $stocks = $this->checkStocks($productDetailsID);
+
+            $sql = "UPDATE products SET STATUS = 'IN', DATE_INSERTED = NOW(), DATE_OUT = NULL WHERE SERIAL_NUMBER = '$serialNumber' AND SKU = '$sku'";
+            $stmt = $this->conn->prepare($sql);
+            $result = '';
+            if ($stmt->execute() === TRUE) {
+                $result = "Successfully Updated";
+                $this->ActionLog->saveLogs('product', 'saved');
+            } else {
+                $result = "Error: <br>" . $this->conn->error;
+            }
+
+            $sql = "DELETE FROM sales WHERE INSTALLATION_FORM_ID = '$installationFormID' AND PRODUCT_DETAILS_ID = '$productDetailsID' AND SERIAL_NUMBER = '$serialNumber' AND SKU = '$sku'";
+            $stmt = $this->conn->prepare($sql);
+            $result = '';
+            if ($stmt->execute() === TRUE) {
+                $result = "Successfully Updated";
+                $this->ActionLog->saveLogs('product', 'saved');
+            } else {
+                $result = "Error: <br>" . $this->conn->error;
+            }
+
+            if (!$stocks) {
+                $sql = "INSERT INTO stocks(PRODUCT_ID, DATE_TODAY, `IN`) VALUES(?, CURDATE(), ?)";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("ss", $model, $counter);
+                $result = "";
+                if ($stmt->execute() === TRUE) {
+                    $result = "Successfully Save";
+
+                    $this->ActionLog->saveLogs('product', 'saved');
+                } else {
+                    $result = "Error: <br>" . $this->conn->error;
+                }
+            } else {
+                $totalStocks = $stocks['IN'] + $counter;
+                $product_id = $stocks['PRODUCT_ID'];
+                $sql = "UPDATE stocks SET `IN` = ? WHERE PRODUCT_ID = ? AND DATE_TODAY = CURDATE()";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("ss", $totalStocks, $product_id);
+                $result = "";
+                if ($stmt->execute() === TRUE) {
+                    $result = "Successfully Save";
+
+                    $this->ActionLog->saveLogs('product', 'saved');
+                } else {
+                    $result = "Error: <br>" . $this->conn->error;
+                }
+            }
+        }
+
+        $this->conn->close();
+        return $result;
     }
 }

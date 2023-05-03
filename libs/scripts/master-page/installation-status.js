@@ -309,6 +309,7 @@ const installationStatus = (() => {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
+                $("#processReturnModal").modal('hide');
                 $.ajax({
                     type: "POST",
                     url: INSTALLATION_STATUS_CONTROLLER + '?action=confirmReturn',
@@ -318,18 +319,8 @@ const installationStatus = (() => {
                         productCartReturn: productCartReturn
                     },
                     success: function (response) {
-                        if (response == "Successfully Updated") {
-                            swal.fire(
-                                'Confirmed!',
-                                'Transaction has been confirmed.',
-                                'success'
-                            ).then((result) => {
-                                if (result.isConfirmed) {
-                                    installationStatus.loadTableData();
-                                    $('#modal_installation_status').modal('hide');
-                                    $('#processReturnModal').modal('hide');
-                                }
-                            });
+                        if (response == "Successfully Save") {
+                            $("#confirmTransaction").click();
                         } else {
                             swal.fire(
                                 'Failed!',

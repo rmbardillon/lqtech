@@ -92,4 +92,15 @@ else if($action == 'checkSerialNumber')
     echo json_encode($result);
 }
 
+else if($action == 'confirmReturn')
+{
+    $installationFormID = $_POST['installationFormID'];
+    $productCartReturn = $_POST['productCartReturn'];
+
+    $result = $Product->confirmReturn($installationFormID, $productCartReturn);
+    
+    echo json_encode($result);
+    // echo json_encode($productCartReturn);
+}
+
 ?>
