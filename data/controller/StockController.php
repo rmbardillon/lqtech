@@ -36,11 +36,11 @@ else if($action == 'displayStocksPerId')
     $counter = 1;
     $totalStocks = 0;
     foreach ($result as $product) {
-        $totalStocks += $product['TOTAL_IN'] - $product['TOTAL_OUT'];
+        $totalStocks += $product['IN'] - $product['OUT'];
         $table_data .= '<tr>';
-        $table_data .= '<td>' . $product['DATE_INSERTED'] . '</td>';
-        $table_data .= '<td>' . $product['TOTAL_IN'] . '</td>';
-        $table_data .= '<td>' . $product['TOTAL_OUT'] . '</td>';
+        $table_data .= '<td>' . $product['DATE_TODAY'] . '</td>';
+        $table_data .= '<td>' . $product['IN'] . '</td>';
+        $table_data .= '<td>' . $product['OUT'] . '</td>';
         $table_data .= '<td>' . $totalStocks . '</td>';
         $table_data .= '</tr>';
 

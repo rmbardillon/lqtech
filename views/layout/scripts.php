@@ -21,23 +21,30 @@
         });
     });
     
+    // function updateDatetime() {
+    //     $.ajax({
+    //         type: "GET",
+    //         url: 'https://worldtimeapi.org/api/ip',
+    //         dataType: "json",
+    //         success: function (response) {
+    //         const datetimeString = response.datetime;
+    //         const datetime = new Date(datetimeString);
+    //         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    //         const formattedDatetime = datetime.toLocaleString('en-US', options);
+    //         $("#currentDate").html(formattedDatetime);
+    //     },
+    //     error: function (error) {
+    //         console.error(error);
+    //     }
+    //     });
+    // }
     function updateDatetime() {
-        $.ajax({
-            type: "GET",
-            url: 'https://worldtimeapi.org/api/ip',
-            dataType: "json",
-            success: function (response) {
-            const datetimeString = response.datetime;
-            const datetime = new Date(datetimeString);
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-            const formattedDatetime = datetime.toLocaleString('en-US', options);
-            $("#currentDate").html(formattedDatetime);
-        },
-        error: function (error) {
-            console.error(error);
-        }
-        });
+        const datetime = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        const formattedDatetime = datetime.toLocaleString('en-US', options);
+        $("#currentDate").html(formattedDatetime);
     }
+
 
 
     // call the updateDatetime() function immediately to display the current datetime

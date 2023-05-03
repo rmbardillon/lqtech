@@ -57,18 +57,10 @@ class Stock
 
     public function getById($id)
     {
-        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, SELLING_PRICE, p.SKU, DATE_FORMAT(p.DATE_INSERTED, '%M %e, %Y') AS DATE_INSERTED, 
-       COUNT(*) as TOTAL_IN, COALESCE(s.TOTAL_OUT, 0) as TOTAL_OUT
-        FROM products p
-        JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
-        LEFT JOIN (
-            SELECT DATE(DATE_PURCHASED) as SALE_DATE, COUNT(*) as TOTAL_OUT
-            FROM sales
-            WHERE PRODUCT_DETAILS_ID = '$id'
-            GROUP BY DATE(DATE_PURCHASED)
-        ) s ON DATE(p.DATE_OUT) = s.SALE_DATE
-        WHERE pd.PRODUCT_DETAILS_ID = '$id'
-        GROUP BY pd.PRODUCT_DETAILS_ID, DATE(p.DATE_INSERTED), DATE(p.DATE_OUT);";
+        $sql = "SELECT * FROM stocks
+                LEFT JOIN product_details ON stocks.PRODUCT_ID = product_details.PRODUCT_DETAILS_ID
+                WHERE stocks.PRODUCT_ID = '$id'
+                GROUP BY stocks.PRODUCT_ID, stocks.DATE_TODAY;";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
