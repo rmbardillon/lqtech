@@ -14,3 +14,4 @@ const ACTIONLOG_CONTROLLER = HOST + '/' + PATH_TO_CONTROLLER + '/ActionLogContro
 const PURCHASE_CONTROLLER = HOST + '/' + PATH_TO_CONTROLLER + '/PurchaseController.php';
 const STOCK_CONTROLLER = HOST + '/' + PATH_TO_CONTROLLER + '/StockController.php';
 const INSTALLATION_STATUS_CONTROLLER = HOST + '/' + PATH_TO_CONTROLLER + '/InstallationStatusController.php';
+const REPORT_CONTROLLER = HOST + '/' + PATH_TO_CONTROLLER + '/ReportController.php';

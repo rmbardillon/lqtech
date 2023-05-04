@@ -11,7 +11,7 @@ const installationStatus = (() => {
 
     $("#viewForm").click(function () {
         // Open new page
-        window.open("../report/report.php?installationFormID=" + installationFormID, "_blank");
+        window.open("../report/installation-form.php?installationFormID=" + installationFormID, "_blank");
     });
 
     $("#confirmTransaction").click(function () {
