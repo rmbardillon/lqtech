@@ -83,7 +83,7 @@
             if ($stmt->execute() === TRUE) {
                 $result = "Updated Successfully";
             } else {
-                $result = "Error updating record: " . $this->conn->error;
+                $result = "Error updating record: " . $this->connection->error;
             }
 
             return $result;
@@ -101,7 +101,7 @@
             if ($stmt->execute() === TRUE) {
                 $result = "Updated Successfully";
             } else {
-                $result = "Error updating record: " . $this->conn->error;
+                $result = "Error updating record: " . $this->connection->error;
             }
 
             return $result;
@@ -119,7 +119,7 @@
             if ($stmt->execute() === TRUE) {
                 $result = "Updated Successfully";
             } else {
-                $result = "Error updating record: " . $this->conn->error;
+                $result = "Error updating record: " . $this->connection->error;
             }
 
             return $result;
