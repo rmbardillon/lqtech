@@ -161,6 +161,19 @@ class Product
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getReturnItems($id)
+    {
+        $sql = "SELECT *, DATE_FORMAT(DATE_TIME, '%W, %M %e, %Y %h:%i:%s %p') AS FORMATTED_DATE, sales.STATUS AS SALES_STATUS
+                FROM sales
+                JOIN product_details ON sales.PRODUCT_DETAILS_ID = product_details.PRODUCT_DETAILS_ID
+                JOIN installation_form ON sales.INSTALLATION_FORM_ID = installation_form.INSTALLATION_FORM_ID
+                WHERE sales.INSTALLATION_FORM_ID = '$id' AND sales.STATUS = 'RETURNED'
+                GROUP BY sales.STATUS, sales.SKU, sales.SERIAL_NUMBER;";
+        $result = $this->conn->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getSalesOrderNumber($id)
     {
         $sql = "SELECT * FROM installation_form WHERE INSTALLATION_FORM_ID = '$id';";
@@ -533,7 +546,7 @@ class Product
                 $result = "Error: <br>" . $this->conn->error;
             }
 
-            $sql = "DELETE FROM sales WHERE INSTALLATION_FORM_ID = '$installationFormID' AND PRODUCT_DETAILS_ID = '$productDetailsID' AND SERIAL_NUMBER = '$serialNumber' AND SKU = '$sku'";
+            $sql = "UPDATE sales SET STATUS =  'RETURNED' WHERE INSTALLATION_FORM_ID = '$installationFormID' AND PRODUCT_DETAILS_ID = '$productDetailsID' AND SERIAL_NUMBER = '$serialNumber' AND SKU = '$sku'";
             $stmt = $this->conn->prepare($sql);
             $result = '';
             if ($stmt->execute() === TRUE) {

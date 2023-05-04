@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2023 at 04:33 AM
+-- Generation Time: May 04, 2023 at 02:48 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -212,6 +212,42 @@ CREATE TABLE `products` (
   `STATUS` varchar(16) NOT NULL DEFAULT 'IN'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`PRODUCT_ID`, `PRODUCT_DETAILS_ID`, `SKU`, `SERIAL_NUMBER`, `DATE_INSERTED`, `DATE_OUT`, `STATUS`) VALUES
+('2e05d48bea1511ed', 'b8b6987fe94b11ed', '123', '1', '2023-05-04 08:47:00', NULL, 'IN'),
+('2e064ff9ea1511ed', 'b8b6987fe94b11ed', '123', '2', '2023-05-04 08:47:00', NULL, 'IN'),
+('2e073b07ea1511ed', 'b8b6987fe94b11ed', '123', '3', '2023-05-04 08:47:00', NULL, 'IN'),
+('2e07c483ea1511ed', 'b8b6987fe94b11ed', '123', '4', '2023-05-04 08:47:00', NULL, 'IN'),
+('2e087b0fea1511ed', 'b8b6987fe94b11ed', '123', '5', '2023-05-04 08:47:00', NULL, 'IN'),
+('2e0911e4ea1511ed', 'b8b6987fe94b11ed', '123', '6', '2023-05-04 08:47:00', NULL, 'IN'),
+('2e09a523ea1511ed', 'b8b6987fe94b11ed', '123', '7', '2023-05-04 08:47:00', NULL, 'IN'),
+('2e0a1fd6ea1511ed', 'b8b6987fe94b11ed', '123', '8', '2023-05-04 08:47:00', NULL, 'IN'),
+('2e0acc6cea1511ed', 'b8b6987fe94b11ed', '123', '9', '2023-05-04 08:47:00', NULL, 'IN'),
+('2e0b6e65ea1511ed', 'b8b6987fe94b11ed', '123', '10', '2023-05-04 08:47:00', NULL, 'IN'),
+('3a18ae50ea1511ed', 'c462ce3de94b11ed', '321', '11', '2023-05-04 08:47:20', NULL, 'IN'),
+('3a192c63ea1511ed', 'c462ce3de94b11ed', '321', '22', '2023-05-04 08:47:20', NULL, 'IN'),
+('3a19b92cea1511ed', 'c462ce3de94b11ed', '321', '33', '2023-05-04 08:47:20', NULL, 'IN'),
+('3a1ac124ea1511ed', 'c462ce3de94b11ed', '321', '44', '2023-05-04 08:47:20', NULL, 'IN'),
+('3a1b4932ea1511ed', 'c462ce3de94b11ed', '321', '55', '2023-05-04 08:47:20', NULL, 'IN'),
+('3a1bc6d9ea1511ed', 'c462ce3de94b11ed', '321', '66', '2023-05-04 08:47:20', NULL, 'IN'),
+('3a1c541bea1511ed', 'c462ce3de94b11ed', '321', '77', '2023-05-04 08:47:20', NULL, 'IN'),
+('3a1cd246ea1511ed', 'c462ce3de94b11ed', '321', '88', '2023-05-04 08:47:20', NULL, 'IN'),
+('3a1d4e86ea1511ed', 'c462ce3de94b11ed', '321', '99', '2023-05-04 08:47:20', NULL, 'IN'),
+('3a1dd29dea1511ed', 'c462ce3de94b11ed', '321', '00', '2023-05-04 08:47:20', NULL, 'IN'),
+('6207b869ea1511ed', '50fa327aea1511ed', '111', '111', '2023-05-04 08:48:27', NULL, 'IN'),
+('62085184ea1511ed', '50fa327aea1511ed', '111', '222', '2023-05-04 08:48:27', NULL, 'IN'),
+('6208d605ea1511ed', '50fa327aea1511ed', '111', '333', '2023-05-04 08:48:27', NULL, 'IN'),
+('6209527bea1511ed', '50fa327aea1511ed', '111', '444', '2023-05-04 08:48:27', NULL, 'IN'),
+('620a35e8ea1511ed', '50fa327aea1511ed', '111', '555', '2023-05-04 08:48:27', NULL, 'IN'),
+('620ac0e4ea1511ed', '50fa327aea1511ed', '111', '666', '2023-05-04 08:48:27', NULL, 'IN'),
+('620b4af5ea1511ed', '50fa327aea1511ed', '111', '777', '2023-05-04 08:48:27', NULL, 'IN'),
+('620be50cea1511ed', '50fa327aea1511ed', '111', '888', '2023-05-04 08:48:27', NULL, 'IN'),
+('620c5b3fea1511ed', '50fa327aea1511ed', '111', '999', '2023-05-04 08:48:27', NULL, 'IN'),
+('620cc7adea1511ed', '50fa327aea1511ed', '111', '000', '2023-05-04 08:48:27', NULL, 'IN');
+
 -- --------------------------------------------------------
 
 --
@@ -240,6 +276,7 @@ CREATE TABLE `product_details` (
 --
 
 INSERT INTO `product_details` (`PRODUCT_DETAILS_ID`, `CATEGORY`, `BRAND`, `MODEL`, `BUYING_PRICE`, `SELLING_PRICE`, `DATE_ADDED`, `CAMERA_TYPE`, `CAMERA_SHAPE`, `RECORDER_TYPE`, `CAPACITY`, `PSU_TYPE`, `WATTS`, `MONITOR_SIZE`) VALUES
+('50fa327aea1511ed', 'Monitor', 'Hikvision', 'Generic', '0.00', '0.00', '2023-05-04 08:47:59', NULL, NULL, NULL, NULL, NULL, NULL, '32 Inches'),
 ('b8b6987fe94b11ed', 'Camera', 'Hikvision', 'DS-2CE70DF3T-PF', '0.00', '0.00', '2023-05-03 08:44:54', 'IP', 'Dome', NULL, NULL, NULL, NULL, NULL),
 ('c462ce3de94b11ed', 'Recorder', 'Hikvision', 'ERA-A363H', '0.00', '0.00', '2023-05-03 08:45:14', NULL, NULL, 'NVR', NULL, NULL, NULL, NULL);
 
@@ -255,7 +292,8 @@ CREATE TABLE `sales` (
   `PRODUCT_DETAILS_ID` varchar(16) NOT NULL,
   `SERIAL_NUMBER` varchar(32) NOT NULL,
   `SKU` varchar(32) NOT NULL,
-  `DATE_PURCHASED` datetime DEFAULT current_timestamp()
+  `DATE_PURCHASED` datetime DEFAULT current_timestamp(),
+  `STATUS` varchar(32) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -271,6 +309,15 @@ CREATE TABLE `stocks` (
   `IN` int(11) NOT NULL,
   `OUT` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `stocks`
+--
+
+INSERT INTO `stocks` (`STOCKS_ID`, `PRODUCT_ID`, `DATE_TODAY`, `IN`, `OUT`) VALUES
+('2e04f8d1ea1511ed', 'b8b6987fe94b11ed', '2023-05-04', 10, 0),
+('3a17a84fea1511ed', 'c462ce3de94b11ed', '2023-05-04', 10, 0),
+('62072796ea1511ed', '50fa327aea1511ed', '2023-05-04', 10, 0);
 
 -- --------------------------------------------------------
 
@@ -295,7 +342,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`USER_ID`, `FIRST_NAME`, `LAST_NAME`, `USERNAME`, `PASSWORD`, `ROLE`, `LOGIN_ATTEMPTS`, `IS_LOCKED`, `LAST_LOGIN`) VALUES
-('58727a89cdf911ed', 'JOHN', 'DOE', 'owner', '$2y$10$NNjsc/qfqw0VhWXnVXwI4e7epUme3YfQlyWpaXcMdpHqjRvp721ze', 1, 0, 0, '2023-05-03 08:19:40');
+('58727a89cdf911ed', 'JOHN', 'DOE', 'owner', '$2y$10$NNjsc/qfqw0VhWXnVXwI4e7epUme3YfQlyWpaXcMdpHqjRvp721ze', 1, 0, 0, '2023-05-04 08:25:44');
 
 --
 -- Indexes for dumped tables

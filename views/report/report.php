@@ -7,6 +7,28 @@ $Product = new Product($conn);
 
 class PDF extends FPDF
 {
+    // Page header
+    function Header()
+    {
+        // Logo image
+        $this->Image('../../libs/images/lqtechicon.png', 10, 10, 30);
+        
+        // Company information
+        $this->SetFont('Arial','B',12);
+        $this->Cell(40);
+        $this->Cell(0,10,'LQTech Security Solutions',0,1);
+        $this->SetFont('Arial','',10);
+        $this->Cell(40);
+        $this->Cell(0,5,'Leading Quality Technologies',0,1);
+        $this->Cell(40);
+        $this->Cell(0,5,'#23 F. Gomez St., Brgy. Kanluran',0,1);
+        $this->Cell(40);
+        $this->Cell(0,5,'Sta. Rosa City, Laguna 4024',0,1);
+        
+        // Line break
+        $this->Ln(5);
+        $this->Line(10, 40, 200, 40);
+    }
     // Page footer
     function Footer()
     {
@@ -40,6 +62,7 @@ if(isset($_GET['installationFormID'])){
 
     $installationFormID = $_GET['installationFormID'];
     $result = $Product->getInstallationStatus($installationFormID);
+    $return = $Product->getReturnItems($installationFormID);
 
     // print_r($result);
     
@@ -74,6 +97,19 @@ if(isset($_GET['installationFormID'])){
 
         $serialNumbersByModel[$model] = $serialNumbers;
     }
+
+    $serialNumbersByStatus = [];
+    foreach ($return as $element) {
+        $model = $element['MODEL'];
+        $serialNumbers = array_filter($return, function($obj) use ($model) {
+            return $obj['MODEL'] === $model;
+        });
+        $serialNumbers = array_map(function($obj) {
+            return $obj['SERIAL_NUMBER'];
+        }, $serialNumbers);
+
+        $serialNumbersByStatus[$model] = $serialNumbers;
+    }
 }
 
 // Instanciation of inherited class
@@ -82,11 +118,13 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 
 // Set font
-$pdf->SetFont('Arial','B',10);
+$pdf->SetFont('Arial','B',12);
 
 // Row 1
 $pdf->Cell(0,6,'INSTALLATION FORM / TRANSMITTAL',0,1,'C');
 
+// Set font
+$pdf->SetFont('Arial','B',10);
 // Row 2
 $pdf->Cell(110,6,'PROJECT NAME: '.$projectName,1,0);
 $pdf->Cell(80,6,'DATE: '.$dateFormatted,1,1);
@@ -128,13 +166,22 @@ if(isset($_GET['installationFormID'])){
         $pdf->Cell(30,7,$key,1,0,'C');
         $pdf->Cell(70,7,implode(',', $value),1,0,'C');
         $pdf->Cell(19,7,count($value),1,0,'C');
-        $pdf->Cell(19,7,'$itemQTYReturn',1,0,'C');
-        $pdf->Cell(39,7,'$serialNumberReturn',1,1,'C');
+        // Check if there are matching serial numbers in $serialNumbersByStatus
+        if (isset($serialNumbersByStatus[$key])) {
+            $matchedSerialNumbers = $serialNumbersByStatus[$key];
+            $itemQTYReturn = count($matchedSerialNumbers);
+            $serialNumberReturn = implode(',', $matchedSerialNumbers);
+        } else {
+            $itemQTYReturn = "";
+            $serialNumberReturn = "";
+        }
+        
+        $pdf->Cell(19, 7, $itemQTYReturn, 1, 0, 'C');
+        $pdf->Cell(39, 7, $serialNumberReturn, 1, 1, 'C');
         $i++;
     }
 } else {
-    
-    for($i = 1; $i <= 28; $i++)
+    for($i = 1; $i <= 25; $i++)
     {
         $pdf->Cell(13,7,$i,1,0,'C');
         $pdf->Cell(30,7,'$itemCode',1,0,'C');
