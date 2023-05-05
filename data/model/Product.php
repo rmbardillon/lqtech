@@ -90,7 +90,7 @@ class Product
 
     public function getByID($id)
     {
-        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, SELLING_PRICE, SKU, PRODUCT_ID
+        $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, BUYING_PRICE, SELLING_PRICE, SKU, PRODUCT_ID
                 FROM products p
                 JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
                 WHERE pd.PRODUCT_DETAILS_ID = '$id'
@@ -98,6 +98,21 @@ class Product
         $result = $this->conn->query($sql);
 
         return $result->fetch_assoc();
+    }
+
+    public function getByModel($id)
+    {
+        $sql = "SELECT * FROM products p
+                JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                WHERE p.PRODUCT_DETAILS_ID = '$id' AND p.STATUS = 'IN';";
+        $result = $this->conn->query($sql);
+
+        $rows = array();
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
     }
 
     public function getSales() 
@@ -302,7 +317,7 @@ class Product
         $id = $request['product_id'];
         $selling_price = $request['selling_price'];
         $buying_price = $request['buying_price'];
-        $sql = "UPDATE product_details SET SELLING_PRICE=?, BUYING_PRICE=? WHERE PRODUCT_ID=?";
+        $sql = "UPDATE product_details SET SELLING_PRICE=?, BUYING_PRICE=? WHERE PRODUCT_DETAILS_ID=?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("dds",$selling_price, $buying_price, $id);
 

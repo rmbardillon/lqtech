@@ -12,7 +12,9 @@
         <table class="table">
             <thead>
                 <th>No.</th>
-                <th>Product</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Model</th>
                 <th>Total Stocks</th>
                 <th>Action</th>
             </thead>

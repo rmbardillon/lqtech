@@ -15,7 +15,9 @@ if ($action == 'displayStocksTable')
     foreach ($result as $product) {
         $table_data .= '<tr>';
         $table_data .= '<td>' . $counter . '</td>';
-        $table_data .= '<td>' . $product['CATEGORY'] ." ". $product['BRAND'] . " " .$product['MODEL']. '</td>';
+        $table_data .= '<td>' . $product['CATEGORY'] . '</td>';
+        $table_data .= '<td>' . $product['BRAND'] . '</td>';
+        $table_data .= '<td>' . $product['MODEL']. '</td>';
         $table_data .= '<td>' . $product['IN_QUANTITY'] . '</td>';
         $table_data .= '<td class="col-actions">';
         $table_data .= '<button type="button" onclick="Stock.viewProduct(`'. $product['PRODUCT_DETAILS_ID'] .'`)" class="btn btn-warning btn-sm w-50"><i class="bi bi-list-check"></i>View</button>';

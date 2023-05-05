@@ -47,6 +47,7 @@ const Product = (() => {
             }
         });
     }
+
     thisProduct.loadTableData = () => {
         $.ajax({
             type: "GET",
@@ -56,6 +57,27 @@ const Product = (() => {
                 $('.table').DataTable().destroy();
                 $('#tbody_product').html(response);
                 $('.table').DataTable();
+            },
+            error: function () {
+                
+            }
+        });
+    }
+
+    thisProduct.view = (id) => {
+        product_id = id;
+        $.ajax({
+            type: "POST",
+            url: PRODUCT_CONTROLLER + '?action=displayProductSerials',
+            dataType: "json",
+            data: {
+                product_id: product_id
+            },
+            success: function (response) {
+                $("#productModal").modal("show");
+                $(".table").DataTable().destroy();
+                $("#product_table").html(response);
+                $(".table").DataTable();
             },
             error: function () {
                 

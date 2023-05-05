@@ -25,7 +25,8 @@ class Stock
                 SELLING_PRICE, SKU, p.STATUS, COUNT(*) as QUANTITY
                 FROM products p
                 JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
-                GROUP BY pd.PRODUCT_DETAILS_ID";
+                GROUP BY pd.PRODUCT_DETAILS_ID
+                ORDER BY pd.CATEGORY, pd.BRAND, pd.MODEL;";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);

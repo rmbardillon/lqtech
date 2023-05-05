@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2023 at 07:45 AM
+-- Generation Time: May 05, 2023 at 07:14 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -47,7 +47,41 @@ INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACT
 ('089ac1c4ea1711ed', '2023-05-04 03:00:16', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('089b56a5ea1711ed', '2023-05-04 03:00:16', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('0b6c4743ea1711ed', '2023-05-04 03:00:21', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d14e38eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d1e98ceb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d2ce61eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d354feeb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d3adb2eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d480c3eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d4e007eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d542cceb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d5b16feb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d61838eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d67f26eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d717b5eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d7df42eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d85f27eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d8d29deb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d95713eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11d9ce36eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11da392deb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11dab992eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('11db2543eb0311ed', '2023-05-05 07:09:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('2464dd44ea2111ed', '2023-05-04 10:12:38', '58727a89cdf911ed', 1, 'User has logged in'),
+('47a17cc9ea4411ed', '2023-05-04 08:24:09', '58727a89cdf911ed', 1, 'Successfully saved the User'),
+('5669c1c5ea4711ed', '2023-05-04 08:46:03', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('59066c29eaf411ed', '2023-05-05 05:24:30', '58727a89cdf911ed', 1, 'Successfully update sell price of the Product'),
+('5df08ff1ea4711ed', '2023-05-04 08:46:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('5df15849ea4711ed', '2023-05-04 08:46:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('5df28a99ea4711ed', '2023-05-04 08:46:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('5df32a1bea4711ed', '2023-05-04 08:46:15', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('9581df7ceb0311ed', '2023-05-05 07:13:34', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('9df220efeadb11ed', '2023-05-05 08:27:28', '58727a89cdf911ed', 1, 'User has logged in'),
+('a0c4360deb0311ed', '2023-05-05 07:13:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('a0c51788eb0311ed', '2023-05-05 07:13:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('a0c60501eb0311ed', '2023-05-05 07:13:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('a0c6990feb0311ed', '2023-05-05 07:13:53', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('a50f450feadb11ed', '2023-05-05 02:27:40', '58727a89cdf911ed', 1, 'Successfully updated the User'),
 ('b12cd3b1ea3111ed', '2023-05-04 12:11:06', '58727a89cdf911ed', 1, 'User has logged in'),
 ('bc4a314aea1511ed', '2023-05-04 02:50:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('bc4acb60ea1511ed', '2023-05-04 02:50:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
@@ -66,7 +100,8 @@ INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACT
 ('bc51e193ea1511ed', '2023-05-04 02:50:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('bc5258aaea1511ed', '2023-05-04 02:50:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
 ('bc52d1b9ea1511ed', '2023-05-04 02:50:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('bc5346afea1511ed', '2023-05-04 02:50:59', '58727a89cdf911ed', 1, 'Successfully saved the Product');
+('bc5346afea1511ed', '2023-05-04 02:50:59', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
+('e7e0098eea4911ed', '2023-05-04 15:04:26', '58727a89cdf911ed', 1, 'User has logged in');
 
 -- --------------------------------------------------------
 
@@ -98,7 +133,8 @@ CREATE TABLE `installation_form` (
 --
 
 INSERT INTO `installation_form` (`INSTALLATION_FORM_ID`, `PROJECT_NAME`, `DATE_TIME`, `CONTACT_PERSON`, `CONTACT_NUMBER`, `PROJECT_SITE`, `SALESMAN_BRANCH`, `INSTALLER`, `SALES_ORDER_NUMBER`, `JOB_ORDER_NUMBER`, `SERVICE`, `NOTE`, `PREPARED_BY`, `TRANSMITTED_BY`, `RECEIVED_BY`, `STATUS`) VALUES
-('645301733b70d701', 'IMall Famy CCTV Installation', '2023-05-04 08:50:59', 'Marvin Vicencio', '09760657071', 'Famy, Laguna', 'Santa Rosa Main Branch', 'Romeo Bardillon', '809', '102', 'L300 (New)', '', 'JOHN DOE', 'Romeo Bardillon', 'JOHN DOE', 'Success');
+('645301733b70d701', 'IMall Famy CCTV Installation', '2023-05-04 08:50:59', 'Marvin Vicencio', '09760657071', 'Famy, Laguna', 'Santa Rosa Main Branch', 'Romeo Bardillon', '809', '102', 'L300 (New)', '', 'JOHN DOE', 'Romeo Bardillon', 'JOHN DOE', 'Success'),
+('64548fa16e814688', 'PUP CCTV Installation', '2023-05-05 13:09:53', 'Arwin Nucum', '09123456789', 'Barangay Tagapo, Santa Rosa, Laguna', 'Santa Rosa Main Branch', 'Jose Miguel Sevilla', '302', '', 'Multicab', '', 'JOHN DOE', '', '', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -262,14 +298,14 @@ INSERT INTO `products` (`PRODUCT_ID`, `PRODUCT_DETAILS_ID`, `SKU`, `SERIAL_NUMBE
 ('2e073b07ea1511ed', 'b8b6987fe94b11ed', '123', '3', '2023-05-04 08:47:00', '2023-05-04 00:00:00', 'OUT'),
 ('2e07c483ea1511ed', 'b8b6987fe94b11ed', '123', '4', '2023-05-04 09:00:16', NULL, 'IN'),
 ('2e087b0fea1511ed', 'b8b6987fe94b11ed', '123', '5', '2023-05-04 08:47:00', NULL, 'IN'),
-('2e0911e4ea1511ed', 'b8b6987fe94b11ed', '123', '6', '2023-05-04 08:47:00', NULL, 'IN'),
-('2e09a523ea1511ed', 'b8b6987fe94b11ed', '123', '7', '2023-05-04 08:47:00', NULL, 'IN'),
-('2e0a1fd6ea1511ed', 'b8b6987fe94b11ed', '123', '8', '2023-05-04 08:47:00', NULL, 'IN'),
-('2e0acc6cea1511ed', 'b8b6987fe94b11ed', '123', '9', '2023-05-04 08:47:00', NULL, 'IN'),
+('2e0911e4ea1511ed', 'b8b6987fe94b11ed', '123', '6', '2023-05-04 08:47:00', '2023-05-05 00:00:00', 'OUT'),
+('2e09a523ea1511ed', 'b8b6987fe94b11ed', '123', '7', '2023-05-04 08:47:00', '2023-05-05 00:00:00', 'OUT'),
+('2e0a1fd6ea1511ed', 'b8b6987fe94b11ed', '123', '8', '2023-05-04 08:47:00', '2023-05-05 00:00:00', 'OUT'),
+('2e0acc6cea1511ed', 'b8b6987fe94b11ed', '123', '9', '2023-05-04 08:47:00', '2023-05-05 00:00:00', 'OUT'),
 ('2e0b6e65ea1511ed', 'b8b6987fe94b11ed', '123', '10', '2023-05-04 08:47:00', NULL, 'IN'),
 ('3a18ae50ea1511ed', 'c462ce3de94b11ed', '321', '11', '2023-05-04 08:47:20', '2023-05-04 00:00:00', 'OUT'),
-('3a192c63ea1511ed', 'c462ce3de94b11ed', '321', '22', '2023-05-04 08:47:20', NULL, 'IN'),
-('3a19b92cea1511ed', 'c462ce3de94b11ed', '321', '33', '2023-05-04 08:47:20', NULL, 'IN'),
+('3a192c63ea1511ed', 'c462ce3de94b11ed', '321', '22', '2023-05-04 08:47:20', '2023-05-05 00:00:00', 'OUT'),
+('3a19b92cea1511ed', 'c462ce3de94b11ed', '321', '33', '2023-05-04 08:47:20', '2023-05-05 00:00:00', 'OUT'),
 ('3a1ac124ea1511ed', 'c462ce3de94b11ed', '321', '44', '2023-05-04 08:47:20', NULL, 'IN'),
 ('3a1b4932ea1511ed', 'c462ce3de94b11ed', '321', '55', '2023-05-04 08:47:20', NULL, 'IN'),
 ('3a1bc6d9ea1511ed', 'c462ce3de94b11ed', '321', '66', '2023-05-04 08:47:20', NULL, 'IN'),
@@ -277,6 +313,9 @@ INSERT INTO `products` (`PRODUCT_ID`, `PRODUCT_DETAILS_ID`, `SKU`, `SERIAL_NUMBE
 ('3a1cd246ea1511ed', 'c462ce3de94b11ed', '321', '88', '2023-05-04 08:47:20', NULL, 'IN'),
 ('3a1d4e86ea1511ed', 'c462ce3de94b11ed', '321', '99', '2023-05-04 08:47:20', NULL, 'IN'),
 ('3a1dd29dea1511ed', 'c462ce3de94b11ed', '321', '00', '2023-05-04 08:47:20', NULL, 'IN'),
+('5df1114aea4711ed', '566830a4ea4711ed', 'qwe', 'eqw', '2023-05-04 14:46:15', NULL, 'IN'),
+('5df20467ea4711ed', '566830a4ea4711ed', 'qwe', 'das', '2023-05-04 14:46:15', NULL, 'IN'),
+('5df2d23fea4711ed', '566830a4ea4711ed', 'qwe', 'fdg', '2023-05-04 14:46:15', NULL, 'IN'),
 ('6207b869ea1511ed', '50fa327aea1511ed', '111', '111', '2023-05-04 08:48:27', '2023-05-04 00:00:00', 'OUT'),
 ('62085184ea1511ed', '50fa327aea1511ed', '111', '222', '2023-05-04 09:00:16', NULL, 'IN'),
 ('6208d605ea1511ed', '50fa327aea1511ed', '111', '333', '2023-05-04 08:48:27', NULL, 'IN'),
@@ -285,8 +324,11 @@ INSERT INTO `products` (`PRODUCT_ID`, `PRODUCT_DETAILS_ID`, `SKU`, `SERIAL_NUMBE
 ('620ac0e4ea1511ed', '50fa327aea1511ed', '111', '666', '2023-05-04 08:48:27', NULL, 'IN'),
 ('620b4af5ea1511ed', '50fa327aea1511ed', '111', '777', '2023-05-04 08:48:27', NULL, 'IN'),
 ('620be50cea1511ed', '50fa327aea1511ed', '111', '888', '2023-05-04 08:48:27', NULL, 'IN'),
-('620c5b3fea1511ed', '50fa327aea1511ed', '111', '999', '2023-05-04 08:48:27', NULL, 'IN'),
-('620cc7adea1511ed', '50fa327aea1511ed', '111', '000', '2023-05-04 08:48:27', NULL, 'IN');
+('620c5b3fea1511ed', '50fa327aea1511ed', '111', '999', '2023-05-04 08:48:27', '2023-05-05 00:00:00', 'OUT'),
+('620cc7adea1511ed', '50fa327aea1511ed', '111', '000', '2023-05-04 08:48:27', '2023-05-05 00:00:00', 'OUT'),
+('a0c4ceceeb0311ed', '95803d91eb0311ed', 'poi', 'pp', '2023-05-05 13:13:53', NULL, 'IN'),
+('a0c5b73ceb0311ed', '95803d91eb0311ed', 'poi', 'oo', '2023-05-05 13:13:53', NULL, 'IN'),
+('a0c653cfeb0311ed', '95803d91eb0311ed', 'poi', 'ii', '2023-05-05 13:13:53', NULL, 'IN');
 
 -- --------------------------------------------------------
 
@@ -316,7 +358,9 @@ CREATE TABLE `product_details` (
 --
 
 INSERT INTO `product_details` (`PRODUCT_DETAILS_ID`, `CATEGORY`, `BRAND`, `MODEL`, `BUYING_PRICE`, `SELLING_PRICE`, `DATE_ADDED`, `CAMERA_TYPE`, `CAMERA_SHAPE`, `RECORDER_TYPE`, `CAPACITY`, `PSU_TYPE`, `WATTS`, `MONITOR_SIZE`) VALUES
-('50fa327aea1511ed', 'Monitor', 'Hikvision', 'Generic', '0.00', '0.00', '2023-05-04 08:47:59', NULL, NULL, NULL, NULL, NULL, NULL, '32 Inches'),
+('50fa327aea1511ed', 'Monitor', 'Hikvision', 'Generic', '1500.00', '3000.00', '2023-05-04 08:47:59', NULL, NULL, NULL, NULL, NULL, NULL, '32 Inches'),
+('566830a4ea4711ed', 'Hard drive', 'Hikvision', 'H1TB', '0.00', '0.00', '2023-05-04 14:46:03', NULL, NULL, NULL, '1TB', NULL, NULL, NULL),
+('95803d91eb0311ed', 'Camera', 'Hikvision', 'DS-2CE16D0T-EXIPF', '0.00', '0.00', '2023-05-05 13:13:34', 'Analog', 'Bullet', NULL, NULL, NULL, NULL, NULL),
 ('b8b6987fe94b11ed', 'Camera', 'Hikvision', 'DS-2CE70DF3T-PF', '0.00', '0.00', '2023-05-03 08:44:54', 'IP', 'Dome', NULL, NULL, NULL, NULL, NULL),
 ('c462ce3de94b11ed', 'Recorder', 'Hikvision', 'ERA-A363H', '0.00', '0.00', '2023-05-03 08:45:14', NULL, NULL, 'NVR', NULL, NULL, NULL, NULL);
 
@@ -341,6 +385,14 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`SALE_ID`, `INSTALLATION_FORM_ID`, `PRODUCT_DETAILS_ID`, `SERIAL_NUMBER`, `SKU`, `DATE_PURCHASED`, `STATUS`) VALUES
+('11d226bbeb0311ed', '64548fa16e814688', 'b8b6987fe94b11ed', '6', '123', '2023-05-05 13:09:53', 'OUT'),
+('11d3810eeb0311ed', '64548fa16e814688', 'b8b6987fe94b11ed', '7', '123', '2023-05-05 13:09:53', 'OUT'),
+('11d4b33aeb0311ed', '64548fa16e814688', 'b8b6987fe94b11ed', '8', '123', '2023-05-05 13:09:53', 'OUT'),
+('11d57606eb0311ed', '64548fa16e814688', 'b8b6987fe94b11ed', '9', '123', '2023-05-05 13:09:53', 'OUT'),
+('11d6bd23eb0311ed', '64548fa16e814688', 'c462ce3de94b11ed', '22', '321', '2023-05-05 13:09:53', 'OUT'),
+('11d82027eb0311ed', '64548fa16e814688', 'c462ce3de94b11ed', '33', '321', '2023-05-05 13:09:53', 'OUT'),
+('11d996a1eb0311ed', '64548fa16e814688', '50fa327aea1511ed', '000', '111', '2023-05-05 13:09:53', 'OUT'),
+('11da7e98eb0311ed', '64548fa16e814688', '50fa327aea1511ed', '999', '111', '2023-05-05 13:09:53', 'OUT'),
 ('bc4b1ba3ea1511ed', '645301733b70d701', 'b8b6987fe94b11ed', '1', '123', '2023-05-04 08:50:59', 'OUT'),
 ('bc4c78d4ea1511ed', '645301733b70d701', 'b8b6987fe94b11ed', '2', '123', '2023-05-04 08:50:59', 'OUT'),
 ('bc4d879fea1511ed', '645301733b70d701', 'b8b6987fe94b11ed', '3', '123', '2023-05-04 08:50:59', 'RETURNED'),
@@ -368,9 +420,14 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`STOCKS_ID`, `PRODUCT_ID`, `DATE_TODAY`, `IN`, `OUT`) VALUES
+('11d19ccbeb0311ed', 'b8b6987fe94b11ed', '2023-05-05', 0, 4),
+('11d6540feb0311ed', 'c462ce3de94b11ed', '2023-05-05', 0, 2),
+('11d9194aeb0311ed', '50fa327aea1511ed', '2023-05-05', 0, 2),
 ('2e04f8d1ea1511ed', 'b8b6987fe94b11ed', '2023-05-04', 11, 4),
 ('3a17a84fea1511ed', 'c462ce3de94b11ed', '2023-05-04', 10, 1),
-('62072796ea1511ed', '50fa327aea1511ed', '2023-05-04', 11, 2);
+('5def00f3ea4711ed', '566830a4ea4711ed', '2023-05-04', 3, 0),
+('62072796ea1511ed', '50fa327aea1511ed', '2023-05-04', 11, 2),
+('a0c2abdaeb0311ed', '95803d91eb0311ed', '2023-05-05', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -395,7 +452,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`USER_ID`, `FIRST_NAME`, `LAST_NAME`, `USERNAME`, `PASSWORD`, `ROLE`, `LOGIN_ATTEMPTS`, `IS_LOCKED`, `LAST_LOGIN`) VALUES
-('58727a89cdf911ed', 'JOHN', 'DOE', 'owner', '$2y$10$NNjsc/qfqw0VhWXnVXwI4e7epUme3YfQlyWpaXcMdpHqjRvp721ze', 1, 0, 0, '2023-05-04 12:11:06');
+('479fb41aea4411ed', 'JK', 'Labajo', 'adminjowner', '$2y$10$UnicskMF8MtgZO1vNrjRLeCQBNwkY/uQgEGAjrOkIvRHZPfwJjyda', 2, 0, 0, NULL),
+('58727a89cdf911ed', 'JOHN', 'DOE', 'owner', '$2y$10$NNjsc/qfqw0VhWXnVXwI4e7epUme3YfQlyWpaXcMdpHqjRvp721ze', 1, 0, 0, '2023-05-05 08:27:28');
 
 --
 -- Indexes for dumped tables

@@ -498,6 +498,7 @@ const Product = (() => {
         toUpdate = false;
 
         $('#category').val("");
+        $("#category").prop("disabled", false);
         $('#inputs').html('');
     }
 
@@ -547,17 +548,20 @@ const Product = (() => {
     }
 
     thisProduct.clickUpdate = (id) => {
+        console.log(id);
         product_id = id;
 
         $.ajax({
             type: "POST",
             url: PRODUCT_CONTROLLER + '?action=getById',
-            dataType: "json",
+            // dataType: "json",
             data:{
                 product_id: product_id
             },
             success: function (response) 
             {   
+                response = JSON.parse(response);
+                console.log(response);
                 if(response.CATEGORY == "Camera") {
                     $('#category').val("Camera");
                     $('#category').trigger("change");
@@ -595,6 +599,7 @@ const Product = (() => {
                 $("#selling_price").val(response.SELLING_PRICE);
                 $("#serial_number").val(response.SERIAL_NUMBER);
 
+                $("#category").prop("disabled", true);
                 $("#brand").prop("disabled", true);
                 $("#model").prop("disabled", true);
                 $("#serial_number").prop("disabled", true);

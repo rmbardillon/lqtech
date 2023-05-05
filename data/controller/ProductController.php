@@ -105,10 +105,32 @@ else if ($action == 'displayProductsTable')
         $table_data .= '<td>' . $product['MODEL']. '</td>';
         $table_data .= '<td>' . $product['IN_QUANTITY'] . '</td>';
         $table_data .= '<td>' . $product['SELLING_PRICE'] . '</td>';
-        $table_data .= '<td><button class="btn btn-warning"><i class="bi bi-list-check"></i>Edit</button></td>';
+        $table_data .= '<td><button class="btn btn-warning" onclick="Product.view(`'. $product['PRODUCT_DETAILS_ID'] .'`)"><i class="bi bi-list-check"></i>View</button></td>';
         $table_data .= '</td>';
         $table_data .= '</tr>';
 
+        $counter++;
+    }
+
+    echo json_encode($table_data);
+}
+
+else if ($action == 'displayProductSerials') 
+{
+    $product_id = $_POST['product_id'];
+    $result = $Product->getByModel($product_id);
+
+    $table_data = '';
+    $counter = 1;
+    // print_r($result);
+    foreach ($result as $product) {
+        $table_data .= '<tr>';
+        $table_data .= '<td>' . $counter . '</td>';
+        $table_data .= '<td>' . $product['BRAND'] . '</td>';
+        $table_data .= '<td>' . $product['MODEL']. '</td>';
+        $table_data .= '<td>' . $product['SKU'] . '</td>';
+        $table_data .= '<td>' . $product['SERIAL_NUMBER'] . '</td>';
+        $table_data .= '</tr>';
         $counter++;
     }
 
@@ -136,9 +158,9 @@ else if ($action == 'getBySku')
     echo json_encode($Product->getBySku($sku));
 }
 
-else if ($action == 'getByID')
+else if ($action == 'getById')
 {
-    $id = $_POST['id'];
+    $id = $_POST['product_id'];
 
     echo json_encode($Product->getByID($id));
 }
