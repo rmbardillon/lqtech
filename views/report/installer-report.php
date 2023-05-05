@@ -26,7 +26,7 @@ class PDF extends FPDF
         $this->Cell(0,5,'Sta. Rosa City, Laguna 4024',0,1);
         
         // Line break
-        $this->Ln(5);
+        $this->Ln(10);
         $this->Line(10, 40, 200, 40);
     }
     // Page footer

@@ -26,7 +26,7 @@ class PDF extends FPDF
         $this->Cell(0,5,'Sta. Rosa City, Laguna 4024',0,1);
         
         // Line break
-        $this->Ln(5);
+        $this->Ln(10);
         $this->Line(10, 40, 200, 40);
     }
     // Page footer
@@ -72,8 +72,8 @@ $pdf->Ln(1);
 $pdf->SetFont('Arial','B',7);
 
 $pdf->Cell(13,10,'No.',1,0,'C');
-$pdf->Cell(30,10,'Item Code',1,0,'C');
-$pdf->Cell(128,10,'Item Description',1,0,'C');
+$pdf->Cell(38,10,'Item Code',1,0,'C');
+$pdf->Cell(120,10,'Item Description',1,0,'C');
 $pdf->Cell(19,10,'QTY OUT',1,1,'C');
 
 if(isset($_GET['from'])){
@@ -81,8 +81,8 @@ if(isset($_GET['from'])){
     foreach($result as $key => $value)
     {
         $pdf->Cell(13,7,$i,1,0,'C');
-        $pdf->Cell(30,7,$value['SKU'],1,0,'C');
-        $pdf->Cell(128,7,$value['CATEGORY']." ".$value['BRAND']." ".$value['MODEL'],1,0,'C');
+        $pdf->Cell(38,7,$value['SKU'],1,0,'C');
+        $pdf->Cell(120,7,$value['CATEGORY']." ".$value['BRAND']." ".$value['MODEL'],1,0,'C');
         $pdf->Cell(19,7,$value['COUNT(*)'],1,1,'C');
         $i++;
     }
@@ -90,8 +90,8 @@ if(isset($_GET['from'])){
     for ($i = 1; $i <= 56; $i++)
     {
         $pdf->Cell(13,7,$i,1,0,'C');
-        $pdf->Cell(30,7,"Item Code",1,0,'C');
-        $pdf->Cell(128,7,"Item Description",1,0,'C');
+        $pdf->Cell(38,7,"Item Code",1,0,'C');
+        $pdf->Cell(120,7,"Item Description",1,0,'C');
         $pdf->Cell(19,7,"QTY Out",1,1,'C');
     }
 }

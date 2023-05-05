@@ -26,7 +26,7 @@ class PDF extends FPDF
         $this->Cell(0,5,'Sta. Rosa City, Laguna 4024',0,1);
         
         // Line break
-        $this->Ln(5);
+        $this->Ln(10);
         $this->Line(10, 40, 200, 40);
     }
     // Page footer
@@ -162,10 +162,13 @@ if(isset($_GET['installationFormID'])){
     $i = 1;
     foreach($serialNumbersByModel as $key => $value)
     {
-        $pdf->Cell(13,7,$i,1,0,'C');
-        $pdf->Cell(30,7,$key,1,0,'C');
-        $pdf->Cell(70,7,implode(',', $value),1,0,'C');
-        $pdf->Cell(19,7,count($value),1,0,'C');
+        $text = implode(',', $value);
+        $height = $pdf->GetMultiCellHeight(70, 7, $text);
+        $pdf->Cell(13,$height,$i,1,0,'C');
+        $pdf->Cell(30,$height,$key,1,0,'C');
+        $pdf->MultiCell(70,$height,implode(',', $value),1,'C');
+        $pdf->SetXY(123, $pdf->GetY() - $height);
+        $pdf->Cell(19,$height,count($value),1,0,'C');
         // Check if there are matching serial numbers in $serialNumbersByStatus
         if (isset($serialNumbersByStatus[$key])) {
             $matchedSerialNumbers = $serialNumbersByStatus[$key];
@@ -183,12 +186,20 @@ if(isset($_GET['installationFormID'])){
 } else {
     for($i = 1; $i <= 25; $i++)
     {
-        $pdf->Cell(13,7,$i,1,0,'C');
-        $pdf->Cell(30,7,'$itemCode',1,0,'C');
-        $pdf->Cell(70,7,'$itemDesc',1,0,'C');
-        $pdf->Cell(19,7,'$itemQTYOut',1,0,'C');
-        $pdf->Cell(19,7,'$itemQTYReturn',1,0,'C');
-        $pdf->Cell(39,7,'$serialNumberReturn',1,1,'C');
+        // $before = $pdf->GetY();
+        // $pdf->MultiCell(70,7,'$itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc$itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc',1,'C');
+        // $after = $pdf->GetY();
+        // $height = $after - $before;
+        $text = '$itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc$itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc';
+        $height = $pdf->GetMultiCellHeight(70, 7, $text);
+
+        $pdf->Cell(13,$height,$i,1,0,'C');
+        $pdf->Cell(30,$height,'$itemCode',1,0,'C');
+        $pdf->MultiCell(70,7,'$itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc$itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc,itemDesc',1,'C');
+        $pdf->SetXY(123, $pdf->GetY() - $height);
+        $pdf->Cell(19,$height,'$itemQTYOut',1,0,'C');
+        $pdf->Cell(19,$height,'$itemQTYReturn',1,0,'C');
+        $pdf->Cell(39,$height,'$serialNumberReturn',1,1,'C');
     }
 }
 

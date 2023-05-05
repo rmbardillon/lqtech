@@ -40,11 +40,14 @@
       <li class="nav-item">
         <a class="nav-link  <?php echo ($page == "Installation Status") ? 'active' : '' ?>" href="../master-page/installation-status.php">Installation Status</a>
       </li>
-      <li class="nav-item ">
+      <!-- <li class="nav-item ">
         <a class="nav-link report <?php echo ($page == "Reports") ? 'report-active' : '' ?>" href="../master-page/reports.php"><i class="fas fa-download "></i>Reports</a>
-      </li>
+      </li> -->
     </ul>
     <ul class="navbar-nav">
+        <li class="nav-item pe-5">
+        <a class="nav-link report <?php echo ($page == "Reports") ? 'report-active' : '' ?>" href="../master-page/reports.php"><i class="fas fa-download "></i> Reports</a>
+      </li>
         <li class="nav-item">
               <b><a class="nav-link h1" id="currentDate"></a></b>
         </li>
