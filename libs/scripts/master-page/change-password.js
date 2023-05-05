@@ -90,8 +90,8 @@ const changePassword = (() => {
             url: USER_CONTROLLER + '?action=changePassword',
             dataType: "json",
             data: {
-                username: $("#username").val(),
-                newPassword: $("#newPassword").val(),
+                user_id: $("#username").val(),
+                password: $("#newPassword").val(),
             },
             success: function (response) {
                 if (response == "Updated Successfully") {

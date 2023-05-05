@@ -42,19 +42,15 @@
                             <h2 class="section__sub-title" id="lbl_title">Create Account</h2>
                             <form class="row g-3" novalidate>
                                 <div class="col-md-12">
-                                    <label for="username" class="form-label">First Name</label>
+                                    <label for="username" class="form-label required">First Name</label>
                                     <input type="text" class="form-control" id="txt_first_name" required>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <label for="lastName" class="form-label required">Last Name</label>
                                     <input type="text" class="form-control" id="txt_last_name" required>
                                 </div>
-                                <!-- <div class="col-md-12">
-                                    <label for="lastName" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="txt_user_name" readonly>
-                                </div> -->
                                 <div class="col-md-12">
-                                    <label for="newpassword" class="form-label">Password</label>
+                                    <label for="newpassword" class="form-label required" id="pwd">Password</label>
                                     <input type="password" class="form-control" id="txt_newpassword" required>
                                     <div id="password-requirements" style="display: none;">
                                         <input type="checkbox" id="length" disabled><span id="pass-length">At least 8 characters</span><br>
@@ -66,26 +62,18 @@
                                     <div id="password-validation"></div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <label for="confirmPassword" class="form-label required" id="confirmPwd">Confirm Password</label>
                                     <input type="password" class="form-control" id="txt_confirm_password" required>
                                     <div class="error-message text-danger"></div>
                                 </div>
                                 <div class="col">
-                                    <label for="role" class="form-label">Role</label>
+                                    <label for="role" class="form-label required">Role</label>
                                     <select id="role" class="form-select" required>
                                         <option value="" disabled selected>Choose...</option>
                                         <option value="2">Admin</option>
                                         <option value="3">User</option>
                                     </select>
                                 </div>
-                                <!-- <div class="col-md-6">
-                                    <label for="is_locked" class="form-label">Is Locked</label>
-                                    <select id="is_locked" class="form-select" required>
-                                        <option value="" disabled selected>Choose...</option>
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div> -->
                                 <div class="col-12">
                                     <div id="error-message" class='text-danger'></div>
                                 </div>

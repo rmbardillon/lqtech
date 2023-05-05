@@ -54,6 +54,16 @@
 
         public function delete($user_id)
         {
+            $sql = "DELETE FROM action_logs WHERE USER_ID='$user_id'";
+
+            $result = '';
+            if ($this->connection->query($sql) === TRUE) {
+                $result = "Deleted Successfully";
+                $this->ActionLog->saveLogs('user', 'deleted');
+            } else {
+                $result = "Error deleting record: " . $this->connection->error;
+            }
+
             $sql = "DELETE FROM users WHERE USER_ID='$user_id'";
 
             $result = '';
@@ -127,12 +137,12 @@
 
         public function update_password($request)
         {
-            $newPassword = $request['newPassword'];
-            $username = $request['username'];
+            $newPassword = $request['password'];
+            $username = $request['user_id'];
 
             $password = password_hash($newPassword, PASSWORD_BCRYPT);
 
-            $sql = "UPDATE users SET PASSWORD=? WHERE USERNAME=?";
+            $sql = "UPDATE users SET PASSWORD=? WHERE USER_ID=?";
 
             $stmt = $this->connection->prepare($sql);
             $stmt->bind_param("ss", $password, $username);
@@ -160,7 +170,6 @@
             $stmt = $this->connection->prepare($sql);
             $stmt->bind_param("s", $username);
             $stmt->execute();
-
 
             $user_id = "";
             $first_name = "";
@@ -191,7 +200,11 @@
 
                 $this->ActionLog->saveLogs('login');
                 return "Validated";
-            } else {
+            } else if($user_id == "") {
+                return "Invalid Username or Password";
+                // return $user_id;
+            } 
+            else{
                 $stmt->free_result();
 
                 $login_attempts += 1;
@@ -240,7 +253,7 @@
             $username = $request['username'];
             $oldPassword = $request['oldPassword'];
 
-            $sql = "SELECT PASSWORD FROM users WHERE USERNAME = ?";
+            $sql = "SELECT PASSWORD FROM users WHERE USER_ID = ?";
 
             $stmt = $this->connection->prepare($sql);
             $stmt->bind_param("s", $username);

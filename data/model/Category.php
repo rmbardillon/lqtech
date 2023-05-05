@@ -26,7 +26,7 @@ class Category
 
     public function getById($model_id)
     {
-        $sql = "SELECT MODEL_ID, MODEL FROM models WHERE MODEL_ID = '$model_id'";
+        $sql = "SELECT * FROM models WHERE MODEL_ID = '$model_id'";
         $result = $this->conn->query($sql);
 
         $this->conn->close();
@@ -61,15 +61,16 @@ class Category
     public function save($request)
     {
         $model_name = $request['name'];
+        $category = $request['category'];
         $values_array = explode("\n", $model_name);
         foreach($values_array as $model) {
             if(trim($model) === "") {
                 continue;
             }
-            $sql = "INSERT INTO models(MODEL) VALUES (?)";
+            $sql = "INSERT INTO models(CATEGORY, MODEL) VALUES (?, ?)";
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("s",$model);
+            $stmt->bind_param("ss",$category, $model);
 
             $result = '';
             if ($stmt->execute() === TRUE) {

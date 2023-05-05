@@ -156,12 +156,12 @@
 
     else if($action == 'changePassword') 
     {
-        $username = $_POST['username'];
-        $newPassword = $_POST['newPassword'];
+        $user_id = $_POST['user_id'];
+        $password = $_POST['password'];
 
         $request = [
-            'username' => $username,
-            'newPassword' => $newPassword
+            'user_id' => $user_id,
+            'password' => $password
         ];
 
         $result = $User->update_password($request);

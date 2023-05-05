@@ -1,7 +1,17 @@
 $(document).ready(function () {
     $('.btn').click(function (event){
         event.preventDefault()
-    })   
+    });
+
+    $('#show-password').click(function() {
+        if ($(this).is(':checked')) {
+            $('#password').attr('type', 'text');
+            $(this).next('label').text('Hide Password');
+        } else {
+            $('#password').attr('type', 'password');
+            $(this).next('label').text('Show Password');
+        }
+    });
 });
 
 $("#login").click(function() {
@@ -9,7 +19,7 @@ $("#login").click(function() {
     var password = $("#password").val();
     $.ajax({
         type: "POST",
-        url: "../../data/controller/LoginController.php?action=login",
+        url: LOGIN_CONTROLLER + '?action=login',
         dataType: "json",
         data: {
             username: username,

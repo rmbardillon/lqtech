@@ -252,7 +252,8 @@ const Category = (() => {
     }
 
     thisCategory.save = () => {
-        const model_name = $('#txt_category_name').val();
+        const model_name = $('#txt_category_name').val().trim();
+        const category = $('#category').val();
         if(model_name == "") {
             Swal.fire({
                 position: 'center',
@@ -267,7 +268,8 @@ const Category = (() => {
                 url: CATEGORY_CONTROLLER + '?action=save',
                 dataType: "json",
                 data:{
-                    model_name: model_name
+                    model_name: model_name,
+                    category: category
                 },
                 success: function (response) 
                 {
@@ -301,6 +303,7 @@ const Category = (() => {
             success: function (response) 
             {
                 $('#txt_category_name').val(response.MODEL);
+                $('#category').val(response.CATEGORY);
                 toUpdate = true;
 
                 $('#btn_save_category').html('Update MODEL');
@@ -312,7 +315,7 @@ const Category = (() => {
     }
 
     thisCategory.update = () => {
-        const model_name = $('#txt_category_name').val();
+        const model_name = $('#txt_category_name').val().trim();
 
         $.ajax({
             type: "POST",

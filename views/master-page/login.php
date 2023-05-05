@@ -22,12 +22,19 @@
             <img src="../../libs/images/lqtechicon.png" alt="LQTech Logo">
             <input type="text" class="form-control mb-2" id="username" placeholder="Username" required>
             <input type="password" class="form-control mb-2" id="password" placeholder="Password" required>
+            <div class="password-wrapper">
+                <input type="checkbox" class="form-check-input" id="show-password">
+                <label class="form-check-label" for="show-password">Show Password</label>
+            </div>
             <button class="btn btn-primary w-100 mb-2" id="login">Login</button>
             <a class="" href="#">Forgot Password?</a>
         </form>
+
     </div>
     <script src="../../libs/plugins/jquery/jquery-3.6.1.min.js"></script>
     <script src="../../libs/plugins/sweetalert/sweetalert.all.min.js"></script>
+    <script src="../../config/system_name.js"></script>
+    <script src="../../libs/scripts/vars.js"></script>
     <script src="../../libs/scripts/master-page/login.js"></script>
 </body>
 </html>

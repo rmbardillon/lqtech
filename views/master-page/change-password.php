@@ -10,7 +10,7 @@
     <div class="container mt-5">
         <h1>Change Password</h1>
         <form>
-            <input type="hidden" id="username" value="<?php echo($_SESSION['user']['username']); ?>">
+            <input type="hidden" id="username" value="<?php echo($_SESSION['user']['id']); ?>">
             <div class="form-group">
                 <label class="form-label" for="oldPassword">Old Password</label>
                 <input type="password" class="form-control" id="oldPassword" placeholder="Old Password" autofocus>

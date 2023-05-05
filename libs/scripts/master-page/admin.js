@@ -218,8 +218,10 @@ const Admin = (() => {
                 $('#txt_first_name').val(response.FIRST_NAME);
                 $('#txt_last_name').val(response.LAST_NAME);
                 $('#txt_user_name').val(response.USERNAME);
-                $('#txt_newpassword').prop( "disabled", true );
-                $('#txt_confirm_password').prop( "disabled", true );
+                $('#txt_newpassword').hide()
+                $('#txt_confirm_password').hide()
+                $('#pwd').hide()
+                $('#confirmPwd').hide()
                 $('#role').val(response.ROLE);
                 $('#slc_status').val(response.IS_LOCKED);
                 
@@ -367,6 +369,10 @@ const Admin = (() => {
         $('#txt_newpassword').val("");
         $('#txt_confirm_password').val("");
         $('#role').val("");
+        $('#txt_newpassword').show()
+        $('#txt_confirm_password').show()
+        $('#pwd').show()
+        $('#confirmPwd').show()
 
         $('.form-control').prop("disabled", false);
 

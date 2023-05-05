@@ -56,9 +56,11 @@ else if ($action == 'getById')
 else if ($action == 'save')
 {
     $model_name = $_POST['model_name'];
+    $category = $_POST['category'];
 
     $request = [
-        'name' => $model_name
+        'name' => $model_name,
+        'category' => $category,
     ];
 
     $result = $Category->save($request);
