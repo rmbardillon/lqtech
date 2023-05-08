@@ -63,10 +63,11 @@ class ProductDetails
         $sql = "SELECT * FROM product_details WHERE CATEGORY = '$category'";
 
         $result = $this->conn->query($sql);
-        
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+
         $this->conn->close();
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+        return $rows;
 
     }
     

@@ -24,27 +24,20 @@ const Product = (() => {
     var productID = '';
     var productDetailsID = '';
 
-    $.ajax({
-        type: "GET",
-        url: 'https://worldtimeapi.org/api/ip',
-        dataType: "json",
-        success: function (response) {
-            const datetimeString = response.datetime;
-            const datetime = new Date(datetimeString);
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
-            const formattedDatetime = datetime.toLocaleString('en-US', options);
-            $("#date").val(formattedDatetime);
-        },
-    });
+    const datetime = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    const formattedDatetime = datetime.toLocaleString('en-US', options);
+    $("#date").val(formattedDatetime);
 
     $("#closeModal").click(function () {
-        Swal.fire({
-            title: 'Are you sure you want to leave?',
-            text: "You will lose all unsaved data.",
+        swal.fire({
+            title: "Are you sure you want to leave?",
+            text: "You will lose unsaved data.",
+            icon: "error",
             showCancelButton: true,
-            confirmButtonText: 'Confirm',
-            cancelButtonText: 'Cancel',
-            }).then((result) => {
+            confirmButtonText: "Ok",
+            reverseButtons: true,
+        }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = 'home.php';
             } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -110,7 +103,18 @@ const Product = (() => {
     });
     
     $("#submitInstallationForm").click(function(){
-        $("#confirmFormModal").modal("hide");
+        swal.fire({
+            title: "Are you sure you want to submit?",
+            text: "You will not be able to edit this form once submitted.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ok",
+            reverseButtons: true,
+        }).then((result) => {
+            if(result.isConfirmed) {
+                $("#confirmFormModal").modal("hide");
+            }
+        })
     });
 
     $('.btn').click(function (event){

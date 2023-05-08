@@ -20,6 +20,22 @@
             form.classList.add('was-validated');
         });
     });
+
+    $(document).on('keyup change', 'input[type="text"]:not(.password[type="text"]),textarea', function() {
+        $(this).val($(this).val().toUpperCase());
+    });
+    
+    $(document).on('keypress', '.numbers', function(e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+    });
+    
+    $(document).on('keyup', '.telephone', function() {
+        if ($(this).val().length > 11) {
+            $(this).val($(this).val().substring(0, 11));
+        }
+    });
     
     // function updateDatetime() {
     //     $.ajax({

@@ -60,9 +60,9 @@ $pdf->SetFont('Arial','B',12);
 
 // Row 1
 if(isset($_GET['from'])){
-    $pdf->Cell(0,6,strtoupper('PRODUCT INVENTORY FOR '.$fromDate." TO ".$toDate),0,1,'C');
+    $pdf->Cell(0,6,strtoupper('PRODUCT SALES INVENTORY FOR '.$fromDate." TO ".$toDate),0,1,'C');
 } else {
-    $pdf->Cell(0,6,strtoupper('PRODUCT INVENTORY FOR FROMDATE TO TODATE'),0,1,'C');
+    $pdf->Cell(0,6,strtoupper('PRODUCT SALES INVENTORY FOR FROMDATE TO TODATE'),0,1,'C');
 }
 
 // Line break

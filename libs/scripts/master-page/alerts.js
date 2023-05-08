@@ -11,10 +11,10 @@ const Alerts = (() => {
     thisAlerts.restock = (id) => {
         $.ajax({
             type: "POST",
-            url: PRODUCT_CONTROLLER + '?action=getByID',
+            url: PRODUCT_CONTROLLER + '?action=getById',
             dataType: "json",
             data: {
-                id: id
+                product_id: id
             },
             success: function (response) {
                 var category = response.CATEGORY;

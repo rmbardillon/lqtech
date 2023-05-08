@@ -15,6 +15,7 @@ if ($action == 'getTableData')
     foreach ($result as $category) {
         $table_data .= '<tr>';
         $table_data .= '<td>' . $counter . '</td>';
+        $table_data .= '<td><span class="category">'  . $category['CATEGORY'] . '</span></td>';
         $table_data .= '<td><span class="category">'  . $category['MODEL'] . '</span></td>';
         $table_data .= '<td class="col-actions">';
         $table_data .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
@@ -34,7 +35,8 @@ if ($action == 'getTableData')
 
 else if ($action == 'getSelectData')
 {
-    $result = $Category->getAll();
+    $category = $_POST['category'];
+    $result = $Category->getByCategory($category);
 
     $options = '<option value="" selected="true" disabled>Select Model</option>';
 
@@ -72,10 +74,12 @@ else if ($action == 'update')
 {
     $model_id = $_POST['model_id'];
     $model_name = $_POST['model_name'];
+    $category = $_POST['category'];
 
     $request = [
         'id' => $model_id,
         'name' => $model_name,
+        'category' => $category,
     ];
 
     $result = $Category->update($request);

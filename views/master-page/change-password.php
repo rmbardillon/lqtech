@@ -20,6 +20,10 @@
                 <label class="form-label" for="newPassword">New Password</label>
                 <input type="password" class="form-control" id="newPassword" placeholder="New Password">
                 <span class="text-danger" id="newPasswordError"></span>
+                <div id="password-strength-container">
+                    <div id="password-strength-meter"></div>
+                    <div id="password-strength-text"></div>
+                </div>
             </div>
             <div class="form-group">
                 <label class="form-label" for="confirmPassword">Re-type New Password</label>

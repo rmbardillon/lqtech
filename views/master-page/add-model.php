@@ -52,6 +52,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Category</th>
                                         <th>Model Name</th>
                                         <th>Actions</th>
                                     </tr>

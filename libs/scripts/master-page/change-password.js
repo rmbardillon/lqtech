@@ -64,6 +64,43 @@ $(document).ready(function () {
         }
     });
 
+    $("#newPassword").on("keyup", function () {
+        var password = $(this).val();
+        var strength = 0;
+        if (password.match(/[a-z]+/)) {
+        strength += 1;
+        }
+        if (password.match(/[A-Z]+/)) {
+        strength += 1;
+        }
+        if (password.match(/[0-9]+/)) {
+        strength += 1;
+        }
+        if (password.match(/[$@#&!]+/)) {
+        strength += 1;
+        }
+
+        if (password.length < 8) {
+        strength = 0;
+        }
+
+        var strengthPercent = (strength / 4) * 100;
+        $('#password-strength-meter').width(strengthPercent + '%');
+        if (strength < 2) {
+        $('#password-strength-meter').css('background-color', '#f00');
+        $('#password-strength-text').html('Weak');
+        } else if (strength == 2) {
+        $('#password-strength-meter').css('background-color', '#ff0');
+        $('#password-strength-text').html('Fair');
+        } else if (strength == 3) {
+        $('#password-strength-meter').css('background-color', '#0f0');
+        $('#password-strength-text').html('Good');
+        } else if (strength == 4) {
+        $('#password-strength-meter').css('background-color', '#0f0');
+        $('#password-strength-text').html('Strong');
+        }
+    });
+
     
     $("#confirmPassword").on("change", function () {
         if($("#newPassword").val() == $("#confirmPassword").val()) {
@@ -78,6 +115,8 @@ $(document).ready(function () {
             $("#confirmPasswordError").html("Passwords does not match. ");
         }
     });
+
+
 
 });
 

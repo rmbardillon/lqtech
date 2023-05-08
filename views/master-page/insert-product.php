@@ -55,7 +55,6 @@
                             <th style="font-family: Ubuntu, sans-serif;">Brand</th>
                             <th style="font-family: Ubuntu, sans-serif;">Model</th>
                             <th style="font-family: Ubuntu, sans-serif;">SKU</th>
-                            <th style="font-family: Ubuntu, sans-serif;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="tbody_product">

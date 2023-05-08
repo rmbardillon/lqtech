@@ -33,13 +33,13 @@
                         <div class="row mb-3">
                             <div class="col col-8">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="contactPerson" placeholder="CONTACT PERSON" required>
+                                    <input type="text" class="form-control" id="contactPerson" placeholder="CONTACT PERSON" maxlength="64" required>
                                     <label class="form-label required" for="contactPerson">CONTACT PERSON</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="contactNumber" placeholder="CONTACT NUMBER" required>
+                                    <input type="text" class="form-control telephone numbers" id="contactNumber" value="09" required>
                                     <label class="form-label required" for="contactNumber">CONTACT NUMBER</label>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="salesOrderNumber" placeholder="SALES ORDER NUMBER">
+                                    <input type="text" class="form-control" id="salesOrderNumber" placeholder="SALES ORDER NUMBER" maxlength="16">
                                     <label class="form-label" for="salesOrderNumber">SALES ORDER NUMBER</label>
                                 </div>
                             </div>
@@ -90,8 +90,8 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
-                                    <textarea class="form-control" name="note" id="note" cols="30" rows="10"></textarea>
-                                    <label class="form-label" for="note">Note</label>
+                                    <input type="text" class="form-control" name="note" name="note" id="note" placeholder="NOTE" maxlength="128">
+                                    <label class="form-label" for="note">NOTE</label>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                 <div class="modal-body">
                     <form>
                         <div class="row">
-                            <div class="col">
+                            <div class="col text-truncate">
                                 <b>PROJECT NAME:</b> <span class="projectNameValue"></span>
                             </div>
                             <div class="col">
@@ -123,23 +123,23 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-6 text-truncate">
                                 <b>CONTACT PERSON:</b> <span class="contactPersonValue"></span>
                             </div>
-                            <div class="col">
+                            <div class="col-6">
                                 <b>CONTACT NUMBER:</b> <span class="contactNumberValue"></span>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col text-truncate">
                                 <b>PROJECT SITE:</b> <span class="projectSiteValue"></span>
                             </div>
-                            <div class="col">
+                            <div class="col text-truncate">
                                 <b>SALESMAN / BRANCH:</b> <span class="salesManBranchValue"></span>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col text-truncate">
                                 <b>INSTALLER:</b> <span class="installerValue"></span>
                             </div>
                             <div class="col">
@@ -150,8 +150,8 @@
                             <div class="col">
                                 <b>SALES ORDER NUMBER:</b> <span class="salesOrderNumberValue"></span>
                             </div>
-                            <div class="col">
-                                <b>NOTE:</b> <p class="noteValue"></p>
+                            <div class="col text-truncate">
+                                <b>NOTE:</b> <span class="noteValue"></span>
                             </div>
                         </div>
                     </form>    

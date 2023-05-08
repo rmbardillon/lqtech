@@ -93,7 +93,8 @@ $("#category").change(function() {
                 </div>
                 <div class="col">
                     <label class="form-label" for="model">Model</label>
-                    <input type="text" class="form-control" id="model">
+                    <select class="form-select model" name="" id="model">
+                    </select>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
@@ -128,7 +129,8 @@ $("#category").change(function() {
                 </div>
                 <div class="col">
                     <label class="form-label" for="model">Model</label>
-                    <input type="text" class="form-control" id="model" value="Generic" readonly>
+                    <select class="form-select model" name="" id="model">
+                    </select>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
@@ -165,7 +167,8 @@ $("#category").change(function() {
                 </div>
                 <div class="col">
                     <label class="form-label" for="model">Model</label>
-                    <input type="text" class="form-control" id="model" value="Generic">
+                    <select class="form-select model" name="" id="model">
+                    </select>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
@@ -230,9 +233,12 @@ const Category = (() => {
 
     thisCategory.loadSelectData = () => {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: CATEGORY_CONTROLLER + '?action=getSelectData',
             dataType: "json",
+            data: {
+                category: $('#category').val()
+            },
             success: function (response) {
                 $('#model').html(response);
             },
@@ -273,7 +279,8 @@ const Category = (() => {
                 },
                 success: function (response) 
                 {
-                    $('#txt_category_name').val("")
+                    $('#txt_category_name').val("");
+                    $('#category').val("");
                     thisCategory.loadTableData();
                     thisCategory.loadSelectData();
                     Swal.fire({
@@ -305,7 +312,6 @@ const Category = (() => {
                 $('#txt_category_name').val(response.MODEL);
                 $('#category').val(response.CATEGORY);
                 toUpdate = true;
-
                 $('#btn_save_category').html('Update MODEL');
             },
             error: function () {
@@ -316,6 +322,7 @@ const Category = (() => {
 
     thisCategory.update = () => {
         const model_name = $('#txt_category_name').val().trim();
+        const category = $('#category').val();
 
         $.ajax({
             type: "POST",
@@ -323,7 +330,8 @@ const Category = (() => {
             dataType: "json",
             data:{
                 model_id: model_id,
-                model_name: model_name
+                model_name: model_name,
+                category: category
             },
             success: function (response) 
             {

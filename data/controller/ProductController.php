@@ -70,12 +70,6 @@ else if ($action == 'getProductsTable')
         $table_data .= '<td>' . $product['BRAND'] . '</td>';
         $table_data .= '<td>' . $product['MODEL']. '</td>';
         $table_data .= '<td>' . $product['SKU']. '</td>';
-        $table_data .= '<td class="col-actions">';
-        $table_data .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
-        $table_data .= '<button type="button" onclick="Product.clickUpdate(`'. $product['PRODUCT_DETAILS_ID'] .'`)" class="btn btn-warning btn-sm"><i class="bi bi-list-check"></i> Update </button>';
-        $table_data .= '<button type="button" onclick="Product.clickDelete(`'. $product['PRODUCT_DETAILS_ID'] .'`)" class="btn btn-danger btn-sm"> <i class="bi bi-trash"></i> Delete</button>';
-        $table_data .= '</div>';
-        $table_data .= '</td>';
         $table_data .= '</tr>';
 
         $counter++;

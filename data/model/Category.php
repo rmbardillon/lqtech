@@ -17,12 +17,25 @@ class Category
 
     public function getAll()
     {
-        $sql = "SELECT MODEL_ID, MODEL from models";
+        $sql = "SELECT * from models ORDER BY CATEGORY ASC, MODEL ASC";
         $result = $this->conn->query($sql);
 
         $this->conn->close();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getByCategory($category)
+    {
+        $sql = "SELECT * from models WHERE CATEGORY = '$category' ORDER BY CATEGORY ASC, MODEL ASC";
+        $result = $this->conn->query($sql);
+
+        $this->conn->close();
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $rows;
+    }
+
+
 
     public function getById($model_id)
     {
@@ -91,11 +104,12 @@ class Category
     {
         $model_id = $request['id'];
         $model_name = $request['name'];
+        $category = $request['category'];
 
-        $sql = "UPDATE models SET MODEL=? WHERE MODEL_ID=?";
+        $sql = "UPDATE models SET MODEL=?, CATEGORY = ? WHERE MODEL_ID=?";
 
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ss",$model_name, $model_id);
+        $stmt->bind_param("sss",$model_name, $category, $model_id);
 
         $result = '';
         if ($stmt->execute() === TRUE) {

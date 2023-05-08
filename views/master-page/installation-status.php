@@ -181,7 +181,6 @@
                                                 <th>Quantity</th>
                                                 <th>SKU</th>
                                                 <th>Model</th>
-                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody id="productCartReturn"></tbody>
@@ -194,7 +193,7 @@
                         </div>            
                     </div>
                     <div class="modal-footer">
-                        <div class="dropdown" id="actionButtons" style="display: none;">
+                        <!-- <div class="dropdown" id="actionButtons" style="display: none;">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonAction" data-bs-toggle="dropdown" aria-expanded="false">
                                 Action
                             </button>
@@ -203,8 +202,9 @@
                                 <li><a class="dropdown-item" id="processReturns" onclick="installationStatus.processReturns();">Process Returns</a></li>
                                 <li><a class="dropdown-item" id="cancelTransaction" onclick="installationStatus.cancelTransaction();">Cancel Transaction</a></li>
                             </ul>
-                        </div>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div> -->
+                        <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                        <button type="button" class="btn btn-danger" id="back">Back</button>
                     </div>
                 </div>
             </div>

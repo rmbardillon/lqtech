@@ -14,6 +14,11 @@ const installationStatus = (() => {
         window.open("../report/installation-form.php?installationFormID=" + installationFormID, "_blank");
     });
 
+    $("#back").click(function() {
+        $("#modal_installation_status").modal('show');
+        $("#processReturnModal").modal('hide');
+    });
+
     $("#confirmTransaction").click(function () {
         console.log(installationFormID);
         // Input Job Order Number
@@ -258,7 +263,7 @@ const installationStatus = (() => {
                         productCartReturn.push(response);
                         $("#serial_number").val('');
                         $("#serial_number").focus();
-
+                        $('.table').DataTable().destroy();
                         // Check if there are any items with the same model in the productCartReturn array
                         const sameModelItems = productCartReturn.filter(item => item.MODEL === response.MODEL);
                         if (sameModelItems.length === 1) {
@@ -268,7 +273,6 @@ const installationStatus = (() => {
                                     <td>1</td>
                                     <td>${response['SKU']}</td>
                                     <td>${response['MODEL']}</td>
-                                    <td><button type="button" class="btn btn-danger btn-sm" onclick="thisInstallationStatus.removeProductCartReturn('${response['SERIAL_NUMBER']}')">Remove</button></td>
                                 </tr>
                             `);
                         } else {
@@ -280,7 +284,8 @@ const installationStatus = (() => {
                                     $row.find("td").eq(0).html(quantity);
                                 }
                             });
-                        }
+                        }                        
+                        $('.table').DataTable();
                     }
                 }, error: function(e) {
                     console.log(e);

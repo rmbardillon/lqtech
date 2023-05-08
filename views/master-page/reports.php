@@ -21,10 +21,29 @@
         </div>
         <div class="row mb-3">
             <div class="col">
+                <label class="form-label" for="selectMonth">Select Month</label>
+                <select class="form-select" name="selectMonth" id="selectMonth">
+                    <option value="" disabled selected>Please Select</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">Septemeber</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">Decemeber</option>
+                </select>
+            </div>
+            <div class="col">
                 <label class="form-label" for="selectReport">Select Type of Report</label>
                 <select class="form-select" name="selectReport" id="selectReport">
                     <option value="" disabled selected>Please Select</option>
-                    <option value="1">Total In and Out of each Items</option>
+                    <option value="1.1">Total In of each Items</option>
+                    <option value="1">Total Out of each Items</option>
                     <option value="2">Total Installs</option>
                     <option value="3">Total Sales of each Salesman</option>
                 </select>

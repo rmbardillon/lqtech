@@ -20,6 +20,17 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
+        public function getReport1a($from, $to)
+        {
+            $sql = "SELECT *, COUNT(*) FROM products 
+                    LEFT JOIN product_details ON products.PRODUCT_DETAILS_ID = product_details.PRODUCT_DETAILS_ID
+                    WHERE products.STATUS = 'IN' AND DATE_INSERTED BETWEEN '$from' AND '$to'
+                    GROUP BY products.PRODUCT_DETAILS_ID;";
+            $result = $this->conn->query($sql);
+
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
         public function getReport2($from, $to)
         {
             $sql = "SELECT * FROM installation_form
