@@ -24,7 +24,7 @@
                                         <th>Date and Time</th>
                                         <th>Role</th>
                                         <th>Username</th>
-                                        <th>Action</th>
+                                        <th class="no-sort">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbl_data">

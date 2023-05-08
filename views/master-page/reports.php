@@ -8,18 +8,19 @@
 <body>
     <?php include_once("../layout/nav.php") ?>
     <div class="container mt-5">
-        <h1>Reports</h1>
+        <h1>Generate Reports</h1>
         <div class="row mb-3">
             <div class="col">
-                <label class="form-label" for="from">From</label>
+                <label class="form-label required" for="from">Select From Date</label>
                 <input class="form-control" type="date" name="from" id="from">
             </div>
             <div class="col">
-                <label class="form-label" for="to">To</label>
+                <label class="form-label required" for="to">Select To Date</label>
                 <input class="form-control" type="date" name="to" id="to">
             </div>
-        </div>
-        <div class="row mb-3">
+            <div class="col-1 text-center">
+                <label class="form-label" for="selectMonth">Or</label>
+            </div>
             <div class="col">
                 <label class="form-label" for="selectMonth">Select Month</label>
                 <select class="form-select" name="selectMonth" id="selectMonth">
@@ -38,8 +39,10 @@
                     <option value="12">Decemeber</option>
                 </select>
             </div>
+        </div>
+        <div class="row mb-3">
             <div class="col">
-                <label class="form-label" for="selectReport">Select Type of Report</label>
+                <label class="form-label required" for="selectReport">Select Type of Report</label>
                 <select class="form-select" name="selectReport" id="selectReport">
                     <option value="" disabled selected>Please Select</option>
                     <option value="1.1">Total In of each Items</option>

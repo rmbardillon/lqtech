@@ -157,19 +157,6 @@
                                     <div class="mb-3">
                                         <input class="form-control" type="text" id="model" placeholder="Model" readonly>
                                     </div>
-                                    <!-- Current Cart Table -->
-                                    <!-- <div class="mb-3">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Quantity</th>
-                                                    <th>SKU</th>
-                                                    <th>Model</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="item_list"></tbody>
-                                        </table>
-                                    </div> -->
                                 </form>
                             </div>
                             <!-- Products cart Table -->
@@ -262,7 +249,7 @@
                             <th style="font-family: Ubuntu, sans-serif;">Job Order Number</th>
                             <th style="font-family: Ubuntu, sans-serif;">Service</th>
                             <th style="font-family: Ubuntu, sans-serif;">Status</th>
-                            <th style="font-family: Ubuntu, sans-serif;">Action</th>
+                            <th class="no-sort" style="font-family: Ubuntu, sans-serif;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="tbody_installation_status">

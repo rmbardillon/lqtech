@@ -22,7 +22,7 @@
                                     <th>Model</th>
                                     <th>Quantity</th>
                                     <th>Stock Status</th>
-                                    <th>Action</th>
+                                    <th class="no-sort">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="tbody_stock_status">

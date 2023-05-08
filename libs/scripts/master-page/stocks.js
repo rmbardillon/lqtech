@@ -17,7 +17,14 @@ const Stock = (() => {
             success: function (response) {
                 $('.table').DataTable().destroy();
                 $('#stocks_table').html(response);
-                $('.table').DataTable();
+                // $('.table').DataTable();
+                // Datatables no sorting
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
             },
             error: function () {
                 
@@ -36,7 +43,14 @@ const Stock = (() => {
             success: function(response) {
                 $('.table').DataTable().destroy();
                 $("#stock_table").html(response);
-                $('.table').DataTable();
+                // $('.table').DataTable();
+                // Datatables no sorting
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
             }, 
             error: function() {
             

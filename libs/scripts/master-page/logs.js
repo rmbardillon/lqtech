@@ -15,7 +15,14 @@ const Logs = (() => {
                 $('.table').DataTable().destroy();
                 $('#tbl_data').html(response);
 
-                $('.table').DataTable();
+                // $('.table').DataTable();
+                // Datatables no sorting
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
             },
             error: function () {
 

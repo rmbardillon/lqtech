@@ -77,7 +77,14 @@ const Product = (() => {
             success: function (response) {
                 $('.table').DataTable().destroy();
                 $('#tbody_product').html(response);
-                $('.table').DataTable();
+                // $('.table').DataTable();
+                // Datatables no sorting
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
             },
             error: function () {
                 

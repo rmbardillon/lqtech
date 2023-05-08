@@ -51,7 +51,14 @@ const installationStatus = (() => {
             success: function (response) {
                 $('.table').DataTable().destroy();
                 $('#tbody_installation_status').html(response);
-                $('.table').DataTable();
+                // $('.table').DataTable();
+                // Datatables no sorting
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
             },
             error: function () {
                 
@@ -110,7 +117,14 @@ const installationStatus = (() => {
                 }
                 $('.table').DataTable().destroy();
                 $("#installation_items").html(data);
-                $('.table').DataTable();
+                // $('.table').DataTable();
+                // Datatables no sorting
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
             },
             error: function () {
                 
@@ -285,7 +299,14 @@ const installationStatus = (() => {
                                 }
                             });
                         }                        
-                        $('.table').DataTable();
+                        // $('.table').DataTable();
+                        // Datatables no sorting
+                        $('.table').DataTable({
+                            columnDefs: [{
+                                targets: 'no-sort',
+                                orderable: false
+                            }]
+                        });
                     }
                 }, error: function(e) {
                     console.log(e);

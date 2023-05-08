@@ -280,7 +280,7 @@
                                 <th>Quantity</th>
                                 <th>SKU</th>
                                 <th>Model</th>
-                                <th>Actions</th>
+                                <th class="no-sort">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="cart"></tbody>

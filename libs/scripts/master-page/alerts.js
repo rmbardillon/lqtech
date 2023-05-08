@@ -39,7 +39,14 @@ const Alerts = (() => {
                 $('.table').DataTable().destroy();
                 $('#tbody_stock_status').html(response);
                 $(".badge").val(response.row_count);
-                $('.table').DataTable();
+                // $('.table').DataTable();
+                // Datatables no sorting
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
             },
             error: function () {
 

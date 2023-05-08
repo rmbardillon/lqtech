@@ -14,7 +14,7 @@
                 <p style="font-family: Ubuntu, sans-serif;font-weight: bold;font-style: italic;">Product Registration</p>
                 <div class="row">
                     <div class="col">
-                        <label class="form-label" for="category">Category</label>
+                        <label class="form-label required" for="category">Category</label>
                         <select class="form-select" id="category">
                             <option value="" disabled selected>- Select Category -</option>
                             <option value="Camera">Camera</option>
@@ -56,7 +56,7 @@
                                     <th style="font-family: Ubuntu, sans-serif;">Brand</th>
                                     <th style="font-family: Ubuntu, sans-serif;">Model</th>
                                     <th style="font-family: Ubuntu, sans-serif;">Price</th>
-                                    <th style="font-family: Ubuntu, sans-serif;">Action</th>
+                                    <th class="no-sort" style="font-family: Ubuntu, sans-serif;">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="tbody_product">

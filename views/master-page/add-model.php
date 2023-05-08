@@ -54,7 +54,7 @@
                                         <th>#</th>
                                         <th>Category</th>
                                         <th>Model Name</th>
-                                        <th>Actions</th>
+                                        <th class="no-sort">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody id = 'tbody_category'>

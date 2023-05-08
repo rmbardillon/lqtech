@@ -27,7 +27,7 @@
                                             <th>Role</th>
                                             <th>Status</th>
                                             <th>Last Login</th>
-                                            <th>Actions</th>
+                                            <th class="no-sort">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tbody_users">

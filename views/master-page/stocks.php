@@ -16,7 +16,7 @@
                 <th>Brand</th>
                 <th>Model</th>
                 <th>Total Stocks</th>
-                <th>Action</th>
+                <th class="no-sort">Action</th>
             </thead>
             <tbody id="stocks_table"></tbody>
         </table>

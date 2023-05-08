@@ -15,7 +15,7 @@
                     <div class="col">
                         <form action="">
                             <div class="mb-3">
-                                <label class="form-label" for="category">Category</label>
+                                <label class="form-label required" for="category">Category</label>
                                 <select class="form-select" id="category">
                                     <option value="" disabled selected>- Select Category -</option>
                                     <option value="Camera">Camera</option>
@@ -26,17 +26,17 @@
                                 </select>
                             </div>
                             <div class="mb-3" id="modelDiv">
-                                <label class="form-label" for="models">Models</label>
+                                <label class="form-label required" for="models">Models</label>
                                 <select class="form-select model" id="models">
                                     <option value="" disabled selected>- Select Model -</option>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="sku">SKU</label>
+                                <label class="form-label required" for="sku">SKU</label>
                                 <input class="form-control" type="text" id="sku">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="serial_number">Serial Numbers</label>
+                                <label class="form-label required" for="serial_number">Serial Numbers</label>
                                 <textarea class="form-control" id="serial_number" id="" cols="30" rows="10"></textarea>
                             </div>
                             <div class="mb-3">

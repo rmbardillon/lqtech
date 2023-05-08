@@ -20,9 +20,9 @@
             <div class="col d-flex justify-content-center align-items-center" style="position: relative; height:400px; width:800px">
                 <canvas id="productChart"></canvas>
             </div>
-            <div class="col d-flex justify-content-center align-items-center" style="position: relative; height:400px; width:800px">
+            <!-- <div class="col d-flex justify-content-center align-items-center" style="position: relative; height:400px; width:800px">
                 <canvas id="chart"></canvas>
-            </div>
+            </div> -->
         </div>
     </div>
 <?php include_once("../layout/scripts.php") ?>

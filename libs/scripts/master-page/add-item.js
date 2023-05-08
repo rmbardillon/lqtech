@@ -12,18 +12,18 @@ $("#category").change(function() {
         var input = `
         <div class="row" style="margin-top: 30px;">
             <div class="col">
-                <label class="form-label" for="brand">Brand</label>
+                <label class="form-label required" for="brand">Brand</label>
                 <input type="text" class="form-control" id="brand">
             </div>
             <div class="col">
-                <label class="form-label" for="model">Model</label>
+                <label class="form-label required" for="model">Model</label>
                 <select class="form-select model" name="" id="model">
                 </select>
             </div>
         </div>
         <div class="row" style="margin-top: 30px;">
             <div class="col">
-                <label class="form-label" for="camera_type">Camera Type</label>
+                <label class="form-label required" for="camera_type">Camera Type</label>
                 <select class="form-select" id="camera_type">
                     <option value="" disabled selected>- Select Camera Type -</option>
                     <option value="IP">IP</option>
@@ -31,7 +31,7 @@ $("#category").change(function() {
                 </select>
             </div>
             <div class="col">
-                <label class="form-label" for="camera_shape">Camera Shape</label>
+                <label class="form-label required" for="camera_shape">Camera Shape</label>
                 <select class="form-select" id="camera_shape">
                     <option value="" disabled selected>- Select Camera Shape -</option>
                     <option value="Dome">Dome</option>
@@ -54,18 +54,18 @@ $("#category").change(function() {
         var input = `
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="brand">Brand</label>
+                    <label class="form-label required" for="brand">Brand</label>
                     <input type="text" class="form-control" id="brand">
                 </div>
                 <div class="col">
-                    <label class="form-label" for="model">Model</label>
+                    <label class="form-label required" for="model">Model</label>
                     <select class="form-select model" name="" id="model">
                     </select>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="recorder_type">Recorder Type</label>
+                    <label class="form-label required" for="recorder_type">Recorder Type</label>
                     <select class="form-select" id="recorder_type">
                         <option value="" disabled selected>- Select Recorder Type -</option>
                         <option value="DVR">DVR</option>
@@ -88,18 +88,18 @@ $("#category").change(function() {
         var input = `
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="brand">Brand</label>
+                    <label class="form-label required" for="brand">Brand</label>
                     <input type="text" class="form-control" id="brand">
                 </div>
                 <div class="col">
-                    <label class="form-label" for="model">Model</label>
+                    <label class="form-label required" for="model">Model</label>
                     <select class="form-select model" name="" id="model">
                     </select>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="capacity">Capacity</label>
+                    <label class="form-label required" for="capacity">Capacity</label>
                     <select class="form-select" id="capacity">
                         <option value="" disabled selected>- Select Capacity -</option>
                         <option value="1TB">1TB</option>
@@ -124,18 +124,18 @@ $("#category").change(function() {
         var input = `
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="brand">Brand</label>
+                    <label class="form-label required" for="brand">Brand</label>
                     <input type="text" class="form-control" id="brand" value="OEM" readonly>
                 </div>
                 <div class="col">
-                    <label class="form-label" for="model">Model</label>
+                    <label class="form-label required" for="model">Model</label>
                     <select class="form-select model" name="" id="model">
                     </select>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="psu_type">PSU Type</label>
+                    <label class="form-label required" for="psu_type">PSU Type</label>
                     <select class="form-select" id="psu_type">
                         <option value="" disabled selected>- Select PSU Type -</option>
                         <option value="Metal Type">Metal Type</option>
@@ -143,7 +143,7 @@ $("#category").change(function() {
                     </select>
                 </div>
                 <div class="col">
-                    <label class="form-label" for="watts">Watts</label>
+                    <label class="form-label required" for="watts">Watts</label>
                     <input class="form-control" id="watts">
                 </div>
             </div>
@@ -162,18 +162,18 @@ $("#category").change(function() {
         var input = `
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="brand">Brand</label>
+                    <label class="form-label required" for="brand">Brand</label>
                     <input type="text" class="form-control" id="brand">
                 </div>
                 <div class="col">
-                    <label class="form-label" for="model">Model</label>
+                    <label class="form-label required" for="model">Model</label>
                     <select class="form-select model" name="" id="model">
                     </select>
                 </div>
             </div>
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
-                    <label class="form-label" for="monitor_size">Monitor Size</label>
+                    <label class="form-label required" for="monitor_size">Monitor Size</label>
                     <select class="form-select" id="monitor_size">
                         <option value="" disabled selected>- Select Monitor Size -</option>
                         <option value="19 Inches">19 Inches</option>
@@ -223,7 +223,14 @@ const Category = (() => {
                 $('.table').DataTable().destroy();
                 $('#tbody_category').html(response);
 
-                $('.table').DataTable();
+                // $('.table').DataTable();
+                // Datatables no sorting
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
             },
             error: function () {
 
@@ -427,7 +434,14 @@ const Product = (() => {
                 $('.table').DataTable().destroy();
                 $('#tbody_product').html(response);
 
-                $('.table').DataTable();
+                // $('.table').DataTable();
+                // Datatables no sorting
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
             },
             error: function () {
 

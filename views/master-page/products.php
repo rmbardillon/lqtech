@@ -46,7 +46,7 @@
                             <th style="font-family: Ubuntu, sans-serif;">Model</th>
                             <th style="font-family: Ubuntu, sans-serif;">Quantity</th>
                             <th style="font-family: Ubuntu, sans-serif;">Selling Price</th>
-                            <th style="font-family: Ubuntu, sans-serif;">Action</th>
+                            <th class="no-sort" style="font-family: Ubuntu, sans-serif;">Action</th>
                         </tr>
                     </thead>
                     <tbody id="tbody_product">

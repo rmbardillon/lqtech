@@ -27,7 +27,6 @@
                 <label class="form-check-label" for="show-password">Show Password</label>
             </div>
             <button class="btn btn-primary w-100 mb-2" id="login">Login</button>
-            <a class="" href="#">Forgot Password?</a>
         </form>
 
     </div>
