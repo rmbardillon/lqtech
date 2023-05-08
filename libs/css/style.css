@@ -13,10 +13,6 @@ body {
     min-width: 90vw;
 }
 
-/* input {
-    margin: 10px 0 10px 0;
-} */
-
 .login-box {
     display: flex;
     justify-content: center;
@@ -61,6 +57,7 @@ footer p {
     color: white !important;
     background-color: #2d3090;
     border-radius: 40px;
+    /* border-bottom: solid 1px black; */
 }
 
 .report {

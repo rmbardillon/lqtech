@@ -103,9 +103,22 @@ const Product = (() => {
 
     thisProduct.save = () => {
         console.log("save")
+        var category = $("#category").val();
         var model = $("#models").val();
         var sku = $("#sku").val();
         var serial_numbers = $("#serial_number").val();
+
+        console.log(category, model, sku, serial_numbers)
+        // Check if all fields are filled
+        if(category == null || model == null || sku == "" || serial_numbers == "") {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Please fill all fields',
+                showConfirmButton: true,
+            })
+            return;
+        }
 
         $.ajax({
             type: "POST",
