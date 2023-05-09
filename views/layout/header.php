@@ -22,6 +22,6 @@
     <link rel="stylesheet" href="../../libs/css/style.css">
     <!-- <link rel="stylesheet" href="../../libs/css/index.css" /> -->
     <link rel="shortcut icon" href="../../libs/images/lqtechicon.ico" type="image/x-icon">
-    <title>LQTech</title>
+    <title>LQTech Inventory System</title>
 
 </head>

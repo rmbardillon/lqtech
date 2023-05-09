@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form {
+        font-family: Helvetica, sans-serif;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 16px;
+        background: #f7f7f7;
+        }
+        .form h1 {
+        background: #5868bf;
+        padding: 20px 0;
+        font-weight: 300;
+        text-align: center;
+        color: #fff;
+        margin: -16px -16px 16px -16px;
+        font-size:  25px;
+        }
+        .form input[type="text"],
+        .form input[type="url"] {
+        box-sizing: border-box;
+        width: 100%;
+        background: #fff;
+        margin-bottom: 4%;
+        border: 1px solid #ccc;
+        padding: 3%;
+        color: #555;
+        }
+        .form input[type="text"]:focus,
+        .form input[type="url"]:focus {
+        box-shadow: 0 0 5px #5868bf;
+        padding: 3%;
+        border: 1px solid #5868bf;
+        }
+
+        .form button {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        width: 150px;
+        margin: 0 auto;
+        padding: 3%;
+        background: #5868bf;
+        border-bottom: 2px solid #5868bf;
+        border-top-style: none;
+        border-right-style: none;
+        border-left-style: none;
+        color: #fff;
+        cursor: pointer;
+        }
+        .form button:hover {
+        background: rgba(88,104,191, 0.5);
+        }
+        #qrcode-container{
+            display:none;
+        }
+
+        .qrcode{
+        padding: 16px;
+        }
+        .qrcode img{
+        margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="form">
+        <h1>QR Code using qrcodejs</h1>
+        <form>
+            <input type="url" id="website" name="website" placeholder="https://example.com" required />
+            <button type="button" onclick="generateQRCode()">
+                Generate QR Code
+            </button>
+        </form>
+
+        <div id="qrcode-container">
+            <div id="qrcode" class="qrcode"></div>
+            <h4>With some styles</h4>
+            <div id="qrcode-2" class="qrcode"></div>
+        </div>
+        
+    </div>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script type="text/javascript">
+        function generateQRCode() {
+            let website = document.getElementById("website").value;
+            if (website) {
+                let qrcodeContainer = document.getElementById("qrcode");
+                qrcodeContainer.innerHTML = "";
+                new QRCode(qrcodeContainer, website);
+                /*With some styles*/
+                let qrcodeContainer2 = document.getElementById("qrcode-2");
+                qrcodeContainer2.innerHTML = "";
+                new QRCode(qrcodeContainer2, {
+                    text: website,
+                    width: 128,
+                    height: 128,
+                    colorDark: "#5868bf",
+                    colorLight: "#ffffff",
+                    // correctLevel: QRCode.CorrectLevel.H
+                });
+                document.getElementById("qrcode-container").style.display = "block";
+            } else {
+                alert("Please enter a valid URL");
+            }
+        }
+    </script>
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Define the list of allowed locations
+        var allowedLocations = ["New York", "London", "Sydney", "Philippines"];
+
+        // Get the user's IP address using a third-party API
+        $.getJSON("https://api.ipify.org?format=json", function(data){
+            var ipAddress = data.ip;
+
+            console.log(ipAddress);
+            // Use a geolocation service to get the user's location from their IP address
+            $.getJSON("https://ipapi.co/" + ipAddress + "/json/", function(data){
+                var userLocation = data.city + ", " + data.region;
+                console.log(userLocation);
+                // Check if the user's location is allowed
+                // if (allowedLocations.indexOf(userLocation) == -1) {
+                //     alert("Access denied. You are not authorized to access this site from your location.");
+                //     // Redirect the user to a different page or log them out
+                //     window.location.href = "https://example.com/access-denied.html";
+                // }
+
+                if(ipAddress != "49.144.40.119") {
+                    alert("Access denied. You are not authorized to access this site from your location.");
+                    // Redirect the user to a different page or log them out
+                    window.location.href = "https://example.com/access-denied.html";
+                }
+            });
+        });
+
+
+    </script>
+</body>
+</html>
