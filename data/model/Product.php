@@ -366,27 +366,31 @@ class Product
         $this->conn->close();
         return $result->fetch_assoc();
     }
+
     public function generateUUID() {
         $uuid = uniqid('', true);
         $uuid = str_replace('.', '', $uuid);
         return substr($uuid, 0, 16);
     }
 
-
-    public function checkout($productCart, $installationForm)
+    public function checkout($productCart, $installationForm, $installationFormId)
     {
-        $uuid = $this->generateUUID();
-        foreach($installationForm as $form) {
-            $sql = "INSERT INTO installation_form(INSTALLATION_FORM_ID, PROJECT_NAME, CONTACT_PERSON, CONTACT_NUMBER, PROJECT_SITE, SALESMAN_BRANCH, INSTALLER, SALES_ORDER_NUMBER, SERVICE, PREPARED_BY, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sssssssssss",$uuid, $form['projectName'], $form['contactPerson'], $form['contactNumber'], $form['projectSite'], $form['salesManBranch'], $form['installer'], $form['salesOrderNumber'], $form['service'], $_SESSION['user']['fullname'], $form['status']);
-            $result = '';
-            if ($stmt->execute() === TRUE) {
-                $result = "Successfully Save";
-                $this->ActionLog->saveLogs('product', 'saved');
-            } else {
-                $result = "Error: <br>" . $this->conn->error;
+        if($installationFormId == NULL){
+            $uuid = $this->generateUUID();
+            foreach($installationForm as $form) {
+                $sql = "INSERT INTO installation_form(INSTALLATION_FORM_ID, PROJECT_NAME, CONTACT_PERSON, CONTACT_NUMBER, PROJECT_SITE, SALESMAN_BRANCH, INSTALLER, SALES_ORDER_NUMBER, SERVICE, PREPARED_BY, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("sssssssssss",$uuid, $form['projectName'], $form['contactPerson'], $form['contactNumber'], $form['projectSite'], $form['salesManBranch'], $form['installer'], $form['salesOrderNumber'], $form['service'], $_SESSION['user']['fullname'], $form['status']);
+                $result = '';
+                if ($stmt->execute() === TRUE) {
+                    $result = "Successfully Save";
+                    $this->ActionLog->saveLogs('product', 'saved');
+                } else {
+                    $result = "Error: <br>" . $this->conn->error;
+                }
             }
+        } else {
+            $uuid = $installationFormId;
         }
         foreach($productCart as $product) {
             $sku = $product['sku'];

@@ -1,16 +1,17 @@
 $(document).ready(function () {
+    var installationFormId = "";
     Product.loadTableData();
-});
-
-const Product = (() => {
     // Get the variable in the URL
     var url = new URL(window.location.href);
-    var installationFormId = url.searchParams.get("installationFormID");
+    installationFormId = url.searchParams.get("installationFormID");
     // Check if the variable is available
     if (installationFormId == null) {
         $("#formModal").modal("show");
     }
+    console.log(installationFormId);
+});
 
+const Product = (() => {
     var projectName = "";
     var date = "";
     var contactPerson = "";
@@ -334,7 +335,8 @@ const Product = (() => {
             dataType: "json",
             data:{
                 productCart: productCart,
-                installationForm: installationForm
+                installationForm: installationForm,
+                installationFormId: installationFormId
             },
             success: function (response){
                 if(response == "Successfully Updated") {

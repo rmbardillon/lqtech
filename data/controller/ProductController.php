@@ -305,8 +305,9 @@ else if($action === 'checkout')
 {
     $productCart = $_POST['productCart'];
     $installationForm = $_POST['installationForm'];
+    $installationFormId = $_POST['installationFormId'];
 
-    $result = $Product->checkout($productCart, $installationForm);
+    $result = $Product->checkout($productCart, $installationForm, $installationFormId);
 
     echo json_encode($result);
 }
