@@ -14,9 +14,16 @@ const installationStatus = (() => {
         window.open("../report/installation-form.php?installationFormID=" + installationFormID, "_blank");
     });
 
-    $("#back").click(function() {
+    $(".back").click(function() {
         $("#modal_installation_status").modal('show');
         $("#processReturnModal").modal('hide');
+        $("#addItemModal").modal('hide');
+    });
+
+    $("#addItem").click(() => {
+        $("#addItemModal").modal('show');
+        $("#modal_installation_status").modal('hide');
+        $(".serial_number").focus();
     });
 
     $("#confirmTransaction").click(function () {
@@ -203,7 +210,11 @@ const installationStatus = (() => {
     thisInstallationStatus.processReturns = () => {
         $("#processReturnModal").modal('show');
         $("#modal_installation_status").modal('hide');
-        $("#serial_number").focus();
+        $(".serial_number").focus();
+    }
+
+    thisInstallationStatus.addItem = () => {
+        window.location.href = "out-product.php?installationFormID=" + installationFormID;
     }
     
     thisInstallationStatus.cancelTransaction = () => {

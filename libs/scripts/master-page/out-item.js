@@ -1,9 +1,16 @@
 $(document).ready(function () {
     Product.loadTableData();
-    $("#formModal").modal("show");
 });
 
 const Product = (() => {
+    // Get the variable in the URL
+    var url = new URL(window.location.href);
+    var installationFormId = url.searchParams.get("installationFormID");
+    // Check if the variable is available
+    if (installationFormId == null) {
+        $("#formModal").modal("show");
+    }
+
     var projectName = "";
     var date = "";
     var contactPerson = "";
@@ -98,6 +105,7 @@ const Product = (() => {
 
 
     $("#back").click(function(){
+        installationForm = [];
         $("#formModal").modal("show");
         $("#confirmFormModal").modal("hide");
     });

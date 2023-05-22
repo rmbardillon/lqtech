@@ -84,6 +84,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAction">
                                 <li><a class="dropdown-item" id="confirmTransaction">Confirm Transaction</a></li>
+                                <li><a class="dropdown-item" onclick="installationStatus.addItem();">Add Item</a></li>
                                 <li><a class="dropdown-item" id="processReturns" onclick="installationStatus.processReturns();">Process Returns</a></li>
                                 <li><a class="dropdown-item" id="cancelTransaction" onclick="installationStatus.cancelTransaction();">Cancel Transaction</a></li>
                             </ul>
@@ -152,7 +153,7 @@
                             <div class="col">
                                 <form class="">
                                     <div class="mb-3">
-                                        <input class="form-control" type="text" id="serial_number" placeholder="Serial Number" autofocus>
+                                        <input class="form-control serial_number" type="text" id="serial_number" placeholder="Serial Number" autofocus>
                                     </div>
                                     <div class="mb-3">
                                         <input class="form-control" type="text" id="model" placeholder="Model" readonly>
@@ -191,7 +192,99 @@
                             </ul>
                         </div> -->
                         <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
-                        <button type="button" class="btn btn-danger" id="back">Back</button>
+                        <button type="button" class="btn btn-danger back" id="back">Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="addItemModal" class="modal" role="dialog">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" class="installationFormID">Add Item</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row">
+                                <div class="col">
+                                    <b>PROJECT NAME:</b> <span class="projectNameValue"></span>
+                                </div>
+                                <div class="col">
+                                    <b>DATE:</b> <span class="dateValue"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <b>CONTACT PERSON:</b> <span class="contactPersonValue"></span>
+                                </div>
+                                <div class="col">
+                                    <b>CONTACT NUMBER:</b> <span class="contactNumberValue"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <b>PROJECT SITE:</b> <span class="projectSiteValue"></span>
+                                </div>
+                                <div class="col">
+                                    <b>SALESMAN/BRANCH:</b> <span class="salesManBranchValue"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <b>INSTALLER:</b> <span class="installerValue"></span>
+                                </div>
+                                <div class="col">
+                                    <b>SERVICE:</b> <span class="serviceValue"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <b>SALES ORDER NUMBER:</b> <span class="salesOrderNumberValue"></span>
+                                </div>
+                                <div class="col">
+                                    <b>JOB ORDER NUMBER:</b> <span class="jobOrderNumberValue"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <b>NOTE:</b> <p class="noteValue"></p>
+                                </div>
+                            </div>
+                        </form>    
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <form class="">
+                                    <div class="mb-3">
+                                        <input class="form-control serial_number" type="text" id="serial_number_add" placeholder="Serial Number" autofocus>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input class="form-control" type="text" id="model" placeholder="Model" readonly>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Products cart Table -->
+                            <div class="col">
+                                <form>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Quantity</th>
+                                                <th>SKU</th>
+                                                <th>Model</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="productCartAdd"></tbody>
+                                    </table>
+                                    <div class="mt-4">
+                                        <button class="btn btn-success w-100" id="add" type="button">Add Item</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>            
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger back" id="back">Back</button>
                     </div>
                 </div>
             </div>

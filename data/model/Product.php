@@ -11,18 +11,6 @@ class Product
     private $conn;
     private $ActionLog;
 
-    private $commonSql = "SELECT p.id AS product_id, p.name AS product_name, barcode, sale_price, status, max_stock, min_stock, type, expired_products,
-    c.id AS category_id, c.name AS category_name,
-    SUM(pd.quantity) AS total_quantity
-    FROM product_details p 
-    INNER JOIN categories c 
-    ON p.category_id = c.id 
-    INNER JOIN product_details pd 
-    ON p.id = pd.product_id ";
-
-    private $groupBySql = " GROUP BY p.id, p.name, barcode, sale_price, status, max_stock, min_stock,
-    c.id, c.name";
-
     public function __construct($connection)
     {
         $this->conn = $connection;
