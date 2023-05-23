@@ -304,7 +304,7 @@ else if($action === 'getTotalProduct')
 else if($action === 'checkout')
 {
     $productCart = $_POST['productCart'];
-    $installationForm = $_POST['installationForm'];
+    $installationForm = isset($_POST['installationForm']) ? $_POST['installationForm'] : null;
     $installationFormId = $_POST['installationFormId'];
 
     $result = $Product->checkout($productCart, $installationForm, $installationFormId);

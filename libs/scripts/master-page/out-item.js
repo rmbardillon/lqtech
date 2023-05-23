@@ -1,17 +1,9 @@
 $(document).ready(function () {
-    var installationFormId = "";
     Product.loadTableData();
-    // Get the variable in the URL
-    var url = new URL(window.location.href);
-    installationFormId = url.searchParams.get("installationFormID");
-    // Check if the variable is available
-    if (installationFormId == null) {
-        $("#formModal").modal("show");
-    }
-    console.log(installationFormId);
 });
 
 const Product = (() => {
+    var installationFormId = "";
     var projectName = "";
     var date = "";
     var contactPerson = "";
@@ -36,6 +28,17 @@ const Product = (() => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
     const formattedDatetime = datetime.toLocaleString('en-US', options);
     $("#date").val(formattedDatetime);
+
+    $(document).ready(function () {
+        // Get the variable in the URL
+        var url = new URL(window.location.href);
+        installationFormId = url.searchParams.get("installationFormID");
+        // Check if the variable is available
+        if (installationFormId == null) {
+            $("#formModal").modal("show");
+        }
+        console.log(installationFormId);
+    });
 
     $("#closeModal").click(function () {
         swal.fire({
