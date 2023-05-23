@@ -90,6 +90,12 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating">
+                                    <input type="date" class="form-control" name="estimatedDate" name="estimatedDate" id="estimatedDate" placeholder="ESTIMATED DATE">
+                                    <label class="form-label" for="estimatedDate">ESTIMATED DATE</label>
+                                </div>
+                            </div>
+                            <div class="col">   
+                                <div class="form-floating">
                                     <input type="text" class="form-control" name="note" name="note" id="note" placeholder="NOTE" maxlength="128">
                                     <label class="form-label" for="note">NOTE</label>
                                 </div>
