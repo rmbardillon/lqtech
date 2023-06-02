@@ -10,7 +10,7 @@ $(document).ready(function() {
         var fromDate = new Date(currentYear, selectedMonth-1, 1);
         
         // Create a date object for the last day of the selected month
-        var toDate = new Date(currentYear, selectedMonth, 0);
+        var toDate = new Date(currentYear, selectedMonth, 1);
         
         // Format the dates as strings in the format yyyy-mm-dd
         var fromDateString = fromDate.getFullYear() + "-" + (fromDate.getMonth()+1).toString().padStart(2, '0') + "-" + fromDate.getDate().toString().padStart(2, '0');
