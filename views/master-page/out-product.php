@@ -91,7 +91,7 @@
                             <div class="col">
                                 <div class="form-floating">
                                     <input type="date" class="form-control" name="estimatedDate" name="estimatedDate" id="estimatedDate" placeholder="ESTIMATED DATE">
-                                    <label class="form-label" for="estimatedDate">ESTIMATED DATE</label>
+                                    <label class="form-label required" for="estimatedDate">ESTIMATED DATE</label>
                                 </div>
                             </div>
                             <div class="col">   
@@ -158,6 +158,11 @@
                             </div>
                             <div class="col text-truncate">
                                 <b>NOTE:</b> <span class="noteValue"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>ESTIMATED DATE OF INSTALLATION:</b> <span class="estimatedDateValue"></span>
                             </div>
                         </div>
                     </form>    

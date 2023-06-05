@@ -85,6 +85,14 @@ else if ($action == 'getProducts')
     echo json_encode($result);
 }
 
+else if($action == "getInstallationStatusTableByID")
+{
+    $installationFormId = $_POST['installationFormId'];
+    $result = $Product->getInstallationStatusTableByID($installationFormId);
+
+    echo json_encode($result);
+}
+
 else if ($action == 'displayProductsTable') 
 {
     $result = $Product->getAll();

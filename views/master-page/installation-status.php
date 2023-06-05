@@ -305,7 +305,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="salesOrderNumber" placeholder="SALES ORDER NUMBER" required readonly>
+                                    <input type="text" class="form-control" id="salesOrderNumber" placeholder="SALES ORDER NUMBER" required>
                                     <label class="form-label required" for="salesOrderNumber">SALES ORDER NUMBER</label>
                                 </div>
                             </div>

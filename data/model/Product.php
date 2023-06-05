@@ -34,16 +34,19 @@ class Product
 
     public function getAllAlert()
     {
-        $sql = "SELECT COUNT(*) as TotalRows
-                FROM (
-                    SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, 
-                    SUM(CASE WHEN p.STATUS = 'IN' THEN 1 ELSE 0 END) as IN_QUANTITY, 
-                    SUM(CASE WHEN p.STATUS = 'OUT' THEN 1 ELSE 0 END) as OUT_QUANTITY
-                    FROM products p
-                    JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
-                    GROUP BY pd.PRODUCT_DETAILS_ID
-                    HAVING IN_QUANTITY <= 10
-                ) as result;";
+        $sql = "SELECT (SELECT COUNT(*) FROM (
+                SELECT pd.PRODUCT_DETAILS_ID
+                FROM products p
+                JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                GROUP BY pd.PRODUCT_DETAILS_ID
+                HAVING SUM(CASE WHEN p.STATUS = 'IN' THEN 1 ELSE 0 END) <= 10
+                ) AS query1) +
+                (SELECT COUNT(*) FROM (
+                SELECT *
+                FROM installation_form
+                WHERE ESTIMATED_DATE BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)
+                ) AS query2) AS total_rows;
+                ";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -59,6 +62,16 @@ class Product
                 JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
                 GROUP BY pd.PRODUCT_DETAILS_ID
                 HAVING IN_QUANTITY <= 10";
+        $result = $this->conn->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getTableDataEstimatedDateAlert()
+    {
+        $sql = "SELECT *, DATEDIFF(ESTIMATED_DATE, CURDATE()) AS DAYS_REMAINING
+                FROM installation_form
+                WHERE ESTIMATED_DATE BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY);";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -148,6 +161,16 @@ class Product
     public function getInstallationStatusTable()
     {
         $sql = "SELECT *, DATE_FORMAT(DATE_TIME, '%W, %M %e, %Y at %h:%i:%s %p') AS FORMATTED_DATE FROM installation_form;";
+        $result = $this->conn->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getInstallationStatusTableByID($installationFormId)
+    {
+        $sql = "SELECT *, DATE_FORMAT(DATE_TIME, '%W, %M %e, %Y at %h:%i:%s %p') AS FORMATTED_DATE 
+                FROM installation_form 
+                WHERE INSTALLATION_FORM_ID = '$installationFormId';";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -378,9 +401,9 @@ class Product
         if($installationFormId == NULL){
             $uuid = $this->generateUUID();
             foreach($installationForm as $form) {
-                $sql = "INSERT INTO installation_form(INSTALLATION_FORM_ID, PROJECT_NAME, CONTACT_PERSON, CONTACT_NUMBER, PROJECT_SITE, SALESMAN_BRANCH, INSTALLER, SALES_ORDER_NUMBER, SERVICE, PREPARED_BY, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO installation_form(INSTALLATION_FORM_ID, PROJECT_NAME, CONTACT_PERSON, CONTACT_NUMBER, PROJECT_SITE, SALESMAN_BRANCH, INSTALLER, SALES_ORDER_NUMBER, SERVICE, NOTE, ESTIMATED_DATE, PREPARED_BY, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("sssssssssss",$uuid, $form['projectName'], $form['contactPerson'], $form['contactNumber'], $form['projectSite'], $form['salesManBranch'], $form['installer'], $form['salesOrderNumber'], $form['service'], $_SESSION['user']['fullname'], $form['status']);
+                $stmt->bind_param("sssssssssssss",$uuid, $form['projectName'], $form['contactPerson'], $form['contactNumber'], $form['projectSite'], $form['salesManBranch'], $form['installer'], $form['salesOrderNumber'], $form['service'], $form['note'], $form['estimatedDate'], $_SESSION['user']['fullname'], $form['status']);
                 $result = '';
                 if ($stmt->execute() === TRUE) {
                     $result = "Successfully Save";

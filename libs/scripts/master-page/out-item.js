@@ -12,7 +12,7 @@ const Product = (() => {
     var salesManBranch = "";
     var installer = "";
     var salesOrderNumber = "";
-    var jobOrderNumber = "";
+    var estimatedDate = "";
     var service = "";
     var installationForm = [];
 
@@ -36,8 +36,33 @@ const Product = (() => {
         // Check if the variable is available
         if (installationFormId == null) {
             $("#formModal").modal("show");
+        } else {
+            $.ajax({
+              type: "POST",
+              url:
+                PRODUCT_CONTROLLER + "?action=getInstallationStatusTableByID",
+              dataType: "json",
+              data: {
+                installationFormId: installationFormId,
+              },
+              success: function (response) {
+                $(".projectNameValue").text(response[0].PROJECT_NAME);
+                $(".dateValue").text(response[0].FORMATTED_DATE);
+                $(".contactPersonValue").text(response[0].CONTACT_PERSON);
+                $(".contactNumberValue").text(response[0].CONTACT_NUMBER);
+                $(".projectSiteValue").text(response[0].PROJECT_SITE);
+                $(".salesManBranchValue").text(response[0].SALESMAN_BRANCH);
+                $(".installerValue").text(response[0].INSTALLER);
+                $(".salesOrderNumberValue").text(response[0].SALES_ORDER_NUMBER);
+                $(".noteValue").text(response[0].NOTE);
+                $(".serviceValue").text(response[0].SERVICE);
+                $(".estimatedDateValue").text(response[0].ESTIMATED_DATE);
+              },
+              error: function (response) {
+                console.log(response);
+              },
+            });
         }
-        console.log(installationFormId);
     });
 
     $("#closeModal").click(function () {
@@ -68,6 +93,8 @@ const Product = (() => {
         salesOrderNumber = $("#salesOrderNumber").val();
         note = $("#note").val();
         service = $("#service").val();
+        estimatedDate = $("#estimatedDate").val();
+        formattedEstimatedDate = new Date(estimatedDate).toLocaleString('en-US', options);
 
         console.log(date)
         installationForm.push({
@@ -81,10 +108,11 @@ const Product = (() => {
             salesOrderNumber: salesOrderNumber,
             service: service,
             note: note,
-            status: "Pending"
+            status: "Pending",
+            estimatedDate: estimatedDate
         });
         console.log(installationForm)
-        if(projectName == "" || contactPerson == "" || contactNumber == "" || projectSite == "" || salesManBranch == "" || installer == "" || service == "") {
+        if(projectName == "" || contactPerson == "" || contactNumber == "" || projectSite == "" || salesManBranch == "" || installer == "" || service == "" || estimatedDate == "") {
             Swal.fire({
                 title: 'Error',
                 text: 'Please fill up all the fields',
@@ -104,6 +132,7 @@ const Product = (() => {
             $(".salesOrderNumberValue").text(salesOrderNumber);
             $(".noteValue").text(note);
             $(".serviceValue").text(service);
+            $(".estimatedDateValue").text(formattedEstimatedDate);
         }
     });
 

@@ -30,12 +30,33 @@ if ($action == 'getTableDataStockStatus')
     echo json_encode($table_data);
 }
 
+else if ($action == 'getTableDataEstimatedDateAlert') 
+{
+    $result = $Product->getTableDataEstimatedDateAlert();
+
+    $table_data = '';
+    $counter = 1;
+    foreach ($result as $product) {
+        $table_data .= '<tr>';
+        $table_data .= '<td>' . $counter . '</td>';
+        $table_data .= '<td>' . $product['PROJECT_NAME'] . '</td>';
+        $table_data .= '<td>' . $product['CONTACT_PERSON'] . '</td>';
+        $table_data .= '<td>' . $product['CONTACT_NUMBER'] . '</td>';
+        $table_data .= '<td>' . $product['ESTIMATED_DATE'] . '</td>';
+        $table_data .= '<td class="text-danger">' . $product['DAYS_REMAINING'] . '</td>';
+        $table_data .= '</tr>';
+
+        $counter++;
+    }
+    echo json_encode($table_data);
+}
+
 else if($action == 'getAlertCount')
 {
     $result = $Product->getAllAlert();
     foreach($result as $product)
     {
-        $result = $product['TotalRows'];
+        $result = $product['total_rows'];
     }
     echo json_encode($result);
 }

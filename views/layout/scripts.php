@@ -36,6 +36,31 @@
             $(this).val($(this).val().substring(0, 11));
         }
     });
+
+     // Add keyup event handler
+    $(document).on("keyup", function(event) {
+        var capsLockEnabled = event.originalEvent.getModifierState && event.originalEvent.getModifierState("CapsLock");
+
+        if (capsLockEnabled) {
+            swal.fire({
+                title: "Warning!",
+                text: "Caps Lock is enabled!",
+                icon: "warning",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#d33",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                stopKeydownPropagation: false,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+        }
+    });
     
     // function updateDatetime() {
     //     $.ajax({

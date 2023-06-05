@@ -41,11 +41,11 @@ const installationStatus = (() => {
             success: function (response) {
                 $("#salesOrderNumber").val(response['SALES_ORDER_NUMBER']);
                 $("#transmittedBy").val(response['INSTALLER']);
-                if(response['SALES_ORDER_NUMBER'] == '') {
-                    $("#salesOrderNumber").prop('readonly', false);
-                } else {
-                    $("#salesOrderNumber").prop('readonly', true);
-                }
+                // if(response['SALES_ORDER_NUMBER'] == '') {
+                //     $("#salesOrderNumber").prop('readonly', false);
+                // } else {
+                //     $("#salesOrderNumber").prop('readonly', true);
+                // }
             }
         });
     });

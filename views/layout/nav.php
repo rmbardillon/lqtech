@@ -53,7 +53,7 @@
         </li>
       <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <?php echo ($page == "Profile") ? 'active' : '' ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Profile
+                <?php echo($_SESSION['user']['fullname']); ?>
             </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="../master-page/action-logs.php">Action Logs</a></li>

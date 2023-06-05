@@ -1,5 +1,6 @@
 $(document).ready(function () {
     Alerts.loadTableDataStockStatus();
+    Alerts.loadTableDataEstimatedDateAlert();
     Alerts.loadAlertCount();
 
 });
@@ -38,7 +39,6 @@ const Alerts = (() => {
             success: function (response) {
                 $('.table').DataTable().destroy();
                 $('#tbody_stock_status').html(response);
-                $(".badge").val(response.row_count);
                 // $('.table').DataTable();
                 // Datatables no sorting
                 $('.table').DataTable({
@@ -51,6 +51,27 @@ const Alerts = (() => {
             error: function () {
 
             }
+        });
+    }
+
+    thisAlerts.loadTableDataEstimatedDateAlert = () => {
+        $.ajax({
+          type: "GET",
+          url: ALERT_CONTROLLER + "?action=getTableDataEstimatedDateAlert",
+          dataType: "json",
+          success: function (response) {
+            $(".table").DataTable().destroy();
+            $("#tbody_estimated_date_alert").html(response);
+            $(".table").DataTable({
+              columnDefs: [
+                {
+                  targets: "no-sort",
+                  orderable: false,
+                },
+              ],
+            });
+          },
+          error: function () {},
         });
     }
 

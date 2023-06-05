@@ -6,10 +6,8 @@ $(document).ready(function () {
     $('#show-password').click(function() {
         if ($(this).is(':checked')) {
             $('#password').attr('type', 'text');
-            $(this).next('label').text('Hide Password');
         } else {
             $('#password').attr('type', 'password');
-            $(this).next('label').text('Show Password');
         }
     });
 });
