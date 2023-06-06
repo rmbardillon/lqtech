@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2023 at 10:22 AM
+-- Generation Time: Jun 06, 2023 at 08:32 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -35,46 +35,30 @@ CREATE TABLE `action_logs` (
   `ACTION` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `action_logs`
---
-
-INSERT INTO `action_logs` (`ACTION_LOG_ID`, `DATE_TIME`, `USER_ID`, `ROLE`, `ACTION`) VALUES
-('016942edd90b11ed', '2023-04-12 10:21:20', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('0169c34fd90b11ed', '2023-04-12 10:21:20', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('485631edd8f611ed', '2023-04-12 07:53:00', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('6978c1d2d8fa11ed', '2023-04-12 08:22:34', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('b1131d89d90011ed', '2023-04-12 09:07:31', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('c1d6124dd8ff11ed', '2023-04-12 09:00:49', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('d4b7c0bed8f611ed', '2023-04-12 07:56:56', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('dfaa75f3d8f911ed', '2023-04-12 08:18:42', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('f5560a0ad90a11ed', '2023-04-12 10:21:00', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('f556e6cbd90a11ed', '2023-04-12 10:21:00', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('f557727bd90a11ed', '2023-04-12 10:21:00', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('f557f950d90a11ed', '2023-04-12 10:21:00', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('ff512ae7d90111ed', '2023-04-12 09:16:51', '58727a89cdf911ed', 1, 'Successfully saved the Product'),
-('ff520202d90111ed', '2023-04-12 09:16:52', '58727a89cdf911ed', 1, 'Successfully saved the Product');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `brands`
+-- Table structure for table `installation_form`
 --
 
-CREATE TABLE `brands` (
-  `BRAND_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
-  `BRAND` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `categories`
---
-
-CREATE TABLE `categories` (
-  `CATEGORY_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
-  `CATEGORY` varchar(64) NOT NULL
+CREATE TABLE `installation_form` (
+  `INSTALLATION_FORM_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `PROJECT_NAME` varchar(128) NOT NULL,
+  `DATE_TIME` datetime NOT NULL DEFAULT current_timestamp(),
+  `CONTACT_PERSON` varchar(128) NOT NULL,
+  `CONTACT_NUMBER` varchar(16) NOT NULL,
+  `PROJECT_SITE` varchar(128) NOT NULL,
+  `SALESMAN_BRANCH` varchar(128) NOT NULL,
+  `INSTALLER` varchar(128) NOT NULL,
+  `SALES_ORDER_NUMBER` varchar(16) NOT NULL,
+  `JOB_ORDER_NUMBER` varchar(16) NOT NULL,
+  `SERVICE` varchar(32) NOT NULL,
+  `NOTE` varchar(1024) NOT NULL,
+  `ESTIMATED_DATE` date DEFAULT NULL,
+  `PREPARED_BY` varchar(64) NOT NULL,
+  `TRANSMITTED_BY` varchar(64) NOT NULL,
+  `RECEIVED_BY` varchar(64) NOT NULL,
+  `STATUS` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -85,6 +69,7 @@ CREATE TABLE `categories` (
 
 CREATE TABLE `models` (
   `MODEL_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `CATEGORY` varchar(64) NOT NULL,
   `MODEL` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -92,125 +77,177 @@ CREATE TABLE `models` (
 -- Dumping data for table `models`
 --
 
-INSERT INTO `models` (`MODEL_ID`, `MODEL`) VALUES
-('2579a6e9d80e11ed', 'ERA-A363H'),
-('7b3d5821d80211ed', 'DS-2CE70DF3T-PF'),
-('7b3f4816d80211ed', 'DS-2CE70DF3T-PFS'),
-('7b3fe92fd80211ed', 'DS-2CE72DF3T-PIRXOS'),
-('7b40c034d80211ed', 'DS-2CE10DF3T-PF'),
-('7b415b29d80211ed', 'DS-2CE10DF3T-PFS'),
-('7b41e2cad80211ed', 'DS-2CE12DF3T-FS'),
-('7b426946d80211ed', 'DS-2CE12DF3T-PIRXOS'),
-('7b435640d80211ed', 'DS-2AE5225TI-A'),
-('7b43c0d6d80211ed', 'TVI-LITE 4CH2D2B-2M CV'),
-('7b4427b9d80211ed', 'DS-2CD2F22FWD-IS'),
-('7b448fdbd80211ed', 'IPC-A23N'),
-('7b45186ad80211ed', 'IPC-F22N-D'),
-('7b4591cdd80211ed', 'IPC-S21FN'),
-('7b460d78d80211ed', 'IPC-TA22CN-D'),
-('7b467800d80211ed', 'HWI-D121H'),
-('7b46e4f3d80211ed', 'E-HWID'),
-('7b475d75d80211ed', 'DS-2CD1323G0-IUF'),
-('7b47ca65d80211ed', 'DS-2CD1321-I'),
-('7b483257d80211ed', 'DS-2CD1023G0-IU'),
-('7b48aaaad80211ed', 'E-HWIB'),
-('7b490f52d80211ed', 'DS-2CD1023GO-IUF'),
-('7b497476d80211ed', 'DS-2CV2Q21FD-IW'),
-('7b49e9b3d80211ed', 'DS-2CD1327G0-L'),
-('7b4a4390d80211ed', 'DS-2CD1327GO-LUF'),
-('7b4aa3f8d80211ed', 'DS-2CD1027G0-L'),
-('7b4b2251d80211ed', 'DS-2CD1027G0-LU'),
-('7b4b8513d80211ed', 'DS-2CD1027G0-LUF'),
-('7b4bde23d80211ed', 'DS-2CE70KF0T-MFS'),
-('7b4c474bd80211ed', 'DS-2CE72KF3T'),
-('7b4ca2b8d80211ed', 'DS-2CE10KF0T-FS'),
-('7b4d0168d80211ed', 'DS-2CE10KF3T'),
-('7b4d78bcd80211ed', 'DS-2CE76U1T-ITPF'),
-('7b4df1f7d80211ed', 'DS-2CE72UF3T-E'),
-('7b4e54f6d80211ed', 'DS-2CE16U1T-ITPF'),
-('7b4ebbabd80211ed', 'DS-2CE10UF3T-E'),
-('7b4f39c6d80211ed', 'DS-2CE76H0T-ITPF'),
-('7b4f9980d80211ed', 'DS-2CE76H0T-ITPFS'),
-('7b4ff8aad80211ed', 'DS-2CE76H0T-ITMF'),
-('7b5052b2d80211ed', 'DS-2CE16H0T-ITPF'),
-('7b50ab94d80211ed', 'DS-2CE16H0T-ITPFS'),
-('7b51116ed80211ed', 'DS-2CE16H0T-ITF'),
-('7b516b4ed80211ed', 'DS-2CE17H0T-IT3F'),
-('7b51da41d80211ed', 'DS-2CE12HFT-F'),
-('7b523a61d80211ed', 'IPC-S41FN'),
-('7b52a42dd80211ed', 'HWI-D140H'),
-('7b52fb2ad80211ed', 'DS2CD-2347G2-LSU/SL'),
-('7b535117d80211ed', 'DS-2DE5425IW-AE '),
-('7b53a514d80211ed', 'HWI-B140H'),
-('7b53f81dd80211ed', 'DS-2CD1147G0-UF'),
-('7b544a1ad80211ed', 'DS-2CV2021G2-IDW'),
-('7b549efdd80211ed', 'DS-2CE16D0T-IPF'),
-('7b54feecd80211ed', 'DS-2CD2046G2-IU/SL'),
-('7b555026d80211ed', 'DS-2CD2047G2-LU/SL'),
-('7b55accfd80211ed', 'DH-IPC-HFW1431S1-4KS2/L'),
-('7b560643d80211ed', 'DS-2CD2347G2-L(U)'),
-('7b5663e8d80211ed', 'DS-2CD1347G0-LUF'),
-('7b56cfa1d80211ed', 'DS-2CD1347G0-L'),
-('7b573f5dd80211ed', 'DS-2CD2047G2-LU'),
-('7b57aa1fd80211ed', 'DS-2CD1047G0-L'),
-('7b58098ed80211ed', 'DS-2CD2T47G2-L'),
-('7b586ebad80211ed', 'DS-2CD1047G0-LUF'),
-('7b58d8aed80211ed', 'DS-2CD2166G2-I'),
-('ad7bd0bfd80211ed', 'Barracuda'),
-('ad7dea63d80211ed', 'Skyhawk'),
-('ad7eb0b9d80211ed', 'Toshiba OEM'),
-('ad7f63e2d80211ed', 'Ironwolf'),
-('ad7fd96bd80211ed', 'Western Digital'),
-('b8f7c5b8d80311ed', 'DS-7204HGHI-K1'),
-('b8f9b0d8d80311ed', 'DS-7204HGHI-F1'),
-('b8fa88c8d80311ed', 'DS-7204HQHI-K1'),
-('b8fb2e78d80311ed', 'DS-7204HQHI-K1/E'),
-('b8fbae29d80311ed', 'DS-7204HUHI-K1/E'),
-('b8fc1e37d80311ed', 'iDS-7204HUHI- M1/FA'),
-('b8fc84e4d80311ed', 'iDS-7204HQHI-M1/S'),
-('b8fced70d80311ed', 'DS-7208HGHI-K1'),
-('b8fd4ad4d80311ed', 'DS-7208HQHI-K1/E'),
-('b8fdaaeed80311ed', 'iDS-7208HUHI-M1/S'),
-('b8fe208bd80311ed', 'DS-7208HGHI-KN'),
-('b8fe7e9cd80311ed', 'DS-7208HQHI-M1/S'),
-('b8fed467d80311ed', 'DS-7208HUHI-K1/E'),
-('b8ff46dcd80311ed', 'DS-7216HGHI-K1'),
-('b8ffa90bd80311ed', 'iDS-7216HQHI-M1/S'),
-('b9000929d80311ed', 'iDS-7216HUHI-M2/S'),
-('b9007d9ad80311ed', 'iDS-7216HQHI-M2/S'),
-('b900e1f4d80311ed', 'DS-7216HGHI-K2'),
-('b9014e41d80311ed', 'iDS-7232HQHI-M2/S'),
-('b901c3a1d80311ed', 'DAHUA 8CH 2MP'),
-('b902346bd80311ed', 'DAHUA 4CH DVR'),
-('b9029b5ed80311ed', 'DS-7604NI-Q1'),
-('b9031006d80311ed', 'DS-7608NI-Q1'),
-('b903766bd80311ed', 'HWN-4108MH'),
-('b903d8eed80311ed', 'DS-7608NXI-12/8P/S'),
-('b90456bcd80311ed', 'DS-7608NI-Q2'),
-('b904b41ed80311ed', 'DS-7608NI-K1'),
-('b9050fdad80311ed', 'DS-7616NI-Q2'),
-('b90576c5d80311ed', 'DS-7616NI-Q1'),
-('b905e33ed80311ed', 'DS-7616NXI-K2'),
-('b90642c1d80311ed', 'DH-NVR4216-4KS2/L'),
-('b906b0b8d80311ed', 'DS-7632NI-K1'),
-('b907218bd80311ed', 'DS-7632NI-K2'),
-('b9078919d80311ed', 'DHI-NVR4232-4KS2/L'),
-('b907fbdfd80311ed', 'DS-7732NXI-K4'),
-('c3433233d80211ed', 'Metal'),
-('c3453332d80211ed', 'Fuse'),
-('e7dd578ad80111ed', 'DS-2CE16D0T-EXIPF'),
-('e7df5b65d80111ed', 'DS-2CE16D0T-ITPFS'),
-('e7e0097bd80111ed', 'DS-2CE16D3T-ITF'),
-('e7e0a60ad80111ed', 'DS-2CE19D3T-IT3ZF'),
-('e7e14e7ad80111ed', 'DS-2CE17D0T-IT3F'),
-('e7e1e3afd80111ed', 'DS-2CE16D8T-IT3ZF'),
-('e7e26d32d80111ed', 'DS-2CE19D3T-AIT3ZF'),
-('e7e2f262d80111ed', 'DS-2CE17D0T-IT5F'),
-('e7e37c91d80111ed', 'DS-2CE16D0T-IRF'),
-('e7e3f2d9d80111ed', 'DS-2CE16D0T-IRPF'),
-('e7e47234d80111ed', 'DS-2CE16DOT-IPF'),
-('e7e4d4fed80111ed', 'DS-2CE16H1T-IT'),
-('e7e5396ad80111ed', 'DS-2CE11DOT-PIRL');
+INSERT INTO `models` (`MODEL_ID`, `CATEGORY`, `MODEL`) VALUES
+('5228d4d2043011ee', 'Camera', 'DS-2CE76D0T-EXIPF'),
+('522b5065043011ee', 'Camera', 'DS-2CE76D0T-ITPFS'),
+('522c4fc1043011ee', 'Camera', 'DS-2CE76D3T-ITMF'),
+('522d729d043011ee', 'Camera', 'DS-2CE5AD3T-VPIT3ZF'),
+('522e8040043011ee', 'Camera', 'DS-2CE56D8T-ITZF'),
+('522f75c4043011ee', 'Camera', 'DS-2CE56D0T-IRPF'),
+('52306e15043011ee', 'Camera', 'DS-2CE56DOT-IPF'),
+('5231875a043011ee', 'Camera', 'DS-2CE72DFT-PIRXOF'),
+('523248ed043011ee', 'Camera', 'DS-2CE56D0T-IT1F'),
+('5232ef9e043011ee', 'Camera', 'DS-2CE56D0T-IT3F'),
+('523392d1043011ee', 'Camera', 'DS-2CE57D3T-VPITF'),
+('52342d76043011ee', 'Camera', 'DS-2CE76D0T-ITMFS'),
+('52349c85043011ee', 'Camera', 'DS-2CS54D8T-PH HIDDEN CAM'),
+('75a502e8043011ee', 'Camera', 'DS-2CE16D0T-EXIPF'),
+('75a7772e043011ee', 'Camera', 'DS-2CE16D0T-ITPFS'),
+('75a89338043011ee', 'Camera', 'DS-2CE16D3T-ITF'),
+('75a9ee00043011ee', 'Camera', 'DS-2CE19D3T-IT3ZF'),
+('75aaf3d1043011ee', 'Camera', 'DS-2CE17D0T-IT3F'),
+('75ac103f043011ee', 'Camera', 'DS-2CE16D8T-IT3ZF'),
+('75ad27fd043011ee', 'Camera', 'DS-2CE19D3T-AIT3ZF'),
+('75ae4724043011ee', 'Camera', 'DS-2CE17D0T-IT5F'),
+('75af698e043011ee', 'Camera', 'DS-2CE16D0T-EXIPF'),
+('75b07133043011ee', 'Camera', 'DS-2CE16D0T-ITPFS'),
+('75b19d89043011ee', 'Camera', 'DS-2CE16DOT-IPF'),
+('75b2c5b3043011ee', 'Camera', 'DS-2CE16H1T-IT'),
+('75b3b05c043011ee', 'Camera', 'DS-2CE11DOT-PIRL'),
+('89d51f44043111ee', 'Power Supply', '2AMP INDOOR'),
+('89d6fceb043111ee', 'Power Supply', '2AMP OUTDOOR'),
+('89d7abbd043111ee', 'Power Supply', '5AMP WITH SPLITTER'),
+('89d82b0d043111ee', 'Power Supply', '10AMP'),
+('89d8a021043111ee', 'Power Supply', '15AMP'),
+('89d91121043111ee', 'Power Supply', '20AMP'),
+('89d99be8043111ee', 'Power Supply', '30AMP'),
+('89da14da043111ee', 'Power Supply', '5AMP'),
+('89da89b0043111ee', 'Power Supply', 'POE 48V'),
+('89db157a043111ee', 'Power Supply', 'POE 24V'),
+('89db9db2043111ee', 'Power Supply', 'DS-3E0105P-E/M(B)'),
+('89dc221a043111ee', 'Power Supply', 'DS-3E0106P-E/M'),
+('89dc9721043111ee', 'Power Supply', 'DS-3E0310P-E/M'),
+('89dd0da8043111ee', 'Power Supply', 'DS-3E0109P-E/M(B)'),
+('89dd7ee4043111ee', 'Power Supply', 'DS-3E1318P-EI'),
+('89ddf294043111ee', 'Power Supply', 'DS-3E0318P-E/M(C)'),
+('89debc67043111ee', 'Power Supply', 'DS-3E01318P-E/M(B)'),
+('89df5b7e043111ee', 'Power Supply', 'DH-PFS3218-16ET-135'),
+('89dfd774043111ee', 'Power Supply', 'DH-PFS3010-8ET-65'),
+('98dde06f043111ee', 'Hard drive', 'TOSHIBA 1TB'),
+('98de9021043111ee', 'Hard drive', 'TOSHIBA 2TB'),
+('98df2e62043111ee', 'Hard drive', 'SEAGATE 2TB SKYHAWK'),
+('98dfb87d043111ee', 'Hard drive', 'SEAGATE 4TB'),
+('98e03bb5043111ee', 'Hard drive', 'SEAGATE 6TB'),
+('98e0ab44043111ee', 'Hard drive', 'SEAGATE 1TB BARRACUDA'),
+('98e10ac2043111ee', 'Hard drive', 'SEAGATE IRONWOLF 4TB'),
+('98e16e3c043111ee', 'Hard drive', '6TB HDD WESTERN DIGITAL'),
+('98e1c9bc043111ee', 'Hard drive', '8TB HDD SKYHAWK'),
+('98e226dd043111ee', 'Hard drive', '4TB WESTERN DIGITAL'),
+('aed93284043111ee', 'Monitor', 'AEVISION 19\"'),
+('aedb06da043111ee', 'Monitor', 'N VISION 20 INCHES'),
+('aedbcb1a043111ee', 'Monitor', 'HIKVISION 22\'\''),
+('aedcc798043111ee', 'Monitor', 'N VISION 43 INCHES'),
+('aeddf5e8043111ee', 'Monitor', 'INPLAY LED HD 32 INCHES'),
+('aedf60a0043111ee', 'Monitor', 'PHILIPS 24\"'),
+('aee042b4043111ee', 'Monitor', 'HISENSE 32\'\' TV MONITOR'),
+('aee1190a043111ee', 'Monitor', 'HISENSE 43\'\' TV MONITOR'),
+('aee1d150043111ee', 'Monitor', 'HISENSE 55\'\' TV MONITOR'),
+('aee28e49043111ee', 'Monitor', 'DAHUA 32\" TV MONITOR'),
+('aee359b3043111ee', 'Monitor', 'DAHUA 43\'\' TV MONITOR'),
+('aee432af043111ee', 'Monitor', 'AEVISION 43\'\' TV MONITOR'),
+('bd088853043011ee', 'Camera', 'DS-2CE70DF3T-PF'),
+('bd0adc53043011ee', 'Camera', 'DS-2CE70DF3T-PFS'),
+('bd0be8b9043011ee', 'Camera', 'DS-2CE72DF3T-PIRXOS'),
+('bd0d0c15043011ee', 'Camera', 'DS-2CE10DF3T-PF'),
+('bd0e09cd043011ee', 'Camera', 'DS-2CE10DF3T-PFS'),
+('bd0f5546043011ee', 'Camera', 'DS-2CE12DF3T-FS'),
+('bd10241a043011ee', 'Camera', 'DS-2CE12DF3T-PIRXOS'),
+('bd110969043011ee', 'Camera', 'DS-2CE70KF0T-MFS'),
+('bd11e490043011ee', 'Camera', 'DS-2CE72KF3T'),
+('bd12a82e043011ee', 'Camera', 'DS-2CE10KF0T-FS'),
+('bd138287043011ee', 'Camera', 'DS-2CE10KF3T'),
+('bd14678e043011ee', 'Camera', 'DS-2CE76U1T-ITPF'),
+('bd152362043011ee', 'Camera', 'DS-2CE72UF3T-E'),
+('bd15eaf2043011ee', 'Camera', 'DS-2CE16U1T-ITPF'),
+('bd16b753043011ee', 'Camera', 'DS-2CE10UF3T-E'),
+('bd177679043011ee', 'Camera', 'DS-2CE76H0T-ITPF'),
+('bd18401a043011ee', 'Camera', 'DS-2CE76H0T-ITPFS'),
+('bd1900a9043011ee', 'Camera', 'DS-2CE76H0T-ITMF'),
+('bd19c58f043011ee', 'Camera', 'DS-2CE16H0T-ITPF'),
+('bd1a9423043011ee', 'Camera', 'DS-2CE16H0T-ITPFS'),
+('bd1b61e2043011ee', 'Camera', 'DS-2CE16H0T-ITF'),
+('bd1c1c17043011ee', 'Camera', 'DS-2CE17H0T-IT3F'),
+('bd1ce5e5043011ee', 'Camera', 'DS-2CE12HFT-F'),
+('bd1daf97043011ee', 'Camera', 'ERA-A363H'),
+('bd1e7ff3043011ee', 'Camera', 'IPC-S41FN (4MP CRUISER)'),
+('bd1f3a4d043011ee', 'Camera', 'IPC-A23N (2MP RANGER SE)'),
+('bd1ff231043011ee', 'Camera', 'IPC-F22N-D (2MP BULLET 2C-D)'),
+('bd20a902043011ee', 'Camera', 'IPC-S21FN CRUISER DOME 2MP'),
+('bd215f2b043011ee', 'Camera', 'IPC-TA22CN-D (2MP RANGER 2C)'),
+('bd2217d5043011ee', 'Camera', 'HWI-D121H'),
+('bd229b9a043011ee', 'Camera', 'E-HWID'),
+('bd232d76043011ee', 'Camera', 'DS-2CD1323G0-IUF'),
+('bd23c2d9043011ee', 'Camera', 'DS-2CD1321-I'),
+('bd245b6e043011ee', 'Camera', 'DS-2CD1123G0E-1'),
+('bd24f73c043011ee', 'Camera', 'DS-2CD1023G0-IU'),
+('bd25726a043011ee', 'Camera', 'E-HWIB'),
+('bd260541043011ee', 'Camera', 'DS-2CD1023GO-IUF'),
+('bd268690043011ee', 'Camera', 'HWI-D140H'),
+('bd26f9ee043011ee', 'Camera', 'DS2CD-2347G2-LSU/SL'),
+('bd276494043011ee', 'Camera', 'HWI-B140H'),
+('bd27c650043011ee', 'Camera', 'DS-2CD1147G0-UF'),
+('bd28287c043011ee', 'Camera', 'DS-2CV2021G2-IDW'),
+('bd28927d043011ee', 'Camera', 'DS-2CE16D0T-IPF'),
+('bd28fc6f043011ee', 'Camera', 'DS-2CD2046G2-IU/SL'),
+('bd296509043011ee', 'Camera', 'DS-2CD2047G2-LU/SL'),
+('bd2b290b043011ee', 'Camera', 'DS-2CV2Q21FD-IW'),
+('bd2c8630043011ee', 'Camera', 'DS-2CD1327G0-L'),
+('bd2cfa44043011ee', 'Camera', 'DS-2CD1327GO-LUF'),
+('bd2d606b043011ee', 'Camera', 'DS-2CD1027G0-L'),
+('bd2dc72d043011ee', 'Camera', 'DS-2CD1027G0-LU'),
+('bd2e1db6043011ee', 'Camera', 'DS-2CD1027G0-LUF'),
+('bd2e6aec043011ee', 'Camera', 'DS-2CD2347G2-L(U)'),
+('bd2eb4a8043011ee', 'Camera', 'DS-2CD1347G0-LUF'),
+('bd2efcc6043011ee', 'Camera', 'DS-2CD1347G0-L'),
+('bd2f51b0043011ee', 'Camera', 'DS-2CD2047G2-LU'),
+('bd2fa369043011ee', 'Camera', 'DS-2CD1047G0-L'),
+('bd2ff1ef043011ee', 'Camera', 'DS-2CD2T47G2-L'),
+('bd304045043011ee', 'Camera', 'DS-2CD1047G0-LUF'),
+('bd30906f043011ee', 'Camera', 'DS-2CD2166G2-I'),
+('bd30e3cb043011ee', 'Camera', 'DS-2CD2F22FWD-IS'),
+('bd31392e043011ee', 'Camera', 'DS-2AE5225TI-A'),
+('bd31895e043011ee', 'Camera', 'DS-2DE5425IW-AE (4MP)'),
+('bd31d4d6043011ee', 'Camera', 'DS-2DE5225IW-AE (2MP)'),
+('c085c72c043111ee', 'Camera', 'DS-2CD2955FWD-IS'),
+('f6f77be8043011ee', 'Recorder', 'DS-7204HGHI-K1'),
+('f6f809df043011ee', 'Recorder', 'DS-7204HGHI-F1'),
+('f6f8925b043011ee', 'Recorder', 'DS-7204HQHI-K1'),
+('f6f90a09043011ee', 'Recorder', 'DS-7204HQHI-K1/E'),
+('f6f9802f043011ee', 'Recorder', 'DS-7204HUHI-K1/E'),
+('f6f9f16b043011ee', 'Recorder', 'IDS-7204HUHI- M1/FA'),
+('f6fa5a00043011ee', 'Recorder', 'IDS-7204HQHI-M1/S'),
+('f6fabe10043011ee', 'Recorder', 'DS-E04HGHI-B'),
+('f6fb2cab043011ee', 'Recorder', 'DS-E04HQHI-B'),
+('f6fb9d60043011ee', 'Recorder', 'DS-7208HGHI-K1'),
+('f6fc0d3b043011ee', 'Recorder', 'DS-7208HQHI-K1/E'),
+('f6fc760d043011ee', 'Recorder', 'IDS-7208HUHI-M1/S'),
+('f6fd2450043011ee', 'Recorder', 'DS-7208HGHI-KN'),
+('f6fdb2ca043011ee', 'Recorder', 'IDS-7208HQHI-M1/S'),
+('f6fe12b3043011ee', 'Recorder', 'DS-7208HUHI-K1/E'),
+('f6fe7ba6043011ee', 'Recorder', 'DS-E08HGHI-B'),
+('f6fee79f043011ee', 'Recorder', 'DS-7216HGHI-K1'),
+('f6ff4742043011ee', 'Recorder', 'IDS-7216HQHI-M1/S'),
+('f6ffb663043011ee', 'Recorder', 'IDS-7216HUHI-M2/S'),
+('f7001a88043011ee', 'Recorder', 'IDS-7216HQHI-M2/S'),
+('f7007da7043011ee', 'Recorder', 'DS-7216HGHI-K2'),
+('f700e2a0043011ee', 'Recorder', 'IDS-7216-HQHI-M2/S'),
+('f7014bf7043011ee', 'Recorder', 'IDS-7232HQHI-M2/S'),
+('f701ab67043011ee', 'Recorder', 'DAHUA 8CH 2MP'),
+('f7020119043011ee', 'Recorder', 'DAHUA 4CH DVR'),
+('f7025c72043011ee', 'Recorder', 'DS-7604NI-Q1'),
+('f702b34c043011ee', 'Recorder', 'DS-7608NI-Q1'),
+('f7032dcb043011ee', 'Recorder', 'HWN-4108MH'),
+('f7038cd9043011ee', 'Recorder', 'DS-7608NXI-12/8P/S'),
+('f703e45a043011ee', 'Recorder', 'DS-7608NI-Q2'),
+('f70439c2043011ee', 'Recorder', 'DS-7608NI-K1'),
+('f70497c3043011ee', 'Recorder', 'DS-7616NI-Q2'),
+('f704f760043011ee', 'Recorder', 'DS-7616NI-Q1'),
+('f705503a043011ee', 'Recorder', 'DS-7616NXI-K2'),
+('f705b5bf043011ee', 'Recorder', 'DH-NVR4216-4KS2/L'),
+('f7061a8c043011ee', 'Recorder', 'DS-7632NI-K1'),
+('f7067d77043011ee', 'Recorder', 'DS-7632NI-K2'),
+('f706e270043011ee', 'Recorder', 'DHI-NVR4232-4KS2/L'),
+('f7074e3a043011ee', 'Recorder', 'DS-7732NXI-K4');
 
 -- --------------------------------------------------------
 
@@ -222,19 +259,11 @@ CREATE TABLE `products` (
   `PRODUCT_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
   `PRODUCT_DETAILS_ID` varchar(16) NOT NULL,
   `SKU` varchar(32) NOT NULL,
-  `SERIAL_NUMBER` varchar(32) NOT NULL
+  `SERIAL_NUMBER` varchar(32) NOT NULL,
+  `DATE_INSERTED` datetime NOT NULL DEFAULT current_timestamp(),
+  `DATE_OUT` datetime DEFAULT NULL,
+  `STATUS` varchar(16) NOT NULL DEFAULT 'IN'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`PRODUCT_ID`, `PRODUCT_DETAILS_ID`, `SKU`, `SERIAL_NUMBER`) VALUES
-('697716f9d8fa11ed', '721e1638d83511ed', '6954273692438', '321'),
-('c1d5b273d8ff11ed', '721e1638d83511ed', '6954273692438', '111'),
-('d993a3aed83511ed', '721e1638d83511ed', '6954273692438', 'K24148414'),
-('dfa8c2e1d8f911ed', '721e1638d83511ed', '6954273692438', '123'),
-('e146bbe9d83511ed', '7d6b5e05d83511ed', '6954273697167', 'K07492984');
 
 -- --------------------------------------------------------
 
@@ -259,15 +288,6 @@ CREATE TABLE `product_details` (
   `MONITOR_SIZE` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `product_details`
---
-
-INSERT INTO `product_details` (`PRODUCT_DETAILS_ID`, `CATEGORY`, `BRAND`, `MODEL`, `BUYING_PRICE`, `SELLING_PRICE`, `DATE_ADDED`, `CAMERA_TYPE`, `CAMERA_SHAPE`, `RECORDER_TYPE`, `CAPACITY`, `PSU_TYPE`, `WATTS`, `MONITOR_SIZE`) VALUES
-('31a891a3d83b11ed', 'Power Supply', 'OEM', 'Generic', '0.00', '0.00', '2023-04-11 15:33:46', NULL, NULL, NULL, NULL, 'Metal Type', '5amps', NULL),
-('721e1638d83511ed', 'Camera', 'Hikvision', 'DS-2CE76H0T-ITPFS', '0.00', '0.00', '2023-04-11 14:52:37', 'Analog', 'Dome', NULL, NULL, NULL, NULL, NULL),
-('7d6b5e05d83511ed', 'Camera', 'Hikvision', 'DS-2CE16H0T-ITPF', '0.00', '0.00', '2023-04-11 14:52:56', 'Analog', 'Bullet', NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -275,10 +295,27 @@ INSERT INTO `product_details` (`PRODUCT_DETAILS_ID`, `CATEGORY`, `BRAND`, `MODEL
 --
 
 CREATE TABLE `sales` (
-  `SALE_ID` varchar(32) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `SALE_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `INSTALLATION_FORM_ID` varchar(16) NOT NULL,
+  `PRODUCT_DETAILS_ID` varchar(16) NOT NULL,
   `SERIAL_NUMBER` varchar(32) NOT NULL,
   `SKU` varchar(32) NOT NULL,
-  `DATE_PURCHASED` datetime DEFAULT current_timestamp()
+  `DATE_PURCHASED` datetime DEFAULT current_timestamp(),
+  `STATUS` varchar(32) NOT NULL DEFAULT 'OUT'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stocks`
+--
+
+CREATE TABLE `stocks` (
+  `STOCKS_ID` varchar(16) NOT NULL DEFAULT replace(convert(uuid() using utf8mb4),'-',''),
+  `PRODUCT_ID` varchar(16) NOT NULL,
+  `DATE_TODAY` date NOT NULL,
+  `IN` int(11) NOT NULL,
+  `OUT` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -304,7 +341,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`USER_ID`, `FIRST_NAME`, `LAST_NAME`, `USERNAME`, `PASSWORD`, `ROLE`, `LOGIN_ATTEMPTS`, `IS_LOCKED`, `LAST_LOGIN`) VALUES
-('58727a89cdf911ed', 'JOHN', 'DOE', 'owner', '$2y$10$uovfGxUqgB7aaOXTlT832OEXoy52Kj1lJ6wzqchHhhnTi65937ZAS', 1, 0, 0, '2023-04-12 09:05:27');
+('2dc43bcc043011ee', 'JENNY ROSE', 'BORREROS', 'adminjborreros', '$2y$10$VUbsB/57/yc2PxzCeXfOCO78f//XutEjZ9xLyy9ba5W9e1ziqGVJm', 2, 0, 0, NULL),
+('58727a89cdf911ed', 'JOY', 'TAN', 'owner', '$2y$10$NNjsc/qfqw0VhWXnVXwI4e7epUme3YfQlyWpaXcMdpHqjRvp721ze', 1, 0, 0, '2023-06-06 14:04:18');
 
 --
 -- Indexes for dumped tables
@@ -318,10 +356,10 @@ ALTER TABLE `action_logs`
   ADD KEY `FK_USER_ACTION_LOG` (`USER_ID`);
 
 --
--- Indexes for table `brands`
+-- Indexes for table `installation_form`
 --
-ALTER TABLE `brands`
-  ADD PRIMARY KEY (`BRAND_ID`);
+ALTER TABLE `installation_form`
+  ADD PRIMARY KEY (`INSTALLATION_FORM_ID`);
 
 --
 -- Indexes for table `models`
@@ -346,7 +384,16 @@ ALTER TABLE `product_details`
 -- Indexes for table `sales`
 --
 ALTER TABLE `sales`
-  ADD PRIMARY KEY (`SALE_ID`);
+  ADD PRIMARY KEY (`SALE_ID`),
+  ADD KEY `SALES_PRODUCT_DETAILS_ID` (`PRODUCT_DETAILS_ID`),
+  ADD KEY `FK_PRODUCT_INSTALLATION_FORM_ID` (`INSTALLATION_FORM_ID`);
+
+--
+-- Indexes for table `stocks`
+--
+ALTER TABLE `stocks`
+  ADD PRIMARY KEY (`STOCKS_ID`),
+  ADD KEY `FK_PRODUCT_STOCKS` (`PRODUCT_ID`);
 
 --
 -- Indexes for table `users`
@@ -369,6 +416,19 @@ ALTER TABLE `action_logs`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `FK_PRODUCT_DETAILS_ID` FOREIGN KEY (`PRODUCT_DETAILS_ID`) REFERENCES `product_details` (`PRODUCT_DETAILS_ID`);
+
+--
+-- Constraints for table `sales`
+--
+ALTER TABLE `sales`
+  ADD CONSTRAINT `FK_PRODUCT_INSTALLATION_FORM_ID` FOREIGN KEY (`INSTALLATION_FORM_ID`) REFERENCES `installation_form` (`INSTALLATION_FORM_ID`),
+  ADD CONSTRAINT `SALES_PRODUCT_DETAILS_ID` FOREIGN KEY (`PRODUCT_DETAILS_ID`) REFERENCES `product_details` (`PRODUCT_DETAILS_ID`);
+
+--
+-- Constraints for table `stocks`
+--
+ALTER TABLE `stocks`
+  ADD CONSTRAINT `FK_PRODUCT_STOCKS` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `product_details` (`PRODUCT_DETAILS_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -92,8 +92,8 @@ class Product
     public function getByID($id)
     {
         $sql = "SELECT pd.PRODUCT_DETAILS_ID, pd.CATEGORY, pd.BRAND, pd.MODEL, COUNT(*) as QUANTITY, BUYING_PRICE, SELLING_PRICE, SKU, PRODUCT_ID
-                FROM products p
-                JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
+                FROM product_details pd
+                LEFT JOIN products p ON pd.PRODUCT_DETAILS_ID = p.PRODUCT_DETAILS_ID
                 WHERE pd.PRODUCT_DETAILS_ID = '$id'
                 GROUP BY pd.PRODUCT_DETAILS_ID;";
         $result = $this->conn->query($sql);

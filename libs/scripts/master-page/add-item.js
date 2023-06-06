@@ -267,7 +267,7 @@ const Category = (() => {
     thisCategory.save = () => {
         const model_name = $('#txt_category_name').val().trim();
         const category = $('#category').val();
-        if(model_name == "") {
+        if(model_name == "" || category == null) {
             Swal.fire({
                 position: 'center',
                 icon: 'warning',
