@@ -25,8 +25,15 @@ class Product
                 SELLING_PRICE, SKU, p.STATUS
                 FROM products p
                 JOIN product_details pd ON p.PRODUCT_DETAILS_ID = pd.PRODUCT_DETAILS_ID
-                GROUP BY pd.PRODUCT_DETAILS_ID;
-";
+                GROUP BY pd.PRODUCT_DETAILS_ID;";
+        $result = $this->conn->query($sql);
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getSalesByInstallationFormId($installationFormId)
+    {
+        $sql = "SELECT * FROM sales WHERE INSTALLATION_FORM_ID = '$installationFormId'";
         $result = $this->conn->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -267,8 +274,9 @@ class Product
         $sku = $request['sku'];
         $serial_numbers = $request['serial_numbers'];
         $values_array = explode("\n", $serial_numbers);
+        $values_array = array_filter($values_array, 'trim');
         $uuid = $this->generateUUID();
-        $counter = count($values_array) - 1;
+        $counter = count($values_array);
         $stocks = $this->checkStocks($model);
 
         if (!$stocks) {
@@ -542,6 +550,36 @@ class Product
 
     public function cancelTransaction($id)
     {
+        // $sql = "UPDATE products SET STATUS = 'IN', DATE_INSERTED = NOW(), DATE_OUT = NULL 
+        //         WHERE SERIAL_NUMBER IN (
+        //             SELECT SERIAL_NUMBER 
+        //             FROM sales 
+        //             WHERE INSTALLATION_FORM_ID = '$id'
+        //         ) 
+        //         AND SKU IN (
+        //             SELECT SKU 
+        //             FROM sales 
+        //             WHERE INSTALLATION_FORM_ID = '$id'
+        //         );";
+        // $stmt = $this->conn->prepare($sql);
+        // $result = '';
+        // $stmt->execute();
+
+        // $sql = "UPDATE sales SET STATUS =  'RETURNED' WHERE INSTALLATION_FORM_ID = '$id'";
+        // $stmt = $this->conn->prepare($sql);
+        // $result = '';
+        // $stmt->execute();
+        $sales = $this->getSalesByInstallationFormId($id);
+        $productCartReturn = array();
+
+        foreach ($sales as $sale) {
+            $productCartReturn[] = array(
+                'PRODUCT_DETAILS_ID' => $sale['PRODUCT_DETAILS_ID'],
+                'SERIAL_NUMBER' => $sale['SERIAL_NUMBER'],
+                'SKU' => $sale['SKU']
+            );
+        }
+        $this->confirmReturn($id, $productCartReturn);
         $receiver = $_SESSION['user']['fullname'];
         $sql = "UPDATE installation_form SET STATUS = 'Canceled' WHERE INSTALLATION_FORM_ID = '$id'";
         $stmt = $this->conn->prepare($sql);
@@ -615,7 +653,6 @@ class Product
             }
         }
 
-        $this->conn->close();
         return $result;
     }
 }

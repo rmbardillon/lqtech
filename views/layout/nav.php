@@ -18,7 +18,7 @@
                 Register
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../master-page/add-model.php">Model</a></li>
+                <li><a class="dropdown-item" href="../master-page/add-model.php">Specification</a></li>
                 <li><a class="dropdown-item" href="../master-page/add-product.php">Product</a></li>
             </ul>
         </li>

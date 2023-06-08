@@ -13,7 +13,8 @@ $("#category").change(function() {
         <div class="row" style="margin-top: 30px;">
             <div class="col">
                 <label class="form-label required" for="brand">Brand</label>
-                <input type="text" class="form-control" id="brand">
+                <select class="form-select brand" name="" id="brand">
+                </select>
             </div>
             <div class="col">
                 <label class="form-label required" for="model">Model</label>
@@ -55,7 +56,8 @@ $("#category").change(function() {
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
                     <label class="form-label required" for="brand">Brand</label>
-                    <input type="text" class="form-control" id="brand">
+                    <select class="form-select brand" name="" id="brand">
+                    </select>
                 </div>
                 <div class="col">
                     <label class="form-label required" for="model">Model</label>
@@ -89,7 +91,8 @@ $("#category").change(function() {
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
                     <label class="form-label required" for="brand">Brand</label>
-                    <input type="text" class="form-control" id="brand">
+                    <select class="form-select brand" name="" id="brand">
+                    </select>
                 </div>
                 <div class="col">
                     <label class="form-label required" for="model">Model</label>
@@ -125,7 +128,8 @@ $("#category").change(function() {
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
                     <label class="form-label required" for="brand">Brand</label>
-                    <input type="text" class="form-control" id="brand" value="OEM" readonly>
+                    <select class="form-select brand" name="" id="brand">
+                    </select>
                 </div>
                 <div class="col">
                     <label class="form-label required" for="model">Model</label>
@@ -163,7 +167,8 @@ $("#category").change(function() {
             <div class="row" style="margin-top: 30px;">
                 <div class="col">
                     <label class="form-label required" for="brand">Brand</label>
-                    <input type="text" class="form-control" id="brand">
+                    <select class="form-select brand" name="" id="brand">
+                    </select>
                 </div>
                 <div class="col">
                     <label class="form-label required" for="model">Model</label>
@@ -205,6 +210,10 @@ $("#category").change(function() {
         placeholder: 'Search for an option...',
         allowClear: true,
     });
+    $('.brand').select2({
+        placeholder: 'Search for an option...',
+        allowClear: true,
+    });
 });
 
 const Category = (() => {
@@ -236,6 +245,28 @@ const Category = (() => {
 
             }
         });
+
+        $.ajax({
+            type: "GET",
+            url: CATEGORY_CONTROLLER + '?action=getBrandTableData',
+            dataType: "json",
+            success: function (response) {
+                $('.table').DataTable().destroy();
+                $('#tbody_brand').html(response);
+
+                // $('.table').DataTable();
+                // Datatables no sorting
+                $('.table').DataTable({
+                    columnDefs: [{
+                        targets: 'no-sort',
+                        orderable: false
+                    }]
+                });
+            },
+            error: function () {
+
+            }
+        });
     }
 
     thisCategory.loadSelectData = () => {
@@ -248,6 +279,21 @@ const Category = (() => {
             },
             success: function (response) {
                 $('#model').html(response);
+            },
+            error: function () {
+
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: CATEGORY_CONTROLLER + '?action=getBrandSelectData',
+            dataType: "json",
+            data: {
+                category: $('#category').val()
+            },
+            success: function (response) {
+                $('#brand').html(response);
             },
             error: function () {
 
@@ -267,7 +313,9 @@ const Category = (() => {
     thisCategory.save = () => {
         const model_name = $('#txt_category_name').val().trim();
         const category = $('#category').val();
-        if(model_name == "" || category == null) {
+        const specification = $('#specification').val();
+
+        if(model_name == "" || category == null || specification == null) {
             Swal.fire({
                 position: 'center',
                 icon: 'warning',
@@ -282,18 +330,20 @@ const Category = (() => {
                 dataType: "json",
                 data:{
                     model_name: model_name,
-                    category: category
+                    category: category,
+                    specification: specification
                 },
                 success: function (response) 
                 {
                     $('#txt_category_name').val("");
                     $('#category').val("");
+                    $('#specification').val("");
                     thisCategory.loadTableData();
                     thisCategory.loadSelectData();
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Model added successfully',
+                        title: 'Specification added successfully',
                         showConfirmButton: true,
                     })
                 },
@@ -464,7 +514,9 @@ const Product = (() => {
         var model = $("#model").val();
         var buying_price = $("#buying_price").val();
         var selling_price = $("#selling_price").val();
-        var data = {
+
+        console.log(model);
+        var productData = {
             category: category,
             brand: brand,
             model: model,
@@ -475,47 +527,42 @@ const Product = (() => {
         if(category == "Camera") {
             var camera_type = $("#camera_type").val();
             var camera_shape = $("#camera_shape").val();
-            data.camera_type = camera_type;
-            data.camera_shape = camera_shape;
+            productData.camera_type = camera_type;
+            productData.camera_shape = camera_shape;
         } else if(category == "Recorder") {
             var recorder_type = $("#recorder_type").val();
-            data.recorder_type = recorder_type;
+            productData.recorder_type = recorder_type;
         } else if(category == "Hard drive") {
             var capacity = $("#capacity").val();
-            data.capacity = capacity;
+            productData.capacity = capacity;
         } else if(category == "Power Supply") {
             var psu_type = $("#psu_type").val();
             var watts = $("#watts").val();
-            data.psu_type = psu_type;
-            data.watts = watts;
+            productData.psu_type = psu_type;
+            productData.watts = watts;
         } else if(category == "Monitor") {
             var monitor_size = $("#monitor_size").val();
-            data.monitor_size = monitor_size;
+            productData.monitor_size = monitor_size;
         }
 
+        console.log(productData);
         $.ajax({
-            type: "POST",
-            url: PRODUCT_CONTROLLER + '?action=save',
-            dataType: "json",
-            data:{
-                data: data
-            },
-            success: function (response) 
-            {
-                thisProduct.loadTableData();
-                thisProduct.resetFields();
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Product added successfully',
-                    showConfirmButton: true,
-                })
-            },
-            error: function () {
-
-            }
-            
-            
+          type: "POST",
+          url: PRODUCT_CONTROLLER + "?action=save",
+          data: {
+            productData: productData,
+          },
+          success: function (response) {
+            thisProduct.loadTableData();
+            thisProduct.resetFields();
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Product added successfully",
+              showConfirmButton: true,
+            });
+          },
+          error: function () {},
         });
     }
 

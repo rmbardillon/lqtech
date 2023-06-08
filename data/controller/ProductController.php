@@ -183,11 +183,11 @@ else if($action == 'getIn')
 
 else if ($action == 'save')
 {
-    $category = $_POST['data']['category'];
-    $brand = $_POST['data']['brand'];
-    $model = $_POST['data']['model'];
-    $buying_price = $_POST['data']['buying_price'];
-    $selling_price = $_POST['data']['selling_price'];
+    $category = $_POST['productData']['category'];
+    $brand = $_POST['productData']['brand'];
+    $model = $_POST['productData']['model'];
+    $buying_price = $_POST['productData']['buying_price'];
+    $selling_price = $_POST['productData']['selling_price'];
 
     $request = [
         'category' => $category,
@@ -198,17 +198,17 @@ else if ($action == 'save')
     ];
 
     if($category == "Camera") {
-        $request['camera_type'] = $_POST['data']['camera_type'];
-        $request['camera_shape'] = $_POST['data']['camera_shape'];
+        $request['camera_type'] = $_POST['productData']['camera_type'];
+        $request['camera_shape'] = $_POST['productData']['camera_shape'];
     } else if($category == "Recorder") {
-        $request['recorder_type'] = $_POST['data']['recorder_type'];
+        $request['recorder_type'] = $_POST['productData']['recorder_type'];
     } else if($category == "Hard drive") {
-        $request['capacity'] = $_POST['data']['capacity'];
+        $request['capacity'] = $_POST['productData']['capacity'];
     } else if($category == "Power Supply") {
-        $request['psu_type'] = $_POST['data']['psu_type'];
-        $request['watts'] = $_POST['data']['watts'];
+        $request['psu_type'] = $_POST['productData']['psu_type'];
+        $request['watts'] = $_POST['productData']['watts'];
     } else if($category == "Monitor") {
-        $request['monitor_size'] = $_POST['data']['monitor_size'];
+        $request['monitor_size'] = $_POST['productData']['monitor_size'];
     }
 
     $result = $Product->save($request);

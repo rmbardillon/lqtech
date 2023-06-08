@@ -24,6 +24,15 @@ class Category
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getBrandTableData()
+    {
+        $sql = "SELECT * from brands ORDER BY CATEGORY ASC, BRAND ASC";
+        $result = $this->conn->query($sql);
+
+        $this->conn->close();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getByCategory($category)
     {
         $sql = "SELECT * from models WHERE CATEGORY = '$category' ORDER BY CATEGORY ASC, MODEL ASC";
@@ -35,7 +44,16 @@ class Category
         return $rows;
     }
 
+    public function getBrandSelectData($category)
+    {
+        $sql = "SELECT * from brands WHERE CATEGORY = '$category' ORDER BY CATEGORY ASC, BRAND ASC";
+        $result = $this->conn->query($sql);
 
+        $this->conn->close();
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $rows;
+    }
 
     public function getById($model_id)
     {
@@ -75,12 +93,18 @@ class Category
     {
         $model_name = $request['name'];
         $category = $request['category'];
+        $specification = $request['specification'];
+
         $values_array = explode("\n", $model_name);
         foreach($values_array as $model) {
             if(trim($model) === "") {
                 continue;
             }
-            $sql = "INSERT INTO models(CATEGORY, MODEL) VALUES (?, ?)";
+            if($specification === 'Brand'){
+                $sql = "INSERT INTO brands(CATEGORY, BRAND) VALUES (?, ?)";
+            } else {
+                $sql = "INSERT INTO models(CATEGORY, MODEL) VALUES (?, ?)";
+            }
 
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("ss",$category, $model);

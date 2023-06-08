@@ -9,34 +9,32 @@
     <?php include_once("../layout/nav.php") ?>
     <div class="container mt-5">
         <div class="row">
-            <!-- <div class="col d-flex justify-content-center align-items-center" style="position: relative; height:400px; width:800px">
-                <canvas id="transactionIn"></canvas>
-            </div> -->
-            <div class="card col mb-2 ms-2">
-                <div class="card-body">
-                    <div class="d-flex justify-content-center align-items-center" style="position: relative; height:400px; width:800px">
-                        <canvas id="transactionIn"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="card col mb-2 ms-2">
-                <div class="card-body">
-                    <div class="d-flex justify-content-center align-items-center" style="position: relative; height:400px; width:800px">
-                        <canvas id="transactionOut"></canvas>
-                    </div>
-                </div>
+            <div class="col-12">
+                <h2 class="section__sub-title">Installation Date</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="col-1">#</th>
+                            <th class="col-3">Project Name</th>
+                            <th class="col-2">Contact Person</th>
+                            <th class="col-2">Contact Number</th>
+                            <th class="col-2">Estimated Date</th>
+                            <th class="col-2">Days before Installation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_estimated_date_alert">
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-3"></div>
-            <div class="card col-6">
-                <div class="card-body">
-                    <div class="d-flex justify-content-center align-items-center" style="position: relative; height:400px; width:800px">
-                        <canvas id="productChart"></canvas>
-                    </div>
-                </div>
+
+        <div class="row">
+            <div class="col">
+                <canvas id="transactionIn"></canvas>
             </div>
-            <div class="col-3"></div>
+            <div class="col">
+                <canvas id="transactionOut"></canvas>
+            </div>
         </div>
     </div>
 <?php include_once("../layout/scripts.php") ?>

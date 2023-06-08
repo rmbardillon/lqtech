@@ -14,10 +14,17 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12 ">
                         <div class="user__table-wrapper">
-                            <h2 class="section__sub-title">Register Model</h2>
-
+                            <h2 class="section__sub-title">Register Specification</h2>
                             <div class="form-wrapper">
                                 <form class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="specification" class="form-label required">Specification</label>
+                                        <select class="form-select" id="specification">
+                                            <option value="" disabled selected>- Select Specification -</option>
+                                            <option value="Brand">Brand</option>
+                                            <option value="Model">Model</option>
+                                        </select>
+                                    </div>
                                     <div class="col-md-12">
                                         <label for="modelCategory" class="form-label required">Category</label>
                                         <select class="form-select" id="category">
@@ -38,7 +45,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" id="btn_save_category" onclick="Category.clickSaveButton()" class="btn form-control btn-primary mb-1">Register Model</button>
+                                        <button type="submit" id="btn_save_category" onclick="Category.clickSaveButton()" class="btn form-control btn-primary mb-1">Register</button>
                                         <button  onclick="Category.clickCancel()" class="btn form-control btn-warning">Cancel</button>
                                     </div>
                                 </form>
@@ -48,6 +55,20 @@
 
                     <div class="col-lg-5 offset-lg-1">
                         <div class="table-wrapper">
+                            <h4>Registered Brands</h4>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Category</th>
+                                        <th>Model Name</th>
+                                        <th class="no-sort">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id = 'tbody_brand'>
+                                </tbody>
+                            </table>
+                            <h4>Registered Models</h4>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
