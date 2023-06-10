@@ -38,6 +38,6 @@
         </div>
     </div>
 <?php include_once("../layout/scripts.php") ?>
-<script type="module" src="../../libs/scripts/master-page/home.js"></script>
+<script src="../../libs/scripts/master-page/home.js"></script>
 </body>
 </html>
