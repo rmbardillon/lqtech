@@ -31,6 +31,18 @@ $(document).ready(function () {
     });
 
     $("#newPassword").on("change", function () {
+        if ($(this).val() != $("#confirmPassword").val()) {
+          $("#confirmPassword").removeClass("is-valid");
+          $("#confirmPassword").addClass("is-invalid");
+          $("#confirmPassword").attr("data-valid", "false");
+          $("#confirmPasswordError").html("Passwords does not match. ");
+          console.log("test");
+        } else {
+          $("#confirmPassword").removeClass("is-invalid");
+          $("#confirmPassword").addClass("is-valid");
+          $("#confirmPassword").attr("data-valid", "true");
+          $("#confirmPasswordError").html("");
+        }
         if($("#oldPassword").val() == $("#newPassword").val()) {
             $("#newPassword").removeClass("is-valid");
             $("#newPassword").addClass("is-invalid");
@@ -124,6 +136,39 @@ const changePassword = (() => {
     const thisChangePassword = {};
 
     thisChangePassword.changePassword = () => {
+        if($("#oldPassword").val() == "" || $("#newPassword").val() == "" || $("#confirmPassword").val() == "") {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please fill in all the required fields.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+        if ($("#oldPassword").attr("data-valid") == "false") {
+            $("#oldPassword").addClass("is-invalid");
+            $("#oldPasswordError").html("Please input your old password correctly.");
+            return;
+        } else {
+            $("#oldPassword").removeClass("is-invalid");
+            $("#oldPasswordError").html("");
+        }
+        if ($("#newPassword").attr("data-valid") == "false") {
+            $("#newPassword").addClass("is-invalid");
+            $("#newPasswordError").html("Please input your new password correctly.");
+            return;
+        } else {
+            $("#newPassword").removeClass("is-invalid");
+            $("#newPasswordError").html("");
+        }
+        if ($("#confirmPassword").attr("data-valid") == "false") {
+            $("#confirmPassword").addClass("is-invalid");
+            $("#confirmPasswordError").html("Please input your confirm password correctly.");
+            return;
+        } else {
+            $("#confirmPassword").removeClass("is-invalid");
+            $("#confirmPasswordError").html("");
+        }
         $.ajax({
             type: "POST",
             url: USER_CONTROLLER + '?action=changePassword',

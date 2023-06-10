@@ -46,9 +46,9 @@ else if ($action == 'getBrandTableData')
         $table_data .= '<td><span class="category">'  . $category['BRAND'] . '</span></td>';
         $table_data .= '<td class="col-actions">';
         $table_data .= '<div class="btn-group" role="group" aria-label="Basic mixed styles example">';
-        $table_data .= '<button type="button" onclick="Category.clickUpdate(`'. $category['BRAND_ID'] .'`)" data-id="'. $category['BRAND_ID'] .'" class="btn btn-warning btn-sm"><i class="bi bi-list-check"></i> Update </button>';
+        $table_data .= '<button type="button" onclick="Brand.clickUpdate(`'. $category['BRAND_ID'] .'`)" data-id="'. $category['BRAND_ID'] .'" class="btn btn-warning btn-sm"><i class="bi bi-list-check"></i> Update </button>';
         if($_SESSION['user']['role'] == 1) {
-            $table_data .= '<button type="button" onclick="Category.clickDelete(`'. $category['BRAND_ID'] .'`)" data-id="'. $category['BRAND_ID'] .'" class="btn btn-danger btn-sm"> <i class="bi bi-trash"></i> Delete</button>';
+            $table_data .= '<button type="button" onclick="Brand.clickDelete(`'. $category['BRAND_ID'] .'`)" data-id="'. $category['BRAND_ID'] .'" class="btn btn-danger btn-sm"> <i class="bi bi-trash"></i> Delete</button>';
         }
         $table_data .= '</div>';
         $table_data .= '</td>';
@@ -84,7 +84,7 @@ else if ($action == 'getBrandSelectData')
 
     foreach ($result as $category) 
     {
-        $options .= '<option value='. $category['BRAND'] .'>' . $category['BRAND'] . '</option>';
+        $options .= '<option value="'. $category['BRAND'] .'">' . $category['BRAND'] . '</option>';
     }
 
     echo json_encode($options);
@@ -95,6 +95,13 @@ else if ($action == 'getById')
     $model_id = $_POST['model_id'];
 
     echo json_encode($Category->getById($model_id));
+}
+
+else if ($action == 'getBrandById')
+{
+    $brand_id = $_POST['brand_id'];
+
+    echo json_encode($Category->getBrandById($brand_id));
 }
 
 else if ($action == 'save')
@@ -119,11 +126,13 @@ else if ($action == 'update')
     $model_id = $_POST['model_id'];
     $model_name = $_POST['model_name'];
     $category = $_POST['category'];
+    $specification = $_POST['specification'];
 
     $request = [
         'id' => $model_id,
         'name' => $model_name,
         'category' => $category,
+        'specification' => $specification,
     ];
 
     $result = $Category->update($request);
@@ -136,6 +145,15 @@ else if ($action == 'delete')
     $model_id = $_POST['model_id'];
 
     $result = $Category->delete($model_id);
+
+    echo json_encode($result);
+}
+
+else if ($action == 'deleteBrand')
+{
+    $brand_id = $_POST['brand_id'];
+
+    $result = $Category->deleteBrand($brand_id);
 
     echo json_encode($result);
 }

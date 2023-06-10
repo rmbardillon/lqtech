@@ -64,6 +64,15 @@ class Category
         return $result->fetch_assoc();
     }
 
+    public function getBrandById($brand_id)
+    {
+        $sql = "SELECT * FROM brands WHERE BRAND_ID = '$brand_id'";
+        $result = $this->conn->query($sql);
+
+        $this->conn->close();
+        return $result->fetch_assoc();
+    }
+
     // public function save($request)
     // {
     //     $model_name = $request['name'];
@@ -129,8 +138,13 @@ class Category
         $model_id = $request['id'];
         $model_name = $request['name'];
         $category = $request['category'];
+        $specification = $request['specification'];
 
-        $sql = "UPDATE models SET MODEL=?, CATEGORY = ? WHERE MODEL_ID=?";
+        if($specification == 'Brand'){
+            $sql = "UPDATE brands SET BRAND=?, CATEGORY = ? WHERE BRAND_ID=?";
+        } else {
+            $sql = "UPDATE models SET MODEL=?, CATEGORY = ? WHERE MODEL_ID=?";
+        }
 
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("sss",$model_name, $category, $model_id);
@@ -152,6 +166,26 @@ class Category
     public function delete($model_id)
     {
         $sql = "DELETE FROM models WHERE MODEL_ID='$model_id'";
+
+        $result = '';
+        if ($this->conn->query($sql) === TRUE) {
+            $result = "Deleted Successfully";
+
+            $this->ActionLog->saveLogs('category', 'deleted');
+        } else {
+            $result = "Error deleting record: " . $this->conn->error;
+        }
+
+        $this->conn->close();
+
+        return $result;
+
+
+    }
+
+    public function deleteBrand($brand_id)
+    {
+        $sql = "DELETE FROM brands WHERE BRAND_ID='$brand_id'";
 
         $result = '';
         if ($this->conn->query($sql) === TRUE) {

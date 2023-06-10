@@ -214,6 +214,10 @@ $("#category").change(function() {
         placeholder: 'Search for an option...',
         allowClear: true,
     });
+    $("#camera_type").select2({
+      placeholder: "Search for an option...",
+      allowClear: true,
+    });
 });
 
 const Category = (() => {
@@ -222,6 +226,14 @@ const Category = (() => {
     let model_id = '';
 
     let toUpdate = false;
+
+    thisCategory.setToUpdate = (value) => {
+      toUpdate = value;
+    };
+
+    thisCategory.setModelId = (value) => {
+      model_id = value;
+    };
 
     thisCategory.loadTableData = () => {
         $.ajax({
@@ -366,6 +378,7 @@ const Category = (() => {
             },
             success: function (response) 
             {
+                console.log(response)
                 $('#txt_category_name').val(response.MODEL);
                 $('#category').val(response.CATEGORY);
                 toUpdate = true;
@@ -380,33 +393,34 @@ const Category = (() => {
     thisCategory.update = () => {
         const model_name = $('#txt_category_name').val().trim();
         const category = $('#category').val();
+        const specification = $('#specification').val();
 
         $.ajax({
-            type: "POST",
-            url: CATEGORY_CONTROLLER + '?action=update',
-            dataType: "json",
-            data:{
-                model_id: model_id,
-                model_name: model_name,
-                category: category
-            },
-            success: function (response) 
-            {
-                $('#txt_category_name').val("")
-                thisCategory.loadTableData();
-                thisCategory.loadSelectData();
-                $('#btn_save_category').html('Register Model');
-                toUpdate = false;
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Model updated successfully',
-                    showConfirmButton: true,
-                })
-            },
-            error: function () {
-
-            }
+          type: "POST",
+          url: CATEGORY_CONTROLLER + "?action=update",
+          dataType: "json",
+          data: {
+            model_id: model_id,
+            model_name: model_name,
+            category: category,
+            specification: specification,
+          },
+          success: function (response) {
+            $("#txt_category_name").val("");
+            $("#specification").val("");
+            $("#category").val("");
+            thisCategory.loadTableData();
+            thisCategory.loadSelectData();
+            $("#btn_save_category").html("Register Model");
+            toUpdate = false;
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Model updated successfully",
+              showConfirmButton: true,
+            });
+          },
+          error: function () {},
         });
     }
 
@@ -468,6 +482,84 @@ const Category = (() => {
     }
 
     return thisCategory;
+})();
+
+const Brand = (() => {
+    const thisBrand = {};
+
+    let brand_id = '';
+
+    thisBrand.clickUpdate = (id) => {
+        brand_id = id;
+        Category.setModelId(id);
+        Category.setToUpdate(true);
+        $.ajax({
+            type: "POST",
+            url: CATEGORY_CONTROLLER + "?action=getBrandById",
+            dataType: "json",
+            data: {
+            brand_id: brand_id,
+            },
+            success: function (response) {
+                $("#specification").val("Brand");
+                $("#txt_category_name").val(response.BRAND);
+                $("#category").val(response.CATEGORY);
+                
+                $("#btn_save_category").html("Update BRAND");
+            },
+            error: function () {},
+        });
+    };
+
+    thisBrand.clickCancel = () => {
+      $("#txt_category_name").val("");
+      toUpdate = false;
+      $("#btn_save_category").html("Register Model");
+    };
+
+    thisBrand.clickDelete = (id) => {
+      brand_id = id;
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!",
+        cancelButtonText: "No",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          thisBrand.delete();
+        }
+      });
+    };
+
+    thisBrand.delete = () => {
+      $.ajax({
+        type: "POST",
+        url: CATEGORY_CONTROLLER + "?action=deleteBrand",
+        dataType: "json",
+        data: {
+          brand_id: brand_id,
+        },
+        success: function (response) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Brand Deleted Successfully ",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          Category.loadTableData();
+          Category.loadSelectData();
+        },
+        error: function () {},
+      });
+    };
+
+    return thisBrand;
 })();
 
 const Product = (() => {
@@ -572,6 +664,7 @@ const Product = (() => {
         $('#category').val("");
         $("#category").prop("disabled", false);
         $('#inputs').html('');
+        $("#btn_save_product").html("Register");
     }
 
     thisProduct.clickDelete = (id) => {
@@ -620,7 +713,6 @@ const Product = (() => {
     }
 
     thisProduct.clickUpdate = (id) => {
-        console.log(id);
         product_id = id;
 
         $.ajax({
@@ -633,48 +725,62 @@ const Product = (() => {
             success: function (response) 
             {   
                 response = JSON.parse(response);
-                console.log(response);
                 if(response.CATEGORY == "Camera") {
                     $('#category').val("Camera");
-                    $('#category').trigger("change");
-                    $("#camera_type").val(response.CAMERA_TYPE);
-                    $("#camera_shape").val(response.CAMERA_SHAPE);
-                    $("#camera_type").prop("disabled", true);
-                    $("#camera_shape").prop("disabled", true);
+                    $('#category').trigger("change").promise().done(function() {
+                        $("#camera_type").val(response.CAMERA_TYPE);
+                        $("#camera_shape").val(response.CAMERA_SHAPE);
+                        $("#camera_type").prop("disabled", true);
+                        $("#camera_shape").prop("disabled", true);
+
+                        assignValuesToElements()
+                    });
                 } else if(response.CATEGORY == "Recorder") {
                     $('#category').val("Recorder");
-                    $('#category').trigger("change");
-                    $("#recorder_type").val(response.RECORDER_TYPE);
-                    $("#recorder_type").prop("disabled", true);
+                    $('#category').trigger("change").promise().done(function() {
+                        $("#recorder_type").val(response.RECORDER_TYPE);
+                        $("#recorder_type").prop("disabled", true);
+
+                        assignValuesToElements()
+                    });
                 } else if(response.CATEGORY == "Hard drive") {
                     $('#category').val("Hard drive");
-                    $('#category').trigger("change");
-                    $("#capacity").val(response.CAPACITY);
-                    $("#capacity").prop("disabled", true);
+                    $('#category').trigger("change").promise().done(function() {
+                        $("#capacity").val(response.CAPACITY);
+                        $("#capacity").prop("disabled", true);
+
+                        assignValuesToElements()
+                    });
                 } else if(response.CATEGORY == "Power Supply") {
                     $('#category').val("Power Supply");
-                    $('#category').trigger("change");
-                    $("#psu_type").val(response.PSU_TYPE);
-                    $("#watts").val(response.WATTS);
-                    $("#psu_type").prop("disabled", true);
-                    $("#watts").prop("disabled", true);
+                    $("#category").trigger("change").promise().done(function () {
+                        $("#psu_type").val(response.PSU_TYPE);
+                        $("#watts").val(response.WATTS);
+                        $("#psu_type").prop("disabled", true);
+                        $("#watts").prop("disabled", true);
+
+                        assignValuesToElements()
+                    });
                 } else if(response.CATEGORY == "Monitor") {
                     $('#category').val("Monitor");
-                    $('#category').trigger("change");
-                    $("#monitor_size").val(response.MONITOR_SIZE);
-                    $("#monitor_size").prop("disabled", true);
-                }
-                $("#category").val(response.CATEGORY);
-                $("#brand").val(response.BRAND);
-                $("#model").val(response.MODEL);
-                $("#buying_price").val(response.BUYING_PRICE);
-                $("#selling_price").val(response.SELLING_PRICE);
-                $("#serial_number").val(response.SERIAL_NUMBER);
+                    $('#category').trigger("change").promise().done(function() {
+                        $("#monitor_size").val(response.MONITOR_SIZE);
+                        $("#monitor_size").prop("disabled", true);
 
-                $("#category").prop("disabled", true);
-                $("#brand").prop("disabled", true);
-                $("#model").prop("disabled", true);
-                $("#serial_number").prop("disabled", true);
+                        assignValuesToElements()
+                    });
+                }
+                function assignValuesToElements() {
+                  $("#brand").val(response.BRAND);
+                  $("#model").val(response.MODEL);
+                  $("#buying_price").val(response.BUYING_PRICE);
+                  $("#selling_price").val(response.SELLING_PRICE);
+                  $("#serial_number").val(response.SERIAL_NUMBER);
+
+                  $("#category").prop("disabled", true);
+                  $("#brand").prop("disabled", true);
+                  $("#model").prop("disabled", true);
+                }
                 
                 toUpdate = true;
 

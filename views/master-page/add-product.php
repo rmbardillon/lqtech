@@ -29,7 +29,7 @@
                     <div id="inputs"></div>
                     <div class="row" style="margin-top: 30px;">
                         <div class="col">
-                            <button class="btn btn-primary w-100" type="button" onclick="Product.clickSaveButton()"><i class="far fa-check-circle"></i>Register</button>
+                            <button class="btn btn-primary w-100" type="button" onclick="Product.clickSaveButton()" id="btn_save_product"><i class="far fa-check-circle"></i>Register</button>
                         </div>
                         <div class="col">
                             <button class="btn btn-danger w-100" type="button" onclick="Product.resetFields()"><i class="far fa-times-circle"></i>Cancel</button>
