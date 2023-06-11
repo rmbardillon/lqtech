@@ -206,17 +206,19 @@ $("#category").change(function() {
     }
     $('#inputs').html(input);
     Category.loadSelectData();
-    $('.model').select2({
-        placeholder: 'Search for an option...',
+    $(".model").select2({
+        placeholder: "Search for an option...",
         allowClear: true,
     });
+       
     $('.brand').select2({
         placeholder: 'Search for an option...',
         allowClear: true,
     });
-    $("#camera_type").select2({
-      placeholder: "Search for an option...",
-      allowClear: true,
+    $(document).on("select2:open", function (e) {
+      document
+        .querySelector(`[aria-controls="select2-${e.target.id}-results"]`)
+        .focus();
     });
 });
 
@@ -290,7 +292,7 @@ const Category = (() => {
                 category: $('#category').val()
             },
             success: function (response) {
-                $('#model').html(response);
+                $('.model').html(response);
             },
             error: function () {
 
@@ -305,7 +307,7 @@ const Category = (() => {
                 category: $('#category').val()
             },
             success: function (response) {
-                $('#brand').html(response);
+                $('.brand').html(response);
             },
             error: function () {
 
@@ -771,8 +773,42 @@ const Product = (() => {
                     });
                 }
                 function assignValuesToElements() {
-                  $("#brand").val(response.BRAND);
-                  $("#model").val(response.MODEL);
+                  // Undo Select2 initialization for the ".model" element
+                  $(".model").select2("destroy");
+
+                  // Undo Select2 initialization for the ".brand" element
+                  $(".brand").select2("destroy");
+                  // Get the select element by its ID
+                  var brand = $("#brand");
+
+                  // Get the select element's attributes
+                  var attributes = brand.prop("attributes");
+
+                  // Create a new input element
+                  var inputBrand = $("<input>");
+
+                  // Copy the attributes from the select element to the input element
+                  $.each(attributes, function () {
+                    inputBrand.attr(this.name, this.value);
+                  });
+                  inputBrand.val(response.BRAND);
+                  brand.replaceWith(inputBrand);
+                  // Get the select element by its ID
+                  var model = $("#model");
+
+                  // Get the select element's attributes
+                  var attributes = model.prop("attributes");
+
+                  // Create a new input element
+                  var inputModel = $("<input>");
+
+                  // Copy the attributes from the select element to the input element
+                  $.each(attributes, function () {
+                    inputModel.attr(this.name, this.value);
+                  });
+                  inputModel.val(response.MODEL);
+                  model.replaceWith(inputModel);
+
                   $("#buying_price").val(response.BUYING_PRICE);
                   $("#selling_price").val(response.SELLING_PRICE);
                   $("#serial_number").val(response.SERIAL_NUMBER);
