@@ -383,6 +383,7 @@ const Category = (() => {
                 console.log(response)
                 $('#txt_category_name').val(response.MODEL);
                 $('#category').val(response.CATEGORY);
+                $('#specification').val("Model");
                 toUpdate = true;
                 $('#btn_save_category').html('Update MODEL');
             },
