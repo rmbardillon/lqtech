@@ -351,9 +351,9 @@ class Product
         return $result;
     }
 
-    public function delete($product_id)
+    public function delete($serial_number)
     {
-        $sql = "DELETE FROM products WHERE PRODUCT_DETAILS_ID='$product_id'";
+        $sql = "DELETE FROM products WHERE SERIAL_NUMBER='$serial_number'";
 
         $result = '';
         if ($this->conn->query($sql) === TRUE) {

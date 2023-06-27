@@ -11,17 +11,6 @@
         <h1>Generate Reports</h1>
         <div class="row mb-3">
             <div class="col">
-                <label class="form-label required" for="from">Select From Date</label>
-                <input class="form-control" type="date" name="from" id="from">
-            </div>
-            <div class="col">
-                <label class="form-label required" for="to">Select To Date</label>
-                <input class="form-control" type="date" name="to" id="to">
-            </div>
-            <div class="col-1 text-center">
-                <label class="form-label" for="selectMonth">Or</label>
-            </div>
-            <div class="col">
                 <label class="form-label" for="selectMonth">Select Month</label>
                 <select class="form-select" name="selectMonth" id="selectMonth">
                     <option value="" disabled selected>Please Select</option>
@@ -38,6 +27,14 @@
                     <option value="11">November</option>
                     <option value="12">Decemeber</option>
                 </select>
+            </div>
+            <div class="col">
+                <label class="form-label required" for="from">Select From Date</label>
+                <input class="form-control" type="date" name="from" id="from">
+            </div>
+            <div class="col">
+                <label class="form-label required" for="to">Select To Date</label>
+                <input class="form-control" type="date" name="to" id="to">
             </div>
         </div>
         <div class="row mb-3">

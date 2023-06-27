@@ -165,24 +165,36 @@ const Product = (() => {
         })
     }
 
-    thisProduct.delete = () => {
+    thisProduct.delete = (serial_number) => {
         $.ajax({
             type: "POST",
             url: PRODUCT_CONTROLLER + '?action=delete',
             dataType: "json",
             data:{
-                product_id: product_id
+                serial_number: serial_number
             },
             success: function (response) 
             {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Product Deleted Successfully ',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                thisProduct.loadTableData();
+                swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                          position: "center",
+                          icon: "success",
+                          title: "Product Deleted Successfully ",
+                          showConfirmButton: false,
+                          timer: 1500,
+                        });
+                        thisProduct.loadTableData();
+                        thisProduct.view(product_id);
+                    }
+                });
             },
             error: function () {
 

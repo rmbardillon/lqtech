@@ -23,6 +23,7 @@
                                     <th>Model</th>
                                     <th>SKU</th>
                                     <th>Serial Number</th>
+                                    <th class="no-sort">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="product_table"></tbody>

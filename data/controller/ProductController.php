@@ -132,6 +132,7 @@ else if ($action == 'displayProductSerials')
         $table_data .= '<td>' . $product['MODEL']. '</td>';
         $table_data .= '<td>' . $product['SKU'] . '</td>';
         $table_data .= '<td>' . $product['SERIAL_NUMBER'] . '</td>';
+        $table_data .= '<td><button class="btn btn-danger" onclick="Product.delete(`'. $product['SERIAL_NUMBER'] .'`)"><i class="bi bi-trash"></i>Delete</button></td>';
         $table_data .= '</tr>';
         $counter++;
     }
@@ -259,9 +260,9 @@ else if ($action == 'getProductForUpdate')
 
 else if($action == 'delete')
 {
-    $product_id = $_POST['product_id'];
+    $serial_number = $_POST['serial_number'];
 
-    $result = $Product->delete($product_id);
+    $result = $Product->delete($serial_number);
 
     echo json_encode($result);
 }
