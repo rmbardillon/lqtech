@@ -476,9 +476,9 @@ class Product
                     $result = "Error: <br>" . $this->conn->error;
                 }
 
-                $sql = "UPDATE products SET STATUS = 'OUT', DATE_OUT = CURDATE() WHERE SERIAL_NUMBER = ? AND SKU = ?";
+                $sql = "UPDATE products SET STATUS = 'OUT', DATE_OUT = CURDATE() WHERE SERIAL_NUMBER = ?";
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("ss",$serial_number, $sku);
+                $stmt->bind_param("s",$serial_number);
                 $result = '';
                 if ($stmt->execute() === TRUE) {
                     $result = "Successfully Updated";
@@ -504,9 +504,11 @@ class Product
         return $result;
     }
 
-    public function checkSerialNumbers($serial_number, $sku)
+    public function checkSerialNumbers($serial_number, $sku, $model)
     {
-        $sql = "SELECT * FROM products WHERE SERIAL_NUMBER = '$serial_number' AND SKU = '$sku' AND STATUS = 'IN'";
+        $sql = "SELECT * FROM products
+                LEFT JOIN product_details ON products.PRODUCT_DETAILS_ID = product_details.PRODUCT_DETAILS_ID
+                WHERE SERIAL_NUMBER = '$serial_number' AND product_details.MODEL = '$model' AND STATUS = 'IN'";
         $result = $this->conn->query($sql);
         if($result->num_rows > 0) {
             return $result->fetch_assoc();

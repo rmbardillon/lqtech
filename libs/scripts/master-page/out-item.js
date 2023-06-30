@@ -207,7 +207,8 @@ const Product = (() => {
                     dataType: "json",
                     data:{
                         serial_number: serial_number,
-                        sku: sku
+                        sku: sku,
+                        model: model
                     },
                     success: function(response) {
                         if (response == false) {

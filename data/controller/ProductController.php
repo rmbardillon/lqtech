@@ -325,7 +325,8 @@ else if($action === 'checkSerialNumbers')
 {
     $serial_number = $_POST['serial_number'];
     $sku = $_POST['sku'];
-    $result = $Product->checkSerialNumbers($serial_number, $sku);
+    $model = $_POST['model'];
+    $result = $Product->checkSerialNumbers($serial_number, $sku, $model);
 
     echo json_encode($result);
 }
